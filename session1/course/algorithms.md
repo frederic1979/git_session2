@@ -132,16 +132,15 @@ Pour plus de détails :
 * [Les structures de contrôle sur Wikipedia](https://fr.wikipedia.org/wiki/Structure_de_contr%C3%B4le)
 * [Les structures de données sur Wikipedia](https://fr.wikipedia.org/wiki/Structure_de_donn%C3%A9es)
 
-
 #### Traiter un ensemble de données : décomposition
 
-Généralement, s'il n'y a qu'une seule valeur traiter, il est possible de le
-faire directement. Pour traiter des ensembles de valeurs, il y a principalement
-deux façon de décomposer :
+Généralement, s'il n'y a qu'une seule valeur traiter, il est possible de le faire directement. Pour traiter des ensembles de valeurs, il y a principalement deux façon de décomposer :
 
 ##### Itérations
 On traite les valeurs les unes après les autres. On initialise le résultat avec la valeur correspondant à un ensemble vide, puis, pour chacune des valeurs à traiter, on met à jour ce résultat.
+
 Par exemple, pour calculer la somme des valeurs, on initialise le résultat à 0 et l'on additionne successivement chacune des valeurs au résultat partiel :
+
 ```
 début
   xs
@@ -153,8 +152,11 @@ fin
 ```
 
 ##### Récursion
+
 On traite les valeurs par sous-ensemble (par exemple par moitiés), sauf si l'ensemble à traiter est trivial (un seul élément) et l'on combine les résultats sur les sous-ensembles.
+
 Par exemple, pour calculer la somme des valeurs, si l'ensemble est vide la somme est 0, s'il contient une valeur c'est celle-ci, sinon c'est la somme des sommes des deux moitiés :
+
 ```
 début
   xs
@@ -180,9 +182,11 @@ Dans la pratique lorsque nous faisons du developpement Web, on prouve rarement u
 Le développement Web n'est peut-être pas le plus exigeant en ce qui concerne les preuves algorithmiques mais nous devons bien avoir conscience de la notion de complexité algorithmique. En effet ne pouvons pas demander tout et n'importe quoi à notre machine car, comme nous, elle a des limites en temps d'exécution et en mémoire.
 
 **La notion de complexité** : Il s'agit en fait de l'efficacité de l'algorithme qu'on va développer. On cherche à prévoir le nombre d'opérations que va effectuer notre algorithme en fonction du volume de données qu'on lui fournit en entrée, et la place mémoire dont il va avoir besoin.
+
 C'est important aussi en développement Web car les calculs se font majoritairement sur votre serveur, donc plus vos algorithmes seront rapides et plus votre serveur le sera.
 
 Pour plus de détails :
+
 * [La complexité algorithmique avec exemple sur OpenClassrooms](https://openclassrooms.com/courses/decouvrez-le-fonctionnement-des-algorithmes/comprenez-la-complexite-algorithmique)
 * [La complexité algorithmique sur Wikipedia](https://fr.wikipedia.org/wiki/Analyse_de_la_complexit%C3%A9_des_algorithmes)
 
