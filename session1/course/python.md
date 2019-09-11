@@ -43,16 +43,63 @@ age = 30
 taille = 184.5
 ```
 
+Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/introduction.html#numbers)
+
 ### Les chaînes de caractères
+
+Afin de stocker du texte (un prénom, un nom, une phrase, ...) nous utiliserons les `string` qui représentent les chaînes de caractères. Il y a deux méthodes pour déclarer un `string` (avec guillemets simples ou doubles):
+
+```python
+prenom = "Jules"
+nom = 'Jules'
+```
+
+Parfois on peut avoir envie d'utiliser des **guillements** dans la chaîne de caractères. Dans ce cas on peut procéder comme suit :
+
+```python
+presentation = "Je m'appelle Jules"
+citation = '"Bienvue à Simplon!" - Jonathan.'
+```
+
+Parfois on peut avoir envie de combiner les deux :
+
+```python
+citation = '"Je suis le pape et j\'attends ma soeur" - Odile de Ray.'
+```
+
+Dans cette dernière citation, j'ai besoin **d'échapper** le guillement simple afin qu'il ne soit pas interprété comme la fin de la chaîne de caractères. On utilise dans ce cas le caractère `backslash`.
+
+On peut aussi avoir besoin d'écrire une chaine de caractères qui contient plusieurs lignes de texte. Dans ce cas, deux solutions : utiliser le caractère spécial `\n` pour indiquer un retour à la ligne ou utiliser le commentaire multiligne.
+
+```python
+presentation = "Je m'appelle Jules\nJ'ai 30 ans."
+passions = """- Aviron
+- Self-Hacking
+- The lord of the ring"""
+```
+
+Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/introduction.html#strings)
 
 ## Opérateurs
 
+@Joss'
+
 ## Booléen et conditions
+
+@Joss'
 
 ## Les fonctions
 
+@Jules
+
 ## Tableaux
+
+@Joss'
 
 ## Boucles
 
+@Joss'
+
 ## Entrées / Sorties
+
+@Jules
