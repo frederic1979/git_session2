@@ -90,7 +90,69 @@ Pour plus de détails : [La documentation officielle de Python](https://docs.pyt
 
 ## Les fonctions
 
-@Jules
+### Pourquoi utiliser des fonctions
+
+Une fonction est un **bout de code** que l'on va définir afin d'être **réutilisé**. Pourquoi devrions-nous faire cela ? En programmation, nous cherchons à résoudre des problèmes, et comme nous l'avons vu en découvrant l'algorithmique très souvent nous pouvons **découper** un problème en plusieurs **sous-problèmes** à résoudre et cela nous aide à rendre le problème plus simple à résoudre. Une des premières utilité d'une fonction est donc de rendre le problème plus simple a résoudre en le découpant en sous problèmes. Cela a aussi l'avantage de rendre le code plus lisible en le découpant et en nomant les actions.
+
+Si l'on se rappelle les notions d'algorithmique on a le programme suivant pour résourdre le problème de la cuisson des pâtes.
+
+```
+début
+  remplir_casserole(eau)
+  tant_que (eau_non_bouillante)
+    chauffer_casserole(feu_max)
+  fin_tant_que
+
+  remplir_casserole(pâtes)
+  tant_que (pâtes_non_cuites)
+    chauffer_casserole(feu_vif)
+  fin_tant_que
+
+  égouter_pâtes
+  servir_pâtes
+fin
+```
+
+Chaque ligne de code peut être une fonction qu'il faut redécouper en actions plus précises. Par exemple `chauffer_casserole(feu_vif)` peut avoir plusieurs actions à réaliser comme `ouvrir_robinet_gaz(70%)`, `craquer_allumette()`, `approcher_allumette()` et `poser_casserole()`. En utilisant `chauffer_casserole(feu_vif)` dans notre programme global on comprend directement ce qu'il y a lieu de faire. Grâce à cette fonction `chauffer_casserole(feu_vif)` on gagne en lisibilité.
+
+En plus cette fonction peut être réutilisée à différents endroits en fonction des besoins et avec différents **arguments**. Ici pour faire bouillir l'eau, on l'utilise avec l'argument `feu_max` puis pour cuire les pâtes avec l'argument `feu_vif`. Si on voulait faire cuire une ratatouille, on pourrait l'utiliser avec l'argument `feu_doux`.
+
+### Définir et appeler des fonctions en Python
+
+En Python, pour déclarer une fonction on procède de la manière suivante :
+
+```python
+def definir_prenom():
+  prenom = "Jules"
+```
+
+Cette fonction ne fait pas grand chose, elle déclare juste une variable `prenom` à l'intérieur de la fonction qui contiendra la chaîne de caractères _Jules_. On peut maintenant **l'appeler** dans la suite de notre programme.
+
+```python
+def definir_prenom():
+  prenom = "Jules"
+
+definir_prenom()
+```
+
+Il ne se passera rien de bien intéressant mais nous avons défini notre première fonction !
+
+Les fonctions deviennent **intéressantes** lorsque l'on :
+
+- Définit des **paramètres**
+- Renvoie une **valeur de retour**
+
+```python
+def dire_bonjour(prenom):
+  return "Bonjour " + prenom
+
+# Ici on range le retour de la fonction "Bonjour Jules" dans la variable message_bienvenue
+message_bienvenue = dire_bonjour("Jules")
+```
+
+Avec cette fonction, je peux maitenant générer des messages de bienvenue différents car `dire_bonjour(prenom)` prend en **paramètre** une chaîne de caractères nommée `prenom` et **retourne** la valeur "Bienvenue _valeur de prenom_"
+
+On peut définir autant d'arguments que l'on veut (même si ça va vite devenir compliqué si une fonction dépasse 5 arguments) et on ne pourra retourner qu'une seule valeur de retour.
 
 ## Tableaux
 

@@ -22,7 +22,9 @@ A faire : déclarer des variables permettant de vous décrire avec :
 
 ## Etape 4 : Créons des fonctions
 
-@Jules
+- Créer une fonction qui renvoit l'aire d'un triangle en prenant en paramètres base et hauteur.
+- Créer une fonction qui renvoit le volume d'une sphère en prenant en paramètre son rayon.
+- Créer une fonction qui renvoit un message donnant l'IMC d'une personne. Elle prendra en paramètre le prénom de la personne, son poids en kg et sa taille en cm.
 
 ## Etape 5 : Tableaux
 
