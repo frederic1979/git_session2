@@ -10,7 +10,9 @@ Python est un langage **interprété**, les mots clés que nous allons utiliser 
 
 Il est beaucoup utilisé dans le monde de la data car il possède de nombreuses bibliothèques mathématiques (morceaux de code réutilisables) accessibles pour les développeurs.
 
-Dans ce cours nous verrons comment créer un unique **script** Python. Il s'agira d'écrire une suite d'instructions dans un seul et même **fichier** Python. Nous passerons ensuite à l'interpréteur Python le fichier en **paramètre**. L'interpréteur se chargera de lire les instructions de haut en bas et de les exécuter les unes après les autres.
+Dans ce cours nous verrons comment écrire et exécuter du Python. Deux méthodes différentes s'offrent à nous : utiliser **l'interpréteur** de commande Python en tapant simplement la commande `python` dans la console et écrire ensuite les instructions les unes après les autres. Sinon, il faudra écrire une suite d'instructions dans un seul et même **fichier** Python. Nous passerons ensuite à l'interpréteur Python le fichier en **paramètre**. L'interpréteur se chargera de lire les instructions de haut en bas et de les exécuter les unes après les autres.
+
+## Commenter le code
 
 Avant toute chose, il convient de parler des commentaires ! C'est certainement une des choses les plus importantes que l'on écrit lorsque l'on code. Ce sont des lignes de code qui ne seront pas interprétées mais qui donnent des indications primordiales pour les programmeurs qui liront le code (y compris vous dans quelques mois / années).
 
@@ -27,8 +29,21 @@ En Python, nous allons pouvoir définir des **variables**. Ce sont des blocs de 
 Pour **déclarer** une variable en Python il suffit de donner un nom à notre variable et de lui donner une valeur.
 
 ```python
+formateur = True
 age = 30
 prenom = "Jules"
+```
+
+### Les booléens
+
+Le type de données élémentaire à connaitre qui est à la base de l'informatique d'aujourd'hui est le booléen. Il s'agit d'un type de données qui n'a que deux valeurs possibles : `True`ou `False`. Cela correspond au `0` et au `1` du binaire. Nous l'utiliserons beaucoup lorsque nous aborderons les conditions.
+
+```python
+# Une vérité
+je_suis_jeune = True
+
+# Un mensonge
+j_ai_des_enfants = False
 ```
 
 ### Les nombres
@@ -47,7 +62,7 @@ Pour plus de détails : [La documentation officielle de Python](https://docs.pyt
 
 ### Les chaînes de caractères
 
-Afin de stocker du texte (un prénom, un nom, une phrase, ...) nous utiliserons les `string` qui représentent les chaînes de caractères. Il y a deux méthodes pour déclarer un `string` (avec guillemets simples ou doubles):
+Afin de stocker du texte (un prénom, un nom, une phrase, ...) nous utiliserons les `str` qui représentent les chaînes de caractères. Il y a deux méthodes pour déclarer un `str` (avec guillemets simples ou doubles):
 
 ```python
 prenom = "Jules"
@@ -75,7 +90,7 @@ On peut aussi avoir besoin d'écrire une chaine de caractères qui contient plus
 presentation = "Je m'appelle Jules\nJ'ai 30 ans."
 passions = """- Aviron
 - Self-Hacking
-- The lord of the ring"""
+- The Lord of the Ring"""
 ```
 
 Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/introduction.html#strings)
@@ -154,6 +169,8 @@ Avec cette fonction, je peux maitenant générer des messages de bienvenue diff�
 
 On peut définir autant d'arguments que l'on veut (même si ça va vite devenir compliqué si une fonction dépasse 5 arguments) et on ne pourra retourner qu'une seule valeur de retour.
 
+Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/controlflow.html#defining-functions)
+
 ## Tableaux
 
 @Joss'
@@ -164,4 +181,69 @@ On peut définir autant d'arguments que l'on veut (même si ça va vite devenir 
 
 ## Entrées / Sorties
 
-@Jules
+Lorsque l'on exécute un programme, on peut avoir besoin de lui fournir des données en entrée ou bien d'en récupérer en sortie. Plusieurs méthodes existent et nous allons en explorer deux : en utilisant la **console** et les **fichiers**.
+
+### Console
+
+La console (ou terminal) est une interface en ligne de commande qui permet de dialoguer avec notre machine en lui écrivant des **instructions** et en lisant les **retours** faits une fois les instructions réalisées. Lorsque nous écrivons un programme Python dans un fichier et que nous lançons ce programme via la console, les instructions du programme s'enchaîne et on reprend la main sur la console lorsque toutes les instructions du programme sont terminées. On pourrait avoir envie d'afficher des informations lors de la réalisation du programme et aussi de demander à l'utilisateur d'en saisir.
+
+Pour **afficher** quelque chose dans la console, il suffit d'utiliser l'instruction `print()`.
+
+Pour **récupérer une entrée utilisateur**, il suffit d'utiliser la fonction `input()`.
+
+```python
+def dire_bonjour(prenom):
+    return "Bonjour " + prenom
+
+prenom_utilisateur = input("Bonjour, comment t'appelles-tu ? ")
+
+print(dire_bonjour(prenom_utilisateur))
+```
+
+### Fichiers
+
+Parfois nous aurons aussi besoin de lire ou d'écrire dans des fichiers. Dans les deux cas, il faudra ouvrir le fichier et lire ou écrire dedans.
+
+Pour ouvrir un fichier il faut utiliser la fonction `open()` et lui donnant en argument l'emplacement du fichier et le mode (façon dont on va utiliser le fichier). Pour le mode, on peut utiliser `'r'` pour lire, `'w'` pour écrire, '`a`' pour écrire à la fin ou '`r+`' pour lire et écrire.
+
+#### Lire
+
+Ci dessous un exemple de lecture de la première ligne d'un fichier markdown. On utilisera la fonction `readline()` pour récupérer le contenu d'une ligne du fichier que nous souhaitons lire.
+
+```python
+f = open('convention.md', 'r')
+print(f.readline())
+f.close()
+```
+
+Si l'on veut lire toutes les lignes du fichier on peut écrire le code suivant :
+
+```python
+f = open('convention.md', 'r')
+
+for line in f:
+    print(line)
+
+f.close()
+```
+
+Dans cet exemple, il est important de noter que l'on ouvre le fichier avant de lire ses lignes et une fois la lecture terminée, on le ferme avec la fonction `close()`. On peut simplifier ce fonctionnement grace à l'instruction `with` qui fermera automatiquement le fichier pour nous :
+
+```python
+with open('convention.md', 'r') as f:
+    for line in f:
+        print(line)
+
+print('end')
+```
+
+#### Ecrire
+
+Ci dessous un exemple d'écriture d'une ligne dans fichier texte. On utilisera la fonction `write()` pour écrire du contenu dans un fichier.
+
+```python
+f = open('./session1/exercice/output.data', 'w')
+f.write('Mon premier fichier écrit en Python')
+f.close()
+```
+
