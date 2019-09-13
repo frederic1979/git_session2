@@ -398,6 +398,7 @@ listeMixe = ['odile', 2, 'ray']
 
 listeNb.reverse() # fonction de base
 listeMot.sort() # trie en place
+len(listeMot) # taille de la liste
 ```
 
 ### Indices
@@ -431,7 +432,6 @@ liste3 = range(1,50,2)
 ```
 
 Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/controlflow.html#the-range-function)
-
 
 ## Boucles
 
