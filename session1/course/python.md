@@ -82,11 +82,211 @@ Pour plus de détails : [La documentation officielle de Python](https://docs.pyt
 
 ## Opérateurs
 
-@Joss'
+### Opérations de base sur des nombres
 
-## Booléen et conditions
+On peut utiliser les 4 opérations sur des nombres. Les résultats obtenus sont sans surprise.
 
-@Joss'
+```python
+soldeCompte = 150
+retrait = 20
+
+nouveauSolde = soldeCompte - retrait
+
+depot = 105
+nouveauSolde = soldeCompte + depot
+```
+
+Les opérations **+,-,*** sur des nombres entiers donnent des nombres entiers.
+Les opérations **+,-,*** sur au moins un nombre float donnent des nombres float.
+
+```python
+soldeCompte = 150
+depot = 10.0
+
+nouveauSolde = soldeCompte + depot
+
+pourcentage = 0.3
+nouveauSolde = soldeCompte * 0.3
+```
+
+La division a toujours pour résultat un float.
+
+```python
+nbPartPizza = 4
+nbPersonne = 2
+
+nbPart = 4/2 # 2.0
+```
+
+Les priorités de calcul sont les priorités habituelles, on peut utiliser des parenthèses.
+```python
+a = (2+4)*3 # 18
+b = 2+4*3 # ?
+```
+
+### Puissance
+
+L'opérateur puissance se note **
+
+```python
+a = 3 ** 2
+```
+
+### Division entière
+
+On utilise souvent en informatique la division entière qui donne deux résultats : le reste et le quotient.
+
+```python
+etudiants = 26
+nbGroupes = 3
+
+etudiantsParGroupe = 26 // 3 # pour obtenir un résultat entier
+etudiantsRestant = 26 % 3 # on dit 26 modulo 3
+```
+
+### Opérations avec des chaînes
+
+On peut concaténer (mettre bout à bout) des chaînes de caractères avec l'opérateur +.
+
+```python
+nom = "Odile"
+age = 34
+
+presentation = "Bonjour, je m'appelle "+nom+ " et j'ai "+age+ " ans" # ne fonctionne pas, il faut convertir d'abord age en chaîne
+presentation2 = "Bonjour, je m'appelle "+nom+ " et j'ai "+str(age)+ " ans"
+```
+
+On peut aussi utiliser d'autres opérations arithmétiques avec du texte.
+
+```python
+initial = "pain"
+magic = 3*initial
+```
+### Comparaison
+
+Les relations d'ordre produisent des booleans. Ils se basent sur l'ordre lexicographique (du dictionnaire).
+
+```python
+18 < 22 # True
+3*5 < 10 # False
+2*3 <= 6 # True
+"la ligne rouge" < "apocalypse now" # False
+"rocky3" > 2 # erreur
+```
+
+### Egalité
+
+On compare des variables avec **==**, puisque le **=** est déjà utilisé pour l'affectation. Cela produit aussi un boolean.
+
+```python
+line1 = "Nah nah nah nah nah nah nah nah nah yeah";
+line2 = "Nah nah nah nah nah nah, nah nah nah, hey Jude";
+line3 = "Nah nah nah nah nah nah, nah nah nah, hey Jude";
+
+line1 == line2
+line2 == line3
+
+isDifferent = line1 != line3 # il est vrai que ces lignes ne sont pas égales!
+```
+
+
+## Booleans et conditions
+
+### Conditions
+
+Pour effectuer un bloc d'instructions si une condition est vraie, on utilise le mot-clé **if**. Pour délimiter la taille du bloc d'instructions, on utilise l'indentation.
+
+```python
+temperature = 10
+vetement = "teeshirt"
+
+if temperature < 15 : # début du bloc après les :
+  print("c'est deja l'automne")
+  vetement = "pull"
+
+print(vetement)
+
+```
+Si la condition est vraie, on exécute les instructions du blocs. Sinon on saute le bloc.
+On peut ajouter un bloc à exécuter seulement si la condition est fausse avec **else**.
+
+```python
+temperature = 10
+vetement = "teeshirt"
+
+if temperature < 15 : # début du bloc après les :
+  print("c'est deja l'automne")
+  vetement = "pull"
+
+else :
+  print("vive le rechauffement")
+  # pas la peine de changer de vetement
+
+print(vetement)
+
+```
+
+On peut aussi ajouter d'autres conditions intermédiaires avec **elif**, a exécuter seulement si les précédentes sont fausses.
+
+
+```python
+age = 2
+
+if age < 0 :
+  print("merci d'entrer un age valide (positif)")
+
+elif age < 3 : # on ne rentre pas ici si on est déjà entré dans le cas d'avant
+  print("tarif : gratuit")
+
+elif age < 18 :
+  print("tarif : réduit")
+
+elif age > 65 :
+  print("tarif : réduit")
+
+else : # dans tous les autres cas
+  print("tarif : normal")
+```
+
+### Opérations sur les booleans
+
+Dans le cas précédent, on obtient un tarif réduit si l'âge est inférieur à 18 **ou** supérieur à 65. On peut rassembler les deux cas.
+
+
+```python
+age = 2
+
+if age < 0 :
+  print("merci d'entrer un age valide (positif)")
+
+elif age < 3 : # on ne rentre pas ici si on est déjà entré dans le cas d'avant
+  print("tarif : gratuit")
+
+elif age < 18 or age > 65 :
+  print("tarif : réduit")
+
+else : # dans tous les autres cas
+  print("tarif : normal")
+```
+
+Une erreur classique est d'utiliser un **or** lorsqu'il faudrait un **and** ou inversement. Ici par exemple, un age qui est inférieur à 18 **et** supérieur à 65 n'existe pas, il fallait bien utiliser **ou**.
+
+```
+brocoli = 4
+aubergine = 6
+concombre = 5
+radis = 2
+pomme = 3
+mure = 9
+```
+> quelle condition sur les prix pour ne sélectionner que :
+```
+brocoli = 4
+radis = 2
+pomme = 3
+mure = 9
+```
+question tirée du concours [castor informatique](http://concours.castor-informatique.fr)
 
 ## Les fonctions
 
