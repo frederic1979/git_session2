@@ -114,13 +114,17 @@ heure = 10
 - Créer une fonction qui renvoit le volume d'une sphère en prenant en paramètre son rayon.
 - Créer une fonction qui renvoit un message donnant l'IMC d'une personne. Elle prendra en paramètre le prénom de la personne, son poids en kg et sa taille en cm.
 
-## Etape 5 : Tableaux
+## Etape 5 : Listes
 
-@Joss'
+Créer une liste qui contient tous les prénoms du groupe. Trier cette liste. Afficher tous les prénoms qui ont un indice impair.
+Créer deux sous-listes groupe1 et groupe2 contenant chacun la moitié du groupe.
 
 ## Etape 6 : Boucles
 
-@Joss'
+Parcourir la liste précédente. Pour chaque prénom, afficher la longueur du prénom avec la fonction **len**.
+Ajouter une variable **maximum** au début du programme qui vaut 0 au début. Pour chaque prénom, **si** la longueur du prénom est supérieur au maximum, remplacer maximum par cette valeur. 
+Afficher le prénom le plus long à la fin avec un message : "le prénom le plus long est <prénom>, il possède <nbLettres> lettres"
+
 
 ## Etape 7 : Entrées / Sorties
 
