@@ -350,17 +350,104 @@ def dire_bonjour(prenom):
 message_bienvenue = dire_bonjour("Jules")
 ```
 
-Avec cette fonction, je peux maitenant générer des messages de bienvenue différents car `dire_bonjour(prenom)` prend en **paramètre** une chaîne de caractères nommée `prenom` et **retourne** la valeur "Bienvenue _valeur de prenom_"
+Avec cette fonction, je peux maintenant générer des messages de bienvenue différents car `dire_bonjour(prenom)` prend en **paramètre** une chaîne de caractères nommée `prenom` et **retourne** la valeur "Bienvenue _valeur de prenom_"
 
 On peut définir autant d'arguments que l'on veut (même si ça va vite devenir compliqué si une fonction dépasse 5 arguments) et on ne pourra retourner qu'une seule valeur de retour.
 
-## Tableaux
+## listes
 
-@Joss'
+Il est souvent pratique de gérer plusieurs variables à l'aide de listes (ou de tableaux).
+
+```python
+eleve1 = "sam"
+eleve2 = "bob"
+eleve3 = "al"
+# etc ...
+```
+
+Les éléments sont entre crochets et séparés par des virgules.
+
+```python
+eleves = ["sam", "bob", "al"]
+# une seule variable !
+```
+
+On peut faire des listes de nombres, de chaînes, de booléens, etc ...
+
+```python
+listeNb = [1,2,3]
+listeMot = ['celeri', 'muscade', 'agneau']
+listeMixe = ['odile', 2, 'ray']
+
+listeNb.reverse() # fonction de base
+listeMot.sort() # trie en place
+```
+
+### Indices
+
+Les éléments sont numérotés à partir de 0. On accède aux éléments avec **[]**
+
+```python
+eleves = ["sam", "bob", "al", "odile"]
+print(eleves[1]) # l'élément n°1 de la liste est bob
+```
+
+On peut extraire une sous-liste avec **:**
+
+```python
+eleves = ["sam", "bob", "al", "odile"]
+print(eleves[1:3]) # les éléments 1 à 3 (exclu)
+print(eleves[1:]) # tous les éléments à partir du 1
+```
+
+### Range
+
+Python sait aussi compter! pour générer une liste de nombre, on utilise simplement la fonction **range**
+
+```python
+liste = range(2,10) # de 2 jusqu'à 10 (exclu)
+liste2 = range(50) # de 0 jusqu'à 50 (exclu)
+liste3 = range(1,50,2)
+```
 
 ## Boucles
 
-@Joss'
+On va parler ici de répétitions. C'est quelque chose qu'un programme sait très bien faire, répéter plusieurs fois (parfois un grand nombre) un bloc d'instructions.
+
+### While (tant que)
+
+Tant que tu n'auras pas fini ta purée, tu n'auras pas de dessert!
+
+```python
+puree = 10 # cuilleres
+
+while puree > 0 : # puree > 0 est une condition, comme pour le if
+  print("une cuillère pour papa")
+  puree = puree -1
+
+dessert = "fondant au chocolat"
+```
+
+### For (pour)
+
+Si on veut faire le même traitement pour chaque élément d'une liste, il suffit d'utiliser le mot **pour**, mais en anglais. Dans ce cas, on doit choisir un nom pour l'élément courant à parcourir.
+
+```python
+eleveListe = ["sam", "bob", "al", "odile"]
+
+for eleve in eleveListe : # on commence toujours un bloc avec :
+  print("bonjour "+eleve)
+
+```
+
+Ou aussi avec des nombres, pour répéter 100 fois une action (utile!).
+
+```python
+for i in range(100) :
+  print("Je ne photocopierai plus mes fesses")
+```
+
+[ref](https://fr.wikipedia.org/wiki/Liste_des_phrases_au_tableau_noir_des_Simpson)
 
 ## Entrées / Sorties
 
