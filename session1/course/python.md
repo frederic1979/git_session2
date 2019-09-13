@@ -369,7 +369,6 @@ Avec cette fonction, je peux maintenant générer des messages de bienvenue diff
 
 On peut définir autant d'arguments que l'on veut (même si ça va vite devenir compliqué si une fonction dépasse 5 arguments) et on ne pourra retourner qu'une seule valeur de retour.
 
-<<<<<<< HEAD
 Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/controlflow.html#defining-functions)
 
 ## Tableaux
@@ -377,7 +376,6 @@ Pour plus de détails : [La documentation officielle de Python](https://docs.pyt
 ## listes
 
 Il est souvent pratique de gérer plusieurs variables à l'aide de listes (ou de tableaux).
->>>>>>> 3ffee1f1e292dbadd62b75aa26e6debbbc0564f3
 
 ```python
 eleve1 = "sam"
@@ -472,7 +470,6 @@ for i in range(100) :
 
 ## Entrées / Sorties
 
-<<<<<<< HEAD
 Lorsque l'on exécute un programme, on peut avoir besoin de lui fournir des données en entrée ou bien d'en récupérer en sortie. Plusieurs méthodes existent et nous allons en explorer deux : en utilisant la **console** et les **fichiers**.
 
 ### Console
@@ -538,7 +535,3 @@ f = open('./session1/exercice/output.data', 'w')
 f.write('Mon premier fichier écrit en Python')
 f.close()
 ```
-
-=======
-@Jules
->>>>>>> 3ffee1f1e292dbadd62b75aa26e6debbbc0564f3
