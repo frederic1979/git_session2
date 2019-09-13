@@ -444,7 +444,7 @@ Ou aussi avec des nombres, pour répéter 100 fois une action (utile!).
 
 ```python
 for i in range(100) :
-  print("Je ne photocopierai plus mes fesses")
+  print(str(i)+" Je ne photocopierai plus mes fesses")
 ```
 
 [ref](https://fr.wikipedia.org/wiki/Liste_des_phrases_au_tableau_noir_des_Simpson)
