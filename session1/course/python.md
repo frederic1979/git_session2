@@ -371,8 +371,6 @@ On peut définir autant d'arguments que l'on veut (même si ça va vite devenir 
 
 Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/controlflow.html#defining-functions)
 
-## Tableaux
-=======
 ## listes
 
 Il est souvent pratique de gérer plusieurs variables à l'aide de listes (ou de tableaux).
@@ -419,6 +417,9 @@ print(eleves[1:3]) # les éléments 1 à 3 (exclu)
 print(eleves[1:]) # tous les éléments à partir du 1
 ```
 
+Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/introduction.html#lists)
+
+
 ### Range
 
 Python sait aussi compter! pour générer une liste de nombre, on utilise simplement la fonction **range**
@@ -428,6 +429,9 @@ liste = range(2,10) # de 2 jusqu'à 10 (exclu)
 liste2 = range(50) # de 0 jusqu'à 50 (exclu)
 liste3 = range(1,50,2)
 ```
+
+Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/controlflow.html#the-range-function)
+
 
 ## Boucles
 
@@ -467,6 +471,9 @@ for i in range(100) :
 ```
 
 [ref](https://fr.wikipedia.org/wiki/Liste_des_phrases_au_tableau_noir_des_Simpson)
+
+Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/controlflow.html#for-statements)
+
 
 ## Entrées / Sorties
 
