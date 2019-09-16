@@ -36,7 +36,7 @@ prenom = "Jules"
 
 ### Les booléens
 
-Le type de données élémentaire à connaitre qui est à la base de l'informatique d'aujourd'hui est le booléen. Il s'agit d'un type de données qui n'a que deux valeurs possibles : `True`ou `False`. Cela correspond au `0` et au `1` du binaire. Nous l'utiliserons beaucoup lorsque nous aborderons les conditions.
+Le type de données élémentaire à connaître qui est à la base de l'informatique d'aujourd'hui est le booléen. Il s'agit d'un type de données qui n'a que deux valeurs possibles : `True`ou `False`. Cela correspond au `0` et au `1` du binaire. Nous l'utiliserons beaucoup lorsque nous aborderons les conditions.
 
 ```python
 # Une vérité
@@ -69,7 +69,7 @@ prenom = "Jules"
 nom = 'Jules'
 ```
 
-Parfois on peut avoir envie d'utiliser des **guillements** dans la chaîne de caractères. Dans ce cas on peut procéder comme suit :
+Parfois on peut avoir envie d'utiliser des **guillemets** dans la chaîne de caractères. Dans ce cas on peut procéder comme suit :
 
 ```python
 presentation = "Je m'appelle Jules"
@@ -82,7 +82,7 @@ Parfois on peut avoir envie de combiner les deux :
 citation = '"Je suis le pape et j\'attends ma soeur" - Odile de Ray.'
 ```
 
-Dans cette dernière citation, j'ai besoin **d'échapper** le guillement simple afin qu'il ne soit pas interprété comme la fin de la chaîne de caractères. On utilise dans ce cas le caractère `backslash`.
+Dans cette dernière citation, j'ai besoin **d'échapper** le guillemet simple afin qu'il ne soit pas interprété comme la fin de la chaîne de caractères. On utilise dans ce cas le caractère `backslash`.
 
 On peut aussi avoir besoin d'écrire une chaine de caractères qui contient plusieurs lignes de texte. Dans ce cas, deux solutions : utiliser le caractère spécial `\n` pour indiquer un retour à la ligne ou utiliser le commentaire multiligne.
 
@@ -307,9 +307,9 @@ question tirée du concours [castor informatique](http://concours.castor-informa
 
 ### Pourquoi utiliser des fonctions
 
-Une fonction est un **bout de code** que l'on va définir afin d'être **réutilisé**. Pourquoi devrions-nous faire cela ? En programmation, nous cherchons à résoudre des problèmes, et comme nous l'avons vu en découvrant l'algorithmique très souvent nous pouvons **découper** un problème en plusieurs **sous-problèmes** à résoudre et cela nous aide à rendre le problème plus simple à résoudre. Une des premières utilité d'une fonction est donc de rendre le problème plus simple a résoudre en le découpant en sous problèmes. Cela a aussi l'avantage de rendre le code plus lisible en le découpant et en nomant les actions.
+Une fonction est un **bout de code** que l'on va définir afin d'être **réutilisé**. Pourquoi devrions-nous faire cela ? En programmation, nous cherchons à résoudre des problèmes, et comme nous l'avons vu en découvrant l'algorithmique très souvent nous pouvons **découper** un problème en plusieurs **sous-problèmes** à résoudre et cela nous aide à rendre le problème plus simple à résoudre. Une des premières utilité d'une fonction est donc de rendre le problème plus simple a résoudre en le découpant en sous problèmes. Cela a aussi l'avantage de rendre le code plus lisible en le découpant et en nommant les actions.
 
-Si l'on se rappelle les notions d'algorithmique on a le programme suivant pour résourdre le problème de la cuisson des pâtes.
+Si l'on se rappelle les notions d'algorithmique on a le programme suivant pour résoudre le problème de la cuisson des pâtes.
 
 ```
 début
@@ -523,7 +523,7 @@ for line in f:
 f.close()
 ```
 
-Dans cet exemple, il est important de noter que l'on ouvre le fichier avant de lire ses lignes et une fois la lecture terminée, on le ferme avec la fonction `close()`. On peut simplifier ce fonctionnement grace à l'instruction `with` qui fermera automatiquement le fichier pour nous :
+Dans cet exemple, il est important de noter que l'on ouvre le fichier avant de lire ses lignes et une fois la lecture terminée, on le ferme avec la fonction `close()`. On peut simplifier ce fonctionnement grâce à l'instruction `with` qui fermera automatiquement le fichier pour nous :
 
 ```python
 with open('convention.md', 'r') as f:

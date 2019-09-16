@@ -36,7 +36,7 @@ tva = 0.20
 Créer une variable **prixFinal** qui égale au prix initial plus le prix initial multiplié par la tva. Afficher cette variable.
 
 ### Ex4 : modulo et division entière
-1. Remplir des boites de 6 oeufs! Créer une variable **nbBoites** qui contient le nombre de boites pleines et une variable **nbOeufsRestant** pour le nombre d’œufs qui restent.
+1. Remplir des boites de 6 œufs! Créer une variable **nbBoites** qui contient le nombre de boites pleines et une variable **nbOeufsRestant** pour le nombre d’œufs qui restent.
 
 ```python
 nbOeufsParBoite = 6
@@ -110,9 +110,9 @@ heure = 10
 
 ## Etape 4 : Créons des fonctions
 
-- Créer une fonction qui renvoit l'aire d'un triangle en prenant en paramètres base et hauteur.
-- Créer une fonction qui renvoit le volume d'une sphère en prenant en paramètre son rayon.
-- Créer une fonction qui renvoit un message donnant l'IMC d'une personne. Elle prendra en paramètre le prénom de la personne, son poids en kg et sa taille en cm.
+- Créer une fonction qui renvoie l'aire d'un triangle en prenant en paramètres base et hauteur.
+- Créer une fonction qui renvoie le volume d'une sphère en prenant en paramètre son rayon.
+- Créer une fonction qui renvoie un message donnant l'IMC d'une personne. Elle prendra en paramètre le prénom de la personne, son poids en kg et sa taille en cm.
 
 ## Etape 5 : Listes
 
@@ -122,7 +122,7 @@ Créer deux sous-listes groupe1 et groupe2 contenant chacun la moitié du groupe
 ## Etape 6 : Boucles
 
 Parcourir la liste précédente. Pour chaque prénom, afficher la longueur du prénom avec la fonction **len**.
-Ajouter une variable **maximum** au début du programme qui vaut 0 au début. Pour chaque prénom, **si** la longueur du prénom est supérieur au maximum, remplacer maximum par cette valeur. 
+Ajouter une variable **maximum** au début du programme qui vaut 0 au début. Pour chaque prénom, **si** la longueur du prénom est supérieur au maximum, remplacer maximum par cette valeur.
 Afficher le prénom le plus long à la fin avec un message : "le prénom le plus long est <prénom>, il possède <nbLettres> lettres"
 
 
@@ -136,4 +136,4 @@ Afficher le prénom le plus long à la fin avec un message : "le prénom le plus
 
 - Créer un programme qui va lire le fichier [villes-france.txt](../resource/villes-france.txt) et indiquer combien de fois apparaît _TOULOUSE_ dans le fichier.
 - Créer un programme qui va lire le fichier [villes-france.txt](../resource/villes-france.txt) et créer un nouveau fichier sans doublons (après modification, le nouveau fichier ne doit contenir qu'une seule fois le même nom de ville).
-- Créer un programme qui va lire le fichier [villes-france.txt](../resource/villes-france.txt) et créer un nouveau fichier dans lequel chaque ligne donnera le nom d'une ville en affichant le nombre d'occurence dans le fichier de départ. Ce fichier devra être trié par ordre alphabétique.
+- Créer un programme qui va lire le fichier [villes-france.txt](../resource/villes-france.txt) et créer un nouveau fichier dans lequel chaque ligne donnera le nom d'une ville en affichant le nombre d’occurrence dans le fichier de départ. Ce fichier devra être trié par ordre alphabétique.
