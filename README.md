@@ -8,6 +8,6 @@ Les cours et exercices de la formation sont stockés dans ce repository et sont 
 
 ## Session 1 : Algo, Python & Java
 
-Les trois premières semaines sont consacrées à l'apprentissage de l'algorithmique avec Python et Java. Rendez-vous sur [Objectifs pédagogiques Session 1](./session1/pedagogy/targets.md) pour en savoir un peu plus.
+Les trois premières semaines sont consacrées à l'apprentissage de l'algorithmique avec Python et Java. Rendez-vous sur [Objectifs pédagogiques Session 1](./session1/pedagogy/objectifs-pedago.md) pour en savoir un peu plus.
 
 ## Session 2 : To-Do
