@@ -6,17 +6,17 @@ C'est une question à résoudre par des méthodes rationnelles ou scientifiques.
 
 ### Exemple 1 : Le problème du fermier sur la berge
 
-Un fermier possède un renard, un canard et un sac de maïs. Il doit traverser une rivière avec un petit bateau disponible sur la berge. Le fermier a les contraintes suivantes :
+Un fermier possède un renard, un canard et un sac de maïs. Il doit traverser une rivière avec un petit bateau disponible sur la berge. Le fermier a les **contraintes** suivantes :
   * le bateau ne permet d'emmener qu’un passager / objet à la fois.
   * le canard ne doit pas être laissé seul avec le maïs sinon il va manger le maïs
   * le renard ne doit pas être laissé seul avec le canard sinon le renard mangera le canard.
 
 **Comment fait le fermier pour faire traverser tout le monde sans encombre ?**
 
-_Retour sur l'exercice_ : Ce problème montre l’importance des contraintes (si on les supprime le problème n’en est plus un) et l’importance de connaître toutes les actions possibles pour résoudre un problème (si je vous dit au départ que vous pouvez revenir en arrière avec le canard ou le renard, alors vous résolvez le problème plus facilement).
+_Retour sur l'exercice_ : Ce problème montre l’importance des **contraintes** (si on les supprime le problème n’en est plus un) et l’importance de connaître toutes les actions possibles pour résoudre un problème (si je vous dit au départ que vous pouvez revenir en arrière avec le canard ou le renard, alors vous résolvez le problème plus facilement).
 
 _Solution_ :
-Reformuler le problème et le regarder sous tous les angles avant de chercher la solution
+**Reformuler** le problème et le regarder sous tous les angles avant de chercher la solution
 
 ### Exemple 2 : Une recherche documentaire
 

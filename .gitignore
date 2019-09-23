@@ -1,0 +1,5 @@
+### Ignore reveal framework modules ###
+reveal/node_modules
+
+### Ignore macOS specific files ###
+.DS_Store

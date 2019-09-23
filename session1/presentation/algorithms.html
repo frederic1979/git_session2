@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Les Algorithmes "purs et durs"</title>
+
+  <link rel="stylesheet" href="../../reveal/css/reveal.css">
+  <link rel="stylesheet" href="../../reveal/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="../../reveal/css/presentation.css">
+  <link rel="stylesheet" href="../../reveal/lib/css/atom-one-dark.css">
+  
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../../reveal/css/print/pdf.css' : '../../reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+
+<body>
+  <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+  <div class="reveal">
+    <!-- Wrap all slides in a single "slides" class -->
+    <div class="slides">
+
+      <!-- ALL SLIDES GO HERE -->
+      <!-- Each section element contains an individual slide -->
+      <section>
+        <h1>Les algorithmes purs et durs</h1>
+        <img class="no-border" src="../../reveal/images/logo_simplon.png" alt="Logo Simplon">
+      </section>
+
+      <section>
+        <h3>Qu'est-ce qu'un problème ?</h3>
+        <p class="fragment">Il s'agit d'une question à résoudre par des méthodes rationnelles ou scientifiques.</p>
+      </section>
+
+      <!-- Le problème du fermier -->
+      <section>
+        <section>
+          <h3>Exemple #1</h3>
+          <h3>Le problème du fermier sur la berge</h3>
+        </section>
+        <section>
+          <h3>Enoncé</h3>
+          <p>Un fermier possède :</p>
+          <div class="side-by-side">
+            <figure class="fragment">
+              <img src="../resource/images/fox.png" alt="Fox" width="250">
+              <figcaption>Un renard</figcaption>
+            </figure>
+            <figure class="fragment">
+              <img src="../resource/images/duck.png" alt="Duck" width="250">
+              <figcaption>Un canard</figcaption>
+            </figure>
+            <figure class="fragment">
+              <img src="../resource/images/corn.png" alt="Corn" width="250">
+              <figcaption>Un sac de maïs</figcaption>
+            </figure>
+          </div>
+        </section>
+        <section>
+          <p class="fragment">Le fermier doit traverser une rivière avec un petit bateau disponible sur la berge.</p>
+          <p class="fragment">Les <strong>contraintes</strong> sont les suivantes :
+            <ul class="fragment">
+              <li>Le bateau permet d'emmener <strong>un seul passager ou objet à la fois</strong></li>
+              <li>Le canard <strong>ne doit pas</strong> être laissé <strong>seul</strong> avec le maïs</li>
+              <li>Le renard <strong>ne doit pas</strong> être laissé <strong>seul</strong> avec le canard</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h3>Comment faire ?</h3>
+          <p>
+            <ul>
+              <li class="fragment">Le fermier fait un aller avec le <strong>canard</strong></li>
+              <li class="fragment">Le fermier revient à <strong>vide</strong></li>
+              <li class="fragment">Le fermier repart avec le <strong>maïs</strong></li>
+              <li class="fragment">Le fermier revient avec le <strong>canard</strong></li>
+              <li class="fragment">Le fermier repart avec le <strong>renard</strong></li>
+              <li class="fragment">Le fermier revient à <strong>vide</strong></li>
+              <li class="fragment">Le fermier fait le dernier aller avec le <strong>canard</strong></li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <p class="fragment">Ce problème montre l’importance des <strong>contraintes</strong>
+          <br>
+          Si on les supprime le problème n’en est plus un.</p>
+          <p class="fragment">
+            Il nous montre aussi l’importance de connaître <strong>toutes</strong> les actions possibles pour résoudre un problème.
+            <aside class="notes">Si je vous dit au départ que vous pouvez revenir en arrière avec le canard ou le renard, alors vous résolvez le problème plus facilement.</aside>
+          </p>
+          <aside class="notes"><strong>Solution : </strong>Reformuler le problème et le regarder sous tous les angles avant de chercher la solution</aside>
+        </section>
+      </section>
+      
+      <!-- La recherche documentaire -->
+      <section>
+        <section>
+          <h3>Exemple #2</h3>
+          <h3>La recherche documentaire</h3>
+        </section>
+        <section>
+          <h3>Enoncé</h3>
+          <p>Je vis dans les années 1970, dans une grande ville des Etats-Unis et je décide de partir en voyage au Tibet dans trois semaines.</p>
+          <p>J'aimerais connaître les rudiments de la culture Bouddhiste avant de partir en voyage.</p>
+        </section>
+        <section>
+          <h3>Comment faire ?</h3>
+          <p>
+            <ul>
+              <li class="fragment">Je me rends à la <strong>bibliothèque</strong> de ma ville</li>
+              <li class="fragment">Je demande le rayon <strong>religion et spiritualité</strong></li>
+              <li class="fragment">Je recherche sur l'étagère étiquettée <strong>"B"</strong></li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <p class="fragment">Ce problème montre l’importance des <strong>découpages</strong></p>
+          <p class="fragment">Chaque problème peut être découpé en <strong>plusieurs petits problèmes</strong> qui peuvent être résolus de manière indépendante</p>
+        </section>
+      </section>
+      
+      <!-- L'itinéraire -->
+      <section>
+        <section>
+          <h3>Exemple #3</h3>
+          <h3>L'itinéraire</h3>
+        </section>
+        <section>
+          <h3>Enoncé</h3>
+          <p>Je vis dans les années 1970, dans une petite ville du sud de la France et je décide de rendre visite à un ami qui vient de déménager à 500 km de chez moi.</p>
+          <p>J'aimerais calculer <strong>l'itinéraire le plus rapide</strong> pour lui rendre visite avec ma nouvelle automobile.</p>
+        </section>
+        <section>
+          <h3>Comment faire ?</h3>
+          <p>
+            <ul>
+              <li class="fragment">J'identifie mon <strong>point de départ</strong></li>
+              <li class="fragment">J'identifie mon <strong>point d'arrivée</strong></li>
+              <li class="fragment">Sur la carte je choisis les segment qui me rapprochent <strong>le plus vite</strong> de l'arrivée</li>
+            </ul>
+          </p>
+        </section>
+      </section>
+
+      <section>
+        <h3>Les clés pour solutionner un problème</h3>
+        <ul>
+          <li>Toujours avoir un <strong>plan</strong> <aside class="notes">Même si un plan risque d’être modifié, cela permet de définir des étapes intermédiaires et de suivre l’avancement de la résolution)</aside></li>
+          <li><strong>Reformuler</strong> le problème <aside class="notes">Cela permet à minima de s’assurer qu’on a compris le problème et parfois de voir le problème sous un autre angle et de trouver plus facilement une solution</aside></li>
+          <li><strong>Diviser</strong> le problème <aside class="notes">Exemple avec le tri de livres par hauteur, il vaut mieux trier 100 livres en découpant 25 par 25 puis rassembler les 4 x 25 triés que de trier les 100 d’un coup</aside></li>
+          <li>Commencer par <strong>ce que l'on sait</strong> faire</li>
+          <li><strong>Simplifier</strong> le problème <aside class="notes">Parfois il est préférable de supprimer des contraintes pour avoir une solution intermédiaire plus simple, même si elle ne couvre pas tout le problème</aside></li>
+          <li>Chercher des <strong>analogies</strong> <aside class="notes">Ne veut pas dire copier/coller</aside></li>
+          <li><strong>Expérimenter</strong> <aside class="notes">Ne veut pas dire deviner ou faire “au pif”</aside></li>
+          <li>Garder la <strong>motivation</strong> <aside class="notes">Eviter de laisser la frustration vous atteindre. Soyez indulgent avec vous même !</aside></li>
+        </ul>
+      </section>
+      <section>
+        <h3>Pour plus de détails</h3>
+        <a href="https://www.nostarch.com/thinklikeaprogrammer">Think Like A Programmer An Introduction To Creative Problem Solving (V. Anton Spraul)</a>
+      </section>
+      <section>
+        <h3>Qu’est ce qu’un algorithme ?</h3>
+        <p class="fragment">
+          Il s’agit d’une <strong>suite (finie) d’opérations élémentaires</strong> qui permettent de résoudre un problème.
+        </p>
+        <p class="fragment">
+          C’est une procédure de calcul qui prend en entrée un ensemble E de valeurs et qui retourne en sortie en ensemble E’ de valeurs.
+        </p>
+      </section>
+      <section>
+        <p class="fragment">
+          Un algorithme doit toujours se <strong>terminer</strong> et <strong>fournir un résultat</strong>.
+        </p>
+        <p class="fragment">
+          Un algorithme est dit <strong>correct</strong> si pour chaque ensemble de valeurs <strong>E</strong> en entrée il fournit le même ensemble de résultat <strong>E'</strong> en sortie.
+        </p>
+      </section>
+      <section>
+        <p class="fragment">
+          On utilise parfois certains algorithmes non corrects si l'on sait gérer le <strong>taux d'erreur</strong> de l'algorithme.
+        </p>
+        <p class="fragment">
+          Certains problèmes ne sont <strong>pas calculables</strong>, il n'existe pas d'algorithme qui permette leur résolution.
+        </p>
+      </section>
+      <section>
+        <section>
+          <h3>Connaissez vous des exemples d'algorithme ?</h3>
+          <p class="fragment">Oui, vous en utilisez tous les jours !</p>
+        </section>
+        <section>
+          <h3>La recette de cuisine</h3>
+          <pre><code class="hljs" data-trim>
+            début
+              remplir_casserole(eau)
+              tant_que (eau_non_bouillante)
+                chauffer_casserole(feu_max)
+              fin_tant_que
+
+              remplir_casserole(pâtes)
+              tant_que (pâtes_non_cuites)
+                chauffer_casserole(feu_fort)
+              fin_tant_que
+
+              égouter_pâtes
+              servir_pâtes
+            fin
+          </code></pre>
+        </section>
+        <section>
+          <h3>Le calcul du PGCD</h3>
+          <pre><code class="hljs" data-trim>
+            début
+              nb_1, nb_2
+              max = max(nb_1, nb_2)
+              min = min(nb_1, nb_2)
+              reste = max modulo min
+              tant_que (reste différent de zéro)
+                max = min
+                min = reste
+                reste = max modulo min
+              fin_tant_que
+
+              pgcd = min
+            fin
+          </code></pre>
+        </section>
+      </section>
+      <section>
+        <h3>Les structures algorithmiques</h3>
+        <ul>
+          <li>Les structures de <strong>contrôle</strong> <aside class="notes">Les structures de contrôle permettent en fait à l'algorithme de prendre un décision (grâce aux conditions) et/ou de répéter certaines opérations (grâce aux boucles).</aside></li>
+          <li>Les structures de <strong>données</strong> <aside class="notes">Les structures de données permettent le stockage de l'information. Elles sont utilisées pour organiser les données afin de pouvoir les traiter le plus facilement possible. On utilisera très souvent les constantes, les variables, les tableaux, les listes. On utilisera parfois les arbres, les graphes, ...</aside></li>
+        </ul>
+      </section>
+      <section>
+        <h3>Pour plus de détails</h3>
+        <ul>
+          <li><a href="https://fr.wikipedia.org/wiki/Structure_de_contr%C3%B4le">Les structures de contrôle sur Wikipedia</a></li>
+          <li><a href="https://fr.wikipedia.org/wiki/Structure_de_donn%C3%A9es">Les structures de données sur Wikipedia</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>La complexité</h3>
+        <p class="fragment">
+          Il s'agit en fait de <strong>l'efficacité</strong> de l'algorithme qu'on va développer.
+        </p>
+        <ul class="fragment">
+          <li>En temps</li>
+          <li>En mémoire</li>
+        </ul>
+      </section>
+
+    </div>
+  </div>
+  <script src="../../reveal/lib/js/head.min.js"></script>
+  <script src="../../reveal/js/reveal.js"></script>
+
+  <script>
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../../reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: '../../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: '../../reveal/plugin/search/search.js', async: true },
+      { src: '../../reveal/plugin/zoom-js/zoom.js', async: true },
+      { src: '../../reveal/plugin/notes/notes.js', async: true }
+    ]
+  });
+  </script>
+</body>
+
+</html>

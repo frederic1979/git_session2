@@ -1,0 +1,54 @@
+body {
+    background-image: url(../images/picto_simplon.png);
+    background-position: 96% 3%;
+    background-repeat: no-repeat;
+    background-size: 10%;
+}
+
+strong {
+  color: #ed1450;
+  font-weight: bold;
+}
+
+.side-by-side {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.sliding-tiles table td {
+  border: 1px solid;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  text-align: center;
+  }
+
+.sliding-tiles table tbody tr:last-child th,
+.sliding-tiles table tbody tr:last-child td {
+    border-bottom: 1px solid; }
+
+.sliding-tiles p {
+    color: #ed1450;
+    font-size: 0.7em;
+}
+
+span.code-font {
+  font-family: "Courier new";
+  font-size: 0.8em;
+}
+
+.reveal pre {
+  display: inline-block;
+  width: auto;
+}
+
+.reveal pre code {
+  padding: 5px 20px;
+}
+
+.reveal blockquote {
+  color: rgb(60, 60, 60);
+  border-left: 3px solid rgb(120, 120, 120);
+  box-shadow: none;
+  text-align: justify;
+  padding-left: 30px;
+}
