@@ -14,11 +14,15 @@
 
 ### **Mar 1 Oct :** Fonctionnement de la mémoire, Linux
 
+Matin :
+
 * **Notions :** [Fonctionnement de la mémoire](../cours/reussir-la-formation.md)
 * **Objectif•s :** Comprendre comment tirer le meilleur parti de la formation
 * **Compétence•s visées•s :** -
 * **Modalité•s pédagogique•s :** Exercices pratiques : [Atelier REAC](../presentation/reussir-la-formation.html)
 * **Temporalité :** 4h
+
+Après-midi :
 
 * **Notions :** [Découverte de Linux](../cours/linux.md)
 * **Objectif•s :** Découvrir l'OS Linux
@@ -28,23 +32,21 @@
 
 ### **Mer 2 Oct :** Les outils du développeur
 
+Matin :
+
 * **Notions :** [Découverte de Linux](../cours/linux.md)
 * **Objectif•s :** Découvrir l'OS Linux
 * **Compétence•s visées•s :** -
 * **Modalité•s pédagogique•s :** Exercices pratiques : [Commandes de survie Linux](../exercice/linux.md)
 * **Temporalité :** 3h
 
-* **Notions :** [Découverte de git](../cours/git.md)
-* **Objectif•s :** Découvrir git
-* **Compétence•s visées•s :** -
-* **Modalité•s pédagogique•s :** Exercices pratiques : [La charte de bonne conduite sous git](../exercice/git.md)
-* **Temporalité :** 4h
+Après-midi :
 
-* **Notions :** [Découverte des EDI](../cours/edi.md)
-* **Objectif•s :** Découvrir les environnements de développement intégrés
+* **Notions :** [Découverte de git](../cours/git.md), [Découverte des EDI](../cours/edi.md)
+* **Objectif•s :** Découvrir git et découvrir les environnements de développement intégrés
 * **Compétence•s visées•s :** -
-* **Modalité•s pédagogique•s :** Presentation
-* **Temporalité :** 1h
+* **Modalité•s pédagogique•s :** Presentation & Exercices pratiques : [La charte de bonne conduite sous git](../exercice/git.md)
+* **Temporalité :** 4h
 
 ### **Jeu 3 et Ven 4 Oct :** Python
 
