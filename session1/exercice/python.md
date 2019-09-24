@@ -130,10 +130,10 @@ Afficher le prénom le plus long à la fin avec un message : "le prénom le plus
 
 - Créer un programme qui demande à l'utilisateur de se présenter : prénom, nom et age. Utilisez la console pour afficher un message d'accueil personnalisé du type "Bonjour _Jules Grand_ tu as _30 ans_ c'est bien ça ?"
 - Créer un programme qui fera la même chose tout en écrivant les informations reçues dans un fichier texte. Le fichier devra être nommé _prenom-nom.txt_
-- Créer un programme qui va lire le fichier [films-2018.txt](../resource/films-2018.txt) et indiquer combien il y a de films sortis en 2018.
+- Créer un programme qui va lire le fichier [films-2018.txt](../ressource/films-2018.txt) et indiquer combien il y a de films sortis en 2018.
 
 **Bonus**
 
-- Créer un programme qui va lire le fichier [villes-france.txt](../resource/villes-france.txt) et indiquer combien de fois apparaît _TOULOUSE_ dans le fichier.
-- Créer un programme qui va lire le fichier [villes-france.txt](../resource/villes-france.txt) et créer un nouveau fichier sans doublons (après modification, le nouveau fichier ne doit contenir qu'une seule fois le même nom de ville).
-- Créer un programme qui va lire le fichier [villes-france.txt](../resource/villes-france.txt) et créer un nouveau fichier dans lequel chaque ligne donnera le nom d'une ville en affichant le nombre d’occurrence dans le fichier de départ. Ce fichier devra être trié par ordre alphabétique.
+- Créer un programme qui va lire le fichier [villes-france.txt](../ressource/villes-france.txt) et indiquer combien de fois apparaît _TOULOUSE_ dans le fichier.
+- Créer un programme qui va lire le fichier [villes-france.txt](../ressource/villes-france.txt) et créer un nouveau fichier sans doublons (après modification, le nouveau fichier ne doit contenir qu'une seule fois le même nom de ville).
+- Créer un programme qui va lire le fichier [villes-france.txt](../ressource/villes-france.txt) et créer un nouveau fichier dans lequel chaque ligne donnera le nom d'une ville en affichant le nombre d’occurrence dans le fichier de départ. Ce fichier devra être trié par ordre alphabétique.
