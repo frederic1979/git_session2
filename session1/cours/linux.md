@@ -1,6 +1,6 @@
 # Le système d'exploitation Linux
 
-Avant de parler du système d'exploitation Linux, il convient de définir quelques termes essentiels : 
+Avant de parler du système d'exploitation Linux, il convient de définir quelques termes essentiels :
 
 - Le **terminal**
 - La **donnée**
@@ -54,7 +54,7 @@ C'est pour cette raison que nous allons utiliser Linux pendant la formation. Lor
 
 ## Le bash
 
-Sous Linux, un outil **incontournable** du développeur est le [bash](https://fr.wikipedia.org/wiki/Bourne-Again_shell). C'est un interpreteur en ligne de commande. Il permet d'exécuter des actions sur le système de fichier, de controler différents logiciels, de configurer le réseau, ... Cela peut paraître étrange de vouloir utiliser des lignes de commandes aujourd'hui où les interfaces graphiques sont très bien développées. Pourtant c'est encore beaucoup utilisé. En effet c'est souvent beaucoup plus efficace pour certaines actions. 
+Sous Linux, un outil **incontournable** du développeur est le [bash](https://fr.wikipedia.org/wiki/Bourne-Again_shell). C'est un interpreteur en ligne de commande. Il permet d'exécuter des actions sur le système de fichier, de controler différents logiciels, de configurer le réseau, ... Cela peut paraître étrange de vouloir utiliser des lignes de commandes aujourd'hui où les interfaces graphiques sont très bien développées. Pourtant c'est encore beaucoup utilisé. En effet c'est souvent beaucoup plus efficace pour certaines actions.
 
 ### Les commandes de survie
 

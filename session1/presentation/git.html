@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <title>git</title>
+
+  <link rel="stylesheet" href="../../reveal/css/reveal.css">
+  <link rel="stylesheet" href="../../reveal/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="../../reveal/css/presentation.css">
+  <link rel="stylesheet" href="../../reveal/lib/css/atom-one-dark.css">
+  
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../../reveal/css/print/pdf.css' : '../../reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+
+<body>
+  <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+  <div class="reveal">
+    <!-- Wrap all slides in a single "slides" class -->
+    <div class="slides">
+
+      <!-- ALL SLIDES GO HERE -->
+      <!-- Each section element contains an individual slide -->
+      <section>
+        <h1>git</h1>
+        <img class="no-border" src="../../reveal/images/logo_simplon.png" alt="Logo Simplon">
+      </section>
+
+      <!-- Définition de git -->
+      <section>
+        <section>
+          <figure>
+            <img src="../ressource/images/git.png" alt="Git" width="250">
+          </figure>
+          <p>Système de gestion de version</p>
+        </section>
+        <section>
+          <p>Ce que cela permet de faire :</p>
+          <ul>
+            <li class="fragment"><strong>Historiser</strong> les changements</li>
+            <li class="fragment"><strong>Collaborer</strong> avec d'autres développeur•euse•s</li>
+            <li class="fragment"><strong>Gérer</strong> les conflits</li>
+          </ul>
+        </section>  
+      </section>
+      
+      <!-- Créer un repository -->
+      <section>
+        <section>
+          <h3>Comment créer un repository ?</h3>
+          <pre><code class="hljs shell" data-trim>
+            git init
+          </code></pre>
+        </section>
+      </section>
+
+
+      <!-- Les arbres -->
+      <section>
+        <section>
+          <h2>Les arbres de git</h3>
+        </section>
+
+        <!-- Espace de travail -->
+        <section>
+          <h3>L'espace de travail</h3>
+          <p class="fragment">Le dossier où vous rangez votre code source</p>
+          <p class="fragment">On peut <strong>ignorer</strong> certains fichiers avec le <strong>.gitignore</strong></p>
+        </section>
+        
+        <!-- Index -->
+        <section>
+          <h3>L'Index</h3>
+          <p class="fragment">Le choix des fichiers à <strong>historiser</strong></p>
+          <pre class="fragment"><code class="hljs shell" data-trim>
+            git add &lt;nom-du-fichier-a-historiser&gt;
+          </code></pre>
+        </section>
+
+        <!-- HEAD -->
+        <section>
+          <h3>Le HEAD</h3>
+          <p class="fragment">La <strong>validation</strong> des changements</p>
+          <pre class="fragment"><code class="hljs shell" data-trim>
+            git commit -m "correction du bug bloquant #0012B"
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>L'exemple du mariage</h3>
+          <ul>
+            <li class="fragment">L'espace de travail = Le chateau où sont les invités</li>
+            <li class="fragment">L'index = Le photographe appelle la famille</li>
+            <li class="fragment">Le commit = La prise de la photographie</li>
+          </ul>
+        </section>
+
+      </section>
+        
+      
+      <!-- Reposiroty distant -->
+      <section>
+        <section>
+          <h2>Le repository distant</h2>
+        </section>
+        <section>
+          <h3>Pourquoi un repository distant ?</h3>
+          <ul>
+            <li class="fragment">Pour <strong>sauvegarder</strong> son code</li>
+            <li class="fragment">Pour <strong>partager</strong> son code</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Comment lier son repository local au distant ?</h3>
+          <pre class="fragment"><code class="hljs shell" data-trim>
+            git remote add origin &lt;url-de-votre-repo-distant&gt;
+          </code></pre>
+        </section>
+        <section>
+          <h3>Comment pousser les commits locaux au repository distant ?</h3>
+          <pre class="fragment"><code class="hljs shell" data-trim>
+            git push origin master
+          </code></pre>
+        </section>
+      </section>
+
+      <!-- Les branches -->
+      <section>
+        <section>
+          <h2>Les branches</h2>
+        </section>
+        <section>
+          <h3>Qu'est-ce qu'une branche ?</h3>
+          <ul>
+            <li class="fragment">Espace de travail <strong>différent</strong></li>
+            <li class="fragment">Ayant une base de code <strong>commune</strong></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Comment créer une branche ?</h3>
+          <pre class="fragment"><code class="hljs shell" data-trim>
+            git checkout -b nouvelle-fonctionnalite-top-moumoutte
+          </code></pre>
+        </section>
+        <section>
+          <h3>Comment revenir sur une branche existante ?</h3>
+          <pre class="fragment"><code class="hljs shell" data-trim>
+            git checkout master
+          </code></pre>
+        </section>
+        <section>
+          <h3>Comment fusionner des changements sur une branche ?</h3>
+          <pre class="fragment"><code class="hljs shell" data-trim>
+            git merge nouvelle-fonctionnalite-top-moumoutte
+          </code></pre>
+        </section>
+      </section>
+      
+    </div>
+  </div>
+  <script src="../../reveal/lib/js/head.min.js"></script>
+  <script src="../../reveal/js/reveal.js"></script>
+
+  <script>
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../../reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: '../../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: '../../reveal/plugin/search/search.js', async: true },
+      { src: '../../reveal/plugin/zoom-js/zoom.js', async: true },
+      { src: '../../reveal/plugin/notes/notes.js', async: true }
+    ]
+  });
+  </script>
+</body>
+
+</html>
