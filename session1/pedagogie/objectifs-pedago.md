@@ -53,5 +53,5 @@ Après-midi :
 * **Notions :** [Python](../cours/python.md)
 * **Objectif•s :** Découvrir l'OS Linux
 * **Compétence•s visées•s :** -
-* **Modalité•s pédagogique•s :** Exercices pratiques [Premiers scripts en Python](../exercice/python.md) et [Mini projet](../exercice/restaurant-python.md)
+* **Modalité•s pédagogique•s :** Exercices pratiques [Premiers scripts en Python](../exercice/python.md) et [Mini projet](https://simplonline.co/briefs/detail/fEPoCouyRST8fqodg)
 * **Temporalité :** 14h

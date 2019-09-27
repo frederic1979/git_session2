@@ -15,27 +15,34 @@ A faire : déclarer des variables permettant de vous décrire avec :
 ## Etape 2 : Utilisons les opérateurs
 
 ### Ex1
+
 ```python
 mystery1 = 8 + 6
 mystery2 = 8 - 6
 ```
+
 Afficher avec **print** la variable qui est égale à -2.
 
 ### Ex2
+
 ```python
 zebrasInZoo = 8
 giraffesInZoo = 4
 ```
+
 Créer une variable **animalsInZoo** qui contient le nombre total d'animaux dans le zoo. Afficher cette variable.
 
 ### Ex3
+
 ```python
 prixInitial = 1500
 tva = 0.20
 ```
+
 Créer une variable **prixFinal** qui égale au prix initial plus le prix initial multiplié par la tva. Afficher cette variable.
 
 ### Ex4 : modulo et division entière
+
 1. Remplir des boites de 6 œufs! Créer une variable **nbBoites** qui contient le nombre de boites pleines et une variable **nbOeufsRestant** pour le nombre d’œufs qui restent.
 
 ```python
@@ -55,18 +62,22 @@ la dame de cœur a pour numéro = 6*2 = 12
 ```python
 numeroCarteMystere = 28
 ```
+
 Créer une variable **numeroCouleur** et **numeroFigure** à retrouver à partir du numéro de la carte mystère. Vous pouvez vérifier que votre méthode fonctionne en retrouvant la couleur de la carte n°3 (9 de pique) ou de la carte n°12 (dame de cœur).
 
 ### Ex5 : inférieur, supérieur
+
 ```python
 prixInitial = 1500
 tva = 0.20
 
 budget = 2000
 ```
+
 Créer une variable **budgetSuffisant** qui indique si le budget est supérieur ou égal au prix initial plus le prix initial multiplié par la tva. Afficher cette variable.
 
 ### Ex6 : égalité
+
 Pour éviter les doublons, on cherche à comparer des albums par rapport à leur durée totale et au nombre de chansons par album.
 
 ```python
@@ -75,6 +86,7 @@ songsB = 9
 albumLengthA = 41
 albumLengthB = 53
 ```
+
 Créer une variable **sameSongs** qui est vraie si les deux albums contiennent le même nombre de chansons.
 Créer une variable **sameAlbumLength** qui est vraie si les deux albums ont la même longueur au total. Afficher ces variables.
 
@@ -124,7 +136,6 @@ Créer deux sous-listes groupe1 et groupe2 contenant chacun la moitié du groupe
 Parcourir la liste précédente. Pour chaque prénom, afficher la longueur du prénom avec la fonction **len**.
 Ajouter une variable **maximum** au début du programme qui vaut 0 au début. Pour chaque prénom, **si** la longueur du prénom est supérieur au maximum, remplacer maximum par cette valeur.
 Afficher le prénom le plus long à la fin avec un message : "le prénom le plus long est <prénom>, il possède <nbLettres> lettres"
-
 
 ## Etape 7 : Entrées / Sorties
 

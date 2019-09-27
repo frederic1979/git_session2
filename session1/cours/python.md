@@ -134,6 +134,7 @@ nbPart = 4/2 # 2.0
 ```
 
 Les priorités de calcul sont les priorités habituelles, on peut utiliser des parenthèses.
+
 ```python
 a = (2+4)*3 # 18
 b = 2+4*3 # ?
@@ -177,6 +178,7 @@ On peut aussi utiliser d'autres opérations arithmétiques avec du texte.
 initial = "pain"
 magic = 3*initial
 ```
+
 ### Comparaison
 
 Les relations d'ordre produisent des booleans. Ils se basent sur l'ordre lexicographique (du dictionnaire).
@@ -204,7 +206,6 @@ line2 == line3
 isDifferent = line1 != line3 # il est vrai que ces lignes ne sont pas égales!
 ```
 
-
 ## Booleans et conditions
 
 ### Conditions
@@ -220,8 +221,8 @@ if temperature < 15 : # début du bloc après les :
   vetement = "pull"
 
 print(vetement)
-
 ```
+
 Si la condition est vraie, on exécute les instructions du blocs. Sinon on saute le bloc.
 On peut ajouter un bloc à exécuter seulement si la condition est fausse avec **else**.
 
@@ -242,7 +243,6 @@ print(vetement)
 ```
 
 On peut aussi ajouter d'autres conditions intermédiaires avec **elif**, a exécuter seulement si les précédentes sont fausses.
-
 
 ```python
 age = 2
@@ -267,7 +267,6 @@ else : # dans tous les autres cas
 
 Dans le cas précédent, on obtient un tarif réduit si l'âge est inférieur à 18 **ou** supérieur à 65. On peut rassembler les deux cas.
 
-
 ```python
 age = 2
 
@@ -286,7 +285,7 @@ else : # dans tous les autres cas
 
 Une erreur classique est d'utiliser un **or** lorsqu'il faudrait un **and** ou inversement. Ici par exemple, un age qui est inférieur à 18 **et** supérieur à 65 n'existe pas, il fallait bien utiliser **ou**.
 
-```
+```python
 brocoli = 4
 aubergine = 6
 concombre = 5
@@ -294,13 +293,16 @@ radis = 2
 pomme = 3
 mure = 9
 ```
+
 > quelle condition sur les prix pour ne sélectionner que :
-```
+
+```python
 brocoli = 4
 radis = 2
 pomme = 3
 mure = 9
 ```
+
 question tirée du concours [castor informatique](http://concours.castor-informatique.fr)
 
 ## Les fonctions
@@ -420,7 +422,6 @@ print(eleves[1:]) # tous les éléments à partir du 1
 
 Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/introduction.html#lists)
 
-
 ### Range
 
 Python sait aussi compter! pour générer une liste de nombre, on utilise simplement la fonction **range**
@@ -473,7 +474,6 @@ for i in range(100) :
 [ref](https://fr.wikipedia.org/wiki/Liste_des_phrases_au_tableau_noir_des_Simpson)
 
 Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/controlflow.html#for-statements)
-
 
 ## Entrées / Sorties
 
