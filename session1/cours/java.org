@@ -422,7 +422,7 @@ arrayOfFloats
 arrayOfDoubles
 #+END_SRC
 
-#+attr_html: :width 500px
+#+attr_html: :width 200px
 #+attr_latex: :width 100px
 #+RESULTS:
 [[file:img/ref-array-0.png]]
@@ -727,6 +727,78 @@ boolean[] data = {true, false, false, true, true};
 int idx = -1;
 System.out.println( (idx >= 0) ? data[idx] : false);
   #+END_SRC
+
+*** switch
+
+Parfois, on veut comparer la valeur d'une expression avec un ensemble
+de valeurs connues pour exécuter différents blocs de code en fonction
+de la valeur. Par exemple :
+#+BEGIN_SRC java :export code
+public static long arithmeticOp(long i, long j, char op){
+    long res=0;
+    if (op == '-'){
+	res = i - j;
+    } else if (op == '+'){
+	res = i + j;
+    } else if (op == '*'){
+	res = i * j;
+    }else if (op == '/'){
+	res = i / j;
+    }else{
+	System.err.println("Operation "+ op + "inconnue !!!");
+    }
+    return res;
+}
+#+END_SRC
+
+Même si le fait de ne pas ouvrir un nouveau bloc pour chaque
+src_java[:exports code]{else} ne contenant qu'un seul
+src_java[:exports code]{if} permet d'éviter de s'enfoncer dans les
+niveaux d'indentation, il est fastidieux de répéter le
+src_java[:exports code]{else if (op == …)}.
+
+Pour éviter ces répétitions, Java possède une structure de contrôle
+dédiée : le src_java[:export code](switch).
+
+Le code précédent s'écrirait avec un src_java[:export
+code](switch). de la façon suivante :
+#+BEGIN_SRC java :export code
+public static long arithmeticOp(long i, long j, char op){
+    long res=0;
+    switch (op){
+    case '-':{
+	res = i - j;
+	break;
+    }
+    case '+':{
+	res = i + j;
+	break;
+    }
+    case '*':{
+	res = i * j;
+	break;
+    }
+    case '/':{
+	res = i / j;
+	break;
+    }
+    default:{
+	System.err.println("Operation "+ op + "inconnue !!!");
+    }
+    }
+    return res;
+}
+#+END_SRC
+
+L'expression testée doit être d'un type entier, ou de type
+src_java[:exports code]{char}, ou de type src_java[:exports
+code]{String}.
+
+- Exercice :: Faire tourner un programme utilisant la fonction
+              src_java[:exports code]{arithmeticOp}. Que se passe-t-il
+              si l'on enlève les instructions src_java[:exports
+              code]{break;} ? À quoi sert-elle ? Ajouter la gestion de
+              l'opérateur modulo pour le caractère ~%~.
 
 ** Boucles while(){} et do{} while();
 Lorsque des opérations doivent être répétées plusieurs fois,
