@@ -1,0 +1,1971 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2019-10-01 Tue 15:04 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Découvrons Java</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Bernard Hugueney" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Découvrons Java</h1>
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org31c2d8a">1. Un arôme de Java</a>
+<ul>
+<li><a href="#org01501a8">1.1. Java, un langage compilé</a></li>
+</ul>
+</li>
+<li><a href="#orgb6fbb50">2. Premier programme Java</a>
+<ul>
+<li><a href="#org97d19f8">2.1. En mode "console"</a></li>
+<li><a href="#orgc9d0b20">2.2. Avec un IDE</a></li>
+<li><a href="#org4cde6af">2.3. Un début d'explications</a></li>
+</ul>
+</li>
+<li><a href="#orgd13577f">3. Conventions</a></li>
+<li><a href="#org2b07694">4. Variables et typage</a>
+<ul>
+<li><a href="#org4543ebe">4.1. Variables locales</a></li>
+<li><a href="#org473056d">4.2. Typage statique</a></li>
+</ul>
+</li>
+<li><a href="#org94375f6">5. Types de données primitifs</a>
+<ul>
+<li><a href="#org2465179">5.1. Types numériques</a>
+<ul>
+<li><a href="#orge7ebd90">5.1.1. Types entiers</a></li>
+<li><a href="#org6354321">5.1.2. Types à virgule</a></li>
+</ul>
+</li>
+<li><a href="#org4e608d3">5.2. Type booléen</a></li>
+<li><a href="#orgd1b8251">5.3. Type caractère</a></li>
+</ul>
+</li>
+<li><a href="#org8f59c11">6. Types de données gérés par référence</a>
+<ul>
+<li><a href="#orgd4a5e29">6.1. Types tableaux</a></li>
+<li><a href="#orgf5f3b03">6.2. Accès aux éléments d'un tableau</a></li>
+<li><a href="#orgc5860ca">6.3. Accès à la taille du tableau</a></li>
+<li><a href="#org89072d1">6.4. Tableau de tableaux</a>
+<ul>
+<li><a href="#orge6522fb">6.4.1. Déclaration</a></li>
+<li><a href="#org45517f8">6.4.2. Initialisation partielle</a></li>
+<li><a href="#org824c50e">6.4.3. Initialisation</a></li>
+</ul>
+</li>
+<li><a href="#orga624a7f">6.5. Type chaîne de caractères</a></li>
+<li><a href="#org3d69ce4">6.6. Tous les autres types définissables (classes)</a></li>
+</ul>
+</li>
+<li><a href="#orgaa98cb6">7. Structures de contrôle</a>
+<ul>
+<li><a href="#org02d6605">7.1. Exécution conditionnelle</a>
+<ul>
+<li><a href="#org984147d">7.1.1. Expression booléennes</a></li>
+<li><a href="#orgb969d9c">7.1.2. if</a></li>
+<li><a href="#org1713781">7.1.3. Opérateur ternaire</a></li>
+</ul>
+</li>
+<li><a href="#org55aecc5">7.2. Boucles while(){} et do{} while();</a></li>
+<li><a href="#org4f296a1">7.3. Boucles for(;;){} et for( : ){}</a>
+<ul>
+<li><a href="#org0503aac">7.3.1. Boucle for classique</a></li>
+<li><a href="#orgad51072">7.3.2. Boucle for sur une séquence de valeurs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org3537088">8. Fonctions</a>
+<ul>
+<li><a href="#org2c6262c">8.1. Instruction <code>return</code></a></li>
+<li><a href="#org2a71edd">8.2. Passage d'argument</a></li>
+<li><a href="#org69308a9">8.3. Contexte local d'exécution / pile / fonction récursive</a></li>
+<li><a href="#org4bd0198">8.4. Surcharge de fonctions</a></li>
+</ul>
+</li>
+<li><a href="#orgd40145c">9. Références Webliographiques</a>
+<ul>
+<li><a href="#org60e3489">9.1. Documentation officielle</a></li>
+<li><a href="#org087f498">9.2. Sur le web</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org31c2d8a" class="outline-2">
+<h2 id="org31c2d8a"><span class="section-number-2">1</span> Un arôme de Java</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Java est un langage de <a href="https://fr.wikipedia.org/wiki/Programmation_orient%C3%A9e_objet">Programmation Orientée Objet</a>. Nous verrons plus tard ce que cela signifie, mais pour l'instant, ce qui est important c'est que Java ne se contente pas de <i>permettre</i> la programmation orientée objet, il l'impose, contrairement à python qui, lui nous a permis d'écrire de petit scripts, voir d'exécuter des bouts de code sans fioritures.
+</p>
+
+<p>
+Java a été conçu pour une utilisation professionnelle en entreprise et nombreuses de ses caractéristiques, non seulement ce qu'il permet mais aussi ce qu'il empêche (par exemple d'écrire de simples petits bouts de code<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>).
+</p>
+
+<p>
+Ainsi, le moindre programme Java exige :
+</p>
+<ul class="org-ul">
+<li>de choisir un nom pour l'<i>unité de code</i> (une <i>classe</i>, cf. infra) que l'on va écrire, par exemple "Exercice1"<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></li>
+<li>de créer un fichier portant exactement ce nom et l'extension <code>.java</code>.</li>
+<li>d'écrire dans ce fichier le code ci-dessous :</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Exercice1</span> {
+    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
+        <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">          &#201;crire ici le code &#224; ex&#233;cuter</span>
+<span style="color: #8D8D84; font-style: italic;">        */</span>
+    }
+}
+</pre>
+</div>
+
+<p>
+<code class="src src-java"><span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">et */</span></code> délimitant un bloc de commentaires (<code class="src src-java"><span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">indiquant un commentaire jusqu'&#224; la fin de la ligne</span></code>, comme <code class="src src-python"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">en python</span></code>).
+</p>
+</div>
+
+<div id="outline-container-org01501a8" class="outline-3">
+<h3 id="org01501a8"><span class="section-number-3">1.1</span> Java, un langage compilé</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Alors qu'il suffisait de passer en argument le fichier contenant du code en python à l'interpréteur Python, il n'en est pas de même pour Java. En effet, il y a une phase intermédiaire : la compilation.
+</p>
+
+
+<div class="figure">
+<p><img src="img/pythonInterpreterFr.png" alt="pythonInterpreterFr.png" />
+</p>
+</div>
+
+<div class="figure">
+<p><img src="img/javaCompilerFr.png" alt="javaCompilerFr.png" />
+</p>
+</div>
+
+
+<p>
+Cette décomposition en deux étapes distinctes (compilation puis
+exécution) a évidemment des avantages (performance et surtout
+fiabilité, cf. infra.) mais lorsqu'on développe un programme en Java,
+on passe son temps à écrire du code et à l'exécuter et l'on a pas
+envie de devoir répéter la même séquence en lançant à chaque fois le
+programme <code>javac</code> (pour compiler) puis le programme <code>java</code> (pour
+exécuter). Pour cette raison, les <i>environnements de développement
+intégrés</i> (<i>IDE</i> en anglais) réalise automatiquement la phase de
+compilation lorsqu'on clique sur le bouton <i>Run</i> <sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> qui est une flèche
+verte sous <i>IntelliJ</i> et une flèche blanche dans un rond vert sous
+<i>Eclipse</i>.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb6fbb50" class="outline-2">
+<h2 id="orgb6fbb50"><span class="section-number-2">2</span> Premier programme Java</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Pour bien comprendre comment fonctionnent l'édition la compilation et
+le lancement d'un programme java, on va d'abord effectuer les différentes étapes avec différents programmes (un éditeur de texte, le compilateur <code>javac</code>, le programme <code>java</code> qui lance la machine virtuelle java (JVM), en mode console. Ensuite, on utilisera un Environnement de Développement Intégré (IDE).
+</p>
+</div>
+
+
+<div id="outline-container-org97d19f8" class="outline-3">
+<h3 id="org97d19f8"><span class="section-number-3">2.1</span> En mode "console"</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Éditer un fichier texte avec le contenu suivant :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Exercice1</span> {
+    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
+        System.out.println(<span style="color: #008000;">"Hello World!"</span>);
+    }
+}
+</pre>
+</div>
+
+<p>
+Comme indiqué plus haut, il ne faut pas s'inquiéter si les couleurs ne sont pas les mêmes : il s'agit juste de <a href="https://fr.wikipedia.org/wiki/Coloration_syntaxique">Coloration syntaxique</a>.
+</p>
+
+<p>
+Le compiler en utilisant le programme <code>javac</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">javac Exercice1.java
+</pre>
+</div>
+
+<p>
+Pour que la commande <code>javac</code> soit utilisable, il faut :
+</p>
+
+<ol class="org-ol">
+<li>avoir installé le <a href="https://fr.wikipedia.org/wiki/Java_Development_Kit">Java Development Kit</a> (JDK) à ne pas confondre avec le <a href="https://fr.wikipedia.org/wiki/Environnement_d%27ex%C3%A9cution_Java">Java Runtime Environment</a> (JRE) qui ne contient que <code>java</code> et non <code>javac</code>.</li>
+<li>avoir fait en sorte que les programmes exécutables <code>javac</code> et <code>java</code> soient reconnus comme commandes (par exemple en <a href="https://www.java.com/fr/download/help/path.xml">ajustant la variable d'environnement PATH</a>).</li>
+</ol>
+
+<p>
+On peut constater que le résultat de la compilation est la création du fichier <code>.class</code> correspondant au fichier <code>.java</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">ls -l Exercice1.*
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">-rw-r&#x2013;r--</td>
+<td class="org-right">1</td>
+<td class="org-left">bernard</td>
+<td class="org-left">bernard</td>
+<td class="org-right">424</td>
+<td class="org-left">Sep</td>
+<td class="org-right">28</td>
+<td class="org-right">20:47</td>
+<td class="org-left">Exercice1.class</td>
+</tr>
+
+<tr>
+<td class="org-left">-rw-r&#x2013;r--</td>
+<td class="org-right">1</td>
+<td class="org-left">bernard</td>
+<td class="org-left">bernard</td>
+<td class="org-right">114</td>
+<td class="org-left">Sep</td>
+<td class="org-right">29</td>
+<td class="org-right">00:51</td>
+<td class="org-left">Exercice1.java</td>
+</tr>
+</tbody>
+</table>
+
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Regarder quelles sont les arguments optionnels du
+programme <code>javac</code> et essayer d'en utiliser quelques uns.</dd>
+</dl>
+
+<p>
+L'exécuter en utilisant le programme <code>java</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">java Exercice1
+</pre>
+</div>
+
+<pre class="example">
+Hello World!
+</pre>
+
+
+<p>
+<b>Attention !</b> L'argument du programme <code>java</code> est le nom de la <b>classe</b>
+(tel qu'indiqué dans le fichier source à la ligne <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Exercice1</span></code>), il n'y a donc pas d'extension de nom de fichier (ni <code>.class</code> ni -encore moins!- <code>.java</code>).
+</p>
+
+<p>
+Normalement, l'exécution produit l'affichage suivant :
+</p>
+<pre class="example">
+Hello World!
+</pre>
+
+
+<p>
+<b>Attention !</b> Un <i>fichier texte</i> doit être créé/édité avec un <b>éditeur
+de texte</b> (comme Notepad sous Windows) et non pas un <b>traitement de
+texte</b>. Si l'affichage montre parfois des couleurs, celles-ci sont
+automatiquement générées et ne sont pas stockées dans le <i>fichier
+source</i> qui ne contient que du texte brut, sans indications de police
+de caractères, formatage ou colorisation.
+</p>
+
+<dl class="org-dl">
+<dt>Exercices</dt><dd> 
+<dl class="org-dl">
+<dt>Édition du code</dt><dd>Modifier le programme pour qu'il affiche autre
+chose (par exemple <code>Bonjour tout le monde !</code>). Recompiler et
+relancer le programme.</dd>
+<dt>Changement du nom de la classe</dt><dd>Faire un autre programme, dans
+une classe appelée par exemple <code>Exercice2</code>, qui fasse la même
+chose. Compiler et lancer ce nouveau programme.</dd>
+</dl></dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-orgc9d0b20" class="outline-3">
+<h3 id="orgc9d0b20"><span class="section-number-3">2.2</span> Avec un IDE</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Lancer son IDE (Eclipse ou IntelliJ) et choisir dans les menus <code>File</code> → <code>New</code> → <code>Project…</code> ou <code>Java Project</code>.
+</p>
+
+
+<div class="figure">
+<p><img src="img/IntelliJ-new-project.png" alt="IntelliJ-new-project.png" />
+</p>
+</div>
+
+<p>
+Puis, le répertoire <code>src</code> de ce projet étant sélectionné dans
+l'arborescence de projets (par défaut à gauche de la fenêtre),
+sélectionner <code>New</code> → <code>Java Class</code> ou <code>Class</code> dans le menu contextuel
+(bouton droit).
+</p>
+
+
+<div class="figure">
+<p><img src="img/IntelliJ-new-class.png" alt="IntelliJ-new-class.png" />
+</p>
+</div>
+
+<p>
+Choisir un nom de classe, par exemple <code>ExerciceIde1</code>, en laissant le nom de <i>package</i> vide (cf. infra), et éditer le code pour avoir un programme (donc avec un <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>) qui fasse un affichage (donc avec un <code class="src src-java">System.out.println(<span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">ce qu'on veut afficher/*);</span></code>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4cde6af" class="outline-3">
+<h3 id="org4cde6af"><span class="section-number-3">2.3</span> Un début d'explications</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Dans tout ce qu'il faut écrire pour avoir un programme en Java, la
+plupart des mots-clés nécessitent des concepts qui ne seront abordés
+que plus tard. On peut néanmoins expliquer l'argument <code>args</code> de
+<code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>. Il
+s'agit d'un argument de fonction, comme on a pu les voir en python. À
+la différence de python, pour un argument, ici <code>args</code>, on ne se contente pas de mettre le nom de l'argument (on aurait bien sûr pu choisir n'importe quel autre nom légal comme <code>arguments</code> ou <code>programArguments</code>), mais on préfixe le ou les arguments par leur <i>type</i>, ici <code class="src src-java">String[]</code>. Ici, on sait donc que l'argument est un tableau de chaînes de caractères.
+</p>
+
+<p>
+On peut modifier le code compilé et exécuté en ligne comme ci-après :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">ExampleArgs</span>{
+    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
+        System.out.print(<span style="color: #008000;">"Hello "</span>);
+        System.out.println(args[0]);
+    }
+}
+</pre>
+</div>
+
+<p>
+(<code>ExampleArgs</code> plutôt que <code>ExempleArgs</code> n'est pas une faute de
+frappe : il est bon de programmer <i>in English</i> et autant s'y mettre
+aussi tôt que possible !)
+</p>
+
+<p>
+On peut ensuite compiler ce programme :
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">javac ExampleArgs.java
+</pre>
+</div>
+
+<p>
+Et l'exécuter avec un argument pour afficher le résultat attendu :
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">java ExampleArgs Yall
+</pre>
+</div>
+
+<p>
+<b>Attention !</b> Si l'on veut passer un argument contenant un espace (ou autre caractère séparateur), il faut utiliser des guillemets. De même si l'on veut utiliser des caractères qui ont un sens particulier pour l'interpréteur de commandes de la console :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">java ExampleArgs <span style="color: #008000;">"you all !"</span>
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercices</dt><dd> 
+<dl class="org-dl">
+<dt>Compréhension de code</dt><dd>comprendre la différence entre <code class="src src-java">System.out.print();</code> et <code class="src src-java">System.out.println();</code>.</dd>
+<dt>Test de code</dt><dd>Lancer le programme avec moins ou plus qu'un argument.</dd>
+<dt>Connaissance de l'IDE</dt><dd>Modifier le programme écrit avec l'IDE
+pour qu'il utilise aussi l'argument de <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>. Configurer le
+lancement du programme (sous IntelliJ avec le menu <code>Run</code> →
+<code>Edit Configurarions</code> par exemple) pour définir le ou les
+arguments passés au lancement du programme par l'IDE.</dd>
+<dt>Modification de code</dt><dd>Pour un programme développé en mode
+console et pour un programme développée avec l'IDE, changer le
+nom de la classe (par exemple de <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">ExampleArgs</span></code> à <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">ExampleArgsRenamed</span></code>), en faisant en sorte de toujours pouvoir
+lancer le programme !</dd>
+</dl></dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd13577f" class="outline-2">
+<h2 id="orgd13577f"><span class="section-number-2">3</span> Conventions</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+En France, <b>techniquement</b> on peut rouler à gauche. En pratique, on impose des contraintes par le code de la route, afin que les automobilistes puissent partager la route sans avoir à se concerter à chaque fois pour faire émerger un consensus local. Il en va de même pour le développement informatique, qui comporte des <i>conventions</i> parce qu'il met en jeu des équipes de développement. Ainsi, on aurait pu <b>techniquement</b> appeler notre classe <code class="src src-java">example_args</code> mais la convention <b>impose</b> de respecter le <a href="https://fr.wikipedia.org/wiki/Camel_case">CamelCase</a> en commençant par une majuscule pour un nom de classe en Java.
+</p>
+
+<p>
+De même pour l'indentation qui, si elle n'est pas fixée par le langage Java lui-même (contrairement à Python), est <a href="https://google.github.io/styleguide/javaguide.html#s4-formatting">imposée par convention</a>. Les IDE permettent de formater automatiquement le code, par exemple sous IntelliJ avec le menu <code>Code</code> → <code>Reformat Code</code> ou le raccourci clavier équivalent <code>Ctrl</code> + <code>Alt</code> + <code>L</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2b07694" class="outline-2">
+<h2 id="org2b07694"><span class="section-number-2">4</span> Variables et typage</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+En Java, on va pouvoir définir des variables, qui correspondent à un
+emplacement mémoire auquel on donne un nom, qui est accessible par un
+certain code et qui peut stocker <b>un certain type de valeurs</b>.
+</p>
+</div>
+
+<div id="outline-container-org4543ebe" class="outline-3">
+<h3 id="org4543ebe"><span class="section-number-3">4.1</span> Variables locales</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Dans un premier temps, on s'intéressera uniquement à ce que l'on
+appelle des <i>variables locales</i>. Ces variables ne sont accessibles
+(n'existent !) qu'à l'intérieur du bloc de code dans lequel elles sont
+déclarées. La restriction de l'accès est un <i>avantage</i> lorsqu'il
+s'agit de pouvoir décomposer le code pour pouvoir raisonner sur une
+partie isolée du code sans avoir à ce préoccuper de tout ce qui
+pourrait interagir avec lui.
+</p>
+
+
+<p>
+Les arguments des fonctions, comme l'argument <code class="src src-java"><span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span></code> de <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>, sont des variables locales, dont la valeur est
+initialisée à l'appel de la fonction, par la valeur correspondante (en
+cas de liste de plusieurs arguments, selon la position) passée lors de
+l'appel de la fonction (pour <code>main</code>, c'est un cas particulier car la
+fonction est appelée par la JVM et les arguments sont passés par le
+système d'exploitation au lancement du programme.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org473056d" class="outline-3">
+<h3 id="org473056d"><span class="section-number-3">4.2</span> Typage statique</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Comme on a pu le constater avec l'argument <code class="src src-java"><span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span></code> de <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>, les variables sont déclarées non seulement avec
+un nom, mais aussi avec un type.
+</p>
+
+<p>
+Par exemple, le bout de code suivant déclare et initialise trois variables locales:
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">formateur</span> = <span style="color: #D0372D;">true</span>;
+<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">age</span> = 30;
+<span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">prenom</span> = <span style="color: #008000;">"Jules"</span>;
+</pre>
+</div>
+
+<p>
+Remarque : on peut déclarer des variables sans les initialiser, mais ce n'est pas forcément (euphémisme) une bonne idée.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd><p>
+Dans un programme Java, effectuer les déclarations sans
+initialisations ci-dessous. Que peut-on observer ?
+Essayer d'afficher le contenu de ces variables non
+initialisées. Que se passe-t-il ?
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">formateur</span>;
+<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">age</span>;
+<span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">prenom</span>;
+</pre>
+</div></dd>
+</dl>
+
+
+<p>
+Un type définit la <i>nature</i> des valeurs stockables dans cette
+variable, qui détermine l'ensemble des valeurs représentables et les
+opérations qu'il est possible de faire sur ces valeurs.
+</p>
+
+<p>
+Le fait que ce type soit immuable (les variables ne changent pas de type au cours de l'exécution du programme) et connu à la compilation constitue le <i>typage statique</i> qui permet de vérifier <i>avant le lancement du programme</i> que les types sont corrects. Essayer d'ajouter la ligne suivante à l'intérieur d'une fonction <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-java">args[0]= 1;
+</pre>
+</div>
+
+<p>
+Dans un développement en mode console, c'est à la compilation qu'on aurait une erreur :
+</p>
+<pre class="example">
+ExampleArgs.java:5: error: incompatible types: int cannot be converted to String
+        args[0]= 1;
+                 ^
+1 error
+
+</pre>
+
+<p>
+Dans un IDE, la ligne est immédiatement soulignée en rouge et un
+indicateur rouge apparaît dans la marge à gauche.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd><p>
+Dans un programme Java développé sous un IDE, écrire les
+déclarations des variables <code>formateur</code>, <code>age</code> et
+<code>prenom</code> vues plus haut. Écrire ensuite les affectations
+suivantes :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">formateur = <span style="color: #008000;">"Bernard"</span>;
+age = 44.2;
+prenom = <span style="color: #008000;">'a'</span>;    
+</pre>
+</div>
+<p>
+Essayer aussi de faire des affectations entre types
+primitifs numériques, entre types entiers et types à
+virgule, et entre types de taille différentes.
+</p></dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org94375f6" class="outline-2">
+<h2 id="org94375f6"><span class="section-number-2">5</span> Types de données primitifs</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Java définit <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html">un certain nombre de types</a> dits <i>primitifs</i>. 
+</p>
+</div>
+
+<div id="outline-container-org2465179" class="outline-3">
+<h3 id="org2465179"><span class="section-number-3">5.1</span> Types numériques</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Il y a deux catégories de types primitifs numériques, suivant qu'on
+cherche à représenter des nombres entiers ou à virgules. Dans chacune
+de ces catégories, les différents types correspondent à différentes
+tailles en mémoire et permette de choisir le compromis entre encombrement mémoire et nombres de valeurs différentes représentables : on peut représenter au maximum 2^N valeurs différentes avec N bits.
+</p>
+</div>
+
+<div id="outline-container-orge7ebd90" class="outline-4">
+<h4 id="orge7ebd90"><span class="section-number-4">5.1.1</span> Types entiers</h4>
+<div class="outline-text-4" id="text-5-1-1">
+<p>
+En java, tous les types entiers sont dit <i>signés</i>, c'est-à-dire qu'ils peuvent représenter des valeurs positives ou négatives et utilisent la représentation binaire du <i>complément à deux</i> qui représente une valeur de plus strictement négative que strictement positive (dit autrement, autant de valeurs &lt; 0 que de valeurs  &gt;= 0).
+</p>
+
+<dl class="org-dl">
+<dt>byte</dt><dd>défini sur 8 bits</dd>
+<dt>short</dt><dd>défini sur 16 bits</dd>
+<dt>int</dt><dd>défini sur 32 bits</dd>
+<dt>long</dt><dd>défini sur 64 bits</dd>
+</dl>
+
+<p>
+Lorsqu'on écrit une valeur entière directement dans le code (par exemple <code class="src src-java">43210</code>, sont type est <code class="src src-java"><span style="color: #6434A3;">int</span></code>. On peut utiliser le suffixe <code>L</code> (<code>l</code> est légal mais déconseillé pour sa ressemblance avec <code>1</code>) pour indiquer que la valeur doit être de type <code class="src src-java"><span style="color: #6434A3;">long</span></code>.
+</p>
+
+
+<p>
+<b>Attention !</b> Les opérateurs arithmétiques de base (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>) sont tous définis comme produisant un résultat de même type, donc <b>entier</b>. Quel est donc le résultat de <code class="src src-java">5/2</code> ? Que se passe-t-il si l'on a des opérandes de différents types numériques ? Faire des hypothèses et les tester.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>  
+<dl class="org-dl">
+<dt>Compréhension</dt><dd>Pour chaque type entier, calculer (ou trouver sur
+internet et comprendre !) les valeurs minimale et
+maximale qu'il est possible de représenter.</dd>
+<dt>Écriture / exécution de code</dt><dd>Pour chaque type entier, essayer
+de dépasser les valeurs minimale ou maximale soit directement à
+l'initialisation d'une variable, soit par une opération (par
+exemple en ajoutant ou en retranchant <code>1</code>).</dd>
+</dl></dd>
+</dl>
+</div>
+</div>
+
+
+
+<div id="outline-container-org6354321" class="outline-4">
+<h4 id="org6354321"><span class="section-number-4">5.1.2</span> Types à virgule</h4>
+<div class="outline-text-4" id="text-5-1-2">
+<p>
+Il est essentiel de bien comprendre que l'on ne peut évidemment pas représenter tous les nombres à virgule dans un ordinateur, puisqu'il y en a une infinité même entre 0 et 1 !
+</p>
+
+<p>
+Il y a deux types primitifs de nombres à virgule qui correspondent à
+deux compromis sur l'encombrement mémoire et la précision &amp; plage des
+valeurs représentables, selon la <a href="https://fr.wikipedia.org/wiki/IEEE_754">norme IEEE754</a> de représentation en
+mémoire.
+</p>
+
+<dl class="org-dl">
+<dt>float</dt><dd>codés sur 32 bits</dd>
+<dt>double</dt><dd>codés sur 64 bits</dd>
+</dl>
+
+<p>
+Il y aura donc forcément un risque d'arrondis dont <a href="https://dzone.com/articles/never-use-float-and-double-for-monetary-calculatio">il faut se méfier</a>. Aussi, le fait que les valeurs soient stockée en binaire trompe notre intuition sur le nombre de chiffres nécessaires pour représenter une valeur à virgule et Java ne nous aide pas en arrondissant lors des affichages de ces valeurs. Ainsi, lorsqu'on écrit <code>0.1</code>, il faut avoir conscience que l'ordinateur ne peut stocker que la valeur la plus proche possible, à savoir 
+</p>
+
+
+<p>
+<code>0.1000000000000000055511151231257827021181583404541015625</code> pour le type <code class="src src-java"><span style="color: #6434A3;">double</span></code> et <code>0.100000001490116119384765625</code> pour le type <code class="src src-java"><span style="color: #6434A3;">float</span></code>.
+</p>
+
+
+<p>
+Lorsqu'on écrit une valeur à virgule <sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> son type est <code class="src src-java"><span style="color: #6434A3;">double</span></code>. On peut utiliser le suffixe <code>f</code> ou <code>F</code> Pour que le type soit <code class="src src-java"><span style="color: #6434A3;">float</span></code>.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org4e608d3" class="outline-3">
+<h3 id="org4e608d3"><span class="section-number-3">5.2</span> Type booléen</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+En java, le type booléen est <code class="src src-java"><span style="color: #6434A3;">boolean</span></code> et les valeurs s'écrivent <code class="src src-java"><span style="color: #D0372D;">true</span></code> et <code class="src src-java"><span style="color: #D0372D;">false</span></code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd1b8251" class="outline-3">
+<h3 id="orgd1b8251"><span class="section-number-3">5.3</span> Type caractère</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+En java, le type des caractères est <code class="src src-java"><span style="color: #6434A3;">char</span></code>. <b>Attention !</b> la standardisation de Java date des
+anciennes version d'<a href="https://fr.wikipedia.org/wiki/Unicode">Unicode</a> qui ne codaient les caractères que sur 16
+bits (deux octets). En conséquence, <a href="https://laethy.developpez.com/tutoriels/java/jvm/unicode-et-java/">certains graphèmes nécessitent 2
+caractères</a> en Java pour être représentés.
+</p>
+
+<p>
+Les caractères sont représentés entre guillemets <b>simples</b> en utilisant des séquences commençant par <i>backslash</i> pour représenter les caractères spéciaux :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">letter</span> = <span style="color: #008000;">'a'</span>;
+<span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">newLine</span> = <span style="color: #008000;">'\n'</span>;
+<span style="color: #6434A3;">char</span> <span style="color: #BA36A5;">tab</span> = <span style="color: #008000;">'\t'</span>;
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8f59c11" class="outline-2">
+<h2 id="org8f59c11"><span class="section-number-2">6</span> Types de données gérés par référence</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Alors que les types primitifs  que l'on vient de voir sont stockés directement en mémoire "dans" les variables, les types que l'on va maintenant voir sont stockés indirectement, les variables "contenant" une <i>référence</i> (on parle aussi parfois de pointeur, il s'agit en fait de l'adresse en mémoire où est stockée la valeur elle-même). Cette distinction aura beaucoup de conséquences très importantes. Lorsqu'une référence n'est pas initialisée, elle a une valeur spéciale <code class="src src-java"><span style="color: #D0372D;">null</span></code>. Essayer d'utiliser une référence valant <code>null</code> comme si elle était une référence valide vers une valeur en mémoire provoquera une <a href="https://en.wikipedia.org/wiki/Null_pointer#Null_dereferencing">erreur classique</a> qu'on devra éviter.
+</p>
+</div>
+
+
+<div id="outline-container-orgd4a5e29" class="outline-3">
+<h3 id="orgd4a5e29"><span class="section-number-3">6.1</span> Types tableaux</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+On a vu un exemple de tableau avec l'argument de <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>. Un type de tableau est toujours un tableau du type de chacune des cases du tableau (elles sont toutes du même type !), par exemple ici <code class="src src-java">String[]</code> est un tableau de cases de type <code class="src src-java">String</code> (qu'on abordera juste après).
+</p>
+
+<p>
+Quelques exemples de déclarations de tableaux :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">int</span>[] <span style="color: #BA36A5;">arrayOfInts</span>; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">(r&#233;f&#233;rence vers un) tableau d'ints</span>
+<span style="color: #6434A3;">long</span>[] <span style="color: #BA36A5;">arrayOfLongs</span>; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">(r&#233;f&#233;rence vers un) tableau de longs</span>
+<span style="color: #6434A3;">float</span>[] <span style="color: #BA36A5;">arrayOfFloats</span>;<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">(r&#233;f&#233;rence vers un) tableau de floats</span>
+<span style="color: #6434A3;">double</span>[] <span style="color: #BA36A5;">arrayOfDoubles</span>;<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">(r&#233;f&#233;rence vers un) tableau de floats</span>
+</pre>
+</div>
+
+<p>
+On remarque que la taille ne fait pas partie du type tableau. On sait que <code class="src src-java"><span style="color: #6434A3;">int</span>[] <span style="color: #BA36A5;">arrayOfInts</span></code> est un tableau d'entiers <sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>, mais on ne sait pas de quelle taille. Après ces déclarations, les variables contiennent des références invalides car il n'y aucun tableau créé :
+</p>
+
+
+<div class="figure">
+<p><img src="img/ref-array-0.png" alt="ref-array-0.png" width="500px" />
+</p>
+</div>
+
+
+<p>
+Il est important de comprendre que ces déclarations sans initialisation en créent pas de tableau : il n'y a alors aucun tableau en mémoire, juste des références pour l'instant invalides. On peut initialiser un tableau de différentes façons :
+</p>
+<ul class="org-ul">
+<li><p>
+En écrivant directement dans le code les valeurs du tableau entre
+accolades, séparées par des virgules :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">arrayOfDoubles = {0.5, 5.0, -0.75};
+arrayOfDoubles = {1., -1.,}; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">la taille n'est pas la m&#234;me</span>
+</pre>
+</div>
+<p>
+À la première affectation, on a :
+</p>
+<p width="500px">
+<img src="img/ref-array-1.png" alt="ref-array-1.png" width="500px" />
+Puis à la deuxième :
+</p>
+
+<div class="figure">
+<p><img src="img/ref-array-2.png" alt="ref-array-2.png" width="500px" />
+</p>
+</div></li>
+</ul>
+
+<p>
+Lorsqu'une valeur en mémoire n'est plus référencée, elle ne peut plus être utilisée et la JVM libère la mémoire que cette valeur occupait grâce à un mécanisme appelé <a href="https://fr.wikipedia.org/wiki/Ramasse-miettes_(informatique)">ramasse-miettes</a> (<i>garbage collector</i> in English).
+</p>
+<ul class="org-ul">
+<li><p>
+En indiquant le nombre de case (par une expression, qui peut donc
+être calculée dynamiquement <sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup>). Les cases sont alors remplies avec la
+valeur par défaut du type considéré :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">arrayOfDoubles = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[2 + 1];
+</pre>
+</div>
+<p>
+Si l'on effectue cette troisième affectation à la suite des précédentes, on a:
+</p>
+
+<div class="figure">
+<p><img src="img/ref-array-3.png" alt="ref-array-3.png" width="500px" />
+</p>
+</div></li>
+</ul>
+
+<p>
+Il est important de comprendre que chaque affectation en modifie pas le tableau, ni pour changer son contenu, ni pour changer sa taille, mais affecte la référence sur un autre tableau.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd> 
+<dl class="org-dl">
+<dt>Trouver de l'information et/ou codage exploratoire</dt><dd>Trouver
+quelles sont les valeurs par défaut des différents types
+primitifs.</dd>
+<dt>Codage exploratoire</dt><dd>Passer des variables de type tableau en
+argument de <code class="src src-java">System.out.println()</code>. Quel
+sens donner à l'affichage obtenu ?</dd>
+</dl></dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-orgf5f3b03" class="outline-3">
+<h3 id="orgf5f3b03"><span class="section-number-3">6.2</span> Accès aux éléments d'un tableau</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+On utilise la notation <code class="src src-java">nomDuTableau[valeurindice]</code> pour accéder à la case d'indice <code>valeurindice</code> du tableau <code>nomDuTableau</code>. Les indices commencent à <code>0</code>, donc un tableau de taille <code>1</code> aura une seule valeur d'indice légale, la valeur <code>0</code>.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Que ce passe-t-il lorsque l'on essaie d'accéder à un
+tableau qui n'a pas été initialisé ? Lorsqu'on essaie
+d'accéder à une case dont l'indice est trop grand (&gt;= à
+la taille du tableau) ou trop petit (&lt; 0)?</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orgc5860ca" class="outline-3">
+<h3 id="orgc5860ca"><span class="section-number-3">6.3</span> Accès à la taille du tableau</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Pour un tableau donné, on peut accéder à sa taille avec la notation <code class="src src-java">nomDuTableau.length</code>. La taille est de type <code class="src src-java"><span style="color: #6434A3;">int</span></code>.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Quelle est la taille maximale d'un tableau en Java ?</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org89072d1" class="outline-3">
+<h3 id="org89072d1"><span class="section-number-3">6.4</span> Tableau de tableaux</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+On peut avoir un type de tableau pour n'importe quel type de
+cases. Pour un type <code class="src src-java">X</code>, on peut avoir le type
+<code class="src src-java">X[]</code> <i>tableau de X</i>. Par exemple
+<code class="src src-java"><span style="color: #6434A3;">int</span>[]</code> est le type <i>tableau d'entiers</i>. On
+peut donc avoir des tableaux de tableaux par exemple <code class="src src-java"><span style="color: #6434A3;">int</span>[][]</code> est le type <i>tableau de tableaux d'entiers</i>.
+</p>
+</div>
+
+<div id="outline-container-orge6522fb" class="outline-4">
+<h4 id="orge6522fb"><span class="section-number-4">6.4.1</span> Déclaration</h4>
+<div class="outline-text-4" id="text-6-4-1">
+<p>
+Avec une simple déclaration, il n'y a <b>aucun</b> tableau en mémoire.
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">int</span>[][] <span style="color: #BA36A5;">data</span>;
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="img/ref-array2d-0.png" alt="ref-array2d-0.png" width="100px" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org45517f8" class="outline-4">
+<h4 id="org45517f8"><span class="section-number-4">6.4.2</span> Initialisation partielle</h4>
+<div class="outline-text-4" id="text-6-4-2">
+<p>
+Si l'on ne crée qu'un seul tableau, il n'y a qu'un tableau qui <b>pourra</b> contenir des références vers des tableaux.
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">int</span>[][] <span style="color: #BA36A5;">data</span>= <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">int</span>[2][];
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="img/ref-array2d-1.png" alt="ref-array2d-1.png" width="200px" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org824c50e" class="outline-4">
+<h4 id="org824c50e"><span class="section-number-4">6.4.3</span> Initialisation</h4>
+<div class="outline-text-4" id="text-6-4-3">
+<p>
+Il faut initialiser chacune des cases de tableau de tableaux.
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">int</span>[][] <span style="color: #BA36A5;">data</span>= {{1,0},{2,-1,0}};
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="img/ref-array2d-2.png" alt="ref-array2d-2.png" width="1000px" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga624a7f" class="outline-3">
+<h3 id="orga624a7f"><span class="section-number-3">6.5</span> Type chaîne de caractères</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+On a vu avec l'argument de <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code> que le type <i>chaîne de caractères</i> est
+<code class="src src-java">String</code>. La majuscule en début de nom,
+contrairement aux noms de types primitifs comme <code class="src src-java"><span style="color: #6434A3;">int</span></code>, <code class="src src-java"><span style="color: #6434A3;">boolean</span></code> ou <code class="src src-java"><span style="color: #6434A3;">float</span></code>, est importante car elle indique qu'il s'agit du nom
+d'une <i>classe</i>, comme les classes que nous sommes obligés de définir
+pour écrire un programme en Java.
+</p>
+
+<p>
+On écrit une chaîne de caractères dans le code Java en l'entourant de guillemets doubles : <code class="src src-java"><span style="color: #008000;">"Une cha&#238;ne de caract&#232;res"</span></code>. Si cette chaîne doit contenu un guillemet double, il faut l'échapper avec une <a href="https://fr.wikipedia.org/wiki/Barre_oblique_invers%C3%A9e">barre oblique inversée</a> (antislash, ou <i>backslash</i>) : <code class="src src-java"><span style="color: #008000;">"une cha&#238;ne avec un \" au milieu"</span></code>.
+</p>
+
+<p>
+Les chaînes de caractères sont manipulées par référence, ce qui fait qu'affecter la contenu d'une variable de type <i>chaîne de caractères</i> à une autre variable ne crée pas une copie de la chaîne de caractères mais juste une nouvelle référence vers la même chaîne de caractères : on dit que ces chaînes ne sont pas seulement <i>égales</i>, mais <i>identiques</i>. En pratique, cela ne crée pas de problèmes car les chaînes de caractères sont <i>immuables</i>, c'est-à-dire qu'on ne peut pas modifier leur valeur.
+</p>
+
+<p>
+Les opérations qu'il est possible d'effectuer sur une chaîne de caractères sont définies dans la <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html">classe String</a>. En plus, il est possible de <a href="https://fr.wikipedia.org/wiki/Concat%C3%A9nation#Programmation">concaténer</a> des chaînes de caractères avec l'opérateur <code class="src src-java">+</code>.
+</p>
+
+<p>
+Une autre particularité des chaînes de caractères est que les valeurs des autres types peuvent être transformées automatiquement en chaînes de caractères lorsque cela est nécessaire. C'est grâce à ce mécanisme qu'on peut par exemple passer n'importe quel type en argument de System.out.println(), par exemple <code class="src src-java">System.out.println(32);</code>, et concaténer n'importe quelle valeur à une chaîne de caractères, par exemple <code class="src src-java"><span style="color: #008000;">"Nombre de joueurs: "</span>+ 2</code>.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Comparer les résultats de <code class="src src-java"><span style="color: #008000;">"score: "</span> + 2 + 3</code> et <code class="src src-java">2 + 3 +<span style="color: #008000;">"points"</span></code>.</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org3d69ce4" class="outline-3">
+<h3 id="org3d69ce4"><span class="section-number-3">6.6</span> Tous les autres types définissables (classes)</h3>
+<div class="outline-text-3" id="text-6-6">
+<p>
+On peut définir de nouveau types comme String en définissant de nouvelles classes. Ce que nous verrons dans le cadre de la <i>Programmation Orientée Objet</i>.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgaa98cb6" class="outline-2">
+<h2 id="orgaa98cb6"><span class="section-number-2">7</span> Structures de contrôle</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+On peut exécuter des blocs d'instructions de façon conditionnelle
+et/ou répétée grâce aux <i>structures de contrôle</i>. En java, on retrouve l'équivalent de celles vues en python. Particulièrement lorsque l'on a programmé en python, il faut faire attention :
+</p>
+<ul class="org-ul">
+<li>au fait que les blocs de code sont délimités par des accolades <code>{</code>
+et <code>}</code> et non par l'indentation et qu'il n'y a pas de <code>:</code> pour
+marquer le début de bloc.</li>
+<li>au fait que les blocs sont théoriquement optionnels et qu'en
+l'absence de bloc explicite, la structure de contrôle porte sur une
+seule instruction.</li>
+<li>que l'instruction vide <code>;</code> est une instruction valide ! (qui ne fait rien)</li>
+</ul>
+</div>
+
+<div id="outline-container-org02d6605" class="outline-3">
+<h3 id="org02d6605"><span class="section-number-3">7.1</span> Exécution conditionnelle</h3>
+<div class="outline-text-3" id="text-7-1">
+</div>
+<div id="outline-container-org984147d" class="outline-4">
+<h4 id="org984147d"><span class="section-number-4">7.1.1</span> Expression booléennes</h4>
+<div class="outline-text-4" id="text-7-1-1">
+<p>
+Une expression booléenne élémentaire est souvent réalisée avec un
+opérateur de comparaison : <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>!=</code>, <code>==</code>.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Faire un programme qui affiche des résultats de
+comparaisons. Quelle est la valeur de <code class="src src-java">0.3 == (3*0.1)</code> ? Pourquoi ?</dd>
+</dl>
+
+
+<p>
+On peut composer des expressions booléennes à l'aide d'opérateurs logiques :
+</p>
+<dl class="org-dl">
+<dt>&amp;&amp;</dt><dd>ET logique dont le résultat est <code class="src src-java"><span style="color: #D0372D;">true</span></code>
+si et seulement si les deux opérandes valent <code class="src src-java"><span style="color: #D0372D;">true</span></code>.</dd>
+<dt>||</dt><dd>OU logique dont le résultat est <code class="src src-java"><span style="color: #D0372D;">true</span></code>
+si un moins un des opérandes (l'un ou l'autre ou les deux!)
+vaut <code class="src src-java"><span style="color: #D0372D;">true</span></code>.</dd>
+<dt>^</dt><dd>OU EXCLUSIF dont le résultat est <code class="src src-java"><span style="color: #D0372D;">true</span></code>
+si un et un seul un des opérandes vaut <code class="src src-java"><span style="color: #D0372D;">true</span></code>.</dd>
+
+<dt>Exercices</dt><dd><p>
+ 
+</p>
+
+<dl class="org-dl">
+<dt>Codage exploratoire</dt><dd>Écrire un petit programme qui mettent
+œuvre les opérateurs logiques.</dd>
+
+<dt>Compréhension</dt><dd>Que fait le bout de code suivant ? <a href="https://en.wikipedia.org/wiki/Short-circuit_evaluation">Comment</a> ? Pourquoi ?</dd>
+</dl>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">idx</span> = -1;
+<span style="color: #6434A3;">boolean</span>[] <span style="color: #BA36A5;">data</span> = {<span style="color: #D0372D;">true</span>, <span style="color: #D0372D;">false</span>, <span style="color: #D0372D;">true</span>};
+<span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">win</span> = (idx &gt;=0 ) &amp;&amp; data[idx];
+<span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">fail</span> = data[idx] &amp;&amp; (idx &gt;= 0);
+</pre>
+</div></dd>
+</dl>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgb969d9c" class="outline-4">
+<h4 id="orgb969d9c"><span class="section-number-4">7.1.2</span> if</h4>
+<div class="outline-text-4" id="text-7-1-2">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">if</span> (expressionBooleenne){
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      Code &#224; ex&#233;cuter si la valeur de</span>
+<span style="color: #8D8D84; font-style: italic;">      expressionBooleenne est true</span>
+<span style="color: #8D8D84; font-style: italic;">     */</span>
+}
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">if</span> (expressionBooleenne){
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      Code &#224; ex&#233;cuter si la valeur de</span>
+<span style="color: #8D8D84; font-style: italic;">      expressionBooleenne est true</span>
+<span style="color: #8D8D84; font-style: italic;">     */</span>
+}<span style="color: #0000FF;">else</span>{
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      Code &#224; ex&#233;cuter si la valeur de</span>
+<span style="color: #8D8D84; font-style: italic;">      expressionBooleenne est false</span>
+<span style="color: #8D8D84; font-style: italic;">     */</span>
+}
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Écrire un petit programme qui met en œuvre la structure
+de contrôle <code class="src src-java"><span style="color: #0000FF;">if</span></code> avec plusieurs
+instructions exécutées conditionnellement. Que se
+passe-t-il l'on oublie les accolade ou si l'on ajoute un
+<code>;</code> : <code class="src src-java"><span style="color: #0000FF;">if</span>(uneExpressionBoolenne);</code> avant le bloc.</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-org1713781" class="outline-4">
+<h4 id="org1713781"><span class="section-number-4">7.1.3</span> Opérateur ternaire</h4>
+<div class="outline-text-4" id="text-7-1-3">
+<p>
+On a vu des opérateurs binaires, arithmétiques et logiques, qui ont
+donc deux arguments. Il existe un opérateur particulier, l'opérateur
+ternaire, qui prend trois arguments, séparés donc par deux symboles
+<code>?</code> et <code>:</code>, sous la forme <code class="src src-java"> expressionBooleenne ? expressionSiVraie : expressionSiFausse</code>. L'évaluation de
+l'expression commence par évaluer l'<code>expressionBooleenne</code>. Si et
+seulement si cette expression est vraie, alors l'<code>expressionSiVraie</code>
+est évaluée et constitue la valeur de l'expression ternaire. Sinon,
+alors seule l'expression <code>expressionSiFausse</code> est évaluée et constitue
+la valeur de l'expression ternaire. L'expression booléenne doit être
+de type booléen. Les deux autres expressions peuvent être de n'importe
+quel type qui constitue donc le type de l'expression ternaire.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd><p>
+ 
+</p>
+<dl class="org-dl">
+<dt>Écriture de de code</dt><dd>Écrire un programme qui utilise un opérateur ternaire.</dd>
+<dt>Compréhension</dt><dd>Que fait le code suivant ? Pourquoi ?</dd>
+</dl>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">boolean</span>[] <span style="color: #BA36A5;">data</span> = {<span style="color: #D0372D;">true</span>, <span style="color: #D0372D;">false</span>, <span style="color: #D0372D;">false</span>, <span style="color: #D0372D;">true</span>, <span style="color: #D0372D;">true</span>};
+<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">idx</span> = -1;
+System.out.println( (idx &gt;= 0) ? data[idx] : <span style="color: #D0372D;">false</span>);
+</pre>
+</div></dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org55aecc5" class="outline-3">
+<h3 id="org55aecc5"><span class="section-number-3">7.2</span> Boucles while(){} et do{} while();</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Lorsque des opérations doivent être répétées plusieurs fois,
+éventuellement 0 ou 1 fois au minimum, on peut
+utiliser,respectivement, les structures de contrôle suivantes :
+</p>
+
+<dl class="org-dl">
+<dt>while</dt><dd><p>
+qui effectue le test avant de (re)commencer éventuellement exécuter le bloc de code
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">while</span>(expressionBooleenne){
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      corps de la boucle : instructions &#224; r&#233;p&#233;ter</span>
+<span style="color: #8D8D84; font-style: italic;">    */</span>
+}
+</pre>
+</div></dd>
+<dt>do while</dt><dd><p>
+qui effectue le test après avoir exécuté (donc au moins
+une fois) le bloc d'instruction, pour recommencer
+éventuellement.
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">do</span>{
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      corps de la boucle : instructions &#224; r&#233;p&#233;ter</span>
+<span style="color: #8D8D84; font-style: italic;">    */</span>
+}<span style="color: #0000FF;">while</span>(expressionBoolenne);
+</pre>
+</div></dd>
+</dl>
+
+<p>
+Lorsqu'on veut que la boucle puisse s'arrêter (et généralement on le
+veut !), on doit s'assurer que la condition de répétition puisse être
+modifiée par l'exécution du corps de la boucle !
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd><p>
+Que se passe-t-il lorsque l'on exécute les codes
+suivants (<code class="src src-java">%</code> est l'opérateur
+<a href="https://fr.wikipedia.org/wiki/Modulo_(op%C3%A9ration)">modulo</a> qui calcule le reste de la division entière) ?
+Pourquoi ?
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">v</span> = 192;
+<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">compteur</span> = 0;
+<span style="color: #0000FF;">while</span> (v % 2 == 0)
+    System.out.println(<span style="color: #008000;">"le compteur vaut "</span>+ compteur + <span style="color: #008000;">" car "</span>+ v+ <span style="color: #008000;">" est (encore) pair"</span>);
+    v = v / 2;
+    compteur = compteur + 1;
+System.out.println(<span style="color: #008000;">"le nombre &#233;tait divisible "</span>+ compteur + <span style="color: #008000;">" fois par 2"</span>;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">v</span> = 192;
+<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">compteur</span> = 0;
+<span style="color: #0000FF;">while</span> (v % 2 == 0);
+{
+    System.out.println(<span style="color: #008000;">"le compteur vaut "</span>+ compteur + <span style="color: #008000;">" car "</span>+ v+ <span style="color: #008000;">" est (encore) pair"</span>);
+    v = v / 2;
+    compteur = compteur + 1;
+}
+System.out.println(<span style="color: #008000;">"le nombre &#233;tait divisible "</span>+ compteur + <span style="color: #008000;">" fois par 2"</span>;
+</pre>
+</div></dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org4f296a1" class="outline-3">
+<h3 id="org4f296a1"><span class="section-number-3">7.3</span> Boucles for(;;){} et for( : ){}</h3>
+<div class="outline-text-3" id="text-7-3">
+</div>
+<div id="outline-container-org0503aac" class="outline-4">
+<h4 id="org0503aac"><span class="section-number-4">7.3.1</span> Boucle for classique</h4>
+<div class="outline-text-4" id="text-7-3-1">
+<p>
+Souvent, la condition de continuation est liée à une variable
+initialisée juste avant et dont la valeur est mise à jour à la fin du
+bloc répété. Par exemple, pour afficher dix chiffres à partir de 0 :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">compteur</span> = 0;
+<span style="color: #0000FF;">while</span>(compteur &lt; 10){
+    System.out.println(compteur);
+    compteur = compteur + 1; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">on pourrait &#233;crire compteur += 1 ou m&#234;me ++compteur</span>
+}
+</pre>
+</div>
+
+<p>
+De façon générale :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">initialisation</span>
+<span style="color: #8D8D84; font-style: italic;">*/</span>
+<span style="color: #0000FF;">while</span>(testDeContinuation){
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      instructions &#224; r&#233;p&#233;ter</span>
+<span style="color: #8D8D84; font-style: italic;">    */</span>
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      mise &#224; jour pour l'it&#233;ration suivante</span>
+<span style="color: #8D8D84; font-style: italic;">     */</span>
+}
+</pre>
+</div>
+
+
+<p>
+La structure de contrôle <code>for</code> "classique"<sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup> permet justement de regrouper ces trois éléments :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">for</span>(initialisation ; testDeContinuation; miseAJourPourLIterationSuivante){
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      instructions &#224; r&#233;p&#233;ter</span>
+<span style="color: #8D8D84; font-style: italic;">    */</span>
+}
+</pre>
+</div>
+
+<p>
+La boucle affichant les dix chiffres à partir de 0 s'écrira donc :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">for</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">compteur</span> = 0; compteur &lt; 10; ++compteur){ <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">++compteur est ici &#233;quivalent &#224; compteur = compteur + 1</span>
+    System.out.println(compteur);
+}
+</pre>
+</div>
+
+<p>
+De même que pour les boucles <code class="src src-java"><span style="color: #0000FF;">while</span>()</code> et
+<code class="src src-java"><span style="color: #0000FF;">do</span> <span style="color: #0000FF;">while</span>();</code>, il faut généralement s'assurer
+que la condition de continuation soit modifiée, normalement au niveau
+de la partie "mise à jour pour l'itération suivante" de la boucle
+<code class="src src-java"><span style="color: #0000FF;">for</span>()</code>.
+</p>
+
+<ul class="org-ul">
+<li>Exercices :: 
+<ul class="org-ul">
+<li>Écrire un programme qui affichage les nombres de 9 à 0 inclus.</li>
+<li>Écrire un programme qui calcule et affiche combien de fois un
+nombre, par exemple <code>192</code> est divisible par 2.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgad51072" class="outline-4">
+<h4 id="orgad51072"><span class="section-number-4">7.3.2</span> Boucle for sur une séquence de valeurs</h4>
+<div class="outline-text-4" id="text-7-3-2">
+<p>
+Lorsqu'on veut traiter toutes les valeurs d'un tableau, par exemple
+pour les afficher, on peut utiliser une boucle <code class="src src-java"><span style="color: #0000FF;">while</span></code> ou une boucle <code class="src src-java"><span style="color: #0000FF;">for</span></code> classique :
+</p>
+<dl class="org-dl">
+<dt>boucle while</dt><dd><p>
+ 
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">int</span>[] <span style="color: #BA36A5;">data</span> = {1, 2, 0, -1, 4, 8};
+<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = 0;
+<span style="color: #0000FF;">while</span>(i != data.length){
+    System.out.println(data[i]);
+    ++i;
+}
+</pre>
+</div></dd>
+<dt>boucle for classique</dt><dd><p>
+ 
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">int</span>[] <span style="color: #BA36A5;">data</span> = {1, 2, 0, -1, 4, 8};
+<span style="color: #0000FF;">for</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = 0; i != data.length; ++i){
+    System.out.println(data[i]);
+}
+</pre>
+</div>
+<p>
+	     Que se passe-t-il si l'on essaie d'utiliser la
+variable <code class="src src-java">i</code> après la boucle ? Noter la différence avec la boucle
+<code class="src src-java"><span style="color: #0000FF;">while</span></code>.
+</p></dd>
+</dl>
+
+
+<p>
+Ce cas de figure est suffisamment fréquent pour qu'une version
+spécifique de boucle <code class="src src-java"><span style="color: #0000FF;">for</span></code> ait été ajoutée au
+langage Java, avec la même fonctionnalité qu'en Python :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">for</span>(<span style="color: #6434A3;">TypeElement</span> <span style="color: #BA36A5;">element</span> : collectionElements){
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      code utilisant la variable element qui prend successivement chacune des valeurs de collectionElements</span>
+<span style="color: #8D8D84; font-style: italic;">     */</span>
+}
+</pre>
+</div>
+
+<p>
+Par exemple :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">int</span>[] <span style="color: #BA36A5;">data</span> = {1, 2, 0, -1, 4, 8};
+<span style="color: #0000FF;">for</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">v</span> : data){
+    System.out.println(v);
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3537088" class="outline-2">
+<h2 id="org3537088"><span class="section-number-2">8</span> Fonctions</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+On va vouloir décomposer son code en unités minimales qui réalise un
+calcul ou une tâche, de façon paramétrée. La <i>fonction</i> <sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup>, qui
+prend éventuellement des arguments et retourne éventuellement une
+valeur, est l'unité de décomposition du code. On a vu un cas
+particulier de fonction avec celle qui implémente le programme
+principal : <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>. Dans un premier temps, on ne s'attardera pas sur
+<code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span></code> qu'on reproduira à l'identique
+pour toutes nos fonctions. <code class="src src-java"><span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code> indique que l'on définit une fonction appelée <code class="src src-java">main</code> qui prend en argument <code class="src src-java"><span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span></code>, donc un tableau de chaînes de caractères appelé
+<code class="src src-java">args</code>, et ne retourne rien (<code class="src src-java"><span style="color: #6434A3;">void</span></code>).
+</p>
+
+
+<p>
+Les fonctions permettent de décomposer le code d'une application
+notamment parce que les variables sont <i>locales</i> : on peut donc
+raisonner localement sans avoir à se demander s'il y a du code
+ailleurs qui pourrait influencer / être influencé par la valeur des
+variables utilisées dans la fonction.
+</p>
+</div>
+
+<div id="outline-container-org2c6262c" class="outline-3">
+<h3 id="org2c6262c"><span class="section-number-3">8.1</span> Instruction <code>return</code></h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Le bloc d'instructions qui définit une fonction peut contenir zéro,
+une ou plusieurs instructions <code class="src src-java"><span style="color: #0000FF;">return</span></code>.
+</p>
+
+
+<p>
+Le seul cas où il peut n'y avoir aucun instruction return dans le
+corps d'une fonction est celui des fonctions ne retournant aucun
+valeur (ce qui est indiqué par le mot clé <code class="src src-java"><span style="color: #6434A3;">void</span></code> à la place du type de retour, comme dans <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>. Dans ce cas, tout se
+passe comme s'il y avait une instruction <code class="src src-java"><span style="color: #0000FF;">return</span>;</code> après la dernière instruction du bloc définissant la
+fonction. Par exemple :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
+    System.out.println(<span style="color: #008000;">"Hello World !"</span>);
+}
+</pre>
+</div>
+<p>
+et équivalent à :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
+    System.out.println(<span style="color: #008000;">"Hello World !"</span>);
+    <span style="color: #0000FF;">return</span>;
+}
+</pre>
+</div>
+
+<p>
+Dans tous les autres cas, il faut que l'exécution du code d'une
+fonction indiquant retourner une valeur d'un certain type aboutisse à
+l'exécution d'une instruction <code class="src src-java"><span style="color: #0000FF;">return</span> expressionDuTypeAttendu;</code>. Par exemple :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">double</span> <span style="color: #006699;">cmToInches</span>(<span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">inCm</span>){
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">inInches</span> = inCm * 0.394;
+    <span style="color: #0000FF;">return</span> inInches;
+}
+</pre>
+</div>
+<p>
+Cet exemple utilise une variable locale <code class="src src-java"><span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">inInches</span></code> pour montrer explicitement le type de la valeur retournée,
+mais on aurait pu écrire directement :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">double</span> <span style="color: #006699;">cmToInches</span>(<span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">inCm</span>){
+    <span style="color: #0000FF;">return</span> inCm * 0.394; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">l'expression inCm * 0.394 est de type double</span>
+}
+</pre>
+</div>
+
+<p>
+Lorsqu'une instruction <code class="src src-java"><span style="color: #0000FF;">return</span></code> est exécutée,
+le flux d'exécution quitte immédiatement la fonction. S'il y avait des
+instructions après l'instruction <code class="src src-java"><span style="color: #0000FF;">return</span></code>,
+elles ne seraient jamais exécutées. Mais le compilateur (ou l'IDE)
+signale un erreur lorsqu'on essaie d'écrire un tel code.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Écrire la fonction <code class="src src-java">cmToInches</code>
+dans un IDE et ajouter du code (par exemple
+<code class="src src-java">System.out.println(<span style="color: #008000;">"Je ne peux pas &#234;tre ex&#233;cut&#233;e!"</span>);</code> <b>après</b> l'instruction
+<code class="src src-java"><span style="color: #0000FF;">return</span></code>. Que se passe-t-il ?</dd>
+</dl>
+
+
+<p>
+Le corps d'une fonction peut contenir plusieurs instructions
+<code class="src src-java"><span style="color: #0000FF;">return</span></code>, lorsqu'une instruction de contrôle de
+flux d'exécution (par exemple un <code class="src src-java"><span style="color: #0000FF;">if</span></code>) produit
+des chemins d'exécution exclusifs. Par exemple :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">long</span> <span style="color: #006699;">fibonacci</span>(<span style="color: #6434A3;">long</span> <span style="color: #BA36A5;">n</span>){
+    <span style="color: #0000FF;">if</span>(n &lt;= 2){
+        <span style="color: #0000FF;">return</span> n;
+    }<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">on pourrait avoir un else</span>
+    <span style="color: #0000FF;">return</span> fibonacci(n-1) + fibonacci(n-2);
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2a71edd" class="outline-3">
+<h3 id="org2a71edd"><span class="section-number-3">8.2</span> Passage d'argument</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+Une fonction peut avoir zéro, un, ou plusieurs arguments, indiqués,
+avec leur type, entre parenthèses et séparés par des virgules :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">fonctionAvecZeroArg</span>(){
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      corps de la fonction</span>
+<span style="color: #8D8D84; font-style: italic;">    */</span>
+}
+<span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">fonctionAvecUnArg</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">seulArgument</span>){
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      corps de la fonction</span>
+<span style="color: #8D8D84; font-style: italic;">    */</span>
+}
+
+<span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">fonctionAvecDeuxArgs</span>(<span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">premierArgument</span>, <span style="color: #6434A3;">float</span> <span style="color: #BA36A5;">secondArgument</span>){
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      corps de la fonction</span>
+<span style="color: #8D8D84; font-style: italic;">    */</span>
+}
+<span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">fonctionAvecTroisArgs</span>(<span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">premierArgument</span>, <span style="color: #6434A3;">int</span>[] <span style="color: #BA36A5;">secondArgument</span>, <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">troisiemeArgument</span>){
+    <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      corps de la fonction</span>
+<span style="color: #8D8D84; font-style: italic;">    */</span>
+}
+</pre>
+</div>
+
+
+<p>
+Lors de l'appel d'une fonction, le flux d'exécution quitte la fonction
+appelante pour exécuter le corps de la fonction appelée.  Soit le
+programme suivante, avec une fonction principale <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code> qui appelle une fonction
+<code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">double</span> <span style="color: #006699;">cmToInchesArea</span>(<span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">widthInCm</span>, <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">lengthInCm</span>)</code>. Cette dernière est à la fois fonction
+appelée (par la fonction principale) et fonction appelante, faisant
+deux appels à la fonction <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">double</span> <span style="color: #006699;">cmToInches</span>(<span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">inCm</span>)</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Main</span>{
+  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">res</span> =  cmToInchesArea(10.5, 5.0);   
+    System.out.println(res);
+  }
+  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">double</span> <span style="color: #006699;">cmToInches</span>(<span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">inCm</span>){
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">inInches</span> = inCm * 0.394;
+    <span style="color: #0000FF;">return</span> inInches;
+  }
+  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">double</span> <span style="color: #006699;">cmToInchesArea</span>(<span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">widthInCm</span>
+                                    , <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">lengthInCm</span>){
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">widthInInches</span> = cmToInches(widthInCm);
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">lengthInInches</span> = cmToInches(lengthInCm);
+    <span style="color: #0000FF;">return</span> widthInInches * lengthInInches;
+  }
+}
+</pre>
+</div>
+
+<p>
+On peut visualiser son exécution pas à pas <a href="http://www.pythontutor.com/visualize.html#code=public%20class%20Main%7B%0A%20%20public%20static%20void%20main%28String%5B%5D%20args%29%7B%0A%20%20%20%20double%20res%20%3D%20%20cmToInchesArea%2810.5,%205.0%29%3B%20%20%20%0A%20%20%20%20System.out.println%28res%29%3B%0A%20%20%7D%0A%20%20public%20static%20double%20cmToInches%28double%20inCm%29%7B%0A%20%20%20%20double%20inInches%20%3D%20inCm%20*%200.394%3B%0A%20%20%20%20return%20inInches%3B%0A%20%20%7D%0A%20%20public%20static%20double%20cmToInchesArea%28double%20widthInCm%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20,%20double%20lengthInCm%29%7B%0A%20%20%20%20double%20widthInInches%20%3D%20cmToInches%28widthInCm%29%3B%0A%20%20%20%20double%20lengthInInches%20%3D%20cmToInches%28lengthInCm%29%3B%0A%20%20%20%20return%20widthInInches%20*%20lengthInInches%3B%0A%20%20%7D%0A%7D&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;mode=display&amp;origin=opt-frontend.js&amp;py=java&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false">en ligne</a>.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Sous IDE, éditer le code précédent et l'exécuter <i>pas à
+pas</i> en mode <i>debug</i>. Pour cela, cliquer dans la marge
+à gauche du code au niveau de la ligne
+<code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code> (bouton gauche sous IntelliJ, menu
+contextuel sous Eclipse) pour y poser un point d'arrêt
+(<i>breakpoint</i>). Lancer l'exécution en mode <i>debug</i> (par
+exemple en cliquant sur le bouton avec un insecte
+vert). Ensuite, exécuter le code <i>pas à pas</i> en entrant
+dans les fonctions appelées (<i>step into</i>), par exemple
+en cliquant sur la flèche vers le bas sous IntelliJ.</dd>
+</dl>
+
+
+<div class="figure">
+<p><img src="img/IntelliJ-debug.png" alt="IntelliJ-debug.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org69308a9" class="outline-3">
+<h3 id="org69308a9"><span class="section-number-3">8.3</span> Contexte local d'exécution / pile / fonction récursive</h3>
+<div class="outline-text-3" id="text-8-3">
+<p>
+En fait, même si les variables locales sont considérées comme
+"appartenant" à la fonction dans laquelle elles sont déclarées, les
+espaces mémoire correspondant sont plus précisément liés au <i>contexte
+local d'exécution</i> de la fonction lorsqu'elle est appelée. Cela veut
+dire que de nouvelles variables sont crées à chaque appel de la
+fonction. La nuance est importante lorsqu'une fonction est appelée
+plusieurs fois "en même temps", le plus souvent dans le cadre d'appels
+récursifs (d'où les guillemets à "en même temps"). Une fonction
+récursive s'appelle elle-même, elle est donc à la fois appelante
+d'elle-même et appelée par elle-même. À chaque appel de fonction, les
+variables locales de la fonction appelée sont crées et à chaque retour
+de la fonction appelée, ces variables locales sont détruites. En
+pratique, ces variables sont crées dans une <i>pile</i> car ce sont
+toujours les dernières crées qui sont les premières détruites puisque
+la prochaine fonction de laquelle on va retourner est toujours la
+dernière fonction qu'on a appelée.
+</p>
+
+<p>
+Pour se convaincre de l'importance du contexte local d'exécution,
+considérer les fonctions suivantes :
+</p>
+
+<ul class="org-ul">
+<li><p>
+Simple récursion, <a href="http://www.pythontutor.com/visualize.html#code=public%20class%20Main%7B%0A%20%20public%20static%20void%20main%28String%5B%5D%20args%29%7B%0A%20%20%20%20long%20res%20%3D%20factorial%284%29%3B%0A%20%20%20%20System.out.println%28res%29%3B%0A%20%20%7D%0A%20%20public%20static%20long%20factorial%28long%20n%29%7B%0A%20%20%20%20if%28n%20%3C%202%29%7B%0A%20%20%20%20%20%20return%201%3B%0A%20%20%20%20%7D//%20on%20pourrait%20avoir%20un%20else%0A%20%20%20%20long%20res%20%3D%20n%20*%20factorial%28n-1%29%3B%0A%20%20%20%20return%20%20res%3B%0A%20%20%7D%0A%7D%0A&amp;cumulative=false&amp;curInstr=27&amp;heapPrimitives=nevernest&amp;mode=display&amp;origin=opt-frontend.js&amp;py=java&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false">dont on peut visualiser l'exécution en ligne</a> :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Main</span>{
+  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
+    <span style="color: #6434A3;">long</span> <span style="color: #BA36A5;">res</span> = factorial(4);
+    System.out.println(res);
+  }
+  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">long</span> <span style="color: #006699;">factorial</span>(<span style="color: #6434A3;">long</span> <span style="color: #BA36A5;">n</span>){
+    <span style="color: #0000FF;">if</span>(n &lt; 2){
+      <span style="color: #0000FF;">return</span> 1;
+    }<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">on pourrait avoir un else</span>
+    <span style="color: #6434A3;">long</span> <span style="color: #BA36A5;">res</span> = n * factorial(n-1);
+    <span style="color: #0000FF;">return</span>  res;
+  }
+}
+</pre>
+</div></li>
+
+<li><p>
+Double récursion, <a href="http://www.pythontutor.com/visualize.html#code=public%20class%20Main%7B%0A%20%20public%20static%20void%20main%28String%5B%5D%20args%29%7B%0A%20%20%20%20long%20res%20%3D%20fibonacci%284%29%3B%0A%20%20%20%20System.out.println%28res%29%3B%0A%20%20%7D%0A%20%20public%20static%20long%20fibonacci%28long%20n%29%7B%0A%20%20%20%20if%28n%20%3C%3D%202%29%7B%0A%20%20%20%20%20%20return%20n%3B%0A%20%20%20%20%7D//%20on%20pourrait%20avoir%20un%20else%0A%20%20%20%20long%20res%20%3D%20fibonacci%28n-1%29%3B%0A%20%20%20%20res%20%3D%20res%20%2B%20fibonacci%28n-2%29%3B%0A%20%20%20%20return%20%20res%3B%0A%20%20%7D%0A%7D&amp;cumulative=false&amp;curInstr=30&amp;heapPrimitives=nevernest&amp;mode=display&amp;origin=opt-frontend.js&amp;py=java&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false">dont on peut visualiser l'exécution en ligne</a> :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Main</span>{
+  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
+    <span style="color: #6434A3;">long</span> <span style="color: #BA36A5;">res</span> = fibonacci(4);
+    System.out.println(res);
+  }
+  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">long</span> <span style="color: #006699;">fibonacci</span>(<span style="color: #6434A3;">long</span> <span style="color: #BA36A5;">n</span>){
+    <span style="color: #0000FF;">if</span>(n &lt;= 2){
+      <span style="color: #0000FF;">return</span> n;
+    }<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">on pourrait avoir un else</span>
+    <span style="color: #6434A3;">long</span> <span style="color: #BA36A5;">res</span> = fibonacci(n-1);
+    res = res + fibonacci(n-2);
+    <span style="color: #0000FF;">return</span>  res;
+  }
+}
+</pre>
+</div></li>
+</ul>
+
+<p>
+<b>Attention !</b> On veut toujours que des appels récursifs "s'arrêtent" à
+un moment donné. Il doit donc toujours y avoir (au moins) une
+<i>condition d'arrêt</i> dépendant de la valeur des arguments et les appels
+récursifs doivent faire converger les valeurs des arguments vers la
+conditions d'arrêt.
+</p>
+
+<dl class="org-dl">
+<dt>Exercices</dt><dd> 
+<dl class="org-dl">
+<dt>Compréhension de code</dt><dd>Pour les fonctions récursives, vérifier
+si elles s'arrêtent effectivement.</dd>
+<dt>Avoir un modèle mental d'exécution</dt><dd>Exécuter dans sa tête, pas à
+pas, les programmes précédents.</dd>
+<dt>Utiliser un IDE</dt><dd>Exécuter dans un IDE, pas à pas, les
+programmes précédents.</dd>
+<dt>Comprendre les messages d'erreur</dt><dd>Supprimer les conditions
+d'arrêt des fonctions récursives précédentes et les
+exécuter. Que veut dire le message d'erreur ?</dd>
+</dl></dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-org4bd0198" class="outline-3">
+<h3 id="org4bd0198"><span class="section-number-3">8.4</span> Surcharge de fonctions</h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+Une fonction d'une classe est identifiée par sa <i>signature</i> qui doit
+être unique. Celle-ci est définie non seulement par le nom de la
+fonction, mais aussi par les arguments (nombre, types) de la
+fonction. On peut donc définir plusieurs fonctions ayant le même
+nom. Par exemple :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">arrayToString</span>(<span style="color: #6434A3;">int</span>[] <span style="color: #BA36A5;">array</span>){
+    <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">res</span> = <span style="color: #008000;">"["</span>;
+    <span style="color: #0000FF;">for</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = 0; i != array.length; ++i){
+        res = res + <span style="color: #008000;">" "</span>+ array[i];
+    }
+    <span style="color: #0000FF;">return</span> res +<span style="color: #008000;">"]"</span>;
+}
+
+<span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">arrayToString</span>(<span style="color: #6434A3;">double</span>[] <span style="color: #BA36A5;">array</span>){
+    <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">res</span> = <span style="color: #008000;">"["</span>;
+    <span style="color: #0000FF;">for</span>(<span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">v</span> : array){
+        res += <span style="color: #008000;">" "</span> + v;
+    }
+    <span style="color: #0000FF;">return</span> res +<span style="color: #008000;">"]"</span>;
+}
+</pre>
+</div>
+
+<p>
+Cela ne pose pas de problème à Java grâce au typage <i>statique</i> : en
+effet, à chaque appel de fonction, Java connaît le type des arguments
+et peut donc choisir l'implémentation ayant la signature correspondante.
+</p>
+
+<ul class="org-ul">
+<li>Exercices :  
+<dl class="org-dl">
+<dt>Implémentation</dt><dd>Ajouter des implémentations pour les signatures
+suivantes : <code class="src src-java">arrayToString(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">array</span>)</code>,
+<code class="src src-java">arrayToString(<span style="color: #6434A3;">boolean</span>[] <span style="color: #BA36A5;">array</span>)</code>.</dd>
+<dt>Algorithme</dt><dd>Modifier les implémentations de <code class="src src-java">arrayToString</code> pour séparer les valeurs par
+<code class="src src-java"><span style="color: #008000;">", "</span></code> (une virgule puis un
+espace). On ne veut pas de séparateur avant la
+première valeur, ni après la dernière valeur !</dd>
+</dl></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd40145c" class="outline-2">
+<h2 id="orgd40145c"><span class="section-number-2">9</span> Références Webliographiques</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Quelques liens pour trouver des informations ou faire de la veille sur Java.
+</p>
+</div>
+<div id="outline-container-org60e3489" class="outline-3">
+<h3 id="org60e3489"><span class="section-number-3">9.1</span> Documentation officielle</h3>
+<div class="outline-text-3" id="text-9-1">
+<ul class="org-ul">
+<li><a href="https://docs.oracle.com/javase/tutorial/">Java tutorials</a></li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/">Javadoc</a>, documentation de la bibliothèque standard</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org087f498" class="outline-3">
+<h3 id="org087f498"><span class="section-number-3">9.2</span> Sur le web</h3>
+<div class="outline-text-3" id="text-9-2">
+<ul class="org-ul">
+<li><a href="https://www.baeldung.com/">Baeldung</a></li>
+<li><a href="https://www.vogella.com/tutorials/java.html">Vogella</a></li>
+<li><a href="https://dzone.com/java-jdk-development-tutorials-tools-news/list">Dzone</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Notes de bas de page: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">Ceci est un peu moins vrai depuis la sortie de <a href="https://en.wikipedia.org/wiki/JShell">JShell</a>, mais les principes du langage Java restent inchangés.</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">les minuscules et majuscules, ainsi que le fait de coller les mots sont importants ! Cf. <a href="https://fr.wikipedia.org/wiki/Camel_case">CamelCase</a></p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">ou évidemment
+lorsqu'on utilise le raccourci clavier équivalent</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">avec un point <code>.</code> et non une virgule <code>,</code> comme séparateur décimal !</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">plus précisément une référence vers un tableau d'entiers</p></div></div>
+
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">pour rappel, dynamiquement veut
+dire <i>à l'exécution</i>.</p></div></div>
+
+<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7">7</a></sup> <div class="footpara"><p class="footpara">depuis la version 5,
+Java a ajouté une nouvelle boucle <code>for</code> similaire à son homologue
+python, cf. infra</p></div></div>
+
+<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8">8</a></sup> <div class="footpara"><p class="footpara">en
+<i>Programmation Orientée Objet</i>, notamment en Java, on parle de
+méthodes, ici statiques ou "de classe". Cf. cours sur la POO</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Auteur: Bernard Hugueney</p>
+<p class="date">Created: 2019-10-01 Tue 15:04</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
