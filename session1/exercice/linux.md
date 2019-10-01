@@ -24,3 +24,9 @@
 - Donnez le nombre de routeurs qu'il y a entre vous et les serveurs de France TV.
 - Ecrivez un script `bash` qui prend en paramètre une chaine de caractère pour ensuite afficher le message : _Bonjour cher **entrée**_.
 - Utilisez un `cron` pour créer un nouveau fichier vide toutes les 5 minutes qui sera nommé comme suit : _dd-MM-yyyy-HH-mm.log_.
+
+## Étape 3 : Vers l'∞ et au delà !
+
+- Décompresser [l'archive contenant le site web banksy en 1993](../ressource/banksy.zip) dans un répertoire.
+- Compter combien il y a de fichiers d'extension`.jpg` sous l'arborescence `www.banksy.co.uk`.
+- S'il y a un fichier d'extension `.jpg` qui n'est **pas** une image, le trouver.
