@@ -662,8 +662,8 @@ On peut composer des expressions booléennes à l'aide d'opérateurs logiques :
 
 - Exercices ::  
 
-  - Codage exploratoire ::  Écrire un petit programme qui mettent
-       œuvre les opérateurs logiques.
+  - Codage exploratoire ::  Écrire un petit programme qui met en œuvre
+       les opérateurs logiques.
 
   - Compréhension :: Que fait le bout de code suivant ? [[https://en.wikipedia.org/wiki/Short-circuit_evaluation][Comment]] ? Pourquoi ?
   #+BEGIN_SRC java :exports code
