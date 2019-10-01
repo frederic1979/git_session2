@@ -28,5 +28,6 @@
 ## Étape 3 : Vers l'∞ et au delà !
 
 - Décompresser [l'archive contenant le site web banksy en 1993](../ressource/banksy.zip) dans un répertoire.
-- Compter combien il y a de fichiers d'extension`.jpg` sous l'arborescence `www.banksy.co.uk`.
-- S'il y a un fichier d'extension `.jpg` qui n'est **pas** une image, le trouver.
+- Compter combien il y a de fichiers d'extension`.jpg` sous l'arborescence `www.banksy.co.uk`. Indice : on peut utiliser [find](https://doc.ubuntu-fr.org/tutoriel/console_commandes_de_base#find)
+- S'il y a un fichier d'extension `.jpg` qui n'est **pas** une image, le trouver. Indice : on peut utiliser [file](https://doc.ubuntu-fr.org/tutoriel/console_commandes_de_base#file)
+- Calculer combien il y a de pixels en tout dans toutes les images d'extension `.jpg`. Indice : on peut utiliser [bc](https://doc.ubuntu-fr.org/bc)
