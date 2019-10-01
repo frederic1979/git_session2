@@ -1,53 +1,53 @@
 
 # Table des matières
 
-1.  [Un arôme de Java](#orgff7f02a)
-    1.  [Java, un langage compilé](#orgb452de3)
-2.  [Premier programme Java](#orgf43e1ba)
-    1.  [En mode "console"](#org3f5411f)
-    2.  [Avec un IDE](#orgb104d42)
-    3.  [Un début d'explications](#org9ffd315)
-3.  [Conventions](#org3fb20fd)
-4.  [Variables et typage](#orgac83b79)
-    1.  [Variables locales](#org9708085)
-    2.  [Typage statique](#org49db44c)
-5.  [Types de données primitifs](#org78d7ba4)
-    1.  [Types numériques](#org2441f52)
-        1.  [Types entiers](#org4c360b4)
-        2.  [Types à virgule](#orgd1366e2)
-    2.  [Type booléen](#orgd44eb29)
-    3.  [Type caractère](#orgd925d53)
-6.  [Types de données gérés par référence](#org2e09f80)
-    1.  [Types tableaux](#orgf9d1ba5)
-    2.  [Accès aux éléments d'un tableau](#orgea3bf52)
-    3.  [Accès à la taille du tableau](#org4473864)
-    4.  [Tableau de tableaux](#org4bd4024)
-        1.  [Déclaration](#org2801229)
-        2.  [Initialisation partielle](#org7a4e01c)
-        3.  [Initialisation](#orgbe2ffff)
-    5.  [Type chaîne de caractères](#org06ee8b6)
-    6.  [Tous les autres types définissables (classes)](#org57c478b)
-7.  [Structures de contrôle](#orgb609d2f)
-    1.  [Exécution conditionnelle](#org2dbfad9)
-        1.  [Expression booléennes](#org1977d93)
-        2.  [if](#org27dd19f)
-        3.  [Opérateur ternaire](#orgd7e85fa)
-    2.  [Boucles while(){} et do{} while();](#org2368984)
-    3.  [Boucles for(;;){} et for( : ){}](#orgffb13cf)
-        1.  [Boucle for classique](#orgaf12943)
-        2.  [Boucle for sur une séquence de valeurs](#orgd4ef2ba)
-8.  [Fonctions](#org8f21710)
-    1.  [Instruction `return`](#orgb99b6e1)
-    2.  [Passage d'argument](#org56e49b4)
-    3.  [Contexte local d'exécution / pile / fonction récursive](#org9413df0)
-    4.  [Surcharge de fonctions](#org2ac27f4)
-9.  [Références Webliographiques](#org962b9b6)
-    1.  [Documentation officielle](#org042a6f4)
-    2.  [Sur le web](#org87e0655)
+1.  [Un arôme de Java](#org072fe32)
+    1.  [Java, un langage compilé](#org8667eec)
+2.  [Premier programme Java](#org384dce2)
+    1.  [En mode "console"](#orgff75140)
+    2.  [Avec un IDE](#orgdaec52b)
+    3.  [Un début d'explications](#org47ef528)
+3.  [Conventions](#orgc63842e)
+4.  [Variables et typage](#org80bfc33)
+    1.  [Variables locales](#orgb543e6d)
+    2.  [Typage statique](#org99eacd6)
+5.  [Types de données primitifs](#org8562771)
+    1.  [Types numériques](#org26b3dec)
+        1.  [Types entiers](#orgbdc4be5)
+        2.  [Types à virgule](#org5e2c285)
+    2.  [Type booléen](#orgf05a8d9)
+    3.  [Type caractère](#orgc7596ca)
+6.  [Types de données gérés par référence](#org6a17b54)
+    1.  [Types tableaux](#org4ab170a)
+    2.  [Accès aux éléments d'un tableau](#org7b06324)
+    3.  [Accès à la taille du tableau](#orgccd3007)
+    4.  [Tableau de tableaux](#org0702987)
+        1.  [Déclaration](#org3b0b7ba)
+        2.  [Initialisation partielle](#org9db48e1)
+        3.  [Initialisation](#org5590565)
+    5.  [Type chaîne de caractères](#org93ce576)
+    6.  [Tous les autres types définissables (classes)](#org7f8c6a4)
+7.  [Structures de contrôle](#orga95552f)
+    1.  [Exécution conditionnelle](#org390d495)
+        1.  [Expression booléennes](#orgc667e1f)
+        2.  [if](#org83d6c73)
+        3.  [Opérateur ternaire](#org300844b)
+    2.  [Boucles while(){} et do{} while();](#org7c6f36f)
+    3.  [Boucles for(;;){} et for( : ){}](#org94722ba)
+        1.  [Boucle for classique](#org2ceb208)
+        2.  [Boucle for sur une séquence de valeurs](#org5373b20)
+8.  [Fonctions](#org7fadc9b)
+    1.  [Instruction `return`](#orge6ac247)
+    2.  [Passage d'argument](#org359636a)
+    3.  [Contexte local d'exécution / pile / fonction récursive](#orga2f38cf)
+    4.  [Surcharge de fonctions](#orged4f17f)
+9.  [Références Webliographiques](#orga791195)
+    1.  [Documentation officielle](#org41ecb13)
+    2.  [Sur le web](#org2e3ccd4)
 
 
 
-<a id="orgff7f02a"></a>
+<a id="org072fe32"></a>
 
 # Un arôme de Java
 
@@ -72,7 +72,7 @@ Ainsi, le moindre programme Java exige :
 `/* et */` délimitant un bloc de commentaires (`// indiquant un commentaire jusqu'à la fin de la ligne`, comme `# en python`).
 
 
-<a id="orgb452de3"></a>
+<a id="org8667eec"></a>
 
 ## Java, un langage compilé
 
@@ -95,7 +95,7 @@ verte sous *IntelliJ* et une flèche blanche dans un rond vert sous
 *Eclipse*.
 
 
-<a id="orgf43e1ba"></a>
+<a id="org384dce2"></a>
 
 # Premier programme Java
 
@@ -103,7 +103,7 @@ Pour bien comprendre comment fonctionnent l'édition la compilation et
 le lancement d'un programme java, on va d'abord effectuer les différentes étapes avec différents programmes (un éditeur de texte, le compilateur `javac`, le programme `java` qui lance la machine virtuelle java (JVM), en mode console. Ensuite, on utilisera un Environnement de Développement Intégré (IDE).
 
 
-<a id="org3f5411f"></a>
+<a id="orgff75140"></a>
 
 ## En mode "console"
 
@@ -123,7 +123,7 @@ Le compiler en utilisant le programme `javac` :
 
 Pour que la commande `javac` soit utilisable, il faut :
 
-1.  avoir installé le [Java Development Kit](https://fr.wikipedia.org/wiki/Java_Development_Kit) (JDK) à ne pas confondre avec le [Java Runtime Environment](https://fr.wikipedia.org/wiki/Environnement_d%27ex%C3%A9cution_Java) (JRE) qui ne contient que `java` et non `javac`.
+1.  avoir installé le [Java Development Kit](https://fr.wikipedia.org/wiki/Java_Development_Kit) (JDK) à ne pas confondre avec le [Java Runtime Environment](https://fr.wikipedia.org/wiki/Environnement_d%27ex%C3%A9cution_Java) (JRE) qui ne contient que `java` et non `javac`. On s'assurera d'avoir au moins la version 8 de java.
 2.  avoir fait en sorte que les programmes exécutables `javac` et `java` soient reconnus comme commandes (par exemple en [ajustant la variable d'environnement PATH](https://www.java.com/fr/download/help/path.xml)).
 
 On peut constater que le résultat de la compilation est la création du fichier `.class` correspondant au fichier `.java` :
@@ -212,7 +212,7 @@ de caractères, formatage ou colorisation.
         chose. Compiler et lancer ce nouveau programme.
 
 
-<a id="orgb104d42"></a>
+<a id="orgdaec52b"></a>
 
 ## Avec un IDE
 
@@ -230,7 +230,7 @@ sélectionner `New` → `Java Class` ou `Class` dans le menu contextuel
 Choisir un nom de classe, par exemple `ExerciceIde1`, en laissant le nom de *package* vide (cf. infra), et éditer le code pour avoir un programme (donc avec un `public static void main(String[] args)`) qui fasse un affichage (donc avec un `System.out.println(/* ce qu'on veut afficher/*);`).
 
 
-<a id="org9ffd315"></a>
+<a id="org47ef528"></a>
 
 ## Un début d'explications
 
@@ -280,7 +280,7 @@ Et l'exécuter avec un argument pour afficher le résultat attendu :
         lancer le programme !
 
 
-<a id="org3fb20fd"></a>
+<a id="orgc63842e"></a>
 
 # Conventions
 
@@ -289,7 +289,7 @@ En France, **techniquement** on peut rouler à gauche. En pratique, on impose de
 De même pour l'indentation qui, si elle n'est pas fixée par le langage Java lui-même (contrairement à Python), est [imposée par convention](https://google.github.io/styleguide/javaguide.html#s4-formatting). Les IDE permettent de formater automatiquement le code, par exemple sous IntelliJ avec le menu `Code` → `Reformat Code` ou le raccourci clavier équivalent `Ctrl` + `Alt` + `L`.
 
 
-<a id="orgac83b79"></a>
+<a id="org80bfc33"></a>
 
 # Variables et typage
 
@@ -298,7 +298,7 @@ emplacement mémoire auquel on donne un nom, qui est accessible par un
 certain code et qui peut stocker **un certain type de valeurs**.
 
 
-<a id="org9708085"></a>
+<a id="orgb543e6d"></a>
 
 ## Variables locales
 
@@ -318,7 +318,7 @@ fonction est appelée par la JVM et les arguments sont passés par le
 système d'exploitation au lancement du programme.
 
 
-<a id="org49db44c"></a>
+<a id="org99eacd6"></a>
 
 ## Typage statique
 
@@ -374,14 +374,14 @@ indicateur rouge apparaît dans la marge à gauche.
     virgule, et entre types de taille différentes.
 
 
-<a id="org78d7ba4"></a>
+<a id="org8562771"></a>
 
 # Types de données primitifs
 
 Java définit [un certain nombre de types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) dits *primitifs*. 
 
 
-<a id="org2441f52"></a>
+<a id="org26b3dec"></a>
 
 ## Types numériques
 
@@ -391,7 +391,7 @@ de ces catégories, les différents types correspondent à différentes
 tailles en mémoire et permette de choisir le compromis entre encombrement mémoire et nombres de valeurs différentes représentables : on peut représenter au maximum 2^N valeurs différentes avec N bits.
 
 
-<a id="org4c360b4"></a>
+<a id="orgbdc4be5"></a>
 
 ### Types entiers
 
@@ -416,7 +416,7 @@ Lorsqu'on écrit une valeur entière directement dans le code (par exemple `4321
         exemple en ajoutant ou en retranchant `1`).
 
 
-<a id="orgd1366e2"></a>
+<a id="org5e2c285"></a>
 
 ### Types à virgule
 
@@ -437,14 +437,14 @@ Il y aura donc forcément un risque d'arrondis dont [il faut se méfier](https:/
 Lorsqu'on écrit une valeur à virgule <sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> son type est `double`. On peut utiliser le suffixe `f` ou `F` Pour que le type soit `float`.
 
 
-<a id="orgd44eb29"></a>
+<a id="orgf05a8d9"></a>
 
 ## Type booléen
 
 En java, le type booléen est `boolean` et les valeurs s'écrivent `true` et `false`.
 
 
-<a id="orgd925d53"></a>
+<a id="orgc7596ca"></a>
 
 ## Type caractère
 
@@ -460,14 +460,14 @@ Les caractères sont représentés entre guillemets **simples** en utilisant des
     char tab = '\t';
 
 
-<a id="org2e09f80"></a>
+<a id="org6a17b54"></a>
 
 # Types de données gérés par référence
 
 Alors que les types primitifs  que l'on vient de voir sont stockés directement en mémoire "dans" les variables, les types que l'on va maintenant voir sont stockés indirectement, les variables "contenant" une *référence* (on parle aussi parfois de pointeur, il s'agit en fait de l'adresse en mémoire où est stockée la valeur elle-même). Cette distinction aura beaucoup de conséquences très importantes. Lorsqu'une référence n'est pas initialisée, elle a une valeur spéciale `null`. Essayer d'utiliser une référence valant `null` comme si elle était une référence valide vers une valeur en mémoire provoquera une [erreur classique](https://en.wikipedia.org/wiki/Null_pointer#Null_dereferencing) qu'on devra éviter.
 
 
-<a id="orgf9d1ba5"></a>
+<a id="org4ab170a"></a>
 
 ## Types tableaux
 
@@ -522,7 +522,7 @@ Il est important de comprendre que chaque affectation en modifie pas le tableau,
         sens donner à l'affichage obtenu ?
 
 
-<a id="orgea3bf52"></a>
+<a id="org7b06324"></a>
 
 ## Accès aux éléments d'un tableau
 
@@ -534,7 +534,7 @@ On utilise la notation `nomDuTableau[valeurindice]` pour accéder à la case d'i
     la taille du tableau) ou trop petit (< 0)?
 
 
-<a id="org4473864"></a>
+<a id="orgccd3007"></a>
 
 ## Accès à la taille du tableau
 
@@ -543,7 +543,7 @@ Pour un tableau donné, on peut accéder à sa taille avec la notation `nomDuTab
 -   **Exercice:** Quelle est la taille maximale d'un tableau en Java ?
 
 
-<a id="org4bd4024"></a>
+<a id="org0702987"></a>
 
 ## Tableau de tableaux
 
@@ -554,7 +554,7 @@ cases. Pour un type `X`, on peut avoir le type
 peut donc avoir des tableaux de tableaux par exemple `int[][]` est le type *tableau de tableaux d'entiers*.
 
 
-<a id="org2801229"></a>
+<a id="org3b0b7ba"></a>
 
 ### Déclaration
 
@@ -565,7 +565,7 @@ Avec une simple déclaration, il n'y a **aucun** tableau en mémoire.
 ![img](img/ref-array2d-0.png)
 
 
-<a id="org7a4e01c"></a>
+<a id="org9db48e1"></a>
 
 ### Initialisation partielle
 
@@ -576,7 +576,7 @@ Si l'on ne crée qu'un seul tableau, il n'y a qu'un tableau qui **pourra** conte
 ![img](img/ref-array2d-1.png)
 
 
-<a id="orgbe2ffff"></a>
+<a id="org5590565"></a>
 
 ### Initialisation
 
@@ -587,7 +587,7 @@ Il faut initialiser chacune des cases de tableau de tableaux.
 ![img](img/ref-array2d-2.png)
 
 
-<a id="org06ee8b6"></a>
+<a id="org93ce576"></a>
 
 ## Type chaîne de caractères
 
@@ -608,14 +608,14 @@ Une autre particularité des chaînes de caractères est que les valeurs des aut
 -   **Exercice:** Comparer les résultats de `"score: " + 2 + 3` et `2 + 3 +"points"`.
 
 
-<a id="org57c478b"></a>
+<a id="org7f8c6a4"></a>
 
 ## Tous les autres types définissables (classes)
 
 On peut définir de nouveau types comme String en définissant de nouvelles classes. Ce que nous verrons dans le cadre de la *Programmation Orientée Objet*.
 
 
-<a id="orgb609d2f"></a>
+<a id="orga95552f"></a>
 
 # Structures de contrôle
 
@@ -631,12 +631,12 @@ et/ou répétée grâce aux *structures de contrôle*. En java, on retrouve l'é
 -   que l'instruction vide `;` est une instruction valide ! (qui ne fait rien)
 
 
-<a id="org2dbfad9"></a>
+<a id="org390d495"></a>
 
 ## Exécution conditionnelle
 
 
-<a id="org1977d93"></a>
+<a id="orgc667e1f"></a>
 
 ### Expression booléennes
 
@@ -669,7 +669,7 @@ On peut composer des expressions booléennes à l'aide d'opérateurs logiques :
         boolean fail = data[idx] && (idx >= 0);
 
 
-<a id="org27dd19f"></a>
+<a id="org83d6c73"></a>
 
 ### if
 
@@ -699,7 +699,7 @@ On peut composer des expressions booléennes à l'aide d'opérateurs logiques :
     `;` : `if(uneExpressionBoolenne);` avant le bloc.
 
 
-<a id="orgd7e85fa"></a>
+<a id="org300844b"></a>
 
 ### Opérateur ternaire
 
@@ -725,7 +725,7 @@ quel type qui constitue donc le type de l'expression ternaire.
         System.out.println( (idx >= 0) ? data[idx] : false);
 
 
-<a id="org2368984"></a>
+<a id="org7c6f36f"></a>
 
 ## Boucles while(){} et do{} while();
 
@@ -778,12 +778,12 @@ modifiée par l'exécution du corps de la boucle !
         System.out.println("le nombre était divisible "+ compteur + " fois par 2";
 
 
-<a id="orgffb13cf"></a>
+<a id="org94722ba"></a>
 
 ## Boucles for(;;){} et for( : ){}
 
 
-<a id="orgaf12943"></a>
+<a id="org2ceb208"></a>
 
 ### Boucle for classique
 
@@ -837,7 +837,7 @@ de la partie "mise à jour pour l'itération suivante" de la boucle
         nombre, par exemple `192` est divisible par 2.
 
 
-<a id="orgd4ef2ba"></a>
+<a id="org5373b20"></a>
 
 ### Boucle for sur une séquence de valeurs
 
@@ -881,7 +881,7 @@ Par exemple :
     }
 
 
-<a id="org8f21710"></a>
+<a id="org7fadc9b"></a>
 
 # Fonctions
 
@@ -902,7 +902,7 @@ ailleurs qui pourrait influencer / être influencé par la valeur des
 variables utilisées dans la fonction.
 
 
-<a id="orgb99b6e1"></a>
+<a id="orge6ac247"></a>
 
 ## Instruction `return`
 
@@ -966,7 +966,7 @@ des chemins d'exécution exclusifs. Par exemple :
     }
 
 
-<a id="org56e49b4"></a>
+<a id="org359636a"></a>
 
 ## Passage d'argument
 
@@ -1035,7 +1035,7 @@ On peut visualiser son exécution pas à pas [en ligne](http://www.pythontutor.c
 ![img](img/IntelliJ-debug.png)
 
 
-<a id="org9413df0"></a>
+<a id="orga2f38cf"></a>
 
 ## Contexte local d'exécution / pile / fonction récursive
 
@@ -1110,7 +1110,7 @@ conditions d'arrêt.
         exécuter. Que veut dire le message d'erreur ?
 
 
-<a id="org2ac27f4"></a>
+<a id="orged4f17f"></a>
 
 ## Surcharge de fonctions
 
@@ -1150,14 +1150,14 @@ et peut donc choisir l'implémentation ayant la signature correspondante.
         première valeur, ni après la dernière valeur !
 
 
-<a id="org962b9b6"></a>
+<a id="orga791195"></a>
 
 # Références Webliographiques
 
 Quelques liens pour trouver des informations ou faire de la veille sur Java.
 
 
-<a id="org042a6f4"></a>
+<a id="org41ecb13"></a>
 
 ## Documentation officielle
 
@@ -1165,7 +1165,7 @@ Quelques liens pour trouver des informations ou faire de la veille sur Java.
 -   [Javadoc](https://docs.oracle.com/javase/8/docs/api/), documentation de la bibliothèque standard
 
 
-<a id="org87e0655"></a>
+<a id="org2e3ccd4"></a>
 
 ## Sur le web
 

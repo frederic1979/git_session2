@@ -109,7 +109,7 @@ javac Exercice1.java
 
 Pour que la commande ~javac~ soit utilisable, il faut :
 
-1. avoir installé le [[https://fr.wikipedia.org/wiki/Java_Development_Kit][Java Development Kit]] (JDK) à ne pas confondre avec le [[https://fr.wikipedia.org/wiki/Environnement_d%2527ex%25C3%25A9cution_Java][Java Runtime Environment]] (JRE) qui ne contient que ~java~ et non ~javac~.
+1. avoir installé le [[https://fr.wikipedia.org/wiki/Java_Development_Kit][Java Development Kit]] (JDK) à ne pas confondre avec le [[https://fr.wikipedia.org/wiki/Environnement_d%2527ex%25C3%25A9cution_Java][Java Runtime Environment]] (JRE) qui ne contient que ~java~ et non ~javac~. On s'assurera d'avoir au moins la version 8 de java.
 2. avoir fait en sorte que les programmes exécutables ~javac~ et ~java~ soient reconnus comme commandes (par exemple en [[https://www.java.com/fr/download/help/path.xml][ajustant la variable d'environnement PATH]]).
 
 On peut constater que le résultat de la compilation est la création du fichier ~.class~ correspondant au fichier ~.java~ :
