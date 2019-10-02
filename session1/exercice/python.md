@@ -53,11 +53,11 @@ nb_boites
 ```
 
 2. Dans un jeu de 32 cartes (7, 8, 9, ..., roi, as pour les couleurs pique, cœur, carreau, trèfle), on décide d'associer à chaque carte un numéro.
-Le numéro de la carte est obtenu en multipliant le numéro de la couleur (0,1,2 ou 3) par le numéro de la figure (0,1,2,3 ... 7).
+Le numéro de la carte est obtenu en multipliant le numéro de la couleur (0,1,2 ou 3) et en lui ajoutant le numéro de la figure (0,1,2,3 ... 7).
 
 Exemple :
-le 9 de pique a pour numéro = 2 + 0*8 = 2 (carte n°2 de la couleur 0)
-la dame de cœur a pour numéro = 5 + 1*8 = 12 (carte n°5 de la couleur 1)
+le 9 de pique a pour numéro = 2 + 0 x 8 = 2 (carte n°2 de la couleur 0)
+la dame de cœur a pour numéro = 5 + 1 x 8 = 12 (carte n°5 de la couleur 1)
 
 ```python
 numero_carte_mystere = 28
@@ -110,7 +110,7 @@ periode = "a definir"
 heure = 10
 ```
 
-1. Créer une condition **if** qui affecte la valeur "matinée" à la variable **periode** si l'heure est inférieure à 10. Afficher ensuite un message du type : "bonne <periode>"
+1. Créer une condition **if** qui affecte la valeur "matinée" à la variable **periode** si l'heure est inférieure à 10. Afficher ensuite un message du type : "bonne _periode_"
 2. Ajouter un deuxième **if** qui affecte la valeur "après-midi" à la variable **periode** si l'heure est inférieure à 18. Tester avec heure = 10, cela devrait afficher "bonne après-midi" ...
 3. Corriger en remplaçant le **if** précédent par **elif**. Tester avec heure = 10 et heure = 15.
 4. Ajouter un **elif** si l'heure est inférieure à 0. Dans ce cas afficher "erreur de saisie" (remarque il aurait mieux valu arrêter le programme ...)
