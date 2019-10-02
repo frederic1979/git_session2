@@ -1,0 +1,523 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Découverte de la programmation avec Python</title>
+
+  <link rel="stylesheet" href="../../reveal/css/reveal.css">
+  <link rel="stylesheet" href="../../reveal/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="../../reveal/css/presentation.css">
+  <link rel="stylesheet" href="../../reveal/lib/css/atom-one-dark.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '../../reveal/css/print/pdf.css' :
+      '../../reveal/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+  <div class="reveal">
+    <!-- Wrap all slides in a single "slides" class -->
+    <div class="slides">
+
+      <!-- ALL SLIDES GO HERE -->
+      <!-- Each section element contains an individual slide -->
+      <section>
+        <h1>Python</h1>
+        <img class="no-border" src="../../reveal/images/logo_simplon.png" alt="Logo Simplon">
+      </section>
+
+      <!-- Quelques mots sur Python -->
+      <section>
+        <section>
+          <h2>Python</h2>
+          <figure>
+            <img src="../ressource/images/python.png" alt="Python" width="250">
+          </figure>
+        </section>
+
+        <section>
+          <h3>Langage de programmation</h3>
+          <ul>
+            <li class="fragment">Base des <strong>aglorithmes</strong></li>
+            <li class="fragment"><strong>Vocabulaire</strong> et <strong>grammaire propre</strong></li>
+            <li class="fragment"><strong>Interface</strong> entre homme et machine</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Particularités de Python</h3>
+          <ul>
+            <li class="fragment">Langage <strong>interprété</strong></li>
+            <li class="fragment">Très utilisé : <strong>scripting</strong> et <strong>analyse de données</strong></li>
+          </ul>
+        </section>
+      </section>
+
+      <!-- Commenter son code -->
+      <section>
+        <section>
+          <h3>Règle d'or : Ton code tu commenteras</h3>
+        </section>
+
+        <section data-background-image="https://media.giphy.com/media/ArrVyXcjSzzxe/giphy.gif">
+          <!-- Maitre Yoda -->
+        </section>
+
+        <section>
+          <h3>Comment commenter ?</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            # Voici comment j'écris un commentaire en Python :
+            # en démarrant ma ligne de code par le caractère #
+            
+            # C'est vraiment très important de documenter son code
+            # en mettant des bons commentaires pour les futurs
+            # développeur•euse•s
+            
+            # J'espère que vous le ferez !
+          </code></pre>
+        </section>
+      </section>
+
+      <!-- Variables et types -->
+      <section>
+        <section>
+          <h3>Variables et types de données</h3>
+        </section>
+
+        <section>
+          <h3>C'est quoi une variable ?</h3>
+          <figure>
+            <img src="../ressource/images/shelf.png" alt="Etagère" width="350">
+            <figcaption>C'est un peu comme une boite sur une étagère</figcaption>
+          </figure>
+        </section>
+
+        <section>
+          <h3>Exemples</h3>
+          <ul>
+            <li class="fragment">Un age</li>
+            <li class="fragment">Un prénom</li>
+            <li class="fragment">Une liste de numéro gagnants au loto</li>
+            <li class="fragment">Votre adresse IP</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Comment <strong>déclarer</strong> une variable ?</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            formateur = True
+            age = 30
+            prenom = "Jules"
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Les booléens</h3>
+          <p><strong>True</strong> ou <strong>False</strong></p>
+
+          <pre class="fragment"><code class="hljs python" data-trim>
+            # Une vérité
+            je_suis_jeune = True
+    
+            # Un mensonge
+            j_ai_des_enfants = False
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Les nombres</h3>
+          <p><strong>int</strong> ou <strong>float</strong></p>
+
+          <pre class="fragment"><code class="hljs python" data-trim>
+            # Mon age
+            age = 30
+    
+            # Ma taille en cm
+            taille = 184.5
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Les chaînes de caractères</h3>
+          <p>Pour stocker du texte</p>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            prenom = "Jules"
+            nom = 'Jules'
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Les guillemets s'entremêlent</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            presentation = "Je m'appelle Jules"
+            citation = '"Bienvue à Simplon!" - Jonathan.'
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Si on veut combiner les deux ?</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            citation = '"Je suis le pape et j\'attends ma soeur" - Odile de Ray.'
+          </code></pre>
+          <p class="fragment">Ici on <strong>échappe</strong> le guillemet simple</p>
+        </section>
+
+        <section>
+          <h3>Et sur plusieurs lignes ?</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            presentation = "Je m'appelle Jules\nJ'ai 30 ans."
+            passions = """- Aviron
+            - Self-Hacking
+            - The Lord of the Ring"""
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>On fait les premiers tests ?</h3>
+          <a href="../exercice/python.md#etape-1--déclarons-quelques-variables">Exercices étape 1</a>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Les opérateurs</h3>
+        </section>
+
+        <section>
+          <h3>Les opérations de base</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            solde_compte = 150
+            retrait = 20
+            
+            nouveau_solde = solde_compte - retrait
+            # nouveau_solde = 130
+            
+            depot = 105
+            nouveau_solde = solde_compte + depot
+            # nouveau_solde = 255
+          </code></pre>
+        </section>
+        <section>
+          <h3>Les opérations de base</h3>
+          <ul>
+            <li class="fragment"><strong>+ et -</strong> sur des entiers => un entier</li>
+            <li class="fragment"><strong>+ et -</strong> sur au moins un flottant => un flottant</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Les opérations de base</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            solde_compte = 150
+            depot = 10.0
+            
+            nouveau_solde = solde_compte + depot
+            # nouveau_solde = 160.0
+            
+            pourcentage = 0.3
+            nouveau_solde = solde_compte * 0.3
+            # nouveau_solde = 45.0
+          </code></pre>
+        </section>
+        <section>
+          <h3>Les opérations de base</h3>
+          <ul>
+            <li class="fragment"><strong>*</strong> sur au moins un flottant => un flottant</li>
+            <li class="fragment"><strong>/</strong> donne toujours un flottant</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Les priorités de calculs</h3>
+          <p>Elles sont <strong>usuelles</strong></p>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            a = (2+4)*3  # a = 18
+            b = 2+4*3    # b = 14
+          </code></pre>
+        </section>
+        <section>
+          <h3>La puissance</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            a = 3 ** 2 # a = 9
+          </code></pre>
+        </section>
+        <section>
+          <h3>La division entière</h3>
+          <p>Très souvent utilisée en programmation</p>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            etudiants = 26
+            nb_groupes = 3
+            
+            etudiants_par_groupe = etudiants // nb_groupes
+            # pour obtenir un résultat entier => etudiants_par_groupe = 8
+            
+            etudiants_restants = etudiants % nb_groupes
+            # pour obtenir le reste (on dit 26 modulo 3) => etudiants_restants = 2
+          </code></pre>
+        </section>
+        <section>
+          <h3>Opérations sur les chaînes</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            nom = "Odile"
+            age = 34
+            
+            intro_ratee = "Bonjour, je m'appelle "+nom+ " et j'ai "+age+ " ans"
+            # ne fonctionne pas, il faut convertir d'abord age en chaîne
+            
+            intro_reussie = "Bonjour, je m'appelle "+nom+ " et j'ai "+str(age)+ " ans"
+            # "Bonjour, je m'appelle Odile et j'ai 34 ans"
+          </code></pre>
+        </section>
+        <section>
+          <h3>Les comparaisons</h3>
+          <p>Production de <strong>booléens</strong></p>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            18 &lt; 22                             # True
+            3*5 &lt; 10                            # False
+            2*3 &lt;= 6                            # True
+            "la ligne rouge" &lt; "apocalypse now" # False
+            "rocky3" &gt; 2                        # erreur
+          </code></pre>
+        </section>
+        <section>
+          <h3>Egalité</h3>
+          <p>On utilise :</p>
+          <ul>
+            <li><strong>==</strong> pour tester l'égalité</li>
+            <li><strong>!=</strong> pour tester l'inégalité</li>
+          </ul>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            line_1 = "Nah nah nah nah nah nah nah nah nah yeah";
+            line_2 = "Nah nah nah nah nah nah, nah nah nah, hey Jude";
+            line_3 = "Nah nah nah nah nah nah, nah nah nah, hey Jude";
+            
+            line_1 == line_2 # False
+            line_2 == line_3 # True
+            
+            is_different = line_1 != line_3
+            # On affecte le résultat de line_1 != line_3 (= False) à la variableis_different
+          </code></pre>
+        </section>
+        <section>
+          <h3>On teste les opérateurs ?</h3>
+          <a href="../exercice/python.md#etape-2--utilisons-les-opérateurs">Exercices étape 2</a>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Les conditions</h3>
+        </section>
+        <section>
+          <h3>L'indentation</h3>
+          <!-- Todo place git -->
+        </section>
+        <section>
+          <h3>Le mot clé <strong>if</strong></h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            temperature = 10
+            vetement = "T-shirt"
+            
+            if temperature < 15 : # début du bloc après les :
+              vetement = "Pull"
+          </code></pre>
+        </section>
+        <section>
+          <h3>Le mot clé <strong>else</strong></h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            temperature = 20
+            vetement = "rien"
+            
+            if temperature < 15 : # début du bloc après les :
+              vetement = "Pull"
+            
+            else :
+              vetement = "T-shirt"
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Le mot clé <strong>elif</strong></h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            age = 2
+
+            if age &lt; 0 :
+              message = "merci d'entrer un age valide (positif)"
+
+            # on ne rentre pas ici si on est déjà entré dans le cas d'avant
+            elif age &lt; 3 :
+              message = "tarif : gratuit"
+            
+            elif age &lt; 18 :
+              message = "tarif : réduit"
+            
+            elif age &gt; 65 :
+              message = "tarif : réduit"
+            
+            else : # dans tous les autres cas
+              message = "tarif : normal"
+          </code></pre>
+        </section>
+        <section>
+          <h3>Plus propre en <strong>combinant</strong> les conditions</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            age = 2
+
+            if age &lt; 0 :
+              message = "merci d'entrer un age valide (positif)"
+
+            # on ne rentre pas ici si on est déjà entré dans le cas d'avant
+            elif age &lt; 3 :
+              message = "tarif : gratuit"
+
+            elif age &lt; 18 or age &gt; 65 :
+              message = "tarif : réduit"
+
+            else : # dans tous les autres cas
+              message = "tarif : normal"
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>On conditionne ?</h3>
+          <a href="../exercice/python.md#etape-3--conditionnons-notre-code">Exercices étape 3</a>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Les fonctions</h3>
+        </section>
+        <section>
+          <h3>Mais pourquoi donc ?</h3>
+          <p class="fragment">Une fonction est un <strong>bout de code</strong> qui a pour but d'être <strong>réutilisé</strong>.</p>
+          <p class="fragment">Elle permettra de rendre le code <strong>modulaire</strong></p>
+          <!-- Todo, add gif -->
+        </section>
+        <section>
+          <h3>Rappel sur l'exemple de la recette</h3>
+          <pre class="fragment"><code class="hljs" data-trim>
+            debut
+              remplir_casserole(eau)
+              tant_que (eau_non_bouillante)
+                chauffer_casserole(feu_max)
+              fin_tant_que
+            
+              remplir_casserole(pates)
+              tant_que (pates_non_cuites)
+                chauffer_casserole(feu_vif)
+              fin_tant_que
+            
+              egouter_pates
+              servir_pates
+            fin
+          </code></pre>
+        </section>
+        <section>
+          <p class="fragment">Chaque ligne est une <strong>action</strong> a redécouper en actions plus <strong>précises</strong>.</p>
+          <p class="fragment">Chaque fonction peut être réutilisée avec des <strong>arguments</strong> différents.</p>
+        </section>
+
+        <section>
+          <h3>Comment faire en Python ?</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            # Définition de la fonction
+            def definir_prenom():
+              prenom = "Jules"
+            
+            # Appel de la fonction
+            definir_prenom()
+          </code></pre>
+        </section>
+        <section>
+          <p>Les fonctions deviennent <strong>intéressantes</strong> lorsque :</p>
+          <ul>
+            <li>Elle définit des <strong>paramètres</strong></li>
+            <li>Elle <strong>renvoit une valeur</strong></li>
+          </ul>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            def dire_bonjour(prenom):
+              return "Bonjour " + prenom
+            
+            # Ici on range le retour de la fonction
+            # "Bonjour Jules" dans la variable message_bienvenue
+            message_bienvenue = dire_bonjour("Jules")
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Ecrivons nos premières fonctions !</h3>
+          <a href="../exercice/python.md#etape-4--cr%C3%A9ons-des-fonctions">Exercices étape 4</a>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Les listes</h3>
+          <!-- TODO -->
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Les boucles</h3>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Les entrées / sorties</h3>
+        </section>
+      </section>
+
+    </div>
+  </div>
+  <script src="../../reveal/lib/js/head.min.js"></script>
+  <script src="../../reveal/js/reveal.js"></script>
+
+  <script>
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+      // More info https://github.com/hakimel/reveal.js#dependencies
+      dependencies: [{
+          src: '../../reveal/lib/js/classList.js',
+          condition: function () {
+            return !document.body.classList;
+          }
+        },
+        {
+          src: '../../reveal/plugin/highlight/highlight.js',
+          async: true,
+          callback: function () {
+            hljs.initHighlightingOnLoad();
+          }
+        },
+        {
+          src: '../../reveal/plugin/search/search.js',
+          async: true
+        },
+        {
+          src: '../../reveal/plugin/zoom-js/zoom.js',
+          async: true
+        },
+        {
+          src: '../../reveal/plugin/notes/notes.js',
+          async: true
+        }
+      ]
+    });
+  </script>
+</body>
+
+</html>
