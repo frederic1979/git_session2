@@ -53,17 +53,17 @@ nb_boites
 ```
 
 2. Dans un jeu de 32 cartes (7, 8, 9, ..., roi, as pour les couleurs pique, cœur, carreau, trèfle), on décide d'associer à chaque carte un numéro.
-Le numéro de la carte est obtenu en multipliant le numéro de la couleur (1,2,3 ou 4) par le numéro de la figure (1,2,3 ... 8).
+Le numéro de la carte est obtenu en multipliant le numéro de la couleur (0,1,2 ou 3) par le numéro de la figure (0,1,2,3 ... 7).
 
 Exemple :
-le 9 de pique a pour numéro = 3*1 = 3 (3e carte de la couleur 1)
-la dame de cœur a pour numéro = 6*2 = 12
+le 9 de pique a pour numéro = 2 + 0*8 = 2 (carte n°2 de la couleur 0)
+la dame de cœur a pour numéro = 5 + 1*8 = 12 (carte n°5 de la couleur 1)
 
 ```python
 numero_carte_mystere = 28
 ```
 
-Créer une variable **numero_couleur** et **numero_figure** à retrouver à partir du numéro de la carte mystère. Vous pouvez vérifier que votre méthode fonctionne en retrouvant la couleur de la carte n°3 (9 de pique) ou de la carte n°12 (dame de cœur).
+Créer une variable **numero_couleur** et **numero_figure** à retrouver à partir du numéro de la carte mystère. Vous pouvez vérifier que votre méthode fonctionne en retrouvant la couleur de la carte n°2 (9 de pique) ou de la carte n°13 (dame de cœur).
 
 ### Ex5 : inférieur, supérieur
 
