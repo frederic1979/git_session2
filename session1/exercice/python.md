@@ -17,42 +17,42 @@ A faire : déclarer des variables permettant de vous décrire avec :
 ### Ex1
 
 ```python
-mystery1 = 8 + 6
-mystery2 = 8 - 6
+mystery_1 = 8 + 6
+mystery_2 = 8 - 6
 ```
 
-Afficher avec **print** la variable qui est égale à -2.
+Afficher avec **print** la variable qui est égale à 2.
 
 ### Ex2
 
 ```python
-zebrasInZoo = 8
-giraffesInZoo = 4
+zebras_in_zoo = 8
+giraffes_in_zoo = 4
 ```
 
-Créer une variable **animalsInZoo** qui contient le nombre total d'animaux dans le zoo. Afficher cette variable.
+Créer une variable **animals_in_zoo** qui contient le nombre total d'animaux dans le zoo. Afficher cette variable.
 
 ### Ex3
 
 ```python
-prixInitial = 1500
+prix_initial = 1500
 tva = 0.20
 ```
 
-Créer une variable **prixFinal** qui égale au prix initial plus le prix initial multiplié par la tva. Afficher cette variable.
+Créer une variable **prix_final** qui égale au prix initial plus le prix initial multiplié par la tva. Afficher cette variable.
 
 ### Ex4 : modulo et division entière
 
-1. Remplir des boites de 6 œufs! Créer une variable **nbBoites** qui contient le nombre de boites pleines et une variable **nbOeufsRestant** pour le nombre d’œufs qui restent.
+1. Remplir des boites de 6 œufs! Créer une variable **nb_boites** qui contient le nombre de boites pleines et une variable **nb_oeufs_restants** pour le nombre d’œufs qui restent.
 
 ```python
-nbOeufsParBoite = 6
-nbOeufsTotal = 145
+nb_oeufs_par_boite = 6
+nb_oeufs_total = 145
 
-nbBoites
+nb_boites
 ```
 
-2. Dans un jeu de 32 cartes (7,8,9,.., roi, as pour pique, cœur, carreau, trèfle), on décide d'associer à chaque carte un numéro.
+2. Dans un jeu de 32 cartes (7, 8, 9, ..., roi, as pour les couleurs pique, cœur, carreau, trèfle), on décide d'associer à chaque carte un numéro.
 Le numéro de la carte est obtenu en multipliant le numéro de la couleur (1,2,3 ou 4) par le numéro de la figure (1,2,3 ... 8).
 
 Exemple :
@@ -60,35 +60,35 @@ le 9 de pique a pour numéro = 3*1 = 3 (3e carte de la couleur 1)
 la dame de cœur a pour numéro = 6*2 = 12
 
 ```python
-numeroCarteMystere = 28
+numero_carte_mystere = 28
 ```
 
-Créer une variable **numeroCouleur** et **numeroFigure** à retrouver à partir du numéro de la carte mystère. Vous pouvez vérifier que votre méthode fonctionne en retrouvant la couleur de la carte n°3 (9 de pique) ou de la carte n°12 (dame de cœur).
+Créer une variable **numero_couleur** et **numero_figure** à retrouver à partir du numéro de la carte mystère. Vous pouvez vérifier que votre méthode fonctionne en retrouvant la couleur de la carte n°3 (9 de pique) ou de la carte n°12 (dame de cœur).
 
 ### Ex5 : inférieur, supérieur
 
 ```python
-prixInitial = 1500
+prix_initial = 1500
 tva = 0.20
 
 budget = 2000
 ```
 
-Créer une variable **budgetSuffisant** qui indique si le budget est supérieur ou égal au prix initial plus le prix initial multiplié par la tva. Afficher cette variable.
+Créer une variable **budget_suffisant** qui indique si le budget est supérieur ou égal au prix initial plus le prix initial multiplié par la tva. Afficher cette variable.
 
 ### Ex6 : égalité
 
 Pour éviter les doublons, on cherche à comparer des albums par rapport à leur durée totale et au nombre de chansons par album.
 
 ```python
-songsA = 9
-songsB = 9
-albumLengthA = 41
-albumLengthB = 53
+songs_a = 9
+songs_b = 9
+album_length_a = 41
+album_length_b = 53
 ```
 
-Créer une variable **sameSongs** qui est vraie si les deux albums contiennent le même nombre de chansons.
-Créer une variable **sameAlbumLength** qui est vraie si les deux albums ont la même longueur au total. Afficher ces variables.
+Créer une variable **same_songs** qui est vraie si les deux albums contiennent le même nombre de chansons.
+Créer une variable **same_album_length** qui est vraie si les deux albums ont la même longueur au total. Afficher ces variables.
 
 ### Ex7 : chaînes et nombres
 
@@ -113,8 +113,8 @@ heure = 10
 1. Créer une condition **if** qui affecte la valeur "matinée" à la variable **periode** si l'heure est inférieure à 10. Afficher ensuite un message du type : "bonne <periode>"
 2. Ajouter un deuxième **if** qui affecte la valeur "après-midi" à la variable **periode** si l'heure est inférieure à 18. Tester avec heure = 10, cela devrait afficher "bonne après-midi" ...
 3. Corriger en remplaçant le **if** précédent par **elif**. Tester avec heure = 10 et heure = 15.
-4. Ajouter un **elif** si l'heure est inférieure à 0. Dans ce cas afficher "erreur de saisie" (remarque il aurait mieux valu arrêter le programme..)
-5. Ajouter un **elif** si l'heure est supérieure à 24. Dans ce cas afficher "erreur de saisie" (remarque il aurait mieux valu arrêter le programme..)
+4. Ajouter un **elif** si l'heure est inférieure à 0. Dans ce cas afficher "erreur de saisie" (remarque il aurait mieux valu arrêter le programme ...)
+5. Ajouter un **elif** si l'heure est supérieure à 24. Dans ce cas afficher "erreur de saisie" (remarque il aurait mieux valu arrêter le programme ...)
 6. Grouper les deux cas précédent en utilisant un **or**.
 7. Dans tous les autres cas, affecter la valeur "soirée" à la variable **periode**. Tester avec heure = 8, heure = -5, heure = 12, heure = 18, heure = 23, heure = 35.
 
@@ -129,13 +129,13 @@ heure = 10
 ## Etape 5 : Listes
 
 Créer une liste qui contient tous les prénoms du groupe. Trier cette liste. Afficher tous les prénoms qui ont un indice impair.
-Créer deux sous-listes groupe1 et groupe2 contenant chacun la moitié du groupe.
+Créer deux sous-listes `groupe_1` et `groupe_2` contenant chacun la moitié du groupe.
 
 ## Etape 6 : Boucles
 
 Parcourir la liste précédente. Pour chaque prénom, afficher la longueur du prénom avec la fonction **len**.
-Ajouter une variable **maximum** au début du programme qui vaut 0 au début. Pour chaque prénom, **si** la longueur du prénom est supérieur au maximum, remplacer maximum par cette valeur.
-Afficher le prénom le plus long à la fin avec un message : "le prénom le plus long est <prénom>, il possède <nbLettres> lettres"
+Ajouter une variable `maximum` au début du programme qui vaut 0 au début. Pour chaque prénom, **si** la longueur du prénom est supérieur au maximum, remplacer maximum par cette valeur.
+Afficher le prénom le plus long à la fin avec un message : "le prénom le plus long est <prénom>, il possède <nb_lettres> lettres"
 
 ## Etape 7 : Entrées / Sorties
 
