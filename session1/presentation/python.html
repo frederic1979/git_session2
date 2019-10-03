@@ -459,19 +459,203 @@
       <section>
         <section>
           <h3>Les listes</h3>
-          <!-- TODO -->
+        </section>
+        <section>
+          <h3>Besoin de gérer plusieurs variables d'un même type ?</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            eleve_1 = "sam"
+            eleve_2 = "bob"
+            eleve_3 = "al"
+          </code></pre>
+          <p class="fragment">C'est manière de faire <strong>fonctionne</strong> mais n'est <strong>pas</strong> vraiment <strong>pratique</strong>.</p>
+        </section>
+        <section>
+          <h3>La solution : Les <strong>listes</strong></h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            eleves = ["sam", "bob", "al"]
+            # une seule variable !
+          </code></pre>
+        </section>
+        <section>
+          <h3>De plein de types différents</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            liste_nb = [1,2,3]
+            liste_mot = ['celeri', 'muscade', 'agneau']
+            liste_mixte = ['odile', 2, 'ray']
+          </code></pre>
+        </section>
+        <section>
+          <h3>Sur lesquelles on peut appeler des fonctions !</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            liste_nb = [1,2,3]
+            liste_mot = ['celeri', 'muscade', 'agneau']
+            liste_mixte = ['odile', 2, 'ray']
+            
+            liste_nb.reverse() # fonction de base
+            liste_mot.sort()   # trie en place
+            len(liste_mot)     # taille de la liste
+          </code></pre>
+        </section>
+        <section>
+          <h3>Les indices</h3>
+          <p class="fragment">Les éléments d'une liste sont <strong>numérotés</strong> à partir de <strong>zéro</strong>.</p>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            eleves = ["sam", "bob", "al", "odile"]
+            print(eleves[1]) # l'élément n°1 de la liste est bob
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Les sous-listes</h3>
+          <p class="fragment">On peut récupérer une partie d'une liste.</p>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            eleves = ["sam", "bob", "al", "odile"]
+            print(eleves[1:3]) # les éléments 1 à 3 (3 exclus)
+            print(eleves[1:])  # tous les éléments à partir du 1
+          </code></pre>
+        </section>
+        
+        <section>
+          <h3>Le range</h3>
+          <p class="fragment">On peut aussi créer des listes <strong>auto-magiquement</strong>.</p>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            liste = range(2, 10)      # de 2 jusqu'à 10 (exclu)
+            liste_2 = range(50)       # de 0 jusqu'à 50 (exclu)
+            liste_3 = range(1, 50, 2) # ???
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Déclarons nos premières listes !</h3>
+          <a href="../exercice/python.md#etape-5--listes">Exercices étape 5</a>
         </section>
       </section>
-
+      
       <section>
         <section>
           <h3>Les boucles</h3>
+        </section>
+
+        <section>
+          <h3>Répéter les actions</h3>
+          <p class="fragment">Une chose que savent très bien faire les langages.</p>
+          <p class="fragment">Super efficace lorsqu'on a une action répétitive à faire (sur une liste par exemple).</p>
+        </section>
+
+        <section>
+          <h3>Le <strong>while</strong></h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            puree = 10 # cuilleres
+
+            while puree > 0 : # puree > 0 est une condition, comme pour le if
+              print("une cuillère pour papa")
+              puree = puree - 1
+
+            dessert = "fondant au chocolat"
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Le <strong>for</strong></h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            eleve_liste = ["sam", "bob", "al", "odile"]
+
+            for eleve in eleve_liste :
+              print("Bonjour " + eleve)
+          </code></pre>
+        </section>
+
+        <section data-background-image="https://media.giphy.com/media/l2Je1avA5JlW5JI3K/giphy.gif">
+          <!-- Bart Simpson -->
+        </section>
+
+        <section>
+          <h3>Avec <strong>range</strong></h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            for i in range(100) :
+              print(str(i) + " - Je ne photocopierai plus mes fesses")
+          </code></pre>
+        </section>
+        
+        <section>
+          <h3>En boucle, en boucle, en boucle, ...</h3>
+          <a href="../exercice/python.md#etape-6--boucles">Exercices étape 6</a>
         </section>
       </section>
 
       <section>
         <section>
           <h3>Les entrées / sorties</h3>
+        </section>
+
+        <section>
+          <h3>Comment récupérer des données ?</h3>
+          <ul>
+            <li class="fragment">La console (entrée / sortie standard)</li>
+            <li class="fragment">Les fichiers</li>
+            <li class="fragment">...</li>
+          </ul>
+        </section>
+        
+        <section>
+          <h3>La console</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            def dire_bonjour(prenom):
+              return "Bonjour " + prenom
+  
+            prenom_utilisateur = input("Bonjour, comment t'appelles-tu ? ")
+  
+            print(dire_bonjour(prenom_utilisateur))    
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Lecture de fichier</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            # Lire une ligne
+            f = open('convention.md', 'r')
+            print(f.readline())
+            f.close() 
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Lecture de fichier</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            # Lire toutes les lignes
+            f = open('convention.md', 'r')
+
+            for line in f:
+                print(line)
+            
+            f.close()
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Lecture de fichier</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            # Plus propre : open() fera la fermeture automatique
+            with open('convention.md', 'r') as f:
+              for line in f:
+                print(line)
+          
+            print('end')
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Ecriture de fichier</h3>
+          <pre class="fragment"><code class="hljs python" data-trim>
+            f = open('./session1/exercice/output.data', 'w')
+            f.write('Mon premier fichier écrit en Python')
+            f.close()
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Dernière étape avant le projet !</h3>
+          <a href="../exercice/python.md#etape-7--entr%C3%A9es--sorties">Exercices étape 7</a>
         </section>
       </section>
 

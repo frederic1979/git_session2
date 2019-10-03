@@ -399,13 +399,13 @@ eleves = ["sam", "bob", "al"]
 On peut faire des listes de nombres, de chaînes, de booléens, etc ...
 
 ```python
-listeNb = [1,2,3]
-listeMot = ['celeri', 'muscade', 'agneau']
-listeMixe = ['odile', 2, 'ray']
+liste_nb = [1,2,3]
+liste_mot = ['celeri', 'muscade', 'agneau']
+liste_mixte = ['odile', 2, 'ray']
 
-listeNb.reverse() # fonction de base
-listeMot.sort() # trie en place
-len(listeMot) # taille de la liste
+liste_nb.reverse() # fonction de base
+liste_mot.sort()   # trie en place
+len(liste_mot)     # taille de la liste
 ```
 
 ### Indices
@@ -422,19 +422,19 @@ On peut extraire une sous-liste avec **:**
 ```python
 eleves = ["sam", "bob", "al", "odile"]
 print(eleves[1:3]) # les éléments 1 à 3 (exclu)
-print(eleves[1:]) # tous les éléments à partir du 1
+print(eleves[1:])  # tous les éléments à partir du 1
 ```
 
 Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/introduction.html#lists)
 
 ### Range
 
-Python sait aussi compter! pour générer une liste de nombre, on utilise simplement la fonction **range**
+Python sait aussi compter ! pour générer une liste de nombre, on utilise simplement la fonction **range**
 
 ```python
-liste = range(2,10) # de 2 jusqu'à 10 (exclu)
-liste2 = range(50) # de 0 jusqu'à 50 (exclu)
-liste3 = range(1,50,2)
+liste = range(2, 10)      # de 2 jusqu'à 10 (exclu)
+liste_2 = range(50)       # de 0 jusqu'à 50 (exclu)
+liste_3 = range(1, 50, 2) # ???
 ```
 
 Pour plus de détails : [La documentation officielle de Python](https://docs.python.org/fr/3/tutorial/controlflow.html#the-range-function)
@@ -452,7 +452,7 @@ puree = 10 # cuilleres
 
 while puree > 0 : # puree > 0 est une condition, comme pour le if
   print("une cuillère pour papa")
-  puree = puree -1
+  puree = puree - 1
 
 dessert = "fondant au chocolat"
 ```
@@ -462,18 +462,17 @@ dessert = "fondant au chocolat"
 Si on veut faire le même traitement pour chaque élément d'une liste, il suffit d'utiliser le mot **pour**, mais en anglais. Dans ce cas, on doit choisir un nom pour l'élément courant à parcourir.
 
 ```python
-eleveListe = ["sam", "bob", "al", "odile"]
+eleve_liste = ["sam", "bob", "al", "odile"]
 
-for eleve in eleveListe : # on commence toujours un bloc avec :
-  print("bonjour "+eleve)
-
+for eleve in eleve_liste :
+  print("Bonjour " + eleve)
 ```
 
 Ou aussi avec des nombres, pour répéter 100 fois une action (utile!).
 
 ```python
 for i in range(100) :
-  print(str(i)+" Je ne photocopierai plus mes fesses")
+  print(str(i) + " - Je ne photocopierai plus mes fesses")
 ```
 
 [ref](https://fr.wikipedia.org/wiki/Liste_des_phrases_au_tableau_noir_des_Simpson)

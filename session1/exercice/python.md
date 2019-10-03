@@ -119,7 +119,7 @@ heure = 10
 
 - Créer une fonction qui renvoie l'aire d'un triangle en prenant en paramètres base et hauteur.
 - Créer une fonction qui renvoie le volume d'une sphère en prenant en paramètre son rayon.
-- Créer une fonction qui renvoie un message donnant l'IMC d'une personne. Elle prendra en paramètre le prénom de la personne, son poids en kg et sa taille en cm.
+- Créer une fonction qui renvoie un message donnant l'IMC d'une personne. Elle prendra en paramètre, le poids en kg et la taille en cm de la personne.
 
 ## Etape 5 : Listes
 
