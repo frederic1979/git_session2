@@ -1246,12 +1246,29 @@ et peut donc choisir l'implémentation ayant la signature correspondante.
                   espace). On ne veut pas de séparateur avant la
                   première valeur, ni après la dernière valeur !
 
+* Ce qu'il reste encore à voir
+
+** Entrées/Sorties au clavier/console ou avec des fichiers, Exceptions
+
+** Collections, Généricité
+
+** POO 2 : Entités
+
+***  attributs
+
+***  méthodes d'instances
+
+*** polymorphisme dynamique
 
 * Références Webliographiques
 Quelques liens pour trouver des informations ou faire de la veille sur Java.
 ** Documentation officielle
 - [[https://docs.oracle.com/javase/tutorial/][Java tutorials]]
 - [[https://docs.oracle.com/javase/8/docs/api/][Javadoc]], documentation de la bibliothèque standard
+
+** Livres consultables en ligne
+
+- [[https://en.wikibooks.org/wiki/Java_Programming][Java Programming]]
 
 ** Sur le web
 - [[https://www.baeldung.com/][Baeldung]]
