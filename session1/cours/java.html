@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-03 Thu 01:20 -->
+<!-- 2019-10-04 Fri 01:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Découvrons Java</title>
@@ -247,106 +247,106 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb5cc478">1. Un arôme de Java</a>
+<li><a href="#org84d8064">1. Un arôme de Java</a>
 <ul>
-<li><a href="#org601ab41">1.1. Java, un langage compilé</a></li>
+<li><a href="#orgab2cde3">1.1. Java, un langage compilé</a></li>
 </ul>
 </li>
-<li><a href="#org7f873c6">2. Premier programme Java</a>
+<li><a href="#orgce8313c">2. Premier programme Java</a>
 <ul>
-<li><a href="#orgb5c6668">2.1. En mode "console"</a></li>
-<li><a href="#org1388695">2.2. Avec un IDE</a></li>
-<li><a href="#org0106018">2.3. Un début d'explications</a></li>
+<li><a href="#org6a9b31b">2.1. En mode "console"</a></li>
+<li><a href="#org58c3569">2.2. Avec un IDE</a></li>
+<li><a href="#orge37936d">2.3. Un début d'explications</a></li>
 </ul>
 </li>
-<li><a href="#orgd9d20a9">3. Conventions</a></li>
-<li><a href="#org98bf65a">4. Variables et typage</a>
+<li><a href="#org0fdc2c4">3. Conventions</a></li>
+<li><a href="#orgb1898a8">4. Variables et typage</a>
 <ul>
-<li><a href="#org8eeda14">4.1. Variables locales</a></li>
-<li><a href="#orgca25e3d">4.2. Typage statique</a></li>
+<li><a href="#orgd53b787">4.1. Variables locales</a></li>
+<li><a href="#orgfc62f70">4.2. Typage statique</a></li>
 </ul>
 </li>
-<li><a href="#org832a7d5">5. Types de données primitifs</a>
+<li><a href="#orgb196a9e">5. Types de données primitifs</a>
 <ul>
-<li><a href="#org464748b">5.1. Types numériques</a>
+<li><a href="#orgeabacb4">5.1. Types numériques</a>
 <ul>
-<li><a href="#orgfb300ca">5.1.1. Types entiers</a></li>
-<li><a href="#orgb9404e8">5.1.2. Types à virgule</a></li>
+<li><a href="#orgf37becd">5.1.1. Types entiers</a></li>
+<li><a href="#org4d0949c">5.1.2. Types à virgule</a></li>
 </ul>
 </li>
-<li><a href="#orgf7f289f">5.2. Type booléen</a></li>
-<li><a href="#org9a5c756">5.3. Type caractère</a></li>
+<li><a href="#orge85e283">5.2. Type booléen</a></li>
+<li><a href="#orgea189b4">5.3. Type caractère</a></li>
 </ul>
 </li>
-<li><a href="#orgc3cce40">6. Types de données gérés par référence</a>
+<li><a href="#org1385675">6. Types de données gérés par référence</a>
 <ul>
-<li><a href="#org8da00b0">6.1. Types tableaux</a></li>
-<li><a href="#org2f7f441">6.2. Accès aux éléments d'un tableau</a></li>
-<li><a href="#org2b3a5f5">6.3. Accès à la taille du tableau</a></li>
-<li><a href="#org62308a8">6.4. Tableau de tableaux</a>
+<li><a href="#org5679ea7">6.1. Types tableaux</a></li>
+<li><a href="#org9fa820b">6.2. Accès aux éléments d'un tableau</a></li>
+<li><a href="#org1c99872">6.3. Accès à la taille du tableau</a></li>
+<li><a href="#orgb540034">6.4. Tableau de tableaux</a>
 <ul>
-<li><a href="#orgb52ce0a">6.4.1. Déclaration</a></li>
-<li><a href="#org83146ee">6.4.2. Initialisation partielle</a></li>
-<li><a href="#orgc54c549">6.4.3. Initialisation</a></li>
+<li><a href="#org813f2e9">6.4.1. Déclaration</a></li>
+<li><a href="#orged883f1">6.4.2. Initialisation partielle</a></li>
+<li><a href="#org6de4d4e">6.4.3. Initialisation</a></li>
 </ul>
 </li>
-<li><a href="#orga41ddfd">6.5. Type chaîne de caractères</a></li>
-<li><a href="#org7d98c88">6.6. Tous les autres types définissables (classes)</a></li>
+<li><a href="#orgb8f10be">6.5. Type chaîne de caractères</a></li>
+<li><a href="#org178414e">6.6. Tous les autres types définissables (classes)</a></li>
 </ul>
 </li>
-<li><a href="#org78cde48">7. Structures de contrôle</a>
+<li><a href="#orgc2b8a3b">7. Structures de contrôle</a>
 <ul>
-<li><a href="#org76d4bb0">7.1. Exécution conditionnelle</a>
+<li><a href="#orgf334edd">7.1. Exécution conditionnelle</a>
 <ul>
-<li><a href="#org22bc46a">7.1.1. Expression booléennes</a></li>
-<li><a href="#org3a6dc04">7.1.2. if</a></li>
-<li><a href="#orgcb3f9cd">7.1.3. Opérateur ternaire</a></li>
-<li><a href="#orgb5c3e5f">7.1.4. switch</a></li>
+<li><a href="#orgb8e002e">7.1.1. Expression booléennes</a></li>
+<li><a href="#org8189492">7.1.2. if</a></li>
+<li><a href="#org9a172d5">7.1.3. Opérateur ternaire</a></li>
+<li><a href="#org9c1fa8f">7.1.4. switch</a></li>
 </ul>
 </li>
-<li><a href="#org2cdbc34">7.2. Boucles while(){} et do{} while();</a></li>
-<li><a href="#orgf4f3748">7.3. Boucles for(;;){} et for( : ){}</a>
+<li><a href="#orgda32b45">7.2. Boucles while(){} et do{} while();</a></li>
+<li><a href="#org7f51add">7.3. Boucles for(;;){} et for( : ){}</a>
 <ul>
-<li><a href="#orgb684644">7.3.1. Boucle for classique</a></li>
-<li><a href="#orgae0a1e4">7.3.2. Boucle for sur une séquence de valeurs</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org982aadc">8. Fonctions</a>
-<ul>
-<li><a href="#org43f3c5e">8.1. Instruction <code>return</code></a></li>
-<li><a href="#orgf568e05">8.2. Passage d'argument</a></li>
-<li><a href="#orgffe2ecb">8.3. Contexte local d'exécution / pile / fonction récursive</a></li>
-<li><a href="#orgda8bd6f">8.4. Surcharge de fonctions</a></li>
-</ul>
-</li>
-<li><a href="#orge49c315">9. Ce qu'il reste encore à voir</a>
-<ul>
-<li><a href="#org81cceb8">9.1. Entrées/Sorties au clavier/console ou avec des fichiers, Exceptions</a></li>
-<li><a href="#orgfd1fd58">9.2. Collections, Généricité</a></li>
-<li><a href="#org5ea2210">9.3. POO 2 : Entités</a>
-<ul>
-<li><a href="#orga5f46d5">9.3.1. attributs</a></li>
-<li><a href="#org003a6c4">9.3.2. méthodes d'instances</a></li>
-<li><a href="#orgc6cc244">9.3.3. polymorphisme dynamique</a></li>
+<li><a href="#org82ca878">7.3.1. Boucle for classique</a></li>
+<li><a href="#org99ad751">7.3.2. Boucle for sur une séquence de valeurs</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgeb159a0">10. Références Webliographiques</a>
+<li><a href="#orgff68fe3">8. Fonctions</a>
 <ul>
-<li><a href="#orgb89ddc1">10.1. Documentation officielle</a></li>
-<li><a href="#org585ba5c">10.2. Livres consultables en ligne</a></li>
-<li><a href="#org464311a">10.3. Sur le web</a></li>
+<li><a href="#org20165aa">8.1. Instruction <code>return</code></a></li>
+<li><a href="#org20baed8">8.2. Passage d'argument</a></li>
+<li><a href="#org00337cf">8.3. Contexte local d'exécution / pile / fonction récursive</a></li>
+<li><a href="#orgea914b0">8.4. Surcharge de fonctions</a></li>
+</ul>
+</li>
+<li><a href="#org65b77ac">9. Ce qu'il reste encore à voir</a>
+<ul>
+<li><a href="#orgce1d952">9.1. Entrées/Sorties au clavier/console ou avec des fichiers, Exceptions</a></li>
+<li><a href="#org23b8f39">9.2. Collections, Généricité</a></li>
+<li><a href="#org8153ed3">9.3. POO 2 : Entités</a>
+<ul>
+<li><a href="#org25538be">9.3.1. attributs</a></li>
+<li><a href="#org542002b">9.3.2. méthodes d'instances</a></li>
+<li><a href="#org08c16c6">9.3.3. polymorphisme dynamique</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org5b7399e">10. Références Webliographiques</a>
+<ul>
+<li><a href="#orgb85351c">10.1. Documentation officielle</a></li>
+<li><a href="#orge756e78">10.2. Livres consultables en ligne</a></li>
+<li><a href="#orgccf1c23">10.3. Sur le web</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb5cc478" class="outline-2">
-<h2 id="orgb5cc478"><span class="section-number-2">1</span> Un arôme de Java</h2>
+<div id="outline-container-org84d8064" class="outline-2">
+<h2 id="org84d8064"><span class="section-number-2">1</span> Un arôme de Java</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Java est un langage de <a href="https://fr.wikipedia.org/wiki/Programmation_orient%C3%A9e_objet">Programmation Orientée Objet</a>. Nous verrons plus tard ce que cela signifie, mais pour l'instant, ce qui est important c'est que Java ne se contente pas de <i>permettre</i> la programmation orientée objet, il l'impose, contrairement à python qui, lui nous a permis d'écrire de petit scripts, voir d'exécuter des bouts de code sans fioritures.
@@ -381,8 +381,8 @@ Ainsi, le moindre programme Java exige :
 </p>
 </div>
 
-<div id="outline-container-org601ab41" class="outline-3">
-<h3 id="org601ab41"><span class="section-number-3">1.1</span> Java, un langage compilé</h3>
+<div id="outline-container-orgab2cde3" class="outline-3">
+<h3 id="orgab2cde3"><span class="section-number-3">1.1</span> Java, un langage compilé</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Alors qu'il suffisait de passer en argument le fichier contenant du code en python à l'interpréteur Python, il n'en est pas de même pour Java. En effet, il y a une phase intermédiaire : la compilation.
@@ -418,8 +418,8 @@ verte sous <i>IntelliJ</i> et une flèche blanche dans un rond vert sous
 </div>
 
 
-<div id="outline-container-org7f873c6" class="outline-2">
-<h2 id="org7f873c6"><span class="section-number-2">2</span> Premier programme Java</h2>
+<div id="outline-container-orgce8313c" class="outline-2">
+<h2 id="orgce8313c"><span class="section-number-2">2</span> Premier programme Java</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Pour bien comprendre comment fonctionnent l'édition la compilation et
@@ -428,8 +428,8 @@ le lancement d'un programme java, on va d'abord effectuer les différentes étap
 </div>
 
 
-<div id="outline-container-orgb5c6668" class="outline-3">
-<h3 id="orgb5c6668"><span class="section-number-3">2.1</span> En mode "console"</h3>
+<div id="outline-container-org6a9b31b" class="outline-3">
+<h3 id="org6a9b31b"><span class="section-number-3">2.1</span> En mode "console"</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Éditer un fichier texte avec le contenu suivant :
@@ -577,8 +577,8 @@ chose. Compiler et lancer ce nouveau programme.</dd>
 </div>
 
 
-<div id="outline-container-org1388695" class="outline-3">
-<h3 id="org1388695"><span class="section-number-3">2.2</span> Avec un IDE</h3>
+<div id="outline-container-org58c3569" class="outline-3">
+<h3 id="org58c3569"><span class="section-number-3">2.2</span> Avec un IDE</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Lancer son IDE (Eclipse ou IntelliJ) et choisir dans les menus <code>File</code> → <code>New</code> → <code>Project…</code> ou <code>Java Project</code>.
@@ -609,8 +609,8 @@ Choisir un nom de classe, par exemple <code>ExerciceIde1</code>, en laissant le 
 </div>
 </div>
 
-<div id="outline-container-org0106018" class="outline-3">
-<h3 id="org0106018"><span class="section-number-3">2.3</span> Un début d'explications</h3>
+<div id="outline-container-orge37936d" class="outline-3">
+<h3 id="orge37936d"><span class="section-number-3">2.3</span> Un début d'explications</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Dans tout ce qu'il faut écrire pour avoir un programme en Java, la
@@ -685,8 +685,8 @@ lancer le programme !</dd>
 </div>
 </div>
 
-<div id="outline-container-orgd9d20a9" class="outline-2">
-<h2 id="orgd9d20a9"><span class="section-number-2">3</span> Conventions</h2>
+<div id="outline-container-org0fdc2c4" class="outline-2">
+<h2 id="org0fdc2c4"><span class="section-number-2">3</span> Conventions</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 En France, <b>techniquement</b> on peut rouler à gauche. En pratique, on impose des contraintes par le code de la route, afin que les automobilistes puissent partager la route sans avoir à se concerter à chaque fois pour faire émerger un consensus local. Il en va de même pour le développement informatique, qui comporte des <i>conventions</i> parce qu'il met en jeu des équipes de développement. Ainsi, on aurait pu <b>techniquement</b> appeler notre classe <code class="src src-java">example_args</code> mais la convention <b>impose</b> de respecter le <a href="https://fr.wikipedia.org/wiki/Camel_case">CamelCase</a> en commençant par une majuscule pour un nom de classe en Java.
@@ -698,8 +698,8 @@ De même pour l'indentation qui, si elle n'est pas fixée par le langage Java lu
 </div>
 </div>
 
-<div id="outline-container-org98bf65a" class="outline-2">
-<h2 id="org98bf65a"><span class="section-number-2">4</span> Variables et typage</h2>
+<div id="outline-container-orgb1898a8" class="outline-2">
+<h2 id="orgb1898a8"><span class="section-number-2">4</span> Variables et typage</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 En Java, on va pouvoir définir des variables, qui correspondent à un
@@ -708,8 +708,8 @@ certain code et qui peut stocker <b>un certain type de valeurs</b>.
 </p>
 </div>
 
-<div id="outline-container-org8eeda14" class="outline-3">
-<h3 id="org8eeda14"><span class="section-number-3">4.1</span> Variables locales</h3>
+<div id="outline-container-orgd53b787" class="outline-3">
+<h3 id="orgd53b787"><span class="section-number-3">4.1</span> Variables locales</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Dans un premier temps, on s'intéressera uniquement à ce que l'on
@@ -733,8 +733,8 @@ système d'exploitation au lancement du programme.
 </div>
 </div>
 
-<div id="outline-container-orgca25e3d" class="outline-3">
-<h3 id="orgca25e3d"><span class="section-number-3">4.2</span> Typage statique</h3>
+<div id="outline-container-orgfc62f70" class="outline-3">
+<h3 id="orgfc62f70"><span class="section-number-3">4.2</span> Typage statique</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Comme on a pu le constater avec l'argument <code class="src src-java"><span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span></code> de <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>, les variables sont déclarées non seulement avec
@@ -824,16 +824,16 @@ virgule, et entre types de taille différentes.
 </div>
 </div>
 
-<div id="outline-container-org832a7d5" class="outline-2">
-<h2 id="org832a7d5"><span class="section-number-2">5</span> Types de données primitifs</h2>
+<div id="outline-container-orgb196a9e" class="outline-2">
+<h2 id="orgb196a9e"><span class="section-number-2">5</span> Types de données primitifs</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Java définit <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html">un certain nombre de types</a> dits <i>primitifs</i>. 
 </p>
 </div>
 
-<div id="outline-container-org464748b" class="outline-3">
-<h3 id="org464748b"><span class="section-number-3">5.1</span> Types numériques</h3>
+<div id="outline-container-orgeabacb4" class="outline-3">
+<h3 id="orgeabacb4"><span class="section-number-3">5.1</span> Types numériques</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Il y a deux catégories de types primitifs numériques, suivant qu'on
@@ -843,8 +843,8 @@ tailles en mémoire et permette de choisir le compromis entre encombrement mémo
 </p>
 </div>
 
-<div id="outline-container-orgfb300ca" class="outline-4">
-<h4 id="orgfb300ca"><span class="section-number-4">5.1.1</span> Types entiers</h4>
+<div id="outline-container-orgf37becd" class="outline-4">
+<h4 id="orgf37becd"><span class="section-number-4">5.1.1</span> Types entiers</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <p>
 En java, tous les types entiers sont dit <i>signés</i>, c'est-à-dire qu'ils peuvent représenter des valeurs positives ou négatives et utilisent la représentation binaire du <i>complément à deux</i> qui représente une valeur de plus strictement négative que strictement positive (dit autrement, autant de valeurs &lt; 0 que de valeurs  &gt;= 0).
@@ -883,8 +883,8 @@ exemple en ajoutant ou en retranchant <code>1</code>).</dd>
 
 
 
-<div id="outline-container-orgb9404e8" class="outline-4">
-<h4 id="orgb9404e8"><span class="section-number-4">5.1.2</span> Types à virgule</h4>
+<div id="outline-container-org4d0949c" class="outline-4">
+<h4 id="org4d0949c"><span class="section-number-4">5.1.2</span> Types à virgule</h4>
 <div class="outline-text-4" id="text-5-1-2">
 <p>
 Il est essentiel de bien comprendre que l'on ne peut évidemment pas représenter tous les nombres à virgule dans un ordinateur, puisqu'il y en a une infinité même entre 0 et 1 !
@@ -920,8 +920,8 @@ Lorsqu'on écrit une valeur à virgule <sup><a id="fnr.4" class="footref" href="
 </div>
 
 
-<div id="outline-container-orgf7f289f" class="outline-3">
-<h3 id="orgf7f289f"><span class="section-number-3">5.2</span> Type booléen</h3>
+<div id="outline-container-orge85e283" class="outline-3">
+<h3 id="orge85e283"><span class="section-number-3">5.2</span> Type booléen</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 En java, le type booléen est <code class="src src-java"><span style="color: #6434A3;">boolean</span></code> et les valeurs s'écrivent <code class="src src-java"><span style="color: #D0372D;">true</span></code> et <code class="src src-java"><span style="color: #D0372D;">false</span></code>.
@@ -929,8 +929,8 @@ En java, le type booléen est <code class="src src-java"><span style="color: #64
 </div>
 </div>
 
-<div id="outline-container-org9a5c756" class="outline-3">
-<h3 id="org9a5c756"><span class="section-number-3">5.3</span> Type caractère</h3>
+<div id="outline-container-orgea189b4" class="outline-3">
+<h3 id="orgea189b4"><span class="section-number-3">5.3</span> Type caractère</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 En java, le type des caractères est <code class="src src-java"><span style="color: #6434A3;">char</span></code>. <b>Attention !</b> la standardisation de Java date des
@@ -952,8 +952,8 @@ Les caractères sont représentés entre guillemets <b>simples</b> en utilisant 
 </div>
 </div>
 
-<div id="outline-container-orgc3cce40" class="outline-2">
-<h2 id="orgc3cce40"><span class="section-number-2">6</span> Types de données gérés par référence</h2>
+<div id="outline-container-org1385675" class="outline-2">
+<h2 id="org1385675"><span class="section-number-2">6</span> Types de données gérés par référence</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Alors que les types primitifs  que l'on vient de voir sont stockés directement en mémoire "dans" les variables, les types que l'on va maintenant voir sont stockés indirectement, les variables "contenant" une <i>référence</i> (on parle aussi parfois de pointeur, il s'agit en fait de l'adresse en mémoire où est stockée la valeur elle-même). Cette distinction aura beaucoup de conséquences très importantes. Lorsqu'une référence n'est pas initialisée, elle a une valeur spéciale <code class="src src-java"><span style="color: #D0372D;">null</span></code>. Essayer d'utiliser une référence valant <code>null</code> comme si elle était une référence valide vers une valeur en mémoire provoquera une <a href="https://en.wikipedia.org/wiki/Null_pointer#Null_dereferencing">erreur classique</a> qu'on devra éviter.
@@ -961,8 +961,8 @@ Alors que les types primitifs  que l'on vient de voir sont stockés directement 
 </div>
 
 
-<div id="outline-container-org8da00b0" class="outline-3">
-<h3 id="org8da00b0"><span class="section-number-3">6.1</span> Types tableaux</h3>
+<div id="outline-container-org5679ea7" class="outline-3">
+<h3 id="org5679ea7"><span class="section-number-3">6.1</span> Types tableaux</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 On a vu un exemple de tableau avec l'argument de <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>. Un type de tableau est toujours un tableau du type de chacune des cases du tableau (elles sont toutes du même type !), par exemple ici <code class="src src-java">String[]</code> est un tableau de cases de type <code class="src src-java">String</code> (qu'on abordera juste après).
@@ -1058,8 +1058,8 @@ sens donner à l'affichage obtenu ?</dd>
 </div>
 </div>
 
-<div id="outline-container-org2f7f441" class="outline-3">
-<h3 id="org2f7f441"><span class="section-number-3">6.2</span> Accès aux éléments d'un tableau</h3>
+<div id="outline-container-org9fa820b" class="outline-3">
+<h3 id="org9fa820b"><span class="section-number-3">6.2</span> Accès aux éléments d'un tableau</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 On utilise la notation <code class="src src-java">nomDuTableau[valeurindice]</code> pour accéder à la case d'indice <code>valeurindice</code> du tableau <code>nomDuTableau</code>. Les indices commencent à <code>0</code>, donc un tableau de taille <code>1</code> aura une seule valeur d'indice légale, la valeur <code>0</code>.
@@ -1073,8 +1073,8 @@ la taille du tableau) ou trop petit (&lt; 0)?</dd>
 </dl>
 </div>
 </div>
-<div id="outline-container-org2b3a5f5" class="outline-3">
-<h3 id="org2b3a5f5"><span class="section-number-3">6.3</span> Accès à la taille du tableau</h3>
+<div id="outline-container-org1c99872" class="outline-3">
+<h3 id="org1c99872"><span class="section-number-3">6.3</span> Accès à la taille du tableau</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 Pour un tableau donné, on peut accéder à sa taille avec la notation <code class="src src-java">nomDuTableau.length</code>. La taille est de type <code class="src src-java"><span style="color: #6434A3;">int</span></code>.
@@ -1086,8 +1086,8 @@ Pour un tableau donné, on peut accéder à sa taille avec la notation <code cla
 </div>
 </div>
 
-<div id="outline-container-org62308a8" class="outline-3">
-<h3 id="org62308a8"><span class="section-number-3">6.4</span> Tableau de tableaux</h3>
+<div id="outline-container-orgb540034" class="outline-3">
+<h3 id="orgb540034"><span class="section-number-3">6.4</span> Tableau de tableaux</h3>
 <div class="outline-text-3" id="text-6-4">
 <p>
 On peut avoir un type de tableau pour n'importe quel type de
@@ -1098,8 +1098,8 @@ peut donc avoir des tableaux de tableaux par exemple <code class="src src-java">
 </p>
 </div>
 
-<div id="outline-container-orgb52ce0a" class="outline-4">
-<h4 id="orgb52ce0a"><span class="section-number-4">6.4.1</span> Déclaration</h4>
+<div id="outline-container-org813f2e9" class="outline-4">
+<h4 id="org813f2e9"><span class="section-number-4">6.4.1</span> Déclaration</h4>
 <div class="outline-text-4" id="text-6-4-1">
 <p>
 Avec une simple déclaration, il n'y a <b>aucun</b> tableau en mémoire.
@@ -1117,8 +1117,8 @@ Avec une simple déclaration, il n'y a <b>aucun</b> tableau en mémoire.
 </div>
 </div>
 
-<div id="outline-container-org83146ee" class="outline-4">
-<h4 id="org83146ee"><span class="section-number-4">6.4.2</span> Initialisation partielle</h4>
+<div id="outline-container-orged883f1" class="outline-4">
+<h4 id="orged883f1"><span class="section-number-4">6.4.2</span> Initialisation partielle</h4>
 <div class="outline-text-4" id="text-6-4-2">
 <p>
 Si l'on ne crée qu'un seul tableau, il n'y a qu'un tableau qui <b>pourra</b> contenir des références vers des tableaux.
@@ -1136,8 +1136,8 @@ Si l'on ne crée qu'un seul tableau, il n'y a qu'un tableau qui <b>pourra</b> co
 </div>
 </div>
 
-<div id="outline-container-orgc54c549" class="outline-4">
-<h4 id="orgc54c549"><span class="section-number-4">6.4.3</span> Initialisation</h4>
+<div id="outline-container-org6de4d4e" class="outline-4">
+<h4 id="org6de4d4e"><span class="section-number-4">6.4.3</span> Initialisation</h4>
 <div class="outline-text-4" id="text-6-4-3">
 <p>
 Il faut initialiser chacune des cases de tableau de tableaux.
@@ -1157,8 +1157,8 @@ Il faut initialiser chacune des cases de tableau de tableaux.
 </div>
 
 
-<div id="outline-container-orga41ddfd" class="outline-3">
-<h3 id="orga41ddfd"><span class="section-number-3">6.5</span> Type chaîne de caractères</h3>
+<div id="outline-container-orgb8f10be" class="outline-3">
+<h3 id="orgb8f10be"><span class="section-number-3">6.5</span> Type chaîne de caractères</h3>
 <div class="outline-text-3" id="text-6-5">
 <p>
 On a vu avec l'argument de <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code> que le type <i>chaîne de caractères</i> est
@@ -1190,8 +1190,8 @@ Une autre particularité des chaînes de caractères est que les valeurs des aut
 </div>
 </div>
 
-<div id="outline-container-org7d98c88" class="outline-3">
-<h3 id="org7d98c88"><span class="section-number-3">6.6</span> Tous les autres types définissables (classes)</h3>
+<div id="outline-container-org178414e" class="outline-3">
+<h3 id="org178414e"><span class="section-number-3">6.6</span> Tous les autres types définissables (classes)</h3>
 <div class="outline-text-3" id="text-6-6">
 <p>
 On peut définir de nouveau types comme String en définissant de nouvelles classes. Ce que nous verrons dans le cadre de la <i>Programmation Orientée Objet</i>.
@@ -1201,8 +1201,8 @@ On peut définir de nouveau types comme String en définissant de nouvelles clas
 </div>
 
 
-<div id="outline-container-org78cde48" class="outline-2">
-<h2 id="org78cde48"><span class="section-number-2">7</span> Structures de contrôle</h2>
+<div id="outline-container-orgc2b8a3b" class="outline-2">
+<h2 id="orgc2b8a3b"><span class="section-number-2">7</span> Structures de contrôle</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 On peut exécuter des blocs d'instructions de façon conditionnelle
@@ -1219,12 +1219,12 @@ seule instruction.</li>
 </ul>
 </div>
 
-<div id="outline-container-org76d4bb0" class="outline-3">
-<h3 id="org76d4bb0"><span class="section-number-3">7.1</span> Exécution conditionnelle</h3>
+<div id="outline-container-orgf334edd" class="outline-3">
+<h3 id="orgf334edd"><span class="section-number-3">7.1</span> Exécution conditionnelle</h3>
 <div class="outline-text-3" id="text-7-1">
 </div>
-<div id="outline-container-org22bc46a" class="outline-4">
-<h4 id="org22bc46a"><span class="section-number-4">7.1.1</span> Expression booléennes</h4>
+<div id="outline-container-orgb8e002e" class="outline-4">
+<h4 id="orgb8e002e"><span class="section-number-4">7.1.1</span> Expression booléennes</h4>
 <div class="outline-text-4" id="text-7-1-1">
 <p>
 Une expression booléenne élémentaire est souvent réalisée avec un
@@ -1272,8 +1272,8 @@ les opérateurs logiques.</dd>
 
 
 
-<div id="outline-container-org3a6dc04" class="outline-4">
-<h4 id="org3a6dc04"><span class="section-number-4">7.1.2</span> if</h4>
+<div id="outline-container-org8189492" class="outline-4">
+<h4 id="org8189492"><span class="section-number-4">7.1.2</span> if</h4>
 <div class="outline-text-4" id="text-7-1-2">
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #0000FF;">if</span> (expressionBooleenne){
@@ -1308,8 +1308,8 @@ passe-t-il l'on oublie les accolade ou si l'on ajoute un
 </dl>
 </div>
 </div>
-<div id="outline-container-orgcb3f9cd" class="outline-4">
-<h4 id="orgcb3f9cd"><span class="section-number-4">7.1.3</span> Opérateur ternaire</h4>
+<div id="outline-container-org9a172d5" class="outline-4">
+<h4 id="org9a172d5"><span class="section-number-4">7.1.3</span> Opérateur ternaire</h4>
 <div class="outline-text-4" id="text-7-1-3">
 <p>
 On a vu des opérateurs binaires, arithmétiques et logiques, qui ont
@@ -1343,8 +1343,8 @@ System.out.println( (idx &gt;= 0) ? data[idx] : <span style="color: #D0372D;">fa
 </div>
 </div>
 
-<div id="outline-container-orgb5c3e5f" class="outline-4">
-<h4 id="orgb5c3e5f"><span class="section-number-4">7.1.4</span> switch</h4>
+<div id="outline-container-org9c1fa8f" class="outline-4">
+<h4 id="org9c1fa8f"><span class="section-number-4">7.1.4</span> switch</h4>
 <div class="outline-text-4" id="text-7-1-4">
 <p>
 Parfois, on veut comparer la valeur d'une expression avec un ensemble
@@ -1431,8 +1431,8 @@ l'opérateur modulo pour le caractère <code>%</code>.</dd>
 </div>
 </div>
 
-<div id="outline-container-org2cdbc34" class="outline-3">
-<h3 id="org2cdbc34"><span class="section-number-3">7.2</span> Boucles while(){} et do{} while();</h3>
+<div id="outline-container-orgda32b45" class="outline-3">
+<h3 id="orgda32b45"><span class="section-number-3">7.2</span> Boucles while(){} et do{} while();</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Lorsque des opérations doivent être répétées plusieurs fois,
@@ -1507,12 +1507,12 @@ System.out.println(<span style="color: #008000;">"le nombre &#233;tait divisible
 </div>
 </div>
 
-<div id="outline-container-orgf4f3748" class="outline-3">
-<h3 id="orgf4f3748"><span class="section-number-3">7.3</span> Boucles for(;;){} et for( : ){}</h3>
+<div id="outline-container-org7f51add" class="outline-3">
+<h3 id="org7f51add"><span class="section-number-3">7.3</span> Boucles for(;;){} et for( : ){}</h3>
 <div class="outline-text-3" id="text-7-3">
 </div>
-<div id="outline-container-orgb684644" class="outline-4">
-<h4 id="orgb684644"><span class="section-number-4">7.3.1</span> Boucle for classique</h4>
+<div id="outline-container-org82ca878" class="outline-4">
+<h4 id="org82ca878"><span class="section-number-4">7.3.1</span> Boucle for classique</h4>
 <div class="outline-text-4" id="text-7-3-1">
 <p>
 Souvent, la condition de continuation est liée à une variable
@@ -1588,8 +1588,8 @@ nombre, par exemple <code>192</code> est divisible par 2.</li>
 </div>
 </div>
 
-<div id="outline-container-orgae0a1e4" class="outline-4">
-<h4 id="orgae0a1e4"><span class="section-number-4">7.3.2</span> Boucle for sur une séquence de valeurs</h4>
+<div id="outline-container-org99ad751" class="outline-4">
+<h4 id="org99ad751"><span class="section-number-4">7.3.2</span> Boucle for sur une séquence de valeurs</h4>
 <div class="outline-text-4" id="text-7-3-2">
 <p>
 Lorsqu'on veut traiter toutes les valeurs d'un tableau, par exemple
@@ -1655,8 +1655,8 @@ Par exemple :
 </div>
 </div>
 
-<div id="outline-container-org982aadc" class="outline-2">
-<h2 id="org982aadc"><span class="section-number-2">8</span> Fonctions</h2>
+<div id="outline-container-orgff68fe3" class="outline-2">
+<h2 id="orgff68fe3"><span class="section-number-2">8</span> Fonctions</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 On va vouloir décomposer son code en unités minimales qui réalise un
@@ -1680,8 +1680,8 @@ variables utilisées dans la fonction.
 </p>
 </div>
 
-<div id="outline-container-org43f3c5e" class="outline-3">
-<h3 id="org43f3c5e"><span class="section-number-3">8.1</span> Instruction <code>return</code></h3>
+<div id="outline-container-org20165aa" class="outline-3">
+<h3 id="org20165aa"><span class="section-number-3">8.1</span> Instruction <code>return</code></h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 Le bloc d'instructions qui définit une fonction peut contenir zéro,
@@ -1772,8 +1772,8 @@ des chemins d'exécution exclusifs. Par exemple :
 </div>
 </div>
 
-<div id="outline-container-orgf568e05" class="outline-3">
-<h3 id="orgf568e05"><span class="section-number-3">8.2</span> Passage d'argument</h3>
+<div id="outline-container-org20baed8" class="outline-3">
+<h3 id="org20baed8"><span class="section-number-3">8.2</span> Passage d'argument</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 Une fonction peut avoir zéro, un, ou plusieurs arguments, indiqués,
@@ -1858,8 +1858,8 @@ en cliquant sur la flèche vers le bas sous IntelliJ.</dd>
 </div>
 </div>
 
-<div id="outline-container-orgffe2ecb" class="outline-3">
-<h3 id="orgffe2ecb"><span class="section-number-3">8.3</span> Contexte local d'exécution / pile / fonction récursive</h3>
+<div id="outline-container-org00337cf" class="outline-3">
+<h3 id="org00337cf"><span class="section-number-3">8.3</span> Contexte local d'exécution / pile / fonction récursive</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 En fait, même si les variables locales sont considérées comme
@@ -1955,8 +1955,8 @@ exécuter. Que veut dire le message d'erreur ?</dd>
 </div>
 
 
-<div id="outline-container-orgda8bd6f" class="outline-3">
-<h3 id="orgda8bd6f"><span class="section-number-3">8.4</span> Surcharge de fonctions</h3>
+<div id="outline-container-orgea914b0" class="outline-3">
+<h3 id="orgea914b0"><span class="section-number-3">8.4</span> Surcharge de fonctions</h3>
 <div class="outline-text-3" id="text-8-4">
 <p>
 Une fonction d'une classe est identifiée par sa <i>signature</i> qui doit
@@ -2006,45 +2006,45 @@ première valeur, ni après la dernière valeur !</dd>
 </div>
 </div>
 
-<div id="outline-container-orge49c315" class="outline-2">
-<h2 id="orge49c315"><span class="section-number-2">9</span> Ce qu'il reste encore à voir</h2>
+<div id="outline-container-org65b77ac" class="outline-2">
+<h2 id="org65b77ac"><span class="section-number-2">9</span> Ce qu'il reste encore à voir</h2>
 <div class="outline-text-2" id="text-9">
 </div>
-<div id="outline-container-org81cceb8" class="outline-3">
-<h3 id="org81cceb8"><span class="section-number-3">9.1</span> Entrées/Sorties au clavier/console ou avec des fichiers, Exceptions</h3>
+<div id="outline-container-orgce1d952" class="outline-3">
+<h3 id="orgce1d952"><span class="section-number-3">9.1</span> Entrées/Sorties au clavier/console ou avec des fichiers, Exceptions</h3>
 </div>
 
-<div id="outline-container-orgfd1fd58" class="outline-3">
-<h3 id="orgfd1fd58"><span class="section-number-3">9.2</span> Collections, Généricité</h3>
+<div id="outline-container-org23b8f39" class="outline-3">
+<h3 id="org23b8f39"><span class="section-number-3">9.2</span> Collections, Généricité</h3>
 </div>
 
-<div id="outline-container-org5ea2210" class="outline-3">
-<h3 id="org5ea2210"><span class="section-number-3">9.3</span> POO 2 : Entités</h3>
+<div id="outline-container-org8153ed3" class="outline-3">
+<h3 id="org8153ed3"><span class="section-number-3">9.3</span> POO 2 : Entités</h3>
 <div class="outline-text-3" id="text-9-3">
 </div>
-<div id="outline-container-orga5f46d5" class="outline-4">
-<h4 id="orga5f46d5"><span class="section-number-4">9.3.1</span> attributs</h4>
+<div id="outline-container-org25538be" class="outline-4">
+<h4 id="org25538be"><span class="section-number-4">9.3.1</span> attributs</h4>
 </div>
 
-<div id="outline-container-org003a6c4" class="outline-4">
-<h4 id="org003a6c4"><span class="section-number-4">9.3.2</span> méthodes d'instances</h4>
+<div id="outline-container-org542002b" class="outline-4">
+<h4 id="org542002b"><span class="section-number-4">9.3.2</span> méthodes d'instances</h4>
 </div>
 
-<div id="outline-container-orgc6cc244" class="outline-4">
-<h4 id="orgc6cc244"><span class="section-number-4">9.3.3</span> polymorphisme dynamique</h4>
+<div id="outline-container-org08c16c6" class="outline-4">
+<h4 id="org08c16c6"><span class="section-number-4">9.3.3</span> polymorphisme dynamique</h4>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgeb159a0" class="outline-2">
-<h2 id="orgeb159a0"><span class="section-number-2">10</span> Références Webliographiques</h2>
+<div id="outline-container-org5b7399e" class="outline-2">
+<h2 id="org5b7399e"><span class="section-number-2">10</span> Références Webliographiques</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 Quelques liens pour trouver des informations ou faire de la veille sur Java.
 </p>
 </div>
-<div id="outline-container-orgb89ddc1" class="outline-3">
-<h3 id="orgb89ddc1"><span class="section-number-3">10.1</span> Documentation officielle</h3>
+<div id="outline-container-orgb85351c" class="outline-3">
+<h3 id="orgb85351c"><span class="section-number-3">10.1</span> Documentation officielle</h3>
 <div class="outline-text-3" id="text-10-1">
 <ul class="org-ul">
 <li><a href="https://docs.oracle.com/javase/tutorial/">Java tutorials</a></li>
@@ -2053,17 +2053,18 @@ Quelques liens pour trouver des informations ou faire de la veille sur Java.
 </div>
 </div>
 
-<div id="outline-container-org585ba5c" class="outline-3">
-<h3 id="org585ba5c"><span class="section-number-3">10.2</span> Livres consultables en ligne</h3>
+<div id="outline-container-orge756e78" class="outline-3">
+<h3 id="orge756e78"><span class="section-number-3">10.2</span> Livres consultables en ligne</h3>
 <div class="outline-text-3" id="text-10-2">
 <ul class="org-ul">
 <li><a href="https://en.wikibooks.org/wiki/Java_Programming">Java Programming</a></li>
+<li><a href="https://www.jmdoudoux.fr/accueil_java.htm">Développons en Java</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org464311a" class="outline-3">
-<h3 id="org464311a"><span class="section-number-3">10.3</span> Sur le web</h3>
+<div id="outline-container-orgccf1c23" class="outline-3">
+<h3 id="orgccf1c23"><span class="section-number-3">10.3</span> Sur le web</h3>
 <div class="outline-text-3" id="text-10-3">
 <ul class="org-ul">
 <li><a href="https://www.baeldung.com/">Baeldung</a></li>
@@ -2104,7 +2105,7 @@ méthodes, ici statiques ou "de classe". Cf. cours sur la POO</p></div></div>
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Bernard Hugueney</p>
-<p class="date">Created: 2019-10-03 Thu 01:20</p>
+<p class="date">Created: 2019-10-04 Fri 01:28</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

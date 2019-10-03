@@ -1269,6 +1269,7 @@ Quelques liens pour trouver des informations ou faire de la veille sur Java.
 ** Livres consultables en ligne
 
 - [[https://en.wikibooks.org/wiki/Java_Programming][Java Programming]]
+- [[https://www.jmdoudoux.fr/accueil_java.htm][Développons en Java]]
 
 ** Sur le web
 - [[https://www.baeldung.com/][Baeldung]]
