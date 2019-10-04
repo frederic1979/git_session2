@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2019-10-04 Fri 02:05 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Entrées / Sorties en Java</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Bernard Hugueney" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Entrées / Sorties en Java</h1>
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgd97d149">1. Utilisation de la console</a>
+<ul>
+<li><a href="#org1456d13">1.1. Écriture dans la console</a></li>
+<li><a href="#orga89fc71">1.2. Lecture dans la console</a></li>
+</ul>
+</li>
+<li><a href="#orgf365b12">2. Exceptions</a></li>
+<li><a href="#orgf4a0ad0">3. Utilisation de fichiers</a>
+<ul>
+<li><a href="#orge4a7277">3.1. Exceptions vérifiées</a></li>
+<li><a href="#org3d3574b">3.2. Chemin absolu ou relatif, répertoire courant</a></li>
+<li><a href="#org484851e">3.3. Écriture dans un fichier</a></li>
+<li><a href="#orgf9d1346">3.4. Lecture depuis un fichier</a></li>
+</ul>
+</li>
+<li><a href="#org161f824">4. Gestion des Exceptions</a>
+<ul>
+<li><a href="#org97d21b2">4.1. try / catch / finally</a></li>
+<li><a href="#org5c97fab">4.2. try avec ressources</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd97d149" class="outline-2">
+<h2 id="orgd97d149"><span class="section-number-2">1</span> Utilisation de la console</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Lorsqu'on exécute un programme en mode console, par exemple dans un
+terminal, mais les IDE ont aussi une fenêtre "Console", on peut écrire
+du texte à l'écran et lire du texte à saisi au clavier.
+</p>
+</div>
+
+<div id="outline-container-org1456d13" class="outline-3">
+<h3 id="org1456d13"><span class="section-number-3">1.1</span> Écriture dans la console</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+On a déjà vu comment écrire des données sur l'écran d'une console :
+avec les <i>méthodes</i> <a href="https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html#print-java.lang.String-">print</a> et <a href="https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html#println-java.lang.String-">println</a> appelées sur les <i>objets</i>
+<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#out">System.out</a> ou <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#err">System.err</a>.
+</p>
+
+<p>
+On parle de <i>méthodes</i> car contrairement aux fonctions qu'on a
+écrites, celles-ci sont appelées sur un <i>objet</i> : <code class="src src-java">nomDeLObjet.nomDeLaMethode(<span style="color: #6434A3;">premierArg</span>, <span style="color: #6434A3;">secondArg</span>)</code>. Les méthodes
+qu'on peut appeler sur un <i>objet</i> sont définis par la <i>classe</i> dont il
+est une <i>instance</i> (ce qui veut dire que la classe est le type de
+l'objet). On a déjà vu par exemple des instances de la classe <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html">String</a>.
+</p>
+
+<p>
+<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#out">System.out</a> écrit sur la <a href="https://fr.wikipedia.org/wiki/Flux_standard#Sortie_standard">sortie standard</a> qui sert aux messages lors
+du fonctionnement normal du programme et <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#err">System.err</a> écrit sur la
+<a href="https://fr.wikipedia.org/wiki/Flux_standard#Erreur_standard">sortie d'erreurs</a> qui sert aux messages d'erreur. Par défaut, les
+deux sont affichés à l'écran mais on peut les rediriger indépendamment
+vers des fichiers. Sous IntelliJ, les deux sont affichés sur la
+console, mais les messages sur la sortie d'erreur affichés en rouge.
+</p>
+
+<p>
+En consultant la documentation de la classe dans laquelle <a href="https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html#print-java.lang.String-">print</a> et
+<a href="https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html#println-java.lang.String-">println</a> sont définies, on constate que ces méthodes sont <i>surchargées</i>
+et qu'il y a des implémentations pour tous les types primitifs.
+</p>
+
+<p>
+Par ailleurs, il est possible de passer des tableaux en arguments.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Constater et comprendre le résultat d'un appel de <a href="https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html#print-java.lang.String-">print</a>
+en passant en argument des tableaux de différents types.</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-orga89fc71" class="outline-3">
+<h3 id="orga89fc71"><span class="section-number-3">1.2</span> Lecture dans la console</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Par défaut, les lecture dans la console correspondent aux saisies au
+clavier, qui sont envoyées lors de l'appui sur la touche ⏎ (ou
+↵). <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#in">System.in</a> correspond à l'<a href="https://fr.wikipedia.org/wiki/Flux_standard#Entr%C3%A9e_standard">entrée standard</a> de la console qui peut
+être utilisée comme source brute de données sous forme d'octets.
+</p>
+
+
+<p>
+En pratique, on ne voudra généralement pas lire directement des octets
+en tant que tel, mais lire des donnés des types de Java
+(e.g. <code class="src src-java"><span style="color: #6434A3;">int</span></code>,<code class="src src-java"><span style="color: #6434A3;">long</span></code>,<code class="src src-java"><span style="color: #6434A3;">float</span></code>,<code class="src src-java"><span style="color: #6434A3;">double</span></code>,<code class="src src-java">String</code>). Pour cela, la
+bibliothèque standard met à disposition la classe <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html">java.util.Scanner</a>
+utilisée comme suit :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span class="linenr"> 1: </span><span style="color: #8D8D84;">/*</span>
+<span class="linenr"> 2: </span><span style="color: #8D8D84; font-style: italic;"> La directive import suivante permet ensuite d'&#233;crire Scanner sans</span>
+<span class="linenr"> 3: </span><span style="color: #8D8D84; font-style: italic;"> avoir &#224; &#233;crire java.util.Scanner</span>
+<span class="linenr"> 4: </span><span style="color: #8D8D84; font-style: italic;">*/</span>
+<span class="linenr"> 5: </span><span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">Scanner</span>;
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">ScannerDemo</span> {
+<span class="linenr"> 8: </span>    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
+<span class="linenr"> 9: </span>        <span style="color: #6434A3;">Scanner</span> <span style="color: #BA36A5;">sc</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Scanner</span>(System.in); <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">lecture depuis l'entr&#233;e standard (clavier)</span>
+<span class="linenr">10: </span>        System.out.println(<span style="color: #008000;">"Saisissez un entier:"</span>);
+<span class="linenr">11: </span>        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = sc.nextInt();
+<span class="linenr">12: </span>        System.out.println(<span style="color: #008000;">"Vous avez saisi: "</span>+ i);
+<span class="linenr">13: </span>        System.out.println(<span style="color: #008000;">"Saisissez un double (penser &#224; la localisation!):"</span>);
+<span class="linenr">14: </span>        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">d</span> = sc.nextDouble();
+<span class="linenr">15: </span>        System.out.println(<span style="color: #008000;">"Vous avez saisi: "</span>+ d);
+<span class="linenr">16: </span>        System.out.println(<span style="color: #008000;">"Saisissez une ligne de caract&#232;res"</span>);
+<span class="linenr">17: </span>        sc.nextLine(); <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">le dernier appel &#224; nextDouble() n'avait pas consomm&#233; la fin de ligne !</span>
+<span class="linenr">18: </span>        <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">line</span> = sc.nextLine();
+<span class="linenr">19: </span>        System.out.println(<span style="color: #008000;">"Vous avez saisi: "</span>+ line);
+<span class="linenr">20: </span>    }
+<span class="linenr">21: </span>}
+</pre>
+</div>
+
+<p>
+Il faut donc :
+</p>
+<ol class="org-ol">
+<li>importer la classe scr_java[:exports code]{java.util.Scanner}</li>
+<li>instancier un objet de cette classe en passant en argument du
+constructeur l'objet qui représente l'entrée standard de la
+console : <code class="src src-java"><span style="color: #6434A3;">Scanner</span> <span style="color: #BA36A5;">sc</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Scanner</span>(System.in)</code> (Bien évidemment, on donne le nom qu'on veut à
+la variable utilisée pour stocker la référence de l'objet créé.</li>
+<li>utiliser ensuite la méthode correspondant au type de donnée à lire</li>
+</ol>
+
+
+
+<dl class="org-dl">
+<dt>Exercices</dt><dd> 
+<dl class="org-dl">
+<dt>Compréhension de code</dt><dd>Pourquoi la localisation est-elle
+importante pour lire les types de nombres avec une partie
+décimale ?</dd>
+<dt>Codage exploratoire</dt><dd>Que se passe-t-il si l'on enlève la ligne
+<code class="src src-java">sc.nextLine();</code> ? Pourquoi ?</dd>
+<dt>Tests</dt><dd>Que se passe-t-il si l'on se rentre pas un nombre
+lorsqu'un nombre est attendu ?</dd>
+</dl></dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf365b12" class="outline-2">
+<h2 id="orgf365b12"><span class="section-number-2">2</span> Exceptions</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Lorsqu'on a effectué une saisie invalide, par exemple avec un chaîne
+de caractères ne représentant pas un nombre, avec le programme
+précédant, on obtient un message d'erreur dans la console :
+</p>
+<p class="verse">
+Exception in thread "main" java.util.InputMismatchException<br />
+&#xa0;at java.util.Scanner.throwFor(Scanner.java:864)<br />
+&#xa0;at java.util.Scanner.next(Scanner.java:1485)<br />
+&#xa0;at java.util.Scanner.nextInt(Scanner.java:2117)<br />
+&#xa0;at java.util.Scanner.nextInt(Scanner.java:2076)<br />
+&#xa0;at ScannerDemo.main(ScannerDemo.java:11)<br />
+<br />
+</p>
+
+<p>
+Il s'agit d'une <a href="https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html">Exception</a> qui indique une erreur à l'exécution,
+erreur dont la nature est indiquée par le type de l'exception, ici
+<code class="src src-java"><span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.InputMismatchException</code>, les lignes
+suivantes permettant de retracer l'origine de l'erreur (ici l'appel à
+la méthode <code class="src src-java">nextInt()</code> sur un objet de classe
+<code class="src src-java"><span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.Scanner</code> dans la fonction
+<code class="src src-java">main</code> de la classe <code class="src src-java">ScannerDemo</code> à la ligne <code>11</code> du fichier <code>ScannerDemo.java</code>.
+</p>
+
+<dl class="org-dl">
+<dt>Exercices</dt><dd> 
+<dl class="org-dl">
+<dt>Compréhension</dt><dd>Comprendre comment retrouver toutes les
+informations précédentes dans le message d'erreur
+(appelé <i>stack trace</i>).</dd>
+<dt>Codage exploratoire</dt><dd>Écrire des programmes pour déclencher les
+types d'erreurs suivantes (et comprendre les <i>stack traces</i>) :
+<ul class="org-ul">
+<li>tentative de diviser par 0.</li>
+<li>tentative d'appeler une méthode sur une référence d'objet (de
+classe <code class="src src-java">String</code> ou <code class="src src-java"><span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.Scanner</code>) non initialisée.</li>
+<li>tentative d'accès à une case d'un tableau ou à la longueur d'un
+tableau par une référence non initialisé.</li>
+<li>tentative d'accès à une case d'un tableau correctement
+initialisé, mais avec un indice invalide (trop grand ou négatif).</li>
+<li>appel d'une fonction récursive sans condition d'arrêt.</li>
+</ul></dd>
+</dl></dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-orgf4a0ad0" class="outline-2">
+<h2 id="orgf4a0ad0"><span class="section-number-2">3</span> Utilisation de fichiers</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orge4a7277" class="outline-3">
+<h3 id="orge4a7277"><span class="section-number-3">3.1</span> Exceptions vérifiées</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+On vient de voir que certaines circonstances très fréquentes (un appel
+de fonction, une utilisation d'un objet ou l'accès à une case d'un
+tableau) pouvaient <a href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_d%27exceptions#Java">déclencher des exceptions</a> (on dit <i>lancer</i> des
+exceptions car celles-ci remontent la pile d'appels de fonction, comme
+on peut le constater sur la <i>stack trace</i>). Bien sûr, on ne peut pas
+être paranoïaque au point de s'inquiéter à chaque fois qu'on utilise
+une référence, mais il y a des circonstances qui doivent a priori
+inciter à la prudence et à envisager des cas d'erreur. Par exemple à
+chaque fois qu'on utilise un fichier, il y a un risque d'erreur de
+lecture ou d'écriture (que le fichier ne soit pas accessible parce
+qu'il n'existe pas ou qu'on a pas les droits d'accès, où que le
+périphérique soit défaillant). Pour ces cas de figure, java dispose
+d'exceptions <i>contrôlées</i> (<a href="https://en.wikibooks.org/wiki/Java_Programming/Checked_Exceptions">Checked Exceptions</a>) qui doivent être
+explicitement prises en compte. Lorsqu'on fait un appel à une méthode
+qui peut lancer une <i>checked exception</i> on doit obligatoirement faire
+l'une ou l'autre des choses suivantes :
+</p>
+
+<ul class="org-ul">
+<li><a href="https://docs.oracle.com/javase/tutorial/essential/exceptions/declaring.html">déclarer que la méthode qu'on est en train d'implémenter peut
+elle-même lancer (en fait, propager) une telle exception</a> en
+utilisant le mot-clé <code class="src src-java"><span style="color: #0000FF;">throws</span></code></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/essential/exceptions/handling.html">gérer localement l'exception</a> en utilisant des blocs
+<code class="src src-java"><span style="color: #0000FF;">try</span></code> / <code class="src src-java"><span style="color: #0000FF;">catch</span></code> et
+éventuellement <code class="src src-java"><span style="color: #0000FF;">finally</span></code>.</li>
+</ul>
+
+
+<p>
+Seulement pour l'exposé des classes et méthodes mises en œuvre pour la
+lecture ou l'écriture dans un fichier, on se contentera d'ajouter <code class="src src-java"><span style="color: #0000FF;">throws</span> <span style="color: #6434A3;">Exception</span></code> à la déclaration de la fonction du programme principal :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>) <span style="color: #0000FF;">throws</span> <span style="color: #6434A3;">Exception</span>{
+<span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">program that can throw (checked) exceptions for instance by calling</span>
+<span style="color: #8D8D84; font-style: italic;">  methodes that throw checked exceptions */</span>
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3d3574b" class="outline-3">
+<h3 id="org3d3574b"><span class="section-number-3">3.2</span> Chemin absolu ou relatif, répertoire courant</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Les fichiers et répertoires sont désignés par un chemin qui peut être :
+</p>
+<dl class="org-dl">
+<dt>absolu</dt><dd>le chemin commence alors par une barre oblique (<i>slash</i>)
+<code>/</code> sous Unix/MacOS qui indique la racine du système de
+fichier ou par l'identifiant d'un "lecteur"(<i>drive</i> <code>A:</code>,
+<code>B:</code>,…) sous Windows.</dd>
+<dt>relatif</dt><dd>le chemin commence alors par <code>.</code> pour indiquer le
+répertoire courant (<i>working directory</i>) ou par <code>..</code> pour
+indiquer le répertoire parent <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.</dd>
+</dl>
+
+
+<p>
+En pratique, le code d'un vrai programme ne devrait <b>jamais</b> contenir
+de chemin absolu vers un fichier de données dans un compte utilisateur
+car il ne pourrait alors fonctionner que sur la machine du
+développeur.
+</p>
+
+<p>
+Lorsqu'on lance un programme depuis la console, le répertoire courant
+est celui dans lequel on exécute la commande pour lancer le
+programme. Lorsqu'on exécute un programme depuis un IDE, il faut
+savoir quel est le répertoire courant au lancement d'un programme. Il
+s'agit souvent du répertoire dans lequel est enregistré le projet mais
+on peut le modifier dans le configurations de lancement (de la même
+façon qu'on peut modifier les arguments passés au programme et
+récupérés dans l'argument de la fonction <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org484851e" class="outline-3">
+<h3 id="org484851e"><span class="section-number-3">3.3</span> Écriture dans un fichier</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Il y a plusieurs façons d'écrire dans un fichier de texte, notamment
+en utilisant une instance spécifique de la classe <a href="https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html">java.io.PrintStream</a>
+à la place de <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#out">System.out</a> ou <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#err">System.err</a> (qui sont aussi des instances
+de cette classe). Il faut pour cela passer par un objet intermédiaire
+de la classe <a href="https://docs.oracle.com/javase/8/docs/api/java/io/FileOutputStream.html">java.io.FileOutputStream</a> :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">FileOutputStream</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">PrintStream</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">FileNotFoundException</span>;
+
+<span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">PrintStreamDemo</span> {
+    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>) <span style="color: #0000FF;">throws</span> <span style="color: #6434A3;">FileNotFoundException</span> {
+        <span style="color: #6434A3;">PrintStream</span> <span style="color: #BA36A5;">fileOut</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">PrintStream</span>(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">FileOutputStream</span>(<span style="color: #008000;">"textFile.txt"</span>));
+        fileOut.print(<span style="color: #008000;">"Hello "</span>);
+        fileOut.println(<span style="color: #008000;">"World !"</span>);
+        fileOut.close();
+    }
+}
+</pre>
+</div>
+
+<p>
+Vous pouvez ensuite utiliser l'instance de <a href="https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html">java.io.PrintStream</a> comme
+vous utiliseriez <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#out">System.out</a> ou <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#err">System.err</a>, avec la seule différence
+qu'il faut appeler la méthode <a href="https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html#close--">close()</a> qui fermera le fichier
+sous-jacent. En fait, il faudra s'assurer que cette fonction est bien
+appelée <b>dans tous les cas</b>, ce qui n'est pas évident dans le cas de
+lancement d'exceptions. Nous verrons comment faire en section
+<a href="#org4e00c41">4</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf9d1346" class="outline-3">
+<h3 id="orgf9d1346"><span class="section-number-3">3.4</span> Lecture depuis un fichier</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Il y a plusieurs façons de lire le contenu d'un petit fichier de
+texte, mais on peut notamment utiliser une instance de la classe
+<a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html">java.io.File</a> à la place de <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#in">System.in</a> :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">FileNotFoundException</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">File</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">Scanner</span>;
+
+<span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">ScannerFromFileDemo</span> {
+    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>) <span style="color: #0000FF;">throws</span> <span style="color: #6434A3;">FileNotFoundException</span> {
+        <span style="color: #6434A3;">Scanner</span> <span style="color: #BA36A5;">sc</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Scanner</span>(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">File</span>(<span style="color: #008000;">"inputFile.txt"</span>));
+        <span style="color: #0000FF;">for</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span>=0; sc.hasNextLine(); ++i){
+            System.out.println(<span style="color: #008000;">"["</span>+i+<span style="color: #008000;">"]:"</span>+ sc.nextLine());
+        }
+        sc.close();
+    }
+}
+
+</pre>
+</div>
+
+<p>
+De même que pour l'instance de l'instance de <a href="https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html">java.io.PrintStream</a>, il faut désormais s'assurer que la méthode <a href="https://docs.oracle.com/javase/10/docs/api/java/util/Scanner.html#close()">close()</a> est appelée.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Modifier le programme ci-dessus pour qu'il lise les
+mêmes informations que le programme <code>ScannerDemo</code> et
+mettre le code de lecture dans une autre fonction
+appelée par java_src[:exports code]{main}.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org161f824" class="outline-2">
+<h2 id="org161f824"><span class="section-number-2">4</span> <a id="org4e00c41"></a>Gestion des Exceptions</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+En pratique, on ne peut évidemment pas se contenter de laisser les
+exceptions se propager. On va donc les <a href="https://docs.oracle.com/javase/tutorial/essential/exceptions/handling.html">gérer localement</a> en utilisant
+des blocs <code class="src src-java"><span style="color: #0000FF;">try</span></code> / <code class="src src-java"><span style="color: #0000FF;">catch</span></code> et éventuellement <code class="src src-java"><span style="color: #0000FF;">finally</span></code>.
+</p>
+</div>
+
+<div id="outline-container-org97d21b2" class="outline-3">
+<h3 id="org97d21b2"><span class="section-number-3">4.1</span> try / catch / finally</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+On doit commencer par déclarer le début d'un bloc <code class="src src-java"><span style="color: #0000FF;">try</span></code> avant de faire l'opération qui peut lancer une exception
+contrôlée. Le bloc <code class="src src-java"><span style="color: #0000FF;">try</span></code> doit non seulement
+contenir cette opération, mais toutes celles-ci en dépendent, par
+exemple tout le code qui utilise un objet dont la construction aurait
+pu déclencher une exception.
+</p>
+
+<p>
+À la suite de ce bloc, on indique quelle exception on veut intercepter
+avec un bloc <code class="src src-java"><span style="color: #0000FF;">catch</span></code>. bloc <code class="src src-java"><span style="color: #0000FF;">catch</span></code> prend un argument dont le type est celui de l'exception à
+intercepter, ce qui permet d'utiliser cet argument ensuite dans le
+bloc.
+</p>
+
+<p>
+On doit utiliser un bloc <code class="src src-java"><span style="color: #0000FF;">finally</span></code> lorsqu'il y a du code qui doit être exécuté dans tous les cas :
+</p>
+<ul class="org-ul">
+<li>pas d'exception ou exception interceptée</li>
+<li>exception propagée</li>
+
+<li id="Exercice"> 
+
+<dl class="org-dl">
+<dt>Modification de code</dt><dd>Modifier les programmes précédents pour
+que <code class="src src-java">main</code> ne laisse plus échapper
+d'exception mais affiche un message d'erreur. N'oubliez pas que
+l'appel à <code class="src src-java">.close()</code> doit être effectué
+<b>dans tous les cas</b>.</dd>
+
+<dt>Ajout de fonctionalité</dt><dd>Modifier les programmes précédents pour
+qu'en cas d'erreur, ils proposent de recommencer :
+<ul class="org-ul">
+<li>en effectuant une autre saisie pour la lecture d'un nombre</li>
+
+<li>en saisissant un nom de fichier pour la lecture à partir d'un
+fichier (dans le cas d'une <code class="src src-java">FileNotFoundException</code>).</li>
+</ul></dd>
+</dl></li>
+</ul>
+
+<p>
+Pour aller plus loin, <a href="https://www.jmdoudoux.fr/java/dej/chap-exceptions.htm">une ressource indiquant notamment comment créer
+ses propres types d'exceptions</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5c97fab" class="outline-3">
+<h3 id="org5c97fab"><span class="section-number-3">4.2</span> try avec ressources</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+On a vu qu'il est fréquent d'avoir :
+</p>
+
+<ol class="org-ol">
+<li>la création d'un objet représentant une ressource,</li>
+<li>l'utilisation de cette ressource qui peut lancer <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> une
+exception,</li>
+<li>l'obligation d'appeler une méthode <code class="src src-java">close()</code>
+sur cet objet pour libérer la ressource.</li>
+</ol>
+
+<p>
+La façon de gérer classiquement ce cas de figure obligeait à penser au
+bloc <code class="src src-java"><span style="color: #0000FF;">finally</span></code> pour y effectuer l'appel à
+<code class="src src-java">close()</code>. La situation devient encore plus
+compliquée si l'appel à <code class="src src-java">close()</code> lui-même lançait une exception !
+</p>
+
+<p>
+Pour gérer automatiquement tout cela, la version 7 de Java a apporté
+une nouvelle construction : le <a href="https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html">try-with-resources</a>.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Réécrire les programmes en utilisant le <a href="https://www.jmdoudoux.fr/java/dej/chap-java7.htm#java7-5">try-with-resources</a>.</dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Notes de bas de page: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">on peut remonter dans
+l'arborescence de répertoires en cumulant les <code>../..</code></p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">on dit
+parfois "lever une exception" / "raise an exception"</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Auteur: Bernard Hugueney</p>
+<p class="date">Created: 2019-10-04 Fri 02:05</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
