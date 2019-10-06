@@ -1,17 +1,17 @@
-- [Pourquoi tester ?](#org71f2a59)
-- [Que tester ?](#org19d80e7)
-- [Comment tester ?](#orge981149)
-- [Outils pour tester](#orgd786f88)
-  - [Automatisation](#org250ef3e)
-  - [Frameworks de test](#org35b8c50)
+- [Pourquoi tester ?](#org6bbc844)
+- [Que tester ?](#org2d08ba7)
+- [Comment tester ?](#org34c6e8f)
+- [Outils pour tester](#org366330b)
+  - [Automatisation](#orgd18dbb0)
+  - [Frameworks de test](#org8f23bb3)
 
 
 
-<a id="org71f2a59"></a>
+<a id="org6bbc844"></a>
 
 # Pourquoi tester ?
 
-Quand on écit un programme, on voudrait avoir des raisons de croire qu'il est correct ! Malheureusement, la plupart des langages de programmation ne peuvent même pas garantir que (x + 1) > x, à cause des [dépassements de capacité](https://fr.wikipedia.org/wiki/D%C3%A9passement_d%27entier), ou que 3\*(1/10) = 3/10, à cause des [erreurs de représentation](https://fr.wikipedia.org/wiki/IEEE_754) :
+Quand on écrit un programme, on voudrait avoir des raisons de croire qu'il est correct ! Malheureusement, la plupart des langages de programmation ne peuvent même pas garantir que (x + 1) > x, à cause des [dépassements de capacité](https://fr.wikipedia.org/wiki/D%C3%A9passement_d%27entier), ou que 3\*(1/10) = 3/10, à cause des [erreurs de représentation](https://fr.wikipedia.org/wiki/IEEE_754) :
 
 ```java
 public class BadMathDemo {
@@ -28,7 +28,7 @@ i+1 > i ? false 3\*(1./10) == 3./10 ? false
 Donc évidemment, on ne peut pas prouver grand chose quand à l'exactitude d'un programme écrit dans un tel langage <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. Faute de preuves, on cherche à se donner des raisons de croire qu'un programme fonctionne correctement en le testant. Mais si des tests peuvent prouver la présence de bugs, ils ne peuvent pas prouver leur absence. En pratique, on considère qu'un programme est suffisamment peu buggé lorsque la vitesse de découverte de bugs et leur gravité sont suffisamment faibles.
 
 
-<a id="org19d80e7"></a>
+<a id="org2d08ba7"></a>
 
 # Que tester ?
 
@@ -42,7 +42,7 @@ Pour qu'une fonction soit plus facilement testable, on voudra qu'elle soit [pure
 On voudra tester toutes les lignes du code à tester, ce qui n'est pas évident à cause des structures de contrôle, d'où la notion de [couverture de code](https://fr.wikipedia.org/wiki/Couverture_de_code) qui caractérise le pourcentage de code qui est effectivement exécuté par les tests.
 
 
-<a id="orge981149"></a>
+<a id="org34c6e8f"></a>
 
 # Comment tester ?
 
@@ -53,19 +53,19 @@ Pour chaque fonction à tester, on va déterminer un ensemble de valeurs d'argum
 -   **Exercice:** Écrire un ou des programmes de tests qui teste[nt] chacune des fonctions implémentées.
 
 
-<a id="orgd786f88"></a>
+<a id="org366330b"></a>
 
 # TODO Outils pour tester
 
 
-<a id="org250ef3e"></a>
+<a id="orgd18dbb0"></a>
 
 ## Automatisation
 
 À terme, on pourra utilisera des outils d'[Intégration Continue](https://fr.wikipedia.org/wiki/Int%C3%A9gration_continue), par exemple [Github Actions](https://github.com/bhugueney/testing-actions-for-java-tests/commit/0660a23706633c491830459b48a1f11a5d77f3cd/checks?check_suite_id=221096623) pour automatiser l'exécution des tests.
 
 
-<a id="org35b8c50"></a>
+<a id="org8f23bb3"></a>
 
 ## Frameworks de test
 

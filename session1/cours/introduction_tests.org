@@ -17,7 +17,7 @@
 
 * Pourquoi tester ?
 
-Quand on écit un programme, on voudrait avoir des raisons de croire
+Quand on écrit un programme, on voudrait avoir des raisons de croire
 qu'il est correct ! Malheureusement, la plupart des langages de
 programmation ne peuvent même pas garantir que (x + 1) > x, à cause
 des [[https://fr.wikipedia.org/wiki/D%25C3%25A9passement_d%2527entier][dépassements de capacité]], ou que 3*(1/10) = 3/10, à cause des
