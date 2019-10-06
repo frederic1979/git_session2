@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-06 Sun 19:39 -->
+<!-- 2019-10-06 Sun 20:06 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Introduction aux tests</title>
@@ -247,21 +247,21 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgcbef3c6">1. Pourquoi tester ?</a></li>
-<li><a href="#org95b3179">2. Que tester ?</a></li>
-<li><a href="#org7090d5d">3. Comment tester ?</a></li>
-<li><a href="#org0971926">4. <span class="todo TODO">TODO</span> Outils pour tester</a>
+<li><a href="#org657a409">1. Pourquoi tester ?</a></li>
+<li><a href="#org3758c4e">2. Que tester ?</a></li>
+<li><a href="#orgf1b95ff">3. Comment tester ?</a></li>
+<li><a href="#orgc453024">4. <span class="todo TODO">TODO</span> Outils pour tester</a>
 <ul>
-<li><a href="#orgc8ca851">4.1. Automatisation</a></li>
-<li><a href="#orgd07569f">4.2. Frameworks de test</a></li>
+<li><a href="#org5ce5e5e">4.1. Automatisation</a></li>
+<li><a href="#orgcdf66c2">4.2. Frameworks de test</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgcbef3c6" class="outline-2">
-<h2 id="orgcbef3c6"><span class="section-number-2">1</span> Pourquoi tester ?</h2>
+<div id="outline-container-org657a409" class="outline-2">
+<h2 id="org657a409"><span class="section-number-2">1</span> Pourquoi tester ?</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Quand on écrit un programme, on voudrait avoir des raisons de croire
@@ -275,6 +275,7 @@ des <a href="https://fr.wikipedia.org/wiki/D%C3%A9passement_d%27entier">dépasse
     <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
         <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = <span style="color: #D0372D;">Integer</span>.MAX_VALUE;
         System.out.println(<span style="color: #008000;">"i+1 &gt; i ? "</span> + ((i+1) &gt; i));
+        System.out.println();
         System.out.println(<span style="color: #008000;">"3*(1./10) == 3./10 ? "</span> + ((3*(1./10)) == (3./10)));
     }
 }
@@ -282,8 +283,12 @@ des <a href="https://fr.wikipedia.org/wiki/D%C3%A9passement_d%27entier">dépasse
 </div>
 <p>
 i+1 &gt; i ? false
+</p>
+
+<p>
 3*(1./10) == 3./10 ? false
 </p>
+
 
 <p>
  Donc évidemment, on ne peut pas prouver grand chose quand à
@@ -299,8 +304,8 @@ suffisamment faibles.
 </div>
 
 
-<div id="outline-container-org95b3179" class="outline-2">
-<h2 id="org95b3179"><span class="section-number-2">2</span> Que tester ?</h2>
+<div id="outline-container-org3758c4e" class="outline-2">
+<h2 id="org3758c4e"><span class="section-number-2">2</span> Que tester ?</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Si à terme il faudra bien tester le programme, voire le système auquel
@@ -330,8 +335,8 @@ effectivement exécuté par les tests.
 </div>
 
 
-<div id="outline-container-org7090d5d" class="outline-2">
-<h2 id="org7090d5d"><span class="section-number-2">3</span> Comment tester ?</h2>
+<div id="outline-container-orgf1b95ff" class="outline-2">
+<h2 id="orgf1b95ff"><span class="section-number-2">3</span> Comment tester ?</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Pour essayer de s'assurer qu'on <a href="https://fr.wikipedia.org/wiki/Test_de_r%C3%A9gression">introduit pas de bugs</a>, on a besoin de
@@ -360,12 +365,12 @@ chacune des fonctions implémentées.</dd>
 </div>
 
 
-<div id="outline-container-org0971926" class="outline-2">
-<h2 id="org0971926"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Outils pour tester</h2>
+<div id="outline-container-orgc453024" class="outline-2">
+<h2 id="orgc453024"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Outils pour tester</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orgc8ca851" class="outline-3">
-<h3 id="orgc8ca851"><span class="section-number-3">4.1</span> Automatisation</h3>
+<div id="outline-container-org5ce5e5e" class="outline-3">
+<h3 id="org5ce5e5e"><span class="section-number-3">4.1</span> Automatisation</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 À terme, on pourra utilisera des outils d'<a href="https://fr.wikipedia.org/wiki/Int%C3%A9gration_continue">Intégration Continue</a>, par
@@ -374,8 +379,8 @@ exemple <a href="https://github.com/bhugueney/testing-actions-for-java-tests/com
 </div>
 </div>
 
-<div id="outline-container-orgd07569f" class="outline-3">
-<h3 id="orgd07569f"><span class="section-number-3">4.2</span> Frameworks de test</h3>
+<div id="outline-container-orgcdf66c2" class="outline-3">
+<h3 id="orgcdf66c2"><span class="section-number-3">4.2</span> Frameworks de test</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 On utilisera des frameworks de tests, par exemple <a href="http://www.jmdoudoux.fr/java/dej/chap-junit5.htm">JUnit 5</a>, pour
@@ -396,7 +401,7 @@ langages (par exemple <a href="https://fr.wikipedia.org/wiki/Coq_(logiciel)">Coq
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Bernard Hugueney</p>
-<p class="date">Created: 2019-10-06 Sun 19:39</p>
+<p class="date">Created: 2019-10-06 Sun 20:06</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

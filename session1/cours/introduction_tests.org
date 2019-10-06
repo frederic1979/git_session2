@@ -27,6 +27,7 @@ public class BadMathDemo {
     public static void main(String[] args){
 	int i = Integer.MAX_VALUE;
 	System.out.println("i+1 > i ? " + ((i+1) > i));
+	System.out.println();
 	System.out.println("3*(1./10) == 3./10 ? " + ((3*(1./10)) == (3./10)));
     }
 }
@@ -34,7 +35,9 @@ public class BadMathDemo {
 
 #+RESULTS:
 i+1 > i ? false
+
 3*(1./10) == 3./10 ? false
+
 
  Donc évidemment, on ne peut pas prouver grand chose quand à
 l'exactitude d'un programme écrit dans un tel langage [fn::d'autres
