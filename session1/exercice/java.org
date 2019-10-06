@@ -1,0 +1,207 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; ispell-local-dictionary: "fr_FR"; org-export-with-fixed-width: t -*-
+
+#+TITLE: Exercices d'introduction à Java
+#+AUTHOR: Bernard Hugueney
+
+#+LANGUAGE: fr
+#+LANG: fr
+#+HTML_HEAD_EXTRA: <style>*{font-family: monospace !important}</style>
+
+#+BEGIN_SRC elisp :exports none :results silent
+ (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t)
+   (java . t)))
+#+END_SRC
+
+
+* Étape 1 : Déclarons quelques variables
+
+Dans un premier temps, on va juste déclarer quelques variables locales
+dans une fonction src_java[:exports code]{main} d'une classe
+src_java[:exports code]{ExosIntro} d'un projet ~Exos~.
+
+- À faire :: déclarer des variables permettant de vous décrire avec :
+  - Votre prénom
+  - Votre nom
+  - Votre âge
+  - Votre taille en cm
+  - Quelques lignes qui expliquent pourquoi vous rejoignez la formation
+  - Le montant d'un compte bancaire
+  - Le fait qu'une année soit bissextile ou non
+  - La /couleur/ d'une carte de jeu de cartes
+  - Une couleur ‽
+
+
+
+* Étape 2 : Utilisons des opérateurs
+
+** Calcul de prix TTC
+
+Déclarer une variable src_java[:exports code]{prixHT} et une variable
+src_java[:exports code]{tauxTVA}. Calculer et mettre dans une variable
+le prix TTC.
+
+
+** Calcul composé
+
+Soit une variable src_java[:exports code]{year}. Calculer et mettre
+dans une variable si cette année est bissextile ou non.
+
+
+* Étape 3 : Algorithmes
+
+** Compréhension de code
+Essayer de deviner / comprendre ce que fait le code suivant :
+#+BEGIN_SRC java :exports code :classname Mystere
+public class Mystere{
+    public static void main(String[] args){
+	System.out.println(mystere(0.01f));
+    }
+    public static float mystere(float epsilon){
+	return mystere(0.f, Float.MAX_VALUE, epsilon);
+    }
+    public static float mystere(float min, float max, float epsilon){
+	while((max != min)){
+	    float m = max/2 + min/2;
+	    if((m + epsilon) > m){
+		min = Math.nextUp(m);
+	    }else{
+		max = m;
+	    }
+	}
+	return min;
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+: 262144.0
+
+** Factorielles
+
+Écrire un programme qui affiche la factorielle d'un nombre.
+
+** Affichage
+
+*** 1D
+
+Écrire un programme qui affiche une règle graduée d'une longueur ~n~,
+avec des graduations tous les 5 pas. Par exemple :
+- n = 1 :: ~[-]~
+- n = 6 :: ~[----+-]~
+- n = 10 :: ~[----+----]~
+- n = 12 :: ~[----+----+--]~
+
+*** 2D
+
+Écrire un programme qui affiche un rectangle de taille ~nColonnes~ par
+~nLignes~. Par exemple :
+- nColonnes = 1, nLignes = 1 :: 
+#+BEGIN_SRC org
++-+
+| |
++-+
+#+END_SRC
+
+
+- nColonnes = 2, nLignes = 1 :: 
+#+BEGIN_SRC org
++---+
+|   |
++---+
+#+END_SRC
+
+- nColonnes = 3, nLignes = 2 :: 
+#+BEGIN_SRC org
++-----+
+|     |
+|     |
+|     |
++-----+
+#+END_SRC
+
+
+
+** Chaîne de caractères
+
+Écrire un programme qui affiche si une chaîne de caractères donnée est
+un palindrome ou non.
+
+** Nombres premiers
+
+- Écrire un programme qui permette de savoir si un nombre donné est
+  premier ou non.
+- Écrire un programme qui affiche les nombres premiers inférieurs ou
+  égaux à un nombre donné.
+
+** Tables
+
+Écrire un programme qui permette d'afficher la table de multiplication
+jusqu'à n × m. Par exemple :
+
+- n = 3, m = 4 ::
+#+BEGIN_SRC org
+ 1  2  3  4
+ 2  4  6  8
+ 3  6  9 12
+#+END_SRC
+
+
+** Représentation de table
+
+*** Table vide
+
+Écrire un programme qui permet d'afficher une table, en représentant
+les lignes et les colonnes, de ~nColonnes~ par ~nLignes~. Par
+exemple :
+- nColonnes = 1, nLignes = 1 :: 
+#+BEGIN_SRC org
+┏━┓
+┃ ┃
+┗━┛
+#+END_SRC
+
+
+- nColonnes = 2, nLignes = 1 :: 
+#+BEGIN_SRC org
+┏━┳━┓
+┃ ┃ ┃
+┗━┻━┛
+#+END_SRC
+
+- nColonnes = 3, nLignes = 2 :: 
+#+BEGIN_SRC org
+┏━┳━┳━┓
+┃ ┃ ┃ ┃
+┣━╋━╋━┫
+┃ ┃ ┃ ┃
+┗━┻━┻━┛
+#+END_SRC
+
+*** Table remplie
+
+Écrire un programme qui permette d'afficher une table de
+multiplication jusqu'à n × m en représentant les lignes et les
+colonnes. Par exemple :
+
+- n = 2, m = 3 :: 
+#+BEGIN_SRC org
+┏━┳━┳━┓
+┃1┃2┃3┃
+┣━╋━╋━┫
+┃2┃4┃6┃
+┗━┻━┻━┛
+#+END_SRC
+
+- n = 3, m = 4 ::
+#+BEGIN_SRC org
+┏━━┳━━┳━━┳━━┓
+┃ 1┃ 2┃ 3┃ 4┃
+┣━━╋━━╋━━╋━━┫
+┃ 2┃ 4┃ 6┃ 8┃
+┣━━╋━━╋━━╋━━┫
+┃ 3┃ 6┃ 9┃12┃
+┗━━┻━━┻━━┻━━┛
+#+END_SRC
