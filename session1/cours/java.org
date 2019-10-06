@@ -975,6 +975,26 @@ args}, donc un tableau de chaînes de caractères appelé
 src_java[:exports code]{args}, et ne retourne rien (src_java[:exports
 code]{void}).
 
+Pour appeler une fonction [fn:: En Java, on parle de /méthode
+statique/ (cf. le mot-clé src_java[:exports code]{static}) ou de
+/classe/ par opposition aux /méthodes d'instance/ cf. POO], il suffit
+d'écrire le nom de la fonction suivi entre parenthèses d'expressions
+correspondant aux valeurs à passer aux arguments (cf. infra), séparées
+par des virgules (s'il n'y a pas d'arguments, on met des parenthèses
+vides). Si la fonction est définie dans une autre classe, il faut
+préfixer le nom de la fonction par le nom de la classe [fn:: On verra
+qu'il faut aussi que la méthode soit visible (ou accessible) depuis le
+code appelant. Pour l'instant, l'utilisation du mot-clé
+src_java[:exports code]{public} garantit que nos fonctions sont
+accessibles depuis n'importe quel code.]. Par exemple pour appeler la
+fonction src_java[:exports code]{random} définie dans la classe [[https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html][Math]]
+[fn:: plus précisément src_java[:exports code]{java.lang.Math}], on
+écrit:
+
+#+BEGIN_SRC java :exports code
+double x = Math.random();
+#+END_SRC
+
 
 Les fonctions permettent de décomposer le code d'une application
 notamment parce que les variables sont /locales/ : on peut donc
