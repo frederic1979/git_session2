@@ -432,8 +432,8 @@ Il est important de comprendre que ces déclarations sans initialisation en cré
 - En écrivant directement dans le code les valeurs du tableau entre
   accolades, séparées par des virgules :
   #+BEGIN_SRC java :exports code
-arrayOfDoubles = {0.5, 5.0, -0.75};
-arrayOfDoubles = {1., -1.}; // la taille n'est pas la même
+double[] arrayOfDoubles = {0.5, 5.0, -0.75};
+arrayOfDoubles = new double[]{1., -1.}; // la taille n'est pas la même
   #+END_SRC
   À la première affectation, on a :
   #+BEGIN_SRC ditaa :file img/ref-array-1.png :cmdline -E
