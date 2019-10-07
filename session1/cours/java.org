@@ -410,7 +410,7 @@ Quelques exemples de déclarations de tableaux :
 int[] arrayOfInts; // (référence vers un) tableau d'ints
 long[] arrayOfLongs; // (référence vers un) tableau de longs
 float[] arrayOfFloats;// (référence vers un) tableau de floats
-double[] arrayOfDoubles;// (référence vers un) tableau de floats
+double[] arrayOfDoubles;// (référence vers un) tableau de double
 #+END_SRC
 
 On remarque que la taille ne fait pas partie du type tableau. On sait que src_java[:exports code]{int[] arrayOfInts} est un tableau d'entiers [fn:: plus précisément une référence vers un tableau d'entiers], mais on ne sait pas de quelle taille. Après ces déclarations, les variables contiennent des références invalides car il n'y aucun tableau créé :
@@ -433,7 +433,7 @@ Il est important de comprendre que ces déclarations sans initialisation en cré
   accolades, séparées par des virgules :
   #+BEGIN_SRC java :exports code
 arrayOfDoubles = {0.5, 5.0, -0.75};
-arrayOfDoubles = {1., -1.,}; // la taille n'est pas la même
+arrayOfDoubles = {1., -1.}; // la taille n'est pas la même
   #+END_SRC
   À la première affectation, on a :
   #+BEGIN_SRC ditaa :file img/ref-array-1.png :cmdline -E
