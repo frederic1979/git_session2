@@ -205,3 +205,37 @@ colonnes. Par exemple :
 ┃ 3┃ 6┃ 9┃12┃
 ┗━━┻━━┻━━┻━━┛
 #+END_SRC
+
+* Étape 4 : Entrées / Sorties
+
+** Console
+
+*** Saisies au clavier
+
+Modifier le code déjà écrit pour lire les données au clavier.
+
+*** Menu
+
+Écrire un programme qui propose d'exécuter les différentes
+fonctionnalités implémentées en choisissant à partir d'un menu.
+
+** Fichier
+
+Modifier le programme précédent pour qu'il puisse prendre en compte un
+argument au lancement du programme. Si le programme reçoit un
+argument, il doit être utilisé comme le nom d'un fichier dans lequel
+chercher toutes les données (y compris les choix de menus).
+
+** Gestion d'erreur
+
+*** Saisie de nombre
+
+Modifier le programme précédent pour que, si une saisie invalide est
+faite dans le menu, une nouvelle saisie soit proposée.
+
+*** Problème d'accès fichier
+
+Modifier le programme précédent pour que, si un nom de fichier est
+passé en argument mais que l'accès à celui-ci n'est pas possible, un
+nouveau nom de fichier soit demandé interactivement.
+
