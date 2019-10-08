@@ -514,6 +514,9 @@ Il est important de comprendre que chaque affectation en modifie pas le tableau,
        argument de src_java[:exports code]{System.out.println()}. Quel
        sens donner à l'affichage obtenu ?
 
+
+
+
 ** Accès aux éléments d'un tableau
 
 On utilise la notation src_java[:exports code]{nomDuTableau[valeurindice]} pour accéder à la case d'indice ~valeurindice~ du tableau ~nomDuTableau~. Les indices commencent à ~0~, donc un tableau de taille ~1~ aura une seule valeur d'indice légale, la valeur ~0~.
@@ -760,34 +763,34 @@ src_java[:exports code]{else if (op == …)}.
 Pour éviter ces répétitions, Java possède une structure de contrôle
 dédiée : le src_java[:export code](switch).
 
-Le code précédent s'écrirait avec un src_java[:export
+Le code précédent s'écrirait avec un src_java[:exports
 code](switch). de la façon suivante :
 #+BEGIN_SRC java :export code
-public static long arithmeticOp(long i, long j, char op){
-    long res=0;
-    switch (op){
-    case '-':{
-	res = i - j;
-	break;
+    public static long arithmeticOp(long i, long j, char op) {
+        long res = 0;
+        switch (op) {
+            case '-': {
+                res = i - j;
+                break;
+            }
+            case '+': {
+                res = i + j;
+                break;
+            }
+            case '*': {
+                res = i * j;
+                break;
+            }
+            case '/': {
+                res = i / j;
+                break;
+            }
+            default: {
+                System.err.println("Operation " + op + "inconnue !!!");
+            }
+        }
+        return res;
     }
-    case '+':{
-	res = i + j;
-	break;
-    }
-    case '*':{
-	res = i * j;
-	break;
-    }
-    case '/':{
-	res = i / j;
-	break;
-    }
-    default:{
-	System.err.println("Operation "+ op + "inconnue !!!");
-    }
-    }
-    return res;
-}
 #+END_SRC
 
 L'expression testée doit être d'un type entier, ou de type
