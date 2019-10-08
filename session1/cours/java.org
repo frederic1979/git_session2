@@ -761,7 +761,7 @@ niveaux d'indentation, il est fastidieux de répéter le
 src_java[:exports code]{else if (op == …)}.
 
 Pour éviter ces répétitions, Java possède une structure de contrôle
-dédiée : le src_java[:export code](switch).
+dédiée : le src_java[:export code]{switch}.
 
 Le code précédent s'écrirait avec un src_java[:exports
 code](switch). de la façon suivante :
