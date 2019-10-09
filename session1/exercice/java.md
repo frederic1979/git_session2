@@ -1,31 +1,34 @@
-- [Étape 1 : Déclarons quelques variables](#orgbbc466a)
-- [Étape 2 : Utilisons des opérateurs](#org092f5b7)
-  - [Calcul de prix TTC](#org39f13f1)
-  - [Calcul composé](#orgad2b878)
-- [Étape 3 : Algorithmes](#orgf98c7e2)
-  - [Compréhension de code](#org9f92fcd)
-  - [Factorielles](#org465ad8a)
-  - [Affichage](#orge04ce4c)
-    - [1D](#org3f8ac11)
-    - [2D](#orgc78eab4)
-  - [Chaîne de caractères](#orgd4becc6)
-  - [Nombres premiers](#orgb42f820)
-  - [Tables](#org6366e33)
-  - [Représentation de table](#orged190c3)
-    - [Table vide](#orgf613c96)
-    - [Table remplie](#orgf4032f1)
-- [Étape 4 : Entrées / Sorties](#org6b8e1fd)
-  - [Console](#orgf917617)
-    - [Saisies au clavier](#org8f2b98a)
-    - [Menu](#orgb00659e)
-  - [Fichier](#orgbc0f493)
-  - [Gestion d'erreur](#org9f111c8)
-    - [Saisie de nombre](#org0114f54)
-    - [Problème d'accès fichier](#org1e8ab2a)
+- [Étape 1 : Déclarons quelques variables](#org87d68d2)
+- [Étape 2 : Utilisons des opérateurs](#orge0ee033)
+  - [Calcul de prix TTC](#orgf2a2ca2)
+  - [Calcul composé](#org2a493e2)
+- [Étape 3 : Algorithmes](#org4a38c2c)
+  - [Compréhension de code](#org5e4c48e)
+  - [Factorielles](#org5fd2cb8)
+  - [Affichage](#org231f826)
+    - [1D](#orgafe126f)
+    - [2D](#org888fd8b)
+  - [Chaîne de caractères](#orgec505d4)
+  - [Nombres premiers](#orgccb5a43)
+  - [Tableaux](#org6fec945)
+    - [1D](#orgb84dfd1)
+    - [2D](#org6140c32)
+  - [Tables](#orga618ec1)
+  - [Représentation de table](#org0ef272f)
+    - [Table vide](#org09b8bb3)
+    - [Table remplie](#orgcd4dc30)
+- [Étape 4 : Entrées / Sorties](#org995545f)
+  - [Console](#orga8bdf4a)
+    - [Saisies au clavier](#org0c84f42)
+    - [Menu](#orgbfbd810)
+  - [Fichier](#orgbc1f60b)
+  - [Gestion d'erreur](#orgf40a113)
+    - [Saisie de nombre](#org76d253e)
+    - [Problème d'accès fichier](#orgef2b83e)
 
 
 
-<a id="orgbbc466a"></a>
+<a id="org87d68d2"></a>
 
 # Étape 1 : Déclarons quelques variables
 
@@ -43,31 +46,31 @@ Dans un premier temps, on va juste déclarer quelques variables locales dans une
     -   Une couleur ‽
 
 
-<a id="org092f5b7"></a>
+<a id="orge0ee033"></a>
 
 # Étape 2 : Utilisons des opérateurs
 
 
-<a id="org39f13f1"></a>
+<a id="orgf2a2ca2"></a>
 
 ## Calcul de prix TTC
 
 Déclarer une variable `prixHT` et une variable `tauxTVA`. Calculer et mettre dans une variable le prix TTC.
 
 
-<a id="orgad2b878"></a>
+<a id="org2a493e2"></a>
 
 ## Calcul composé
 
 Soit une variable `year`. Calculer et mettre dans une variable si cette année est bissextile ou non.
 
 
-<a id="orgf98c7e2"></a>
+<a id="org4a38c2c"></a>
 
 # Étape 3 : Algorithmes
 
 
-<a id="org9f92fcd"></a>
+<a id="org5e4c48e"></a>
 
 ## Compréhension de code
 
@@ -96,19 +99,19 @@ public class Mystere{
 ```
 
 
-<a id="org465ad8a"></a>
+<a id="org5fd2cb8"></a>
 
 ## Factorielles
 
 Écrire un programme qui affiche la factorielle d'un nombre.
 
 
-<a id="orge04ce4c"></a>
+<a id="org231f826"></a>
 
 ## Affichage
 
 
-<a id="org3f8ac11"></a>
+<a id="orgafe126f"></a>
 
 ### 1D
 
@@ -116,11 +119,11 @@ public class Mystere{
 
 -   **n = 1:** `[-]`
 -   **n = 6:** `[----+-]`
--   **n = 10:** `[----+----]`
+-   **n = 10:** `[----+----+]`
 -   **n = 12:** `[----+----+--]`
 
 
-<a id="orgc78eab4"></a>
+<a id="org888fd8b"></a>
 
 ### 2D
 
@@ -134,7 +137,7 @@ public class Mystere{
 +-+
 ```
 
--   **nColonnes = 2, nLignes = 1:** 
+-   **nColonnes = 3, nLignes = 1:** 
 
 ```org
 +---+
@@ -142,7 +145,7 @@ public class Mystere{
 +---+
 ```
 
--   **nColonnes = 3, nLignes = 2:** 
+-   **nColonnes = 5, nLignes = 3:** 
 
 ```org
 +-----+
@@ -153,14 +156,14 @@ public class Mystere{
 ```
 
 
-<a id="orgd4becc6"></a>
+<a id="orgec505d4"></a>
 
 ## Chaîne de caractères
 
 Écrire un programme qui affiche si une chaîne de caractères donnée est un palindrome ou non.
 
 
-<a id="orgb42f820"></a>
+<a id="orgccb5a43"></a>
 
 ## Nombres premiers
 
@@ -168,7 +171,28 @@ public class Mystere{
 -   Écrire un programme qui affiche les nombres premiers inférieurs ou égaux à un nombre donné.
 
 
-<a id="org6366e33"></a>
+<a id="org6fec945"></a>
+
+## Tableaux
+
+
+<a id="orgb84dfd1"></a>
+
+### 1D
+
+-   **Nombres:** Écrire un programme qui permette d'afficher la valeur maximale d'un tableau de nombres.
+-   **Chaînes de caractères:** Écrire un programme qui permette d'afficher la taille de la chaîne de caractères la plus longue d'un tableau de chaînes de caractères.
+
+
+<a id="org6140c32"></a>
+
+### 2D
+
+-   **Nombres:** Écrire un programme qui permette d'afficher la valeur maximale d'un tableau de tableaux de nombres.
+-   **Chaînes de caractères:** Écrire un programme qui permette d'afficher la taille de la chaîne de caractères la plus longue d'un tableau de tableaux de chaînes de caractères.
+
+
+<a id="orga618ec1"></a>
 
 ## Tables
 
@@ -183,12 +207,12 @@ public class Mystere{
 ```
 
 
-<a id="orged190c3"></a>
+<a id="org0ef272f"></a>
 
 ## Représentation de table
 
 
-<a id="orgf613c96"></a>
+<a id="org09b8bb3"></a>
 
 ### Table vide
 
@@ -221,7 +245,7 @@ public class Mystere{
 ```
 
 
-<a id="orgf4032f1"></a>
+<a id="orgcd4dc30"></a>
 
 ### Table remplie
 
@@ -250,50 +274,50 @@ public class Mystere{
 ```
 
 
-<a id="org6b8e1fd"></a>
+<a id="org995545f"></a>
 
 # Étape 4 : Entrées / Sorties
 
 
-<a id="orgf917617"></a>
+<a id="orga8bdf4a"></a>
 
 ## Console
 
 
-<a id="org8f2b98a"></a>
+<a id="org0c84f42"></a>
 
 ### Saisies au clavier
 
 Modifier le code déjà écrit pour lire les données au clavier.
 
 
-<a id="orgb00659e"></a>
+<a id="orgbfbd810"></a>
 
 ### Menu
 
 Écrire un programme qui propose d'exécuter les différentes fonctionnalités implémentées en choisissant à partir d'un menu.
 
 
-<a id="orgbc0f493"></a>
+<a id="orgbc1f60b"></a>
 
 ## Fichier
 
 Modifier le programme précédent pour qu'il puisse prendre en compte un argument au lancement du programme. Si le programme reçoit un argument, il doit être utilisé comme le nom d'un fichier dans lequel chercher toutes les données (y compris les choix de menus).
 
 
-<a id="org9f111c8"></a>
+<a id="orgf40a113"></a>
 
 ## Gestion d'erreur
 
 
-<a id="org0114f54"></a>
+<a id="org76d253e"></a>
 
 ### Saisie de nombre
 
 Modifier le programme précédent pour que, si une saisie invalide est faite dans le menu, une nouvelle saisie soit proposée.
 
 
-<a id="org1e8ab2a"></a>
+<a id="orgef2b83e"></a>
 
 ### Problème d'accès fichier
 

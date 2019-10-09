@@ -91,7 +91,7 @@ public class Mystere{
 avec des graduations tous les 5 pas. Par exemple :
 - n = 1 :: ~[-]~
 - n = 6 :: ~[----+-]~
-- n = 10 :: ~[----+----]~
+- n = 10 :: ~[----+----+]~
 - n = 12 :: ~[----+----+--]~
 
 *** 2D
@@ -106,14 +106,14 @@ avec des graduations tous les 5 pas. Par exemple :
 #+END_SRC
 
 
-- nColonnes = 2, nLignes = 1 :: 
+- nColonnes = 3, nLignes = 1 :: 
 #+BEGIN_SRC org
 +---+
 |   |
 +---+
 #+END_SRC
 
-- nColonnes = 3, nLignes = 2 :: 
+- nColonnes = 5, nLignes = 3 :: 
 #+BEGIN_SRC org
 +-----+
 |     |
@@ -135,6 +135,24 @@ un palindrome ou non.
   premier ou non.
 - Écrire un programme qui affiche les nombres premiers inférieurs ou
   égaux à un nombre donné.
+
+** Tableaux
+
+*** 1D
+
+- Nombres :: Écrire un programme qui permette d'afficher la valeur
+             maximale d'un tableau de nombres.
+- Chaînes de caractères :: Écrire un programme qui permette d'afficher
+     la taille de la chaîne de caractères la plus longue d'un tableau
+     de chaînes de caractères.
+*** 2D
+
+- Nombres :: Écrire un programme qui permette d'afficher la valeur
+             maximale d'un tableau de tableaux de nombres.
+- Chaînes de caractères :: Écrire un programme qui permette d'afficher
+     la taille de la chaîne de caractères la plus longue d'un tableau
+     de tableaux de chaînes de caractères.
+
 
 ** Tables
 

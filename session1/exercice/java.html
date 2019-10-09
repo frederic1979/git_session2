@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-07 Mon 09:31 -->
+<!-- 2019-10-09 Wed 10:09 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Exercices d'introduction à Java</title>
@@ -248,47 +248,53 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org1a4359c">1. Étape 1 : Déclarons quelques variables</a></li>
-<li><a href="#org425a207">2. Étape 2 : Utilisons des opérateurs</a>
+<li><a href="#org97ec2b5">1. Étape 1 : Déclarons quelques variables</a></li>
+<li><a href="#org5aeae38">2. Étape 2 : Utilisons des opérateurs</a>
 <ul>
-<li><a href="#org39de290">2.1. Calcul de prix TTC</a></li>
-<li><a href="#orgeaffa7a">2.2. Calcul composé</a></li>
+<li><a href="#orgf2ae3de">2.1. Calcul de prix TTC</a></li>
+<li><a href="#org37cd217">2.2. Calcul composé</a></li>
 </ul>
 </li>
-<li><a href="#org44e3398">3. Étape 3 : Algorithmes</a>
+<li><a href="#org1dddb6f">3. Étape 3 : Algorithmes</a>
 <ul>
-<li><a href="#org8e6c8b1">3.1. Compréhension de code</a></li>
-<li><a href="#orgfeb92fb">3.2. Factorielles</a></li>
-<li><a href="#org7c2228a">3.3. Affichage</a>
+<li><a href="#org9a92ff7">3.1. Compréhension de code</a></li>
+<li><a href="#org38e19f4">3.2. Factorielles</a></li>
+<li><a href="#org3810b31">3.3. Affichage</a>
 <ul>
-<li><a href="#org221e30c">3.3.1. 1D</a></li>
-<li><a href="#org100b17e">3.3.2. 2D</a></li>
+<li><a href="#org4194331">3.3.1. 1D</a></li>
+<li><a href="#org28acf7a">3.3.2. 2D</a></li>
 </ul>
 </li>
-<li><a href="#org91a4c08">3.4. Chaîne de caractères</a></li>
-<li><a href="#org77aec11">3.5. Nombres premiers</a></li>
-<li><a href="#org04f6999">3.6. Tables</a></li>
-<li><a href="#orga57d497">3.7. Représentation de table</a>
+<li><a href="#org0db123d">3.4. Chaîne de caractères</a></li>
+<li><a href="#orgd7f0c4d">3.5. Nombres premiers</a></li>
+<li><a href="#org73b8416">3.6. Tableaux</a>
 <ul>
-<li><a href="#org4fd9756">3.7.1. Table vide</a></li>
-<li><a href="#orga56bdc8">3.7.2. Table remplie</a></li>
+<li><a href="#orgdea9f19">3.6.1. 1D</a></li>
+<li><a href="#orgcbcfdde">3.6.2. 2D</a></li>
+</ul>
+</li>
+<li><a href="#org433fc60">3.7. Tables</a></li>
+<li><a href="#org94be3b7">3.8. Représentation de table</a>
+<ul>
+<li><a href="#org0df3f6c">3.8.1. Table vide</a></li>
+<li><a href="#org8feb416">3.8.2. Table remplie</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org2297b64">4. Étape 4 : Entrées / Sorties</a>
+<li><a href="#orgdc0463d">4. Étape 4 : Entrées / Sorties</a>
 <ul>
-<li><a href="#org06aea42">4.1. Console</a>
+<li><a href="#orgda8dfb2">4.1. Console</a>
 <ul>
-<li><a href="#orgd4d6d2d">4.1.1. Saisies au clavier</a></li>
-<li><a href="#org3b82066">4.1.2. Menu</a></li>
+<li><a href="#orge05e977">4.1.1. Saisies au clavier</a></li>
+<li><a href="#org9e4009d">4.1.2. Menu</a></li>
 </ul>
 </li>
-<li><a href="#org504d993">4.2. Fichier</a></li>
-<li><a href="#org6735cad">4.3. Gestion d'erreur</a>
+<li><a href="#orgffaf7e5">4.2. Fichier</a></li>
+<li><a href="#orgf3bafb5">4.3. Gestion d'erreur</a>
 <ul>
-<li><a href="#org07aa894">4.3.1. Saisie de nombre</a></li>
-<li><a href="#orga813746">4.3.2. Problème d'accès fichier</a></li>
+<li><a href="#org4f46490">4.3.1. Saisie de nombre</a></li>
+<li><a href="#org2a31b47">4.3.2. Problème d'accès fichier</a></li>
 </ul>
 </li>
 </ul>
@@ -297,8 +303,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org1a4359c" class="outline-2">
-<h2 id="org1a4359c"><span class="section-number-2">1</span> Étape 1 : Déclarons quelques variables</h2>
+<div id="outline-container-org97ec2b5" class="outline-2">
+<h2 id="org97ec2b5"><span class="section-number-2">1</span> Étape 1 : Déclarons quelques variables</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Dans un premier temps, on va juste déclarer quelques variables locales
@@ -325,12 +331,12 @@ dans une fonction <code class="src src-java">main</code> d'une classe
 
 
 
-<div id="outline-container-org425a207" class="outline-2">
-<h2 id="org425a207"><span class="section-number-2">2</span> Étape 2 : Utilisons des opérateurs</h2>
+<div id="outline-container-org5aeae38" class="outline-2">
+<h2 id="org5aeae38"><span class="section-number-2">2</span> Étape 2 : Utilisons des opérateurs</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org39de290" class="outline-3">
-<h3 id="org39de290"><span class="section-number-3">2.1</span> Calcul de prix TTC</h3>
+<div id="outline-container-orgf2ae3de" class="outline-3">
+<h3 id="orgf2ae3de"><span class="section-number-3">2.1</span> Calcul de prix TTC</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Déclarer une variable <code class="src src-java">prixHT</code> et une variable
@@ -341,8 +347,8 @@ le prix TTC.
 </div>
 
 
-<div id="outline-container-orgeaffa7a" class="outline-3">
-<h3 id="orgeaffa7a"><span class="section-number-3">2.2</span> Calcul composé</h3>
+<div id="outline-container-org37cd217" class="outline-3">
+<h3 id="org37cd217"><span class="section-number-3">2.2</span> Calcul composé</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Soit une variable <code class="src src-java">year</code>. Calculer et mettre
@@ -353,12 +359,12 @@ dans une variable si cette année est bissextile ou non.
 </div>
 
 
-<div id="outline-container-org44e3398" class="outline-2">
-<h2 id="org44e3398"><span class="section-number-2">3</span> Étape 3 : Algorithmes</h2>
+<div id="outline-container-org1dddb6f" class="outline-2">
+<h2 id="org1dddb6f"><span class="section-number-2">3</span> Étape 3 : Algorithmes</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org8e6c8b1" class="outline-3">
-<h3 id="org8e6c8b1"><span class="section-number-3">3.1</span> Compréhension de code</h3>
+<div id="outline-container-org9a92ff7" class="outline-3">
+<h3 id="org9a92ff7"><span class="section-number-3">3.1</span> Compréhension de code</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Essayer de deviner / comprendre ce que fait le code suivant :
@@ -388,8 +394,8 @@ Essayer de deviner / comprendre ce que fait le code suivant :
 </div>
 </div>
 
-<div id="outline-container-orgfeb92fb" class="outline-3">
-<h3 id="orgfeb92fb"><span class="section-number-3">3.2</span> Factorielles</h3>
+<div id="outline-container-org38e19f4" class="outline-3">
+<h3 id="org38e19f4"><span class="section-number-3">3.2</span> Factorielles</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Écrire un programme qui affiche la factorielle d'un nombre.
@@ -397,12 +403,12 @@ Essayer de deviner / comprendre ce que fait le code suivant :
 </div>
 </div>
 
-<div id="outline-container-org7c2228a" class="outline-3">
-<h3 id="org7c2228a"><span class="section-number-3">3.3</span> Affichage</h3>
+<div id="outline-container-org3810b31" class="outline-3">
+<h3 id="org3810b31"><span class="section-number-3">3.3</span> Affichage</h3>
 <div class="outline-text-3" id="text-3-3">
 </div>
-<div id="outline-container-org221e30c" class="outline-4">
-<h4 id="org221e30c"><span class="section-number-4">3.3.1</span> 1D</h4>
+<div id="outline-container-org4194331" class="outline-4">
+<h4 id="org4194331"><span class="section-number-4">3.3.1</span> 1D</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
 Écrire un programme qui affiche une règle graduée d'une longueur <code>n</code>,
@@ -411,14 +417,14 @@ avec des graduations tous les 5 pas. Par exemple :
 <dl class="org-dl">
 <dt>n = 1</dt><dd><code>[-]</code></dd>
 <dt>n = 6</dt><dd><code>[----+-]</code></dd>
-<dt>n = 10</dt><dd><code>[----+----]</code></dd>
+<dt>n = 10</dt><dd><code>[----+----+]</code></dd>
 <dt>n = 12</dt><dd><code>[----+----+--]</code></dd>
 </dl>
 </div>
 </div>
 
-<div id="outline-container-org100b17e" class="outline-4">
-<h4 id="org100b17e"><span class="section-number-4">3.3.2</span> 2D</h4>
+<div id="outline-container-org28acf7a" class="outline-4">
+<h4 id="org28acf7a"><span class="section-number-4">3.3.2</span> 2D</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
 Écrire un programme qui affiche un rectangle de taille <code>nColonnes</code> par
@@ -436,7 +442,7 @@ avec des graduations tous les 5 pas. Par exemple :
 
 
 <dl class="org-dl">
-<dt>nColonnes = 2, nLignes = 1</dt><dd></dd>
+<dt>nColonnes = 3, nLignes = 1</dt><dd></dd>
 </dl>
 <div class="org-src-container">
 <pre class="src src-org"><span style="color: #006400; background-color: #EAFFEA;">+---+</span>
@@ -446,7 +452,7 @@ avec des graduations tous les 5 pas. Par exemple :
 </div>
 
 <dl class="org-dl">
-<dt>nColonnes = 3, nLignes = 2</dt><dd></dd>
+<dt>nColonnes = 5, nLignes = 3</dt><dd></dd>
 </dl>
 <div class="org-src-container">
 <pre class="src src-org"><span style="color: #006400; background-color: #EAFFEA;">+-----+</span>
@@ -462,8 +468,8 @@ avec des graduations tous les 5 pas. Par exemple :
 
 
 
-<div id="outline-container-org91a4c08" class="outline-3">
-<h3 id="org91a4c08"><span class="section-number-3">3.4</span> Chaîne de caractères</h3>
+<div id="outline-container-org0db123d" class="outline-3">
+<h3 id="org0db123d"><span class="section-number-3">3.4</span> Chaîne de caractères</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Écrire un programme qui affiche si une chaîne de caractères donnée est
@@ -472,8 +478,8 @@ un palindrome ou non.
 </div>
 </div>
 
-<div id="outline-container-org77aec11" class="outline-3">
-<h3 id="org77aec11"><span class="section-number-3">3.5</span> Nombres premiers</h3>
+<div id="outline-container-orgd7f0c4d" class="outline-3">
+<h3 id="orgd7f0c4d"><span class="section-number-3">3.5</span> Nombres premiers</h3>
 <div class="outline-text-3" id="text-3-5">
 <ul class="org-ul">
 <li>Écrire un programme qui permette de savoir si un nombre donné est
@@ -484,9 +490,40 @@ premier ou non.</li>
 </div>
 </div>
 
-<div id="outline-container-org04f6999" class="outline-3">
-<h3 id="org04f6999"><span class="section-number-3">3.6</span> Tables</h3>
+<div id="outline-container-org73b8416" class="outline-3">
+<h3 id="org73b8416"><span class="section-number-3">3.6</span> Tableaux</h3>
 <div class="outline-text-3" id="text-3-6">
+</div>
+<div id="outline-container-orgdea9f19" class="outline-4">
+<h4 id="orgdea9f19"><span class="section-number-4">3.6.1</span> 1D</h4>
+<div class="outline-text-4" id="text-3-6-1">
+<dl class="org-dl">
+<dt>Nombres</dt><dd>Écrire un programme qui permette d'afficher la valeur
+maximale d'un tableau de nombres.</dd>
+<dt>Chaînes de caractères</dt><dd>Écrire un programme qui permette d'afficher
+la taille de la chaîne de caractères la plus longue d'un tableau
+de chaînes de caractères.</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orgcbcfdde" class="outline-4">
+<h4 id="orgcbcfdde"><span class="section-number-4">3.6.2</span> 2D</h4>
+<div class="outline-text-4" id="text-3-6-2">
+<dl class="org-dl">
+<dt>Nombres</dt><dd>Écrire un programme qui permette d'afficher la valeur
+maximale d'un tableau de tableaux de nombres.</dd>
+<dt>Chaînes de caractères</dt><dd>Écrire un programme qui permette d'afficher
+la taille de la chaîne de caractères la plus longue d'un tableau
+de tableaux de chaînes de caractères.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org433fc60" class="outline-3">
+<h3 id="org433fc60"><span class="section-number-3">3.7</span> Tables</h3>
+<div class="outline-text-3" id="text-3-7">
 <p>
 Écrire un programme qui permette d'afficher la table de multiplication
 jusqu'à n × m. Par exemple :
@@ -505,13 +542,13 @@ jusqu'à n × m. Par exemple :
 </div>
 
 
-<div id="outline-container-orga57d497" class="outline-3">
-<h3 id="orga57d497"><span class="section-number-3">3.7</span> Représentation de table</h3>
-<div class="outline-text-3" id="text-3-7">
+<div id="outline-container-org94be3b7" class="outline-3">
+<h3 id="org94be3b7"><span class="section-number-3">3.8</span> Représentation de table</h3>
+<div class="outline-text-3" id="text-3-8">
 </div>
-<div id="outline-container-org4fd9756" class="outline-4">
-<h4 id="org4fd9756"><span class="section-number-4">3.7.1</span> Table vide</h4>
-<div class="outline-text-4" id="text-3-7-1">
+<div id="outline-container-org0df3f6c" class="outline-4">
+<h4 id="org0df3f6c"><span class="section-number-4">3.8.1</span> Table vide</h4>
+<div class="outline-text-4" id="text-3-8-1">
 <p>
 Écrire un programme qui permet d'afficher une table, en représentant
 les lignes et les colonnes, de <code>nColonnes</code> par <code>nLignes</code>. Par
@@ -552,9 +589,9 @@ exemple :
 </div>
 </div>
 
-<div id="outline-container-orga56bdc8" class="outline-4">
-<h4 id="orga56bdc8"><span class="section-number-4">3.7.2</span> Table remplie</h4>
-<div class="outline-text-4" id="text-3-7-2">
+<div id="outline-container-org8feb416" class="outline-4">
+<h4 id="org8feb416"><span class="section-number-4">3.8.2</span> Table remplie</h4>
+<div class="outline-text-4" id="text-3-8-2">
 <p>
 Écrire un programme qui permette d'afficher une table de
 multiplication jusqu'à n × m en représentant les lignes et les
@@ -591,16 +628,16 @@ colonnes. Par exemple :
 </div>
 </div>
 
-<div id="outline-container-org2297b64" class="outline-2">
-<h2 id="org2297b64"><span class="section-number-2">4</span> Étape 4 : Entrées / Sorties</h2>
+<div id="outline-container-orgdc0463d" class="outline-2">
+<h2 id="orgdc0463d"><span class="section-number-2">4</span> Étape 4 : Entrées / Sorties</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org06aea42" class="outline-3">
-<h3 id="org06aea42"><span class="section-number-3">4.1</span> Console</h3>
+<div id="outline-container-orgda8dfb2" class="outline-3">
+<h3 id="orgda8dfb2"><span class="section-number-3">4.1</span> Console</h3>
 <div class="outline-text-3" id="text-4-1">
 </div>
-<div id="outline-container-orgd4d6d2d" class="outline-4">
-<h4 id="orgd4d6d2d"><span class="section-number-4">4.1.1</span> Saisies au clavier</h4>
+<div id="outline-container-orge05e977" class="outline-4">
+<h4 id="orge05e977"><span class="section-number-4">4.1.1</span> Saisies au clavier</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 Modifier le code déjà écrit pour lire les données au clavier.
@@ -608,8 +645,8 @@ Modifier le code déjà écrit pour lire les données au clavier.
 </div>
 </div>
 
-<div id="outline-container-org3b82066" class="outline-4">
-<h4 id="org3b82066"><span class="section-number-4">4.1.2</span> Menu</h4>
+<div id="outline-container-org9e4009d" class="outline-4">
+<h4 id="org9e4009d"><span class="section-number-4">4.1.2</span> Menu</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
 Écrire un programme qui propose d'exécuter les différentes
@@ -619,8 +656,8 @@ fonctionnalités implémentées en choisissant à partir d'un menu.
 </div>
 </div>
 
-<div id="outline-container-org504d993" class="outline-3">
-<h3 id="org504d993"><span class="section-number-3">4.2</span> Fichier</h3>
+<div id="outline-container-orgffaf7e5" class="outline-3">
+<h3 id="orgffaf7e5"><span class="section-number-3">4.2</span> Fichier</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Modifier le programme précédent pour qu'il puisse prendre en compte un
@@ -631,12 +668,12 @@ chercher toutes les données (y compris les choix de menus).
 </div>
 </div>
 
-<div id="outline-container-org6735cad" class="outline-3">
-<h3 id="org6735cad"><span class="section-number-3">4.3</span> Gestion d'erreur</h3>
+<div id="outline-container-orgf3bafb5" class="outline-3">
+<h3 id="orgf3bafb5"><span class="section-number-3">4.3</span> Gestion d'erreur</h3>
 <div class="outline-text-3" id="text-4-3">
 </div>
-<div id="outline-container-org07aa894" class="outline-4">
-<h4 id="org07aa894"><span class="section-number-4">4.3.1</span> Saisie de nombre</h4>
+<div id="outline-container-org4f46490" class="outline-4">
+<h4 id="org4f46490"><span class="section-number-4">4.3.1</span> Saisie de nombre</h4>
 <div class="outline-text-4" id="text-4-3-1">
 <p>
 Modifier le programme précédent pour que, si une saisie invalide est
@@ -645,8 +682,8 @@ faite dans le menu, une nouvelle saisie soit proposée.
 </div>
 </div>
 
-<div id="outline-container-orga813746" class="outline-4">
-<h4 id="orga813746"><span class="section-number-4">4.3.2</span> Problème d'accès fichier</h4>
+<div id="outline-container-org2a31b47" class="outline-4">
+<h4 id="org2a31b47"><span class="section-number-4">4.3.2</span> Problème d'accès fichier</h4>
 <div class="outline-text-4" id="text-4-3-2">
 <p>
 Modifier le programme précédent pour que, si un nom de fichier est
@@ -660,7 +697,7 @@ nouveau nom de fichier soit demandé interactivement.
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Bernard Hugueney</p>
-<p class="date">Created: 2019-10-07 Mon 09:31</p>
+<p class="date">Created: 2019-10-09 Wed 10:09</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
