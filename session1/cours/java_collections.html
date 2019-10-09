@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2019-10-09 Wed 17:59 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Les collections en Java</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Bernard Hugueney" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<style>*{font-family: monospace !important}</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Les collections en Java</h1>
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgb41c062">1. Limites des tableaux</a></li>
+<li><a href="#orga959826">2. Introduction aux classes génériques</a>
+<ul>
+<li><a href="#orgc545d1b">2.1. Pourquoi des classes génériques ?</a></li>
+<li><a href="#org2b8c78e">2.2. Les classes 'wrappers'</a></li>
+</ul>
+</li>
+<li><a href="#orgf084624">3. Stocker un nombre indéterminé d'éléments</a>
+<ul>
+<li><a href="#org954c72d">3.1. Listes</a></li>
+<li><a href="#orgd81fdc8">3.2. Piles (<i>Stack</i>)</a></li>
+<li><a href="#org7019385">3.3. Files (<i>Queues</i>)</a></li>
+</ul>
+</li>
+<li><a href="#orgb2c3471">4. Stocker et rechercher des valeurs sans doublons</a></li>
+<li><a href="#orgfbf18cd">5. Associer des valeurs à des clés</a></li>
+<li><a href="#org390d643">6. Implémenter des classes qui peuvent être utilisées dans des Collections</a>
+<ul>
+<li><a href="#org4a4ffdc">6.1. equals</a></li>
+<li><a href="#org9281c3a">6.2. hashCode</a></li>
+<li><a href="#org24cfef8">6.3. Interface Comparable ou objet Comparator</a></li>
+</ul>
+</li>
+<li><a href="#orgf4c765e">7. Interfaces</a>
+<ul>
+<li><a href="#orge340678">7.1. List</a></li>
+<li><a href="#org1122fb1">7.2. Set</a></li>
+<li><a href="#org1356d91">7.3. Map</a></li>
+<li><a href="#orgf40ea58">7.4. Collection</a></li>
+</ul>
+</li>
+<li><a href="#org4aad85a">8. Webliographie</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb41c062" class="outline-2">
+<h2 id="orgb41c062"><span class="section-number-2">1</span> Limites des tableaux</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Si l'on peut tout faire avec les types primitifs et des tableaux comme
+"briques de base", certaines fonctionnalités nécessitent une
+implémentation non triviales pour être performantes.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Proposer un algorithme, voire une implémentation, pour
+stocker un nombre indéterminé à priori d'éléments (par
+exemple les lignes d'un fichier). Que penser de son
+efficacité ?</dd>
+</dl>
+
+
+<p>
+La bibliothèque standard met à notre disposition, dans le <i>package</i>
+<code class="src src-java">java.util</code> des classes qui implémentent les
+principales <i>structures de données</i> qui permettent de gérer
+efficacement des principaux cas d'utilisations.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga959826" class="outline-2">
+<h2 id="orga959826"><span class="section-number-2">2</span> Introduction aux classes génériques</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Les classes implémentant les structures de données sont différentes
+des classes comme <code class="src src-java">String</code> ou <code class="src src-java">Scanner</code>. En effet, elles sont <i>paramétrées</i> par un(ou plus) nom
+de classe. Par exemple : <code class="src src-java"><span style="color: #6434A3;">ArrayList</span>&lt;<span style="color: #6434A3;">String</span>&gt;</code>.
+</p>
+
+<p>
+Il s'agit de <a href="https://en.wikipedia.org/wiki/Generics_in_Java">classes génériques</a>.
+</p>
+</div>
+
+<div id="outline-container-orgc545d1b" class="outline-3">
+<h3 id="orgc545d1b"><span class="section-number-3">2.1</span> Pourquoi des classes génériques ?</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+En fait, on pourrait stocker des objets de n'importe quel type
+(n'importe quelle classe) car tous les objets peuvent être considérés
+comme des instances de la classe <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a> <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
+</p>
+
+<p>
+De telles structures de données permettraient d'avoir des collections
+<i>hétérogènes</i>, mais surtout ne permettraient pas d'assurer que des
+collections sont <i>homogènes</i>, ce qui est le cas le plus fréquent,
+perdant l'intérêt du typage statique. C'est en essayant d'utiliser une
+valeur récupérée dans une collection qu'on aurait une erreur à
+l'exécution, alors qu'on aurait voulu avoir une erreur de compilation
+à l'insertion puisque c'est là qu'était l'erreur.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Programme&nbsp;1&nbsp;: </span><a id="orgd84a2d0"></a> Erreur avec une collection hétérogène</label><pre class="src src-java"><span class="linenr"> 1: </span><span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">ArrayList</span>;
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">HeterogenousContainerError</span>{
+<span class="linenr"> 4: </span>    <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">ArrayList</span> <span style="color: #BA36A5;">data</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">ArrayList</span>();
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span>    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
+<span class="linenr"> 7: </span>        <span style="color: #0000FF;">try</span> {
+<span class="linenr"> 8: </span>            createData(<span style="color: #D0372D;">true</span>);
+<span class="linenr"> 9: </span>            createData(<span style="color: #D0372D;">true</span>);
+<span class="linenr">10: </span>            createData(<span style="color: #D0372D;">false</span>);
+<span class="linenr">11: </span>            createData(<span style="color: #D0372D;">true</span>);
+<span class="linenr">12: </span>            
+<span class="linenr">13: </span>            useData();
+<span class="linenr">14: </span>            useData();
+<span class="linenr">15: </span>            useData();
+<span class="linenr">16: </span>        }<span style="color: #0000FF;">catch</span>(<span style="color: #6434A3;">Exception</span> <span style="color: #BA36A5;">e</span>){
+<span class="linenr">17: </span>            e.printStackTrace(System.out);
+<span class="linenr">18: </span>        }
+<span class="linenr">19: </span>    }
+<span class="linenr">20: </span>    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">createData</span>(<span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">valid</span>){
+<span id="coderef-autoboxing" class="coderef-off"><span class="linenr">21: </span>        data.add( valid ? 1 : <span style="color: #008000;">"1"</span>);</span>
+<span class="linenr">22: </span>    }
+<span class="linenr">23: </span>    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">int</span> <span style="color: #006699;">useData</span>(){
+<span id="coderef-no-autounboxing" class="coderef-off"><span class="linenr">24: </span>        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">res</span> = ((<span style="color: #6434A3;">Integer</span>)data.get(data.size()-1))*2;</span>
+<span class="linenr">25: </span>        data.remove(data.size()-1);
+<span class="linenr">26: </span>        <span style="color: #0000FF;">return</span> res;
+<span class="linenr">27: </span>    }
+<span class="linenr">28: </span>}
+</pre>
+</div>
+
+<p>
+java.lang.ClassCastException: java.lang.String cannot be cast to java.lang.Integer
+	at HeterogenousContainerError.useData(HeterogenousContainerError.java:24)
+	at HeterogenousContainerError.main(HeterogenousContainerError.java:14)
+java.lang.ClassCastException: java.lang.String cannot be cast to java.lang.Integer
+	at HeterogenousContainerError.useData(HeterogenousContainerError.java:24)
+	at HeterogenousContainerError.main(HeterogenousContainerError.java:14)
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org2b8c78e" class="outline-3">
+<h3 id="org2b8c78e"><span class="section-number-3">2.2</span> Les classes 'wrappers'</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+On vient de voir que les classes implémentant les structures de
+données permettent de stocker n'importe quel <i>objet</i>. Mais on peut
+vouloir stocker des valeurs de types primitifs. Pour chaque type
+primitif, Java met à disposition une <a href="https://en.wikipedia.org/wiki/Primitive_wrapper_class">classe wrapper</a> qui permet, <a href="https://docs.oracle.com/javase/tutorial/java/data/numberclasses.html">entre
+autres</a>, de stocker la valeur de type primitif à l'intérieur d'un
+objet. Par exemple, on a vu la classe <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html">Integer</a> (plus précisément
+<code class="src src-java"><span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Integer</code>) qui correspond au type
+primitf <code class="src src-java"><span style="color: #6434A3;">int</span></code>.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Trouver les classes correspondant aux autres types
+primitifs.</dd>
+</dl>
+
+
+
+<p>
+Ces classes permettent les conversions automatique depuis/vers les
+types primitifs (<a href="https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html">autoboxing / unboxing</a>), comme par exemple à la ligne
+ <a href="#coderef-autoboxing" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-autoboxing');" onmouseout="CodeHighlightOff(this, 'coderef-autoboxing');">21</a>  du <a href="#src-HeterogenousContainerError">HeterogenousContainerError.java</a>.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Comprendre pourquoi il n'y a pas d'auto-unboxing à la
+ligne  <a href="#coderef-no-autounboxing" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-no-autounboxing');" onmouseout="CodeHighlightOff(this, 'coderef-no-autounboxing');">24</a> .</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf084624" class="outline-2">
+<h2 id="orgf084624"><span class="section-number-2">3</span> Stocker un nombre indéterminé d'éléments</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Lorsqu'on veut stocker un nombre a priori indéterminé de valeurs, suivant qu'on s'intéresse à pouvoir efficacement :
+</p>
+<ul class="org-ul">
+<li>ajouter des valeurs</li>
+<li>ajouter et retirer des valeurs :
+<ul class="org-ul">
+<li>En retirant d'abord la dernière valeur ajoutée</li>
+<li>En retirant d'abord la première valeur ajoutée</li>
+</ul></li>
+</ul>
+
+
+<p>
+Ces trois cas d'utilisation correspondent à différentes classes de la
+bibliothèque standard.
+</p>
+</div>
+<div id="outline-container-org954c72d" class="outline-3">
+<h3 id="org954c72d"><span class="section-number-3">3.1</span> Listes</h3>
+<div class="outline-text-3" id="text-3-1">
+<dl class="org-dl">
+<dt><a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">java.util.ArrayList&lt;E&gt;</a> (où E est la classe des éléments à stocker)</dt><dd>c'est
+la classe qui correspond aux listes de python. Elle permet
+d'ajouter efficacement des éléments en fin de liste avec <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#add-E-">add</a> ou
+de supprimer efficacement le dernier élément en passant <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#size--">.size()-1</a>
+en argument à <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#remove-int-">remove(int index)</a>. Elle permet aussi des accès
+<i>aléatoire</i> (<i>random access</i>) permettant d'accéder à n'importe
+quel élément en indiquant l'indice (<a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#get-int-">get(int index)</a>).</dd>
+<dt><a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html">java.util.LinkedList&lt;E&gt;</a> (où E est la classe des éléments à stocker)</dt><dd>c'est
+une <a href="https://fr.wikipedia.org/wiki/Liste_cha%C3%AEn%C3%A9e#Liste_doublement_cha%C3%AEn%C3%A9e">liste doublement chaînée</a> qui permet donc des ajout, accès et
+suppressions efficaces en début ou en fin de liste avec,
+respectivement, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#addFirst-E-">addFirst</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#getFirst--">getFirst</a> et <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#removeFirst--">removeFirst</a> ou <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#addLast-E-">addLast</a>,
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#getLast--">getLast</a> et <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#removeLast--">removeLast</a>. En revanche, elle ne permet pas d'accès
+efficace à n'importe quel élément : pour la traverser
+efficacement, il faut accéder aux éléments dans l'ordre.</dd>
+
+<dt>Exercice</dt><dd>Utiliser une ArrayList pour lire les lignes d'un
+<a href="file:///home/bernard/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/books/Spinoza/Spinoza-Ethique.txt">fichier texte</a>.</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-orgd81fdc8" class="outline-3">
+<h3 id="orgd81fdc8"><span class="section-number-3">3.2</span> Piles (<i>Stack</i>)</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Les structures de données de type <i>LIFO</i> (Last In First Out), ou
+<i>piles/(/Stack</i><sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>) (car comme sur une
+pile d'objet, on enlève le dernier élément ajouté), peuvent être
+réalisées efficacement avec une <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">java.util.ArrayList</a> en ajoutant et
+retirant en fin de liste. Elles peuvent aussi être implémentées avec
+une <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html">java.util.LinkedList</a>, soit en ajoutant et retirant en début de
+liste, soit en ajoutant et retirant en fin de liste.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7019385" class="outline-3">
+<h3 id="org7019385"><span class="section-number-3">3.3</span> Files (<i>Queues</i>)</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Les structures de données de type <i>FIFO</i> (First In First Out), ou
+<i>files</i> (<i>Queue</i>), peuvent être implémentées par une
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html">java.util.LinkedList</a> en ajoutant en début de liste et retirant en fin
+de liste (ou l'inverse).
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb2c3471" class="outline-2">
+<h2 id="orgb2c3471"><span class="section-number-2">4</span> Stocker et rechercher des valeurs sans doublons</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Si l'on veut stocker des valeurs sans doublons <sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> et pouvoir
+tester efficacement si un certain <i>ensemble</i> contient déjà une valeur
+donnée, on peut utiliser l'un des classes suivantes :
+</p>
+
+<dl class="org-dl">
+<dt><a href="https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html">HashSet&lt;E&gt;</a></dt><dd>c'est une structure de données qui stocke les éléments
+"dans le désordre" de façon à les indexer et pouvoir y
+accéder rapidement en fonction de leur valeur. Ainsi,
+la méthode <a href="https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html#contains-java.lang.Object-">contains</a> est très efficace.</dd>
+<dt><a href="https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html">TreeSet&lt;E&gt;</a></dt><dd>c'est une structure de données qui stocke les éléments
+selon un ordre, afin de pouvoir faire des recherche
+dichotomiques. Elle est en générale un peu moins performante que
+ <a href="https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html">HashSet&lt;E&gt;</a> mais permet d'accéder aux éléments dans l'ordre.</dd>
+</dl>
+
+
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Permettre de recherche efficacement si des noms de domaine
+sont dans <a href="file:///home/bernard/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/hosts/bad-hosts.txt">une liste de noms de domaines <i>blacklistés</i></a>.</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-orgfbf18cd" class="outline-2">
+<h2 id="orgfbf18cd"><span class="section-number-2">5</span> Associer des valeurs à des clés</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Les tableaux permettent d'associer une valeur (le contenu d'une case
+du tableau) à un indice compris entre 0 et <code>(nombre de cases du
+tableau - 1)</code>. On peut vouloir généraliser ce genre d'association à
+tous types de <i>clés</i>, par exemple pour pouvoir associer des adresses
+IP à des noms de domaines. C'est ce que permettent les <i>dictionnaires</i>
+en python où les tables d'association (<i>maps</i>) en Java. Elles sont
+paramétrées par deux types, le paramétrage <code class="src src-java">&lt;<span style="color: #6434A3;">K</span>,<span style="color: #6434A3;">V</span>&gt;</code> indiquant, respectivement, la classe de la clé et la
+classe de la valeur associée. On associe une valeur <code class="src src-java">v</code> de classe <code class="src src-java">V</code> à la clé
+<code class="src src-java">k</code> de type <code class="src src-java">K</code> avec la
+méthode <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#put-K-V-">put(K k, V v)</a>. On récupère la valeur associée à la clé
+<code class="src src-java">k</code> avec la méthode <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-">get(K k)</a>. Pour permettre de
+trouver efficacement la valeur associée à une clé, les clés des tables
+d'association sont organisées de façon similaire aux éléments d'un
+ensemble. On aura donc les deux classes suivantes, suivant que les
+clés soient indexées ou ordonnées :
+</p>
+
+<dl class="org-dl">
+<dt><a href="https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html">HashMap&lt;K,V&gt;</a></dt><dd>c'est une table d'association dans laquelle les clés
+sont indexées pour permettre un accès très efficace.</dd>
+<dt><a href="https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html">TreeMap&lt;K,V&gt;</a></dt><dd>c'est une table d'association dans laquelle les clés
+sont ordonnées pour permettre un accès par recherche
+dichotomique.</dd>
+
+<dt>Exercice</dt><dd>Compter le nombre d'occurrences de chaque mot dans <a href="file:///home/bernard/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/books/mots.txt">un
+fichier de mots</a>.</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org390d643" class="outline-2">
+<h2 id="org390d643"><span class="section-number-2">6</span> Implémenter des classes qui peuvent être utilisées dans des Collections</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+On peut utiliser les structures de données pour stocker des instances
+de <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html">String</a> et de toutes les classes <i>wrapper</i> de tous les types
+primitifs (<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Integer.html">Integer</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Long.html">Long</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Float.html">Float</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Double.html">Double</a>, …).  Lorsqu'on voudra pouvoir
+stocker des instances de classes que nous définirons nous-mêmes
+(cf. /Programmation Orientée Objet), il faudra prendre de soin de
+définir correctement quelques méthodes pour que les instances de nos
+classes soient utilisables dans ces structures de données.
+</p>
+</div>
+
+<div id="outline-container-org4a4ffdc" class="outline-3">
+<h3 id="org4a4ffdc"><span class="section-number-3">6.1</span> equals</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Même si elle n'est pas aussi performante que pour les ensembles
+(<i>sets</i>), les listes proposent aussi une méthode <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html#contains-java.lang.Object-">contains</a> qui permet
+de savoir si un élément est contenu dans la liste. Les tables
+d'association (<i>maps</i>) permettent efficacement, elles, de savoir si
+une clé est présente dans la table. Dans tous ces cas, il s'agit de
+trouver un élément (ou une clé) <b>égal</b> à l'argument et non pas
+seulement <b>identique</b>. Il faut donc que l'égalité soit définie, ce qui
+se fait en Java en redéfinissant la <a href="https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html">méthode equals</a>.
+</p>
+
+<p>
+Généralement, des instances seront égales lorsque tous leurs attributs
+sont égaux (au sens de leur <a href="https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html">méthode equals</a> lorsqu'il s'agit d'objets).
+</p>
+
+
+<dl class="org-dl">
+<dt>Note</dt><dd>Lorsqu'on <a href="https://jmdoudoux.developpez.com/cours/developpons/java/chap-techniques_java.php#techniques_java-2">redéfinit equals, il faut aussi redéfinir
+hashcode</a> (cf. infra).</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org9281c3a" class="outline-3">
+<h3 id="org9281c3a"><span class="section-number-3">6.2</span> hashCode</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Les structures de données basées sur des index (<a href="https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html">HashSet&lt;E&gt;</a>,
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html">HashMap&lt;K,V&gt;</a>) utilisent un code numérique associé aux valeurs de
+éléments / clés stockées. Cette valeur numérique (retournée par la
+méthode <a href="https://fr.wikipedia.org/wiki/Java_hashCode()">hashcode en java</a>) doit avoir les deux propriétés suivantes :
+</p>
+
+<dl class="org-dl">
+<dt>obligatoirement</dt><dd>deux objets égaux (au sens de la <a href="https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html">méthode equals</a>)
+doivent avoir la même valeur de hashcode.</dd>
+<dt>autant que possible</dt><dd>on essaie d'éviter les <i>collisions</i>,
+c'est-à-dire qu'on essaie d'éviter que des objets qui ne sont pas
+égaux (toujours au sens de la <a href="https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html">méthode equals</a>) aient la même
+valeur de hashcode.</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-org24cfef8" class="outline-3">
+<h3 id="org24cfef8"><span class="section-number-3">6.3</span> Interface Comparable ou objet Comparator</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Lorsque l'on utilise une structure de donnée ( <a href="https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html">TreeSet&lt;E&gt;</a>,
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html">TreeMap&lt;K,V&gt;</a>) qui ordonne ses éléments / clés, celle-ci doit pouvoir
+effectuer des comparaisons selon un <a href="https://fr.wikipedia.org/wiki/Ordre_total">ordre total</a>. On définit pour cela
+des méthodes de comparaison qui retournent un entier négatif, nul ou positif suivant que la première instance soit inférieure, égale ou supérieure à la seconde.
+</p>
+
+<p>
+Cela peut se faire de deux façons différentes en Java :
+</p>
+<ul class="org-ul">
+<li>en définissant une relation d'ordre générale toujours valable pour toutes les
+instances en implémentant l'interface <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html">Comparable</a>.</li>
+<li>de façon spécifique à une utilisation dans une structure de donnée
+en définissant une classe implémentant l'interface <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html">Comparator</a> et en
+passant une instance de cette classe à la construction de la
+structure de données.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf4c765e" class="outline-2">
+<h2 id="orgf4c765e"><span class="section-number-2">7</span> Interfaces</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+On a pu constater que plusieurs classes pouvaient offrir les mêmes
+<i>fonctionnalités</i>, avec des implémentations différentes. La
+<i>Programmation Orientée Objet</i> de Java permet de définir des
+<a href="https://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html">interfaces</a> qui expriment ces fonctionnalités. En pratique, on
+manipulera les instances autant que possible selon une interface, afin
+de laisser libre la classe d'implémentation.
+</p>
+
+<p>
+Par exemple, si l'on définit une fonction prenant en argument une
+liste, on aura intérêt à définir par exemple:
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">anyFunction</span>(<span style="color: #6434A3;">List</span>&lt;<span style="color: #6434A3;">Integer</span>&gt; <span style="color: #BA36A5;">xs</span>){
+    <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">impl&#233;mentation */</span>
+}
+</pre>
+</div>
+<p>
+Plutôt que :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">anyFunction</span>(<span style="color: #6434A3;">ArrayList</span>&lt;<span style="color: #6434A3;">Integer</span>&gt; <span style="color: #BA36A5;">xs</span>){
+    <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">impl&#233;mentation */</span>
+}
+</pre>
+</div>
+<p>
+et ou
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">anyFunction</span>(<span style="color: #6434A3;">LinkedList</span>&lt;<span style="color: #6434A3;">Integer</span>&gt; <span style="color: #BA36A5;">xs</span>){
+    <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">impl&#233;mentation */</span>
+}
+</pre>
+</div>
+
+<p>
+Sous réserve que la fonction <code class="src src-java">anyfunction</code>
+n'utilise que des fonctionnalités communes à <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a> et à <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html">LinkedList</a>
+et donc mises à déclarées dans l'interface <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>.
+</p>
+</div>
+
+
+<div id="outline-container-orge340678" class="outline-3">
+<h3 id="orge340678"><span class="section-number-3">7.1</span> List</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+<a href="https://jmdoudoux.developpez.com/cours/developpons/java/chap-collections.php#collections-3">L'interface List est implémentée par de nombreuses classes</a> et à chaque
+fois que possible, on utilisera la classe concrète aussi peu que
+possible (i.e. à l'instanciation), par exemple en écrivant :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">List</span>&lt;<span style="color: #6434A3;">String</span>&gt; <span style="color: #BA36A5;">myStrings</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">ArrayList</span>&lt;<span style="color: #6434A3;">String</span>&gt;();
+</pre>
+</div>
+<p>
+ou 
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">List</span>&lt;<span style="color: #6434A3;">String</span>&gt; <span style="color: #BA36A5;">myStrings</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">LinkedList</span>&lt;<span style="color: #6434A3;">String</span>&gt;();
+</pre>
+</div>
+
+<p>
+plutôt que :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">ArrayList</span>&lt;<span style="color: #6434A3;">String</span>&gt; <span style="color: #BA36A5;">myStrings</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">ArrayList</span>&lt;<span style="color: #6434A3;">String</span>&gt;();
+</pre>
+</div>
+<p>
+ou 
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">LinkedList</span>&lt;<span style="color: #6434A3;">String</span>&gt; <span style="color: #BA36A5;">myStrings</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">LinkedList</span>&lt;<span style="color: #6434A3;">String</span>&gt;();
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org1122fb1" class="outline-3">
+<h3 id="org1122fb1"><span class="section-number-3">7.2</span> Set</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+<a href="https://jmdoudoux.developpez.com/cours/developpons/java/chap-collections.php#collections-4">L'interface Set fait partie d'une hiérarchies de classes</a> et on
+l'utilisera à chaque fois que possible, par exemple en écrivant :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">Set</span>&lt;<span style="color: #6434A3;">String</span>&gt; <span style="color: #BA36A5;">myStrings</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">HashSet</span>&lt;<span style="color: #6434A3;">String</span>&gt;();
+</pre>
+</div>
+<p>
+ou
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">Set</span>&lt;<span style="color: #6434A3;">String</span>&gt; <span style="color: #BA36A5;">myStrings</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">TreeSet</span>&lt;<span style="color: #6434A3;">String</span>&gt;();
+</pre>
+</div>
+
+<p>
+plutôt que :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">HashSet</span>&lt;<span style="color: #6434A3;">String</span>&gt; <span style="color: #BA36A5;">myStrings</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">HashSet</span>&lt;<span style="color: #6434A3;">String</span>&gt;();
+</pre>
+</div>
+<p>
+ou
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">TreeSet</span>&lt;<span style="color: #6434A3;">String</span>&gt; <span style="color: #BA36A5;">myStrings</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">TreeSet</span>&lt;<span style="color: #6434A3;">String</span>&gt;();
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org1356d91" class="outline-3">
+<h3 id="org1356d91"><span class="section-number-3">7.3</span> Map</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+<a href="https://jmdoudoux.developpez.com/cours/developpons/java/chap-collections.php#collections-5">L'interface Map fait partie d'une hiérarchie de classes</a> et on
+l'utilisera à chaque fois que possible, par exemple en écrivant :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">Map</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Integer</span>&gt; <span style="color: #BA36A5;">stringToInt</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">HashMap</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Integer</span>&gt;();
+</pre>
+</div>
+<p>
+ou
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">Map</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Integer</span>&gt; <span style="color: #BA36A5;">stringToInt</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">TreeMap</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Integer</span>&gt;();
+</pre>
+</div>
+
+<p>
+plutôt que :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">HashMap</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Integer</span>&gt; <span style="color: #BA36A5;">stringToInt</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">HashMap</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Integer</span>&gt;();
+</pre>
+</div>
+<p>
+ou
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">TreeMap</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Integer</span>&gt; <span style="color: #BA36A5;">stringToInt</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">TreeMap</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Integer</span>&gt;();
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf40ea58" class="outline-3">
+<h3 id="orgf40ea58"><span class="section-number-3">7.4</span> Collection</h3>
+<div class="outline-text-3" id="text-7-4">
+<p>
+En fait, il y a quelques fonctionnalités qui sont communes à toutes
+les structures de données (notamment le fait de pouvoir la parcourir,
+savoir si elle est vide ou connaître sa taille). L'interface
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html">Collection</a> permet d'exprimer ce niveau d'abstraction. Lorsque cela est
+possible, on aura donc intérêt à prendre les arguments en tant que
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html">Collection</a> pour avoir le code le plus générique et réutilisable
+possible.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4aad85a" class="outline-2">
+<h2 id="org4aad85a"><span class="section-number-2">8</span> Webliographie</h2>
+<div class="outline-text-2" id="text-8">
+<ul class="org-ul">
+<li><a href="https://www.jmdoudoux.fr/java/dej/chap-collections.htm#collections">Les collections</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/collections/index.html">Tutorial officiel sur les collections</a></li>
+<li><a href="https://www.baeldung.com/java-collections-complexity">Complexité algorithmique (cf. performance) des structures de données standard en Java</a></li>
+<li><a href="http://www.iro.umontreal.ca/~dift1020/cours/ift1020/communs/Cours/C10/ComparableComparator.pdf">LEs interfaces Comparable et Comparator</a></li>
+<li><a href="https://www.baeldung.com/java-comparator-comparable">Comparators / Comparable on Baeldung</a></li>
+</ul>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Notes de bas de page: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">car toutes les classes
+en Java <a href="https://fr.wikipedia.org/wiki/H%C3%A9ritage_(informatique)">héritent</a> (cf.POO) de la classe <code class="src src-java">Object</code>.</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">Il y a une classe java.util.Stack, mais on ne
+l'utilise plus car elle n'est pas performante.</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">c'est-à-đire que
+si l'on essaie de mettre plusieurs fois des valeurs égales dans un tel
+ensemble (<i>set</i>), elle ne sera présente qu'une seule fois.</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Auteur: Bernard Hugueney</p>
+<p class="date">Created: 2019-10-09 Wed 17:59</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

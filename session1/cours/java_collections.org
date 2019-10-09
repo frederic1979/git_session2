@@ -1,0 +1,429 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; ispell-local-dictionary: "fr_FR";-*-
+
+#+TITLE: Les collections en Java
+#+AUTHOR: Bernard Hugueney
+
+#+LANGUAGE: fr
+#+LANG: fr
+#+HTML_HEAD_EXTRA: <style>*{font-family: monospace !important}</style>
+
+#+BEGIN_SRC elisp :exports none :results silent
+ (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t)
+   (java . t)
+   (python . t)))
+#+END_SRC
+
+* Limites des tableaux
+
+Si l'on peut tout faire avec les types primitifs et des tableaux comme
+"briques de base", certaines fonctionnalités nécessitent une
+implémentation non triviales pour être performantes.
+
+- Exercice :: Proposer un algorithme, voire une implémentation, pour
+              stocker un nombre indéterminé à priori d'éléments (par
+              exemple les lignes d'un fichier). Que penser de son
+              efficacité ?
+
+
+La bibliothèque standard met à notre disposition, dans le /package/
+src_java[:exports code]{java.util} des classes qui implémentent les
+principales /structures de données/ qui permettent de gérer
+efficacement des principaux cas d'utilisations.
+
+* Introduction aux classes génériques
+
+Les classes implémentant les structures de données sont différentes
+des classes comme src_java[:exports code]{String} ou src_java[:exports
+code]{Scanner}. En effet, elles sont /paramétrées/ par un(ou plus) nom
+de classe. Par exemple : src_java[:exports code]{ArrayList<String>}.
+
+Il s'agit de [[https://en.wikipedia.org/wiki/Generics_in_Java][classes génériques]].
+
+** Pourquoi des classes génériques ?
+
+En fait, on pourrait stocker des objets de n'importe quel type
+(n'importe quelle classe) car tous les objets peuvent être considérés
+comme des instances de la classe [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html][Object]] [fn:: car toutes les classes
+en Java [[https://fr.wikipedia.org/wiki/H%25C3%25A9ritage_(informatique)][héritent]] (cf.POO) de la classe src_java[:exports code]{Object}.].
+
+De telles structures de données permettraient d'avoir des collections
+/hétérogènes/, mais surtout ne permettraient pas d'assurer que des
+collections sont /homogènes/, ce qui est le cas le plus fréquent,
+perdant l'intérêt du typage statique. C'est en essayant d'utiliser une
+valeur récupérée dans une collection qu'on aurait une erreur à
+l'exécution, alors qu'on aurait voulu avoir une erreur de compilation
+à l'insertion puisque c'est là qu'était l'erreur.
+
+#+caption: <<ref:src-HeterogenousContainerError>> Erreur avec une collection hétérogène
+#+BEGIN_SRC java -r -l "(ref:%s)" -n :classname HeterogenousContainerError :results raw :exports both
+import java.util.ArrayList;
+
+public class HeterogenousContainerError{
+    static ArrayList data = new ArrayList();
+
+    public static void main(String[] args){
+	try {
+	    createData(true);
+	    createData(true);
+	    createData(false);
+	    createData(true);
+	    
+	    useData();
+	    useData();
+	    useData();
+	}catch(Exception e){
+	    e.printStackTrace(System.out);
+	}
+    }
+    public static void createData(boolean valid){
+	data.add( valid ? 1 : "1");(ref:autoboxing)
+    }
+    public static int useData(){
+	int res = ((Integer)data.get(data.size()-1))*2; (ref:no-autounboxing)
+	data.remove(data.size()-1);
+	return res;
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+java.lang.ClassCastException: java.lang.String cannot be cast to java.lang.Integer
+	at HeterogenousContainerError.useData(HeterogenousContainerError.java:24)
+	at HeterogenousContainerError.main(HeterogenousContainerError.java:14)
+
+
+** Les classes 'wrappers'
+
+On vient de voir que les classes implémentant les structures de
+données permettent de stocker n'importe quel /objet/. Mais on peut
+vouloir stocker des valeurs de types primitifs. Pour chaque type
+primitif, Java met à disposition une [[https://en.wikipedia.org/wiki/Primitive_wrapper_class][classe wrapper]] qui permet, [[https://docs.oracle.com/javase/tutorial/java/data/numberclasses.html][entre
+autres]], de stocker la valeur de type primitif à l'intérieur d'un
+objet. Par exemple, on a vu la classe [[https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html][Integer]] (plus précisément
+src_java[:exports code]{java.lang.Integer}) qui correspond au type
+primitf src_java[:exports code]{int}.
+
+- Exercice :: Trouver les classes correspondant aux autres types
+              primitifs.
+
+
+
+Ces classes permettent les conversions automatique depuis/vers les
+types primitifs ([[https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html][autoboxing / unboxing]]), comme par exemple à la ligne
+ [[(autoboxing)]]  du [[ref:src-HeterogenousContainerError][HeterogenousContainerError.java]].
+
+- Exercice :: Comprendre pourquoi il n'y a pas d'auto-unboxing à la
+              ligne  [[(no-autounboxing)]] .
+
+* Stocker un nombre indéterminé d'éléments
+
+Lorsqu'on veut stocker un nombre a priori indéterminé de valeurs, suivant qu'on s'intéresse à pouvoir efficacement :
+- ajouter des valeurs
+- ajouter et retirer des valeurs :
+  - En retirant d'abord la dernière valeur ajoutée
+  - En retirant d'abord la première valeur ajoutée
+
+
+Ces trois cas d'utilisation correspondent à différentes classes de la
+bibliothèque standard.
+** Listes
+
+- [[https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html][java.util.ArrayList<E>]] (où E est la classe des éléments à stocker) :: c'est
+     la classe qui correspond aux listes de python. Elle permet
+     d'ajouter efficacement des éléments en fin de liste avec [[https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#add-E-][add]] ou
+     de supprimer efficacement le dernier élément en passant [[https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#size--][.size()-1]]
+     en argument à [[https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#remove-int-][remove(int index)]]. Elle permet aussi des accès
+     /aléatoire/ (/random access/) permettant d'accéder à n'importe
+     quel élément en indiquant l'indice ([[https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#get-int-][get(int index)]]).
+- [[https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html][java.util.LinkedList<E>]] (où E est la classe des éléments à stocker) :: c'est
+     une [[https://fr.wikipedia.org/wiki/Liste_cha%25C3%25AEn%25C3%25A9e#Liste_doublement_cha%25C3%25AEn%25C3%25A9e][liste doublement chaînée]] qui permet donc des ajout, accès et
+     suppressions efficaces en début ou en fin de liste avec,
+     respectivement, [[https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#addFirst-E-][addFirst]], [[https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#getFirst--][getFirst]] et [[https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#removeFirst--][removeFirst]] ou [[https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#addLast-E-][addLast]],
+     [[https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#getLast--][getLast]] et [[https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#removeLast--][removeLast]]. En revanche, elle ne permet pas d'accès
+     efficace à n'importe quel élément : pour la traverser
+     efficacement, il faut accéder aux éléments dans l'ordre.
+
+- Exercice :: Utiliser une ArrayList pour lire les lignes d'un
+              [[file:~/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/books/Spinoza/Spinoza-Ethique.txt][fichier texte]].
+
+** Piles (/Stack/)
+
+Les structures de données de type /LIFO/ (Last In First Out), ou
+/piles/(/Stack/[fn::Il y a une classe java.util.Stack, mais on ne
+l'utilise plus car elle n'est pas performante.]) (car comme sur une
+pile d'objet, on enlève le dernier élément ajouté), peuvent être
+réalisées efficacement avec une [[https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html][java.util.ArrayList]] en ajoutant et
+retirant en fin de liste. Elles peuvent aussi être implémentées avec
+une [[https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html][java.util.LinkedList]], soit en ajoutant et retirant en début de
+liste, soit en ajoutant et retirant en fin de liste.
+
+** Files (/Queues/)
+
+Les structures de données de type /FIFO/ (First In First Out), ou
+/files/ (/Queue/), peuvent être implémentées par une
+[[https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html][java.util.LinkedList]] en ajoutant en début de liste et retirant en fin
+de liste (ou l'inverse).
+
+* Stocker et rechercher des valeurs sans doublons
+
+Si l'on veut stocker des valeurs sans doublons [fn:: c'est-à-đire que
+si l'on essaie de mettre plusieurs fois des valeurs égales dans un tel
+ensemble (/set/), elle ne sera présente qu'une seule fois.] et pouvoir
+tester efficacement si un certain /ensemble/ contient déjà une valeur
+donnée, on peut utiliser l'un des classes suivantes :
+
+- [[https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html][HashSet<E>]] :: c'est une structure de données qui stocke les éléments
+                "dans le désordre" de façon à les indexer et pouvoir y
+                accéder rapidement en fonction de leur valeur. Ainsi,
+                la méthode [[https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html#contains-java.lang.Object-][contains]] est très efficace.
+- [[https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html][TreeSet<E>]] :: c'est une structure de données qui stocke les éléments
+     selon un ordre, afin de pouvoir faire des recherche
+     dichotomiques. Elle est en générale un peu moins performante que
+      [[https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html][HashSet<E>]] mais permet d'accéder aux éléments dans l'ordre.
+
+
+
+- Exercice :: Permettre de recherche efficacement si des noms de domaine
+              sont dans [[file:~/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/hosts/bad-hosts.txt][une liste de noms de domaines /blacklistés/]].
+
+
+#+BEGIN_SRC python :exports none
+import re
+with open("/tmp/tmp.txt") as input, open("/tmp/tmp-words.txt", "w") as output:
+    for line in input:
+        for word in re.findall(r'\w+', line):
+            output.write(word.lower())
+            output.write('\n')
+#+END_SRC
+#+BEGIN_SRC java :exports none
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Exos1 {
+    public static void main(String[] args)throws FileNotFoundException {
+        Pattern p = Pattern.compile("\\w+", Pattern.UNICODE_CHARACTER_CLASS);
+        try(Scanner sc = new Scanner(new File(args[0]));
+            PrintStream fileOut = new PrintStream(new FileOutputStream(args[1]))){
+            for(int i=0; sc.hasNextLine(); ++i){
+                for(Matcher m1 = p.matcher(sc.nextLine()); m1.find();) {
+                    fileOut.println(m1.group());
+                }
+            }
+        }
+    }
+}
+#+END_SRC
+* Associer des valeurs à des clés
+
+Les tableaux permettent d'associer une valeur (le contenu d'une case
+du tableau) à un indice compris entre 0 et ~(nombre de cases du
+tableau - 1)~. On peut vouloir généraliser ce genre d'association à
+tous types de /clés/, par exemple pour pouvoir associer des adresses
+IP à des noms de domaines. C'est ce que permettent les /dictionnaires/
+en python où les tables d'association (/maps/) en Java. Elles sont
+paramétrées par deux types, le paramétrage src_java[:exports
+code]{<K,V>} indiquant, respectivement, la classe de la clé et la
+classe de la valeur associée. On associe une valeur src_java[:exports
+code]{v} de classe src_java[:exports code]{V} à la clé
+src_java[:exports code]{k} de type src_java[:exports code]{K} avec la
+méthode [[https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#put-K-V-][put(K k, V v)]]. On récupère la valeur associée à la clé
+src_java[:exports code]{k} avec la méthode [[https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-][get(K k)]]. Pour permettre de
+trouver efficacement la valeur associée à une clé, les clés des tables
+d'association sont organisées de façon similaire aux éléments d'un
+ensemble. On aura donc les deux classes suivantes, suivant que les
+clés soient indexées ou ordonnées :
+
+- [[https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html][HashMap<K,V>]] :: c'est une table d'association dans laquelle les clés
+     sont indexées pour permettre un accès très efficace.
+- [[https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html][TreeMap<K,V>]] :: c'est une table d'association dans laquelle les clés
+     sont ordonnées pour permettre un accès par recherche
+     dichotomique.
+
+- Exercice :: Compter le nombre d'occurrences de chaque mot dans [[file:~/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/books/mots.txt][un
+              fichier de mots]].
+
+* Implémenter des classes qui peuvent être utilisées dans des Collections
+
+On peut utiliser les structures de données pour stocker des instances
+de [[https://docs.oracle.com/javase/9/docs/api/java/lang/String.html][String]] et de toutes les classes /wrapper/ de tous les types
+primitifs ([[https://docs.oracle.com/javase/9/docs/api/java/lang/Integer.html][Integer]], [[https://docs.oracle.com/javase/9/docs/api/java/lang/Long.html][Long]], [[https://docs.oracle.com/javase/9/docs/api/java/lang/Float.html][Float]], [[https://docs.oracle.com/javase/9/docs/api/java/lang/Double.html][Double]], …).  Lorsqu'on voudra pouvoir
+stocker des instances de classes que nous définirons nous-mêmes
+(cf. /Programmation Orientée Objet), il faudra prendre de soin de
+définir correctement quelques méthodes pour que les instances de nos
+classes soient utilisables dans ces structures de données.
+
+** equals
+
+Même si elle n'est pas aussi performante que pour les ensembles
+(/sets/), les listes proposent aussi une méthode [[https://docs.oracle.com/javase/8/docs/api/java/util/List.html#contains-java.lang.Object-][contains]] qui permet
+de savoir si un élément est contenu dans la liste. Les tables
+d'association (/maps/) permettent efficacement, elles, de savoir si
+une clé est présente dans la table. Dans tous ces cas, il s'agit de
+trouver un élément (ou une clé) *égal* à l'argument et non pas
+seulement *identique*. Il faut donc que l'égalité soit définie, ce qui
+se fait en Java en redéfinissant la [[https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html][méthode equals]].
+
+Généralement, des instances seront égales lorsque tous leurs attributs
+sont égaux (au sens de leur [[https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html][méthode equals]] lorsqu'il s'agit d'objets).
+
+
+- Note :: Lorsqu'on [[https://jmdoudoux.developpez.com/cours/developpons/java/chap-techniques_java.php#techniques_java-2][redéfinit equals, il faut aussi redéfinir
+          hashcode]] (cf. infra).
+
+** hashCode
+
+Les structures de données basées sur des index ([[https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html][HashSet<E>]],
+[[https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html][HashMap<K,V>]]) utilisent un code numérique associé aux valeurs de
+éléments / clés stockées. Cette valeur numérique (retournée par la
+méthode [[https://fr.wikipedia.org/wiki/Java_hashCode()][hashcode en java]]) doit avoir les deux propriétés suivantes :
+
+- obligatoirement :: deux objets égaux (au sens de la [[https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html][méthode equals]])
+     doivent avoir la même valeur de hashcode.
+- autant que possible :: on essaie d'éviter les /collisions/,
+     c'est-à-dire qu'on essaie d'éviter que des objets qui ne sont pas
+     égaux (toujours au sens de la [[https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html][méthode equals]]) aient la même
+     valeur de hashcode.
+
+
+** Interface Comparable ou objet Comparator
+
+Lorsque l'on utilise une structure de donnée ( [[https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html][TreeSet<E>]],
+[[https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html][TreeMap<K,V>]]) qui ordonne ses éléments / clés, celle-ci doit pouvoir
+effectuer des comparaisons selon un [[https://fr.wikipedia.org/wiki/Ordre_total][ordre total]]. On définit pour cela
+des méthodes de comparaison qui retournent un entier négatif, nul ou positif suivant que la première instance soit inférieure, égale ou supérieure à la seconde.
+
+Cela peut se faire de deux façons différentes en Java :
+- en définissant une relation d'ordre générale toujours valable pour toutes les
+  instances en implémentant l'interface [[https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html][Comparable]].
+- de façon spécifique à une utilisation dans une structure de donnée
+  en définissant une classe implémentant l'interface [[https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html][Comparator]] et en
+  passant une instance de cette classe à la construction de la
+  structure de données.
+
+* Interfaces
+
+On a pu constater que plusieurs classes pouvaient offrir les mêmes
+/fonctionnalités/, avec des implémentations différentes. La
+/Programmation Orientée Objet/ de Java permet de définir des
+[[https://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html][interfaces]] qui expriment ces fonctionnalités. En pratique, on
+manipulera les instances autant que possible selon une interface, afin
+de laisser libre la classe d'implémentation.
+
+Par exemple, si l'on définit une fonction prenant en argument une
+liste, on aura intérêt à définir par exemple:
+#+BEGIN_SRC java :exports code
+public static void anyFunction(List<Integer> xs){
+    /* implémentation */
+}
+#+END_SRC
+Plutôt que :
+#+BEGIN_SRC java :exports code
+public static void anyFunction(ArrayList<Integer> xs){
+    /* implémentation */
+}
+#+END_SRC
+et ou
+#+BEGIN_SRC java :exports code
+public static void anyFunction(LinkedList<Integer> xs){
+    /* implémentation */
+}
+#+END_SRC
+
+Sous réserve que la fonction src_java[:exports code]{anyfunction}
+n'utilise que des fonctionnalités communes à [[https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html][ArrayList]] et à [[https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html][LinkedList]]
+et donc mises à déclarées dans l'interface [[https://docs.oracle.com/javase/8/docs/api/java/util/List.html][List]].
+
+
+** List
+
+[[https://jmdoudoux.developpez.com/cours/developpons/java/chap-collections.php#collections-3][L'interface List est implémentée par de nombreuses classes]] et à chaque
+fois que possible, on utilisera la classe concrète aussi peu que
+possible (i.e. à l'instanciation), par exemple en écrivant :
+#+BEGIN_SRC java :exports code
+List<String> myStrings = new ArrayList<String>();
+#+END_SRC
+ou 
+#+BEGIN_SRC java :exports code
+List<String> myStrings = new LinkedList<String>();
+#+END_SRC
+
+plutôt que :
+#+BEGIN_SRC java :exports code
+ArrayList<String> myStrings = new ArrayList<String>();
+#+END_SRC
+ou 
+#+BEGIN_SRC java :exports code
+LinkedList<String> myStrings = new LinkedList<String>();
+#+END_SRC
+
+
+** Set
+
+[[https://jmdoudoux.developpez.com/cours/developpons/java/chap-collections.php#collections-4][L'interface Set fait partie d'une hiérarchies de classes]] et on
+l'utilisera à chaque fois que possible, par exemple en écrivant :
+
+#+BEGIN_SRC java :exports code
+Set<String> myStrings = new HashSet<String>();
+#+END_SRC
+ou
+#+BEGIN_SRC java :exports code
+Set<String> myStrings = new TreeSet<String>();
+#+END_SRC
+
+plutôt que :
+#+BEGIN_SRC java :exports code
+HashSet<String> myStrings = new HashSet<String>();
+#+END_SRC
+ou
+#+BEGIN_SRC java :exports code
+TreeSet<String> myStrings = new TreeSet<String>();
+#+END_SRC
+
+
+** Map
+
+[[https://jmdoudoux.developpez.com/cours/developpons/java/chap-collections.php#collections-5][L'interface Map fait partie d'une hiérarchie de classes]] et on
+l'utilisera à chaque fois que possible, par exemple en écrivant :
+
+#+BEGIN_SRC java :exports code
+Map<String, Integer> stringToInt = new HashMap<String, Integer>();
+#+END_SRC
+ou
+#+BEGIN_SRC java :exports code
+Map<String, Integer> stringToInt = new TreeMap<String, Integer>();
+#+END_SRC
+
+plutôt que :
+#+BEGIN_SRC java :exports code
+HashMap<String, Integer> stringToInt = new HashMap<String, Integer>();
+#+END_SRC
+ou
+#+BEGIN_SRC java :exports code
+TreeMap<String, Integer> stringToInt = new TreeMap<String, Integer>();
+#+END_SRC
+
+** Collection
+
+En fait, il y a quelques fonctionnalités qui sont communes à toutes
+les structures de données (notamment le fait de pouvoir la parcourir,
+savoir si elle est vide ou connaître sa taille). L'interface
+[[https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html][Collection]] permet d'exprimer ce niveau d'abstraction. Lorsque cela est
+possible, on aura donc intérêt à prendre les arguments en tant que
+[[https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html][Collection]] pour avoir le code le plus générique et réutilisable
+possible.
+
+* Webliographie
+
+- [[https://www.jmdoudoux.fr/java/dej/chap-collections.htm#collections][Les collections]]
+- [[https://docs.oracle.com/javase/tutorial/collections/index.html][Tutorial officiel sur les collections]]
+- [[https://www.baeldung.com/java-collections-complexity][Complexité algorithmique (cf. performance) des structures de données standard en Java]]
+- [[http://www.iro.umontreal.ca/~dift1020/cours/ift1020/communs/Cours/C10/ComparableComparator.pdf][LEs interfaces Comparable et Comparator]]
+- [[https://www.baeldung.com/java-comparator-comparable][Comparators / Comparable on Baeldung]]
