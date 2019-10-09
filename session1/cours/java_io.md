@@ -1,26 +1,26 @@
-- [Utilisation de la console](#org0eb3cad)
-  - [Écriture dans la console](#org1146887)
-  - [Lecture dans la console](#orgaa6df19)
-- [Exceptions](#orge41a073)
-- [Utilisation de fichiers](#org316fc95)
-  - [Exceptions vérifiées](#orga27e9fd)
-  - [Chemin absolu ou relatif, répertoire courant](#orgbd0da6f)
-  - [Écriture dans un fichier](#org111dc98)
-  - [Lecture depuis un fichier](#org1de5cb6)
-- [<a id="orgfb80cf5"></a>Gestion des Exceptions](#orgc4503b2)
-  - [try / catch / finally](#orgb54de0f)
-  - [try avec ressources](#org62943d3)
+- [Utilisation de la console](#orgcb61258)
+  - [Écriture dans la console](#org3fd1e67)
+  - [Lecture dans la console](#org926f6e4)
+- [Exceptions](#orgef94388)
+- [Utilisation de fichiers](#org558cc74)
+  - [Exceptions vérifiées](#org74daf1f)
+  - [Chemin absolu ou relatif, répertoire courant](#orgf69d2ee)
+  - [Écriture dans un fichier](#orga59b031)
+  - [Lecture depuis un fichier](#org91eea5f)
+- [<a id="orgb86faec"></a>Gestion des Exceptions](#orga8383f2)
+  - [try / catch / finally](#org61fa669)
+  - [try avec ressources](#org2032003)
 
 
 
-<a id="org0eb3cad"></a>
+<a id="orgcb61258"></a>
 
 # Utilisation de la console
 
 Lorsqu'on exécute un programme en mode console, par exemple dans un terminal, mais les IDE ont aussi une fenêtre "Console", on peut écrire du texte à l'écran et lire du texte à saisi au clavier.
 
 
-<a id="org1146887"></a>
+<a id="org3fd1e67"></a>
 
 ## Écriture dans la console
 
@@ -37,7 +37,7 @@ Par ailleurs, il est possible de passer des tableaux en arguments.
 -   **Exercice:** Constater et comprendre le résultat d'un appel de [print](https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html#print-java.lang.String-) en passant en argument des tableaux de différents types.
 
 
-<a id="orgaa6df19"></a>
+<a id="org926f6e4"></a>
 
 ## Lecture dans la console
 
@@ -59,10 +59,10 @@ En pratique, on ne voudra généralement pas lire directement des octets en tant
 11  	int i = sc.nextInt();
 12  	System.out.println("Vous avez saisi: "+ i);
 13  	System.out.println("Saisissez un double (penser à la localisation!):");
-14  	double d = sc.nextDouble();
+14  	double d = sc.nextDouble(); // /!\ Si l'ordinateur est configuré en fr_FR, le séparateur décimal attendu est une virgule !
 15  	System.out.println("Vous avez saisi: "+ d);
 16  	System.out.println("Saisissez une ligne de caractères");
-17  	sc.nextLine(); // le dernier appel à nextDouble() n'avait pas consommé la fin de ligne !
+17  	sc.nextLine(); // /!\ le dernier appel à nextDouble() n'avait pas consommé la fin de ligne !
 18  	String line = sc.nextLine();
 19  	System.out.println("Vous avez saisi: "+ line);
 20      }
@@ -81,7 +81,7 @@ Il faut donc :
     -   **Tests:** Que se passe-t-il si l'on se rentre pas un nombre lorsqu'un nombre est attendu ?
 
 
-<a id="orge41a073"></a>
+<a id="orgef94388"></a>
 
 # Exceptions
 
@@ -109,12 +109,12 @@ Il s'agit d'une [Exception](https://docs.oracle.com/javase/tutorial/essential/ex
         -   appel d'une fonction récursive sans condition d'arrêt.
 
 
-<a id="org316fc95"></a>
+<a id="org558cc74"></a>
 
 # Utilisation de fichiers
 
 
-<a id="orga27e9fd"></a>
+<a id="org74daf1f"></a>
 
 ## Exceptions vérifiées
 
@@ -133,7 +133,7 @@ public static void main(String[] args) throws Exception{
 ```
 
 
-<a id="orgbd0da6f"></a>
+<a id="orgf69d2ee"></a>
 
 ## Chemin absolu ou relatif, répertoire courant
 
@@ -147,7 +147,7 @@ En pratique, le code d'un vrai programme ne devrait **jamais** contenir de chemi
 Lorsqu'on lance un programme depuis la console, le répertoire courant est celui dans lequel on exécute la commande pour lancer le programme. Lorsqu'on exécute un programme depuis un IDE, il faut savoir quel est le répertoire courant au lancement d'un programme. Il s'agit souvent du répertoire dans lequel est enregistré le projet mais on peut le modifier dans le configurations de lancement (de la même façon qu'on peut modifier les arguments passés au programme et récupérés dans l'argument de la fonction `public static void main(String[] args)`).
 
 
-<a id="org111dc98"></a>
+<a id="orga59b031"></a>
 
 ## Écriture dans un fichier
 
@@ -168,10 +168,10 @@ public class PrintStreamDemo {
 }
 ```
 
-Vous pouvez ensuite utiliser l'instance de [java.io.PrintStream](https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html) comme vous utiliseriez [System.out](https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#out) ou [System.err](https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#err), avec la seule différence qu'il faut appeler la méthode [close()](https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html#close--) qui fermera le fichier sous-jacent. En fait, il faudra s'assurer que cette fonction est bien appelée **dans tous les cas**, ce qui n'est pas évident dans le cas de lancement d'exceptions. Nous verrons comment faire en section [4](#orgfb80cf5).
+Vous pouvez ensuite utiliser l'instance de [java.io.PrintStream](https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html) comme vous utiliseriez [System.out](https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#out) ou [System.err](https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#err), avec la seule différence qu'il faut appeler la méthode [close()](https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html#close--) qui fermera le fichier sous-jacent. En fait, il faudra s'assurer que cette fonction est bien appelée **dans tous les cas**, ce qui n'est pas évident dans le cas de lancement d'exceptions. Nous verrons comment faire en section [4](#orgb86faec).
 
 
-<a id="org1de5cb6"></a>
+<a id="org91eea5f"></a>
 
 ## Lecture depuis un fichier
 
@@ -199,14 +199,14 @@ De même que pour l'instance de l'instance de [java.io.PrintStream](https://docs
 -   **Exercice:** Modifier le programme ci-dessus pour qu'il lise les mêmes informations que le programme `ScannerDemo` et mettre le code de lecture dans une autre fonction appelée par java\_src[:exports code]{main}.
 
 
-<a id="orgc4503b2"></a>
+<a id="orga8383f2"></a>
 
-# <a id="orgfb80cf5"></a>Gestion des Exceptions
+# <a id="orgb86faec"></a>Gestion des Exceptions
 
 En pratique, on ne peut évidemment pas se contenter de laisser les exceptions se propager. On va donc les [gérer localement](https://docs.oracle.com/javase/tutorial/essential/exceptions/handling.html) en utilisant des blocs `try` / `catch` et éventuellement `finally`.
 
 
-<a id="orgb54de0f"></a>
+<a id="org61fa669"></a>
 
 ## try / catch / finally
 
@@ -230,7 +230,7 @@ On doit utiliser un bloc `finally` lorsqu'il y a du code qui doit être exécut�
 Pour aller plus loin, [une ressource indiquant notamment comment créer ses propres types d'exceptions](https://www.jmdoudoux.fr/java/dej/chap-exceptions.htm).
 
 
-<a id="org62943d3"></a>
+<a id="org2032003"></a>
 
 ## try avec ressources
 
