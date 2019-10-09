@@ -420,6 +420,11 @@ possible, on aura donc intérêt à prendre les arguments en tant que
 [[https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html][Collection]] pour avoir le code le plus générique et réutilisable
 possible.
 
+On peut par exemple parcourir n'importe quelle collection soit [[https://www.baeldung.com/java-iterator][avec un
+Iterator]], soit avec la boucle src_java[:exports code]{for( X x : xs)}
+où src_java[:exports code]{xs} est un src_java[:exports code]{X[]} ou
+une src_java[:exports code]{Collection<X>}.
+
 * Webliographie
 
 - [[https://www.jmdoudoux.fr/java/dej/chap-collections.htm#collections][Les collections]]
