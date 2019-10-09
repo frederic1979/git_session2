@@ -425,5 +425,8 @@ possible.
 - [[https://www.jmdoudoux.fr/java/dej/chap-collections.htm#collections][Les collections]]
 - [[https://docs.oracle.com/javase/tutorial/collections/index.html][Tutorial officiel sur les collections]]
 - [[https://www.baeldung.com/java-collections-complexity][Complexité algorithmique (cf. performance) des structures de données standard en Java]]
-- [[http://www.iro.umontreal.ca/~dift1020/cours/ift1020/communs/Cours/C10/ComparableComparator.pdf][LEs interfaces Comparable et Comparator]]
+- [[https://en.wikiversity.org/wiki/Java_Collections_Overview][Résumé des différentes collections et les complexités algorithmiques
+  de leurs principales opérations]]
+- [[http://www.iro.umontreal.ca/~dift1020/cours/ift1020/communs/Cours/C10/ComparableComparator.pdf][Les interfaces Comparable et Comparator]]
 - [[https://www.baeldung.com/java-comparator-comparable][Comparators / Comparable on Baeldung]]
+
