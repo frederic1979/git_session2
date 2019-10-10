@@ -15,7 +15,6 @@
    (java . t)
    (python . t)))
 #+END_SRC
-
 * Limites des tableaux
 
 Si l'on peut tout faire avec les types primitifs et des tableaux comme
@@ -189,38 +188,6 @@ donnée, on peut utiliser l'un des classes suivantes :
 - Exercice :: Permettre de recherche efficacement si des noms de domaine
               sont dans [[file:~/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/hosts/bad-hosts.txt][une liste de noms de domaines /blacklistés/]].
 
-
-#+BEGIN_SRC python :exports none
-import re
-with open("/tmp/tmp.txt") as input, open("/tmp/tmp-words.txt", "w") as output:
-    for line in input:
-        for word in re.findall(r'\w+', line):
-            output.write(word.lower())
-            output.write('\n')
-#+END_SRC
-#+BEGIN_SRC java :exports none
-import java.io.FileNotFoundException;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class Exos1 {
-    public static void main(String[] args)throws FileNotFoundException {
-        Pattern p = Pattern.compile("\\w+", Pattern.UNICODE_CHARACTER_CLASS);
-        try(Scanner sc = new Scanner(new File(args[0]));
-            PrintStream fileOut = new PrintStream(new FileOutputStream(args[1]))){
-            for(int i=0; sc.hasNextLine(); ++i){
-                for(Matcher m1 = p.matcher(sc.nextLine()); m1.find();) {
-                    fileOut.println(m1.group());
-                }
-            }
-        }
-    }
-}
-#+END_SRC
 * Associer des valeurs à des clés
 
 Les tableaux permettent d'associer une valeur (le contenu d'une case
@@ -293,7 +260,7 @@ méthode [[https://fr.wikipedia.org/wiki/Java_hashCode()][hashcode en java]]) do
      valeur de hashcode.
 
 
-** Interface Comparable ou objet Comparator
+** <<sec:Comparable>> Interface Comparable ou objet Comparator
 
 Lorsque l'on utilise une structure de donnée ( [[https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html][TreeSet<E>]],
 [[https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html][TreeMap<K,V>]]) qui ordonne ses éléments / clés, celle-ci doit pouvoir
@@ -307,6 +274,11 @@ Cela peut se faire de deux façons différentes en Java :
   en définissant une classe implémentant l'interface [[https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html][Comparator]] et en
   passant une instance de cette classe à la construction de la
   structure de données.
+
+- Remarque :: L'interface [[https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html][Comparator]] permet de définir un ordre
+              spécifique pour des instances de n'importe quelle
+              classe. Cet ordre peut aussi être utilisé pour trier des
+              listes avec la méthode [[https://docs.oracle.com/javase/8/docs/api/java/util/List.html#sort-java.util.Comparator-][sort]].
 
 * Interfaces
 

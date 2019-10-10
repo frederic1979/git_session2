@@ -1,27 +1,27 @@
-- [Limites des tableaux](#org23034cb)
-- [Introduction aux classes génériques](#org3661122)
-  - [Pourquoi des classes génériques ?](#org83dd9ef)
-  - [Les classes 'wrappers'](#org29a6baa)
-- [Stocker un nombre indéterminé d'éléments](#orgbe4088b)
-  - [Listes](#orgbb904ef)
-  - [Piles (*Stack*)](#orgf4d160f)
-  - [Files (*Queues*)](#org0d16045)
-- [Stocker et rechercher des valeurs sans doublons](#org562f855)
-- [Associer des valeurs à des clés](#orgcf43958)
-- [Implémenter des classes qui peuvent être utilisées dans des Collections](#org0eca174)
-  - [equals](#org2330e27)
-  - [hashCode](#orgcf366b7)
-  - [Interface Comparable ou objet Comparator](#org3268424)
-- [Interfaces](#org9806d7f)
-  - [List](#org21144ed)
-  - [Set](#orgb31047d)
-  - [Map](#orgc1efd1d)
-  - [Collection](#orgb6cfcc6)
-- [Webliographie](#org055a94e)
+- [Limites des tableaux](#orgcf6a404)
+- [Introduction aux classes génériques](#orgb4e4fd6)
+  - [Pourquoi des classes génériques ?](#orgbcb474b)
+  - [Les classes 'wrappers'](#org2995cd8)
+- [Stocker un nombre indéterminé d'éléments](#org95a6120)
+  - [Listes](#org0f9f23d)
+  - [Piles (*Stack*)](#orgab7e0b8)
+  - [Files (*Queues*)](#orgb72887e)
+- [Stocker et rechercher des valeurs sans doublons](#org0ddc442)
+- [Associer des valeurs à des clés](#org35ba9ca)
+- [Implémenter des classes qui peuvent être utilisées dans des Collections](#org97399f7)
+  - [equals](#orga6a5ed8)
+  - [hashCode](#org605db4d)
+  - [<a id="org844722a"></a> Interface Comparable ou objet Comparator](#orgc266f32)
+- [Interfaces](#org9386107)
+  - [List](#org86d33ff)
+  - [Set](#orga2371c9)
+  - [Map](#org099238c)
+  - [Collection](#org79eab61)
+- [Webliographie](#org075c553)
 
 
 
-<a id="org23034cb"></a>
+<a id="orgcf6a404"></a>
 
 # Limites des tableaux
 
@@ -32,7 +32,7 @@ Si l'on peut tout faire avec les types primitifs et des tableaux comme "briques 
 La bibliothèque standard met à notre disposition, dans le *package* `java.util` des classes qui implémentent les principales *structures de données* qui permettent de gérer efficacement des principaux cas d'utilisations.
 
 
-<a id="org3661122"></a>
+<a id="orgb4e4fd6"></a>
 
 # Introduction aux classes génériques
 
@@ -41,7 +41,7 @@ Les classes implémentant les structures de données sont différentes des class
 Il s'agit de [classes génériques](https://en.wikipedia.org/wiki/Generics_in_Java).
 
 
-<a id="org83dd9ef"></a>
+<a id="orgbcb474b"></a>
 
 ## Pourquoi des classes génériques ?
 
@@ -83,7 +83,7 @@ De telles structures de données permettraient d'avoir des collections *hétéro
 java.lang.ClassCastException: java.lang.String cannot be cast to java.lang.Integer at HeterogenousContainerError.useData(HeterogenousContainerError.java:24) at HeterogenousContainerError.main(HeterogenousContainerError.java:14) java.lang.ClassCastException: java.lang.String cannot be cast to java.lang.Integer at HeterogenousContainerError.useData(HeterogenousContainerError.java:24) at HeterogenousContainerError.main(HeterogenousContainerError.java:14)
 
 
-<a id="org29a6baa"></a>
+<a id="org2995cd8"></a>
 
 ## Les classes 'wrappers'
 
@@ -96,7 +96,7 @@ Ces classes permettent les conversions automatique depuis/vers les types primiti
 -   **Exercice:** Comprendre pourquoi il n'y a pas d'auto-unboxing à la ligne 24 .
 
 
-<a id="orgbe4088b"></a>
+<a id="org95a6120"></a>
 
 # Stocker un nombre indéterminé d'éléments
 
@@ -110,7 +110,7 @@ Lorsqu'on veut stocker un nombre a priori indéterminé de valeurs, suivant qu'o
 Ces trois cas d'utilisation correspondent à différentes classes de la bibliothèque standard.
 
 
-<a id="orgbb904ef"></a>
+<a id="org0f9f23d"></a>
 
 ## Listes
 
@@ -120,21 +120,21 @@ Ces trois cas d'utilisation correspondent à différentes classes de la biblioth
 -   **Exercice:** Utiliser une ArrayList pour lire les lignes d'un [fichier texte](file:///home/bernard/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/books/Spinoza/Spinoza-Ethique.txt).
 
 
-<a id="orgf4d160f"></a>
+<a id="orgab7e0b8"></a>
 
 ## Piles (*Stack*)
 
 Les structures de données de type *LIFO* (Last In First Out), ou *piles/(/Stack*<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>) (car comme sur une pile d'objet, on enlève le dernier élément ajouté), peuvent être réalisées efficacement avec une [java.util.ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) en ajoutant et retirant en fin de liste. Elles peuvent aussi être implémentées avec une [java.util.LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html), soit en ajoutant et retirant en début de liste, soit en ajoutant et retirant en fin de liste.
 
 
-<a id="org0d16045"></a>
+<a id="orgb72887e"></a>
 
 ## Files (*Queues*)
 
 Les structures de données de type *FIFO* (First In First Out), ou *files* (*Queue*), peuvent être implémentées par une [java.util.LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html) en ajoutant en début de liste et retirant en fin de liste (ou l'inverse).
 
 
-<a id="org562f855"></a>
+<a id="org0ddc442"></a>
 
 # Stocker et rechercher des valeurs sans doublons
 
@@ -146,7 +146,7 @@ Si l'on veut stocker des valeurs sans doublons <sup><a id="fnr.3" class="footref
 -   **Exercice:** Permettre de recherche efficacement si des noms de domaine sont dans [une liste de noms de domaines *blacklistés*](file:///home/bernard/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/hosts/bad-hosts.txt).
 
 
-<a id="orgcf43958"></a>
+<a id="org35ba9ca"></a>
 
 # Associer des valeurs à des clés
 
@@ -158,14 +158,14 @@ Les tableaux permettent d'associer une valeur (le contenu d'une case du tableau)
 -   **Exercice:** Compter le nombre d'occurrences de chaque mot dans [un fichier de mots](file:///home/bernard/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/books/mots.txt).
 
 
-<a id="org0eca174"></a>
+<a id="org97399f7"></a>
 
 # Implémenter des classes qui peuvent être utilisées dans des Collections
 
 On peut utiliser les structures de données pour stocker des instances de [String](https://docs.oracle.com/javase/9/docs/api/java/lang/String.html) et de toutes les classes *wrapper* de tous les types primitifs ([Integer](https://docs.oracle.com/javase/9/docs/api/java/lang/Integer.html), [Long](https://docs.oracle.com/javase/9/docs/api/java/lang/Long.html), [Float](https://docs.oracle.com/javase/9/docs/api/java/lang/Float.html), [Double](https://docs.oracle.com/javase/9/docs/api/java/lang/Double.html), …). Lorsqu'on voudra pouvoir stocker des instances de classes que nous définirons nous-mêmes (cf. /Programmation Orientée Objet), il faudra prendre de soin de définir correctement quelques méthodes pour que les instances de nos classes soient utilisables dans ces structures de données.
 
 
-<a id="org2330e27"></a>
+<a id="orga6a5ed8"></a>
 
 ## equals
 
@@ -176,7 +176,7 @@ Généralement, des instances seront égales lorsque tous leurs attributs sont �
 -   **Note:** Lorsqu'on [redéfinit equals, il faut aussi redéfinir hashcode](https://jmdoudoux.developpez.com/cours/developpons/java/chap-techniques_java.php#techniques_java-2) (cf. infra).
 
 
-<a id="orgcf366b7"></a>
+<a id="org605db4d"></a>
 
 ## hashCode
 
@@ -186,9 +186,9 @@ Les structures de données basées sur des index ([HashSet<E>](https://docs.orac
 -   **autant que possible:** on essaie d'éviter les *collisions*, c'est-à-dire qu'on essaie d'éviter que des objets qui ne sont pas égaux (toujours au sens de la [méthode equals](https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html)) aient la même valeur de hashcode.
 
 
-<a id="org3268424"></a>
+<a id="orgc266f32"></a>
 
-## Interface Comparable ou objet Comparator
+## <a id="org844722a"></a> Interface Comparable ou objet Comparator
 
 Lorsque l'on utilise une structure de donnée ( [TreeSet<E>](https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html), [TreeMap<K,V>](https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html)) qui ordonne ses éléments / clés, celle-ci doit pouvoir effectuer des comparaisons selon un [ordre total](https://fr.wikipedia.org/wiki/Ordre_total). On définit pour cela des méthodes de comparaison qui retournent un entier négatif, nul ou positif suivant que la première instance soit inférieure, égale ou supérieure à la seconde.
 
@@ -197,8 +197,10 @@ Cela peut se faire de deux façons différentes en Java :
 -   en définissant une relation d'ordre générale toujours valable pour toutes les instances en implémentant l'interface [Comparable](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html).
 -   de façon spécifique à une utilisation dans une structure de donnée en définissant une classe implémentant l'interface [Comparator](https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html) et en passant une instance de cette classe à la construction de la structure de données.
 
+-   **Remarque:** L'interface [Comparator](https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html) permet de définir un ordre spécifique pour des instances de n'importe quelle classe. Cet ordre peut aussi être utilisé pour trier des listes avec la méthode [sort](https://docs.oracle.com/javase/8/docs/api/java/util/List.html#sort-java.util.Comparator-).
 
-<a id="org9806d7f"></a>
+
+<a id="org9386107"></a>
 
 # Interfaces
 
@@ -231,7 +233,7 @@ public static void anyFunction(LinkedList<Integer> xs){
 Sous réserve que la fonction `anyfunction` n'utilise que des fonctionnalités communes à [ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) et à [LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html) et donc mises à déclarées dans l'interface [List](https://docs.oracle.com/javase/8/docs/api/java/util/List.html).
 
 
-<a id="org21144ed"></a>
+<a id="org86d33ff"></a>
 
 ## List
 
@@ -260,7 +262,7 @@ LinkedList<String> myStrings = new LinkedList<String>();
 ```
 
 
-<a id="orgb31047d"></a>
+<a id="orga2371c9"></a>
 
 ## Set
 
@@ -289,7 +291,7 @@ TreeSet<String> myStrings = new TreeSet<String>();
 ```
 
 
-<a id="orgc1efd1d"></a>
+<a id="org099238c"></a>
 
 ## Map
 
@@ -318,7 +320,7 @@ TreeMap<String, Integer> stringToInt = new TreeMap<String, Integer>();
 ```
 
 
-<a id="orgb6cfcc6"></a>
+<a id="org79eab61"></a>
 
 ## Collection
 
@@ -327,7 +329,7 @@ En fait, il y a quelques fonctionnalités qui sont communes à toutes les struct
 On peut par exemple parcourir n'importe quelle collection soit [avec un Iterator](https://www.baeldung.com/java-iterator), soit avec la boucle `for( X x : xs)` où `xs` est un `X[]` ou une `Collection<X>`.
 
 
-<a id="org055a94e"></a>
+<a id="org075c553"></a>
 
 # Webliographie
 
