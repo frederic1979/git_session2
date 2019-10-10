@@ -91,7 +91,7 @@ public class ScannerDemo {
 #+END_SRC
 
 Il faut donc :
-1. importer la classe scr_java[:exports code]{java.util.Scanner}
+1. importer la classe src_java[:exports code]{java.util.Scanner}
 2. instancier un objet de cette classe en passant en argument du
    constructeur l'objet qui représente l'entrée standard de la
    console : src_java[:exports code]{Scanner sc = new
