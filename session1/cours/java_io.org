@@ -274,7 +274,7 @@ De même que pour l'instance de l'instance de [[https://docs.oracle.com/javase/8
 - Exercice :: Modifier le programme ci-dessus pour qu'il lise les
               mêmes informations que le programme ~ScannerDemo~ et
               mettre le code de lecture dans une autre fonction
-              appelée par java_src[:exports code]{main}.
+              appelée par src_java[:exports code]{main}.
 
 * <<sec:exceptions_handling>>Gestion des Exceptions
 
