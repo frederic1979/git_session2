@@ -1,0 +1,243 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; ispell-local-dictionary: "fr_FR";-*-
+
+#+TITLE: Initiation la Programmation Orientée Objet en Java
+#+AUTHOR: Bernard Hugueney
+
+#+LANGUAGE: fr
+#+LANG: fr
+#+HTML_HEAD_EXTRA: <style>*{font-family: monospace !important}</style>
+
+#+BEGIN_SRC elisp :exports none :results silent
+ (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t)
+   (java . t)
+   (python . t)))
+#+END_SRC
+
+
+* Principe
+Un programme est constitué de données et de code manipulant ces
+données. Les classes sont des unités de décomposition de données et du
+code qui les manipule.
+
+* Classe et objet
+- Une classe est le type d'un objet.
+
+- Un objet est une instance d'une classe
+* Classes en Java
+En Java, tout le code est implémenté sous forme de classes.
+* Packages
+Les packages sont l'organisation hiérarchique des classes
+(cf. répertoires pour les fichiers).
+
+On peut utiliser un nom complètement qualifié (/fully qualified name/)
+src_java[:exports code]{java.util.Scanner} ou utiliser des directives =import= : src_java[:exports code]{import java.util.Scanner;} ou src_java[:exports code]{import java.util.*;}.
+
+
+- Exercices :: 
+  - Créer une classe dans un package
+  - Dans un programme existant, utiliser une classe par son nom
+    complètement qualifié, puis avec un =import= spécifique, puis avec
+    un =import= de tout le contenu d'un /package/.
+
+* Interface et implémentation
+- Interface : "quoi" / ce qui est visible
+- Implémentation : "comment" / ce qui est caché
+
+On parle d'/encapsulation/. 
+
+- Exemples ::
+  - ajouter un élément dans un ensemble ([[https://docs.oracle.com/javase/8/docs/api/java/util/Set.html][Set]]), [[https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html][indexé]] ou [[https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html][ordonné]],
+    associer une valeur à une clé dans une table d'association
+    ([[https://docs.oracle.com/javase/8/docs/api/java/util/Map.html][Map]]), [[https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html][indexée]] ou [[https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html][ordonnée]].
+  - récupérer des informations sur une erreur ([[https://docs.oracle.com/javase/8/docs/api/java/lang/Throwable.html#getMessage--][Throwable]] dont les plus
+    connues sont les [[https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html][Exceptions]]), par exemple pour une erreur d'indice
+    ([[https://docs.oracle.com/javase/8/docs/api/java/lang/IndexOutOfBoundsException.html][IndexOutOfBoundsException]]) qui indiquera la valeur d'indice
+    erronée ou pour une erreur d'accès à un fichier
+    ([[https://docs.oracle.com/javase/8/docs/api/java/io/FileNotFoundException.html][FileNotFoundException]]) qui indiquera le nom du fichier
+    problématique.
+
+- Exercices :: Comparer les /signatures/ des méthodes :
+  - src_java[:exports code]{put} de src_java[:exports
+    code]{java.util.Map}, src_java[:exports code]{java.util.HashMap}
+    et src_java[:exports code]{java.util.TreeMap}
+
+  - src_java[:exports code]{getMessage} de src_java[:exports
+    code]{IndexOutOfBoundsException} et src_java[:exports
+    code]{FileNotfoundException}.
+
+* Minimisation de la compléxité
+On minimise ce qui est visible : il n'y a pas de dépendance envers ce
+qui n'est pas visible (\rightarrow possibilité d'évolutions).
+
+* Visibilités
+Les différents [[https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html][niveaux de visibilité]] indiquent quel code a accès à ce
+qui est qualifié:
+
+| qualificatif | Classe | Package | Sous-classe | Tout |
+|--------------+--------+---------+-------------+------|
+| =public=     | ✓      | ✓       | ✓           | ✓    |
+| =protected=  | ✓      | ✓       | ✓           |      |
+|              | ✓      | ✓       |             |      |
+| =private=    | ✓      |         |             |      |
+
+(sous-classe \rightarrow cf. infra héritage)
+
+- Exercices ::
+  - Créer une classe =VisiP= sans qualificatif de visibilité dans un
+    package =co.simplon.p1= avec une fonction :
+    #+BEGIN_SRC java
+static void message(){
+    System.out.println("Hello from VisiP !");
+}
+    #+END_SRC
+  - Créer une classe =Main= dans un package =co.simplon.p1= avec une
+    fonction =public static void main(String[] args)= qui essaie
+    d'appeler =VisiP.message()=.
+  - Que se passe-t'il si =Main= est dans un package =co.simplon= ?
+    Quelle(s) modification(s) faut-il faire ?
+
+* Mot clé =static=
+Ce qui est qualifié de =static= concerne la classe (n'est pas créé en
+cours d'exécution). Cf. =public static vois main(String[] args)=.
+
+* Attributs de classe
+
+On peut associer des données à une classe avec des
+/attributs/. Ceux-ci sont accessibles, selon leur visibilité, comme
+des variables avec une durée de vie qui est celle du programme.
+On accède à un attribut d'une classe comme à une fonction (/méthode/) de classe:
+#+BEGIN_SRC java
+System.out;
+Integer.MAX_VALUE;
+#+END_SRC
+
+
+* Attributs constants
+En fait, pour limiter le /couplage/ on utilise généralement des
+attributs de classe qui sont déclarés constant :
+#+BEGIN_SRC java
+public static final int NB_OF_RETRIES= 3;
+#+END_SRC
+
+** En pratique 1/2
+
+Dans la classe =VisiP=, mettre un attribut de classe =GREETING= de
+type =String= pour remplacer le ="hello"= de la classe =VisiP=.
+
+** En pratique 2/2
+Modifier la classe =Quizz= pour que la fonction =main= soit comme suit :
+#+BEGIN_SRC java
+  public static void main(String[] args){
+   for(int i=0; i != questions.length; ++i){
+       System.out.println(questions[i]);
+       String answer= in.nextLine();
+       if(answer.equals(answers[i])){
+	   score+= scores[i];
+       }
+   }
+   displayResult();
+  }
+#+END_SRC
+
+* Objets
+Lorsque l'on veut manipuler différents /valeurs/ pour un même type
+composé, l'on doit /instancier/ la classe décrivant ce type:
+#+BEGIN_SRC java
+  public class TestItem {
+      String question;
+      String answer;
+      int points;
+  }
+#+END_SRC
+On utilise le mot-clé src_java[:exports code]{new} :
+#+BEGIN_SRC java
+TestItem ti= new TestItem();
+#+END_SRC
+* Constructeurs
+On initialise les /attributs/ d'un objet à l'occasion de la
+/construction/ d'un objet. Dans une méthode d'instance (et un
+constructeur) on peut accéder directement aux attributs de l'instance.
+#+BEGIN_SRC java
+  public class TestItem {
+      public TestItem(String q, String a, int p){
+	  question= q;
+	  answer= a;
+	  points= p;
+      }
+  }
+#+END_SRC
+
+** mot clé =this=
+On peut aussi préfixer avec le mot-clé src_java[:exports code]{this} :
+#+BEGIN_SRC java
+  public class TestItem {
+      public TestItem(String question, String answer, int points){
+	  this.question= question;
+	  this.answer= answer;
+	  this.points= points;
+      }
+  }
+#+END_SRC
+* Accesseurs
+Généralement, on ne permet pas l'accès direct aux attributs, mais l'on
+utilise *si nécessaire* des /accesseurs/ : /getter/ et /setter/ :
+#+BEGIN_SRC java
+public TypeOfXXX getXXX(){
+  return xxx;
+}
+public void setXXX( TypeOfXXX xxx ){
+  this.xxx= xxx;
+}
+#+END_SRC
+* Méthodes
+Une méthode d'instance (non qualifiée par =static=) :
+- est appelée sur une instance 
+  #+BEGIN_SRC java
+  System.out.println();
+  str.equals("test");
+  #+END_SRC
+- a accès implicite aux attributs d'instance (Cf. accesseurs)
+* equals et toString
+On réimplémente (cf. infra héritage) généralement au moins les
+méthodes [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-][equals]] et [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--][toString]]. Cette dernière est appellée
+automatiquement lors d'une concaténation ou d'un affichage avec
+=println=.
+
+* Références
+En fait, tous les objets sont manipulés par
+références (comme les instances de =String=, =Integer=,…).
+
+ Cf. implications pour arguments, ==, …
+
+
+* Classes immutables
+Si tous les attributs d'instance sont constants, il n'y a pas de
+risques de modifications problématiques.
+
+* En pratique 1/2
+Modifier le programme =Quizz= pour utiliser des objets d'une classe
+=TestItem=.
+
+** Classe QuizzItem immutable
+Utiliser une classe =QuizzItem= immutable, avec une méthode qui
+retourne le nombre de points obtenus en validant ou non une réponse
+proposée.
+
+** Classe QuizzItem mutable
+Utiliser une classe =QuizzItem= mutable avec un attribut qui permette
+de reproposer la question en cas de réponse erronée.
+
+** Instances de la classe Quizz
+
+Modifier la classe =Quizz= pour que le main instancie un objet
+paramétré par le nombre d'essais:
+#+BEGIN_SRC java
+  public static void main(String[] args){
+      Quizz session= new Quizz(nbRetries);
+      session.doTest();
+      session.displayResults();
+  }
+#+END_SRC
