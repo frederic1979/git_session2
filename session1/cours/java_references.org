@@ -1,0 +1,807 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; ispell-local-dictionary: "fr_FR";-*-
+
+#+TITLE: Références en Java
+#+AUTHOR: Bernard Hugueney
+#+DATE:
+
+#+LANGUAGE: fr
+#+LANG: fr
+#+HTML_HEAD_EXTRA: <style>*{font-family: monospace !important}</style>
+
+#+BEGIN_SRC elisp :exports none :results silent
+ (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t)
+   (java . t)
+   (python . t)))
+#+END_SRC
+
+* Références en Java
+Tous les objets et tous les tableaux sont manipulés à travers des
+*références*. En fait, elles correspondent à l'adresse d'un objet ou
+d'un tableau.
+
+* Égalité et identité
+Si 'deux' valeurs sont au même endroit en mémoire, il s'agit en fait
+de la même valeurs : elles sont *identiques*.
+
+** Contra. types primitifs
+Des valeurs de types primitifs ne sont jamais *identiques*.
+*** Déclaration
+Si l'on exécute le code suivant:
+#+BEGIN_SRC java
+int score; // not a local variable
+#+END_SRC
+Il y a un =int= en mémoire.
+
+#+BEGIN_SRC ditaa :file img/ref-int-0.png
+       +-+
+score: |0|
+       +-+
+#+END_SRC
+
+*** Affectation
+#+BEGIN_SRC java
+int score= 0;
+int other= score;
+#+END_SRC
+=score= et =other= sont des =int= *égaux*.
+#+BEGIN_SRC ditaa :file img/ref-int-1.png
+       +-+
+score: |0|
+       +-+
+
+
+       +-+
+other: |0|
+       +-+
+
+#+END_SRC
+
+** Chaîne de caractères
+*** Déclaration
+Si l'on exécute le code suivant:
+#+BEGIN_SRC java
+String firstname;
+#+END_SRC
+Il n'y a *AUCUNE* chaîne de caractères en mémoire.
+
+#+BEGIN_SRC ditaa :file img/ref-string-0.png
+firstname
+#+END_SRC
+
+*** Affectation
+#+BEGIN_SRC java
+String firstname= "Bernard";
+#+END_SRC
+#+BEGIN_SRC ditaa :file img/ref-string-1.png
+
+firstname -+
+       +---+
+       |
+       v
++---------+
+|"Bernard"|
++---------+
+
+#+END_SRC
+
+*** Affectations
+#+BEGIN_SRC java
+String firstname= "Bernard";
+String other= firstname;
+#+END_SRC
+=firstname= et =other= sont des chaînes de caractères *identiques*.
+#+BEGIN_SRC ditaa :file img/ref-string-2.png
+
+firstname -+
+       +---+
+       |
+       v
++---------+
+|"Bernard"|
++---------+
+    ^
+    |
+    +---+
+        |
+other --+
+#+END_SRC
+
+*** Affectations 2
+#+BEGIN_SRC java
+String firstname= "Bernard";
+String other= firstname;
+String another= "Ber"+"nard";
+#+END_SRC
+=firstname= et =other= sont *identiques* entre elles et seulement *égales* à =another=.
+#+BEGIN_SRC ditaa :file img/ref-string-3.png
+
+firstname -+
+       +---+
+       |
+       v
++---------+
+|"Bernard"|
++---------+
+    ^
+    |
+    +---+
+        |
+other --+
+
+
+           +---------+
+another -->|"Bernard"|
+           +---------+
+#+END_SRC
+
+** Tableaux
+*** Déclaration
+Si l'on exécute le code suivant:
+#+BEGIN_SRC java
+int[] originalData;
+#+END_SRC
+Il n'y a *AUCUN* tableau en mémoire.
+
+#+BEGIN_SRC ditaa :file img/ref-array-0.png
+originalData
+#+END_SRC
+
+*** Affectation
+#+BEGIN_SRC java
+int[] originalData= {1,3,0};
+#+END_SRC
+#+BEGIN_SRC ditaa :file img/ref-array-1.png :cmdline -E
+
+originalData -+
+     +--------+
+     |
+     v
++--+--+--+
+|1 |3 |0 |
++--+--+--+
+
+#+END_SRC
+
+*** Affectations
+#+BEGIN_SRC java
+int[] originalData= {1,3,0};
+int[] other= originalData;
+#+END_SRC
+=originalData= et =other= sont des tableaux *identiques*.
+#+BEGIN_SRC ditaa :file img/ref-array-2.png :cmdline -E
+originalData -+
+     +--------+
+     |
+     v
++--+--+--+
+|1 |3 |0 |
++--+--+--+
+    ^
+    |
+    +---+
+        |
+other --+
+#+END_SRC
+
+*** Affectations 2
+#+BEGIN_SRC java
+int[] originalData= {1,3,0};
+int[] other= originalData;
+int[] another= {1,3,0};// or with new int[] and assignments
+#+END_SRC
+=originalData= et =other= sont *identiques* entre elles et seulement *égales* à =another=.
+Comment tester l'égalité ?
+#+BEGIN_SRC ditaa :file img/ref-array-3.png :cmdline -E
+
+originalData -+
+     +--------+
+     |
+     v
++--+--+--+
+|1 |3 |0 |
++--+--+--+
+    ^
+    |
+    +---+
+        |
+other --+
+
+           +--+--+--+
+another -->|1 |3 |0 |
+           +--+--+--+
+
+
+#+END_SRC
+
+** Objets
+*** Déclaration
+Si l'on exécute le code suivant:
+#+BEGIN_SRC java
+  public class Person{
+      String firstname;
+      String lastname;
+      int age;
+      public Person(String firstname, String lastname, int age){
+	  this.firstname= firstname;
+	  this.lastname= lastname;
+	  this.age= age;
+      }
+  }
+#+END_SRC
+#+BEGIN_SRC java
+Person customer;
+#+END_SRC
+Il n'y a *AUCUN* objet de classe =Person= en mémoire.
+
+#+BEGIN_SRC ditaa :file img/ref-object-0.png
+customer
+#+END_SRC
+
+*** Affectation
+#+BEGIN_SRC java
+Person customer= new Person("Clark", "Kent", 42);
+#+END_SRC
+#+BEGIN_SRC ditaa :file img/ref-object-1.png :cmdline -E
+customer -+
+     +----+
+     |
+     v
++-------------------+
+| +------+-----+--+ |
+| |Clark |Kent |42| |
+| +------+-----+--+ |
++-------------------+
+#+END_SRC
+
+*** Affectations
+#+BEGIN_SRC java
+Person customer= new Person("Clark", "Kent", 42);
+Person other= customer;
+#+END_SRC
+=customer= et =other= sont des objets *identiques*.
+#+BEGIN_SRC ditaa :file img/ref-objects-2.png :cmdline -E
+customer -+
+     +----+
+     |
+     v
++-------------------+
+| +------+-----+--+ |
+| |Clark |Kent |42| |
+| +------+-----+--+ |
++-------------------+
+    ^
+    |
+    +---+
+        |
+other --+
+#+END_SRC
+
+*** Affectations 2
+#+BEGIN_SRC java
+Person customer= new Person("Clark", "Kent", 42);
+Person other= customer;
+Person another= new Person("Clark", "Kent", 42);
+#+END_SRC
+=customer= et =other= sont *identiques* entre elles et seulement *égales* à =another=.
+Comment tester l'égalité ?
+#+BEGIN_SRC ditaa :file img/ref-object-3.png :cmdline -E
+customer -+
+     +----+
+     |
+     v
++-------------------+
+| +------+-----+--+ |
+| |Clark |Kent |42| |
+| +------+-----+--+ |
++-------------------+
+    ^
+    |
+    +---+
+        |
+other --+
+
+           +-------------------+
+           | +------+-----+--+ |
+another -->| |Clark |Kent |42| |
+           | +------+-----+--+ |
+           +-------------------+
+
+#+END_SRC
+
+*** equals()
+On redéfini la méthode [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-][equals(Object other)]]:
+#+BEGIN_SRC java
+  public class Person{
+      String firstname;
+      String lastname;
+      int age;
+      public Person(String firstname, String lastname, int age){
+	  this.firstname= firstname;
+	  this.lastname= lastname;
+	  this.age= age;
+      }
+      public boolean equals(Object other){
+	  if(other != null && (other instanceof Person)){
+	      Person otherPerson= (Person) other;
+	      if(firstname.equals(otherPerson.firstname) 
+	      && lastname.equals(otherPerson.lastname)
+		 && (age == otherPerson.age)){
+		  return true;
+	      }
+	  }
+	  return false;
+      }
+  }
+#+END_SRC
+Analyser et comprendre chacune des opérations de cette méthode.
+
+
+* Combinaisons
+** Tableaux de tableaux
+*** Déclaration
+Avec une simple déclaration, il n'y a *aucun* tableau en mémoire.
+#+BEGIN_SRC java
+int[][] data;
+#+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-array2d-0.png
+data
+#+END_SRC
+
+*** Initialisation partielle
+Si l'on ne crée qu'un seul tableau, il n'y a qu'un tableau qui *pourra* contrenir des références vers des tableaux.
+#+BEGIN_SRC java
+int[][] data= new int[2][];
+#+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-array2d-1.png :cmdline -E
+data -+
+      |
+      v
+   +-----+
+   |     |
+   +-----+
+   |     |
+   +-----+
+#+END_SRC
+
+
+*** Initialisation 
+Il faut initialiser chacune des cases de tableau de tableaux.
+#+BEGIN_SRC java
+int[][] data= new int[2][];
+for(int i=0; i != data.length; ++i){
+  data[i]= new int[2+i];
+}
+#+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-array2d-2.png :cmdline -E
+data -+
+      |
+      v
+   +-------+     +---+---+
+   |data[0]|---->|   |   |
+   +-------+     +---+---+
+   |data[1]|-+
+   +-------+ |  +---+---+---+
+             +->|   |   |   |
+                +---+---+---+
+#+END_SRC
+
+*** Affectation
+
+Si l'on ne crée pas d'autres tableaux, il n'y a pas d'autre tableau !
+#+BEGIN_SRC java
+int[][] data= new int[2][];
+for(int i=0; i != data.length; ++i){
+  data[i]= new int[2+i];
+}
+int [][] other= data;
+#+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-array2d-3.png :cmdline -E
+data -+
+      |
+      v
++->+-------+     +---+---+
+|  |data[0]|---->|   |   |
+|  +-------+     +---+---+
+|  |data[1]|-+
+|  +-------+ |  +---+---+---+
+|            +->|   |   |   |
++-+             +---+---+---+
+  |
+other
+
+#+END_SRC
+
+*** Copie superficielle
+
+Si l'on ne copie que le tableau de tableaux, seul celui-ci est
+recopié, pas son contenu.
+
+#+BEGIN_SRC java
+int[][] data= new int[2][];
+for(int i=0; i != data.length; ++i){
+  data[i]= new int[2+i];
+}
+int [][] other= new int[data.length][];
+for(int i=0; i != data.length; ++i){
+  other[i]= data[i];
+}
+#+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-array2d-4.png :cmdline -E
+data -+
+      |
+      v
+   +-------+           +---+---+
+   |data[0]|---------->|   |   |
+   +-------+      +--->+---+---+
+   |data[1]|-+    |
+   +-------+ |    |    +---+---+---+
+             +-------->|   |   |   |
+                  | +->+---+---+---+
+                  | |    
+other             | |
+ |  +--------+    | |
+ +->|other[0]|----+ |
+    +--------+      |
+    |other[1]|------+
+    +--------+  
+#+END_SRC
+
+*** Copie profonde
+
+#+BEGIN_SRC java
+  public static int[][] deepCopy(int[][] data){
+      int [][] result= new int[data.length][];
+      for(int i=0; i != data.length; ++i){
+	  result[i]= new int[data[i].length];
+	  for(int =0; j != data[i].length; ++j){
+	      result[i][j]= data[i][j];
+	  }
+      }
+      return result;
+  }
+#+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-array2d-5.png :cmdline -E
+data -+
+      |
+      v
+   +-------+           +---+---+
+   |data[0]|---------->|   |   |
+   +-------+           +---+---+
+   |data[1]|-+     
+   +-------+ |         +---+---+---+
+             +-------->|   |   |   |
+                       +---+---+---+
+
+other 
+ |  +--------+       +---+---+
+ +->|other[0]|------>|   |   |
+    +--------+       +---+---+
+    |other[1]|--+
+    +--------+  |    +---+---+---+
+                +--->|   |   |   |
+                     +---+---+---+
+#+END_SRC
+
+*** Égalité
+
+Comment tester l'égalité ?
+
+** Objets contenant des objets
+
+Soit la classe (problématique) suivante :
+#+BEGIN_SRC java
+public class ProgrammingPair {
+  Person driver;
+  Person navigator;
+  public Person getDriver(){ return driver;}
+  public void setDriver(Person driver){ this.driver= driver;}
+  public Person getNavigator(){ return navigator;}
+  public void setNavigator(Person navigator){ this.navigator= navigator;}
+
+}
+#+END_SRC
+
+*** Déclaration
+
+Encore une fois, la simple déclaration ne crée aucun objet.
+#+BEGIN_SRC java
+ProgrammingPair pair;
+#+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-object-object-0.png :cmdline -E
+pair
+#+END_SRC
+
+*** Affectations
+
+#+BEGIN_SRC java
+ProgrammingPair pair= new ProgrammingPair();
+#+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-object-object-1.png :cmdline -E
+pair-+
+     |
+     |
+     v
++---------------------+
+| +-------+---------+ |
+| |driver |navigator| |
+| +-------+---------+ |
++---------------------+
+#+END_SRC
+
+#+BEGIN_SRC java
+ProgrammingPair pair= new ProgrammingPair();
+pair.setDriver(new Person("Clark", "Kent", 42));
+pair.setNavigator(new Person("Lex", "Luthor", 45));
+#+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-object-object-2.png :cmdline -E
+pair-+
+     |
+     |
+     v
++---------------------+
+| +-------+---------+ |  +-------+---------+----+
+| |driver |navigator|-|->|"Lex"  | "Luthor"| 45 |
+| +--+----+---------+ |  +-------+---------+----+
+|    |                |
+|    |                |
++---------------------+
+     |
+     v
++-------+--------+----+
+|"Clark"| "Kent" | 42 |
++-------+--------+----+
+
+#+END_SRC
+
+#+BEGIN_SRC java
+ProgrammingPair pair= new ProgrammingPair();
+pair.setDriver(new Person("Clark", "Kent", 42));
+pair.setNavigator(new Person("Lex", "Luthor", 45));
+ProgrammingPair other= originalPair;
+#+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-object-object-3.png :cmdline -E
+  pair-+
++-+    |
+| |    |
+| v    v
+| +---------------------+
+| | +-------+---------+ |  +-------+---------+----+
+| | |driver |navigator|-|->|"Lex"  | "Luthor"| 45 |
+| | +--+----+---------+ |  +-------+---------+----+
+| |    |                |
+| |    |                |
+| +---------------------+
+|      |
+|      v
+| +-------+--------+----+
+| |"Clark"| "Kent" | 42 |
+| +-------+--------+----+
+|
++-+
+  |
+other
+#+END_SRC
+
+#+BEGIN_SRC java
+ProgrammingPair pair= new ProgrammingPair();
+pair.setDriver(new Person("Clark", "Kent", 42));
+pair.setNavigator(new Person("Lex", "Luthor", 45));
+ProgrammingPair other= new ProgrammingPair();
+other.setDriver(pair.getDriver());
+other.setNavigator(pair.getNavigator());
+#+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-object-object-4.png :cmdline -E
+  pair-+
+       |
+       |
+       v
+  +---------------------+
+  | +-------+---------+ |  +-------+---------+----+
+  | |driver |navigator|-|->|"Lex"  | "Luthor"| 45 |
+  | +--+----+---------+ |  +-------+---------+----+
+  |    |                |  ^
+  |    |                |  |
+  +---------------------+  |
+       |                   |
+       v                   |
+  +-------+--------+----+  |
+  |"Clark"| "Kent" | 42 |  |
+  +-------+--------+----+  |
+  ^                        |
+  |                        |
+  +-------+                |
+          |                |
+          |                |
+          |                |
+          |                |
+  +---------------------+  |
+  |       |             |  |
+  | +-----+-+---------+ |  |
+  | |driver |navigator|-|--+
+  | +--+----+---------+ | 
+  +---------------------+
+      ^
+      |
+other-+
+
+#+END_SRC
+
+*** clone()
+
+Pour construire un nouvel objet qui est une copie, il est
+conventionnel d'utiliser une méthode =clone=.
+
+#+BEGIN_SRC java
+  public ProgrammingPair clone(){
+      return new ProgrammingPair(driver, navigator); // this cstor should exist anyway !
+  }
+#+END_SRC
+
+#+BEGIN_SRC java
+ProgrammingPair pair= new ProgrammingPair("Clark", "Kent", 42);
+ProgrammingPair other= pair.clone();
+#+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-object-object-3.png :cmdline -E
+  pair-+
+      |
+      v
+  +---------------------+
+  | +-------+---------+ |  +-------+---------+----+
+  | |driver |navigator|-|->|"Lex"  | "Luthor"| 45 |
+  | +--+----+---------+ |  +-------+---------+----+
+  |    |                |
+  |    |                |
+  +---------------------+
+       |
+       v
+  +-------+--------+----+
+  |"Clark"| "Kent" | 42 |
+  +-------+--------+----+
+ 
+  
+other
+#+END_SRC
+
+En fait, on utilise souvent [[https://www.artima.com/intv/bloch13.html][un constructeur par copie]].
+
+*** constructeur par copie
+
+#+BEGIN_SRC java
+  public ProgrammingPair(ProgrammingPair other){
+      driver= new Person(other.driver);
+      navigator= new Person(other.navigator);
+  }
+#+END_SRC
+
+Écrire une classe =Seminar= qui comporte:
+- un attribut =coach= de type =Person=
+- un attribut =attendents= de type "tableau de Person"
+
+
+
+** Tableaux d'objets
+
+Écrire une classe =Seminar= qui comporte:
+- un attribut =coach= de type =Person=
+- un attribut =attendents= de type "tableau de Person"
+
+
+* Exercices
+
+** Tableau à deux dimensions de caractères
+
+Que fait le programme suivant ? Pourquoi ? Comment le corriger (pour qu'il affiche une croix) ?
+#+BEGIN_SRC java
+  public class DebugArr2D {
+      public static char[] initializedArray(char c, int nb){
+	  char[] res= new char[nb];
+	  for(int i=0; i != res.length; ++i){
+	      res[i]= c;
+	  }
+	  return res;
+      }
+      public static char[][] initializedArray2D(char[] arr, int nb){
+	  char[][] res= new char[nb][];
+	  for(int i=0; i != res.length; ++i){
+	      res[i]= arr;
+	  }
+	  return res;
+      }
+#+END_SRC
+
+#+BEGIN_SRC java
+      public static void display(char[][] arr2D){
+	  for(char[] row : arr2D){
+	      for(char c : row){
+		  System.out.print(c);
+	      }
+	      System.out.println();
+	  }
+      }
+      public static void main(String[] args){
+	  char[][] screen= initializedArray2D(initializedArray(' ', 20), 20);
+	  for(int i= 0; i != Math.min(screen.length, screen[0].length); ++i){
+	      screen[i][i]='X';
+	      screen[screen.length-i-1][i]='X';
+	  }
+	  display(screen);
+      }
+  }
+#+END_SRC
+
+** Tableaux à deux dimensions d'objets
+
+Que fait le programme suivant ? Pourquoi ? Comment le corriger (pour qu'il affiche une croix) ?
+
+#+BEGIN_SRC java
+class Stone{
+	private boolean firstPlayer;
+	public Stone(boolean firstPlayer) {
+		this.firstPlayer= firstPlayer;
+	}
+	public boolean isFirstPlayer() {
+		return firstPlayer;
+	}
+	public void setFirstPlayer(boolean firstPlayer) {
+		this.firstPlayer= firstPlayer;
+	}
+	public String toString() {
+		return firstPlayer ? "O":"X";
+	}
+}
+
+#+END_SRC
+
+#+BEGIN_SRC java
+public class DebugArray2DObjects {
+    public static Stone[] initializedArray(Stone s, int nb){
+	  Stone[] res= new Stone[nb];
+	  for(int i=0; i != res.length; ++i){
+	      res[i]= s;
+	  }
+	  return res;
+    }
+    public static Stone[][] initializedArray2D(Stone[] arr, int nb){
+	  Stone[][] res= new Stone[nb][];
+	  for(int i=0; i != res.length; ++i){
+	      res[i]= arr;
+	  }
+	  return res;
+    }
+#+END_SRC
+
+#+BEGIN_SRC java
+	public static void display(Stone[][] board){
+		  for(Stone[] row : board){
+		      for(Stone c : row){
+			  System.out.print(c);
+		      }
+		      System.out.println();
+		  }
+	    }
+	 public static void main(String[] args){
+		  Stone[][] screen= initializedArray2D(initializedArray(new Stone(false), 20), 20);
+		  for(int i= 0; i != Math.min(screen.length, screen[0].length); ++i){
+		      screen[i][i].setFirstPlayer(true);
+		      screen[screen.length-i-1][i].setFirstPlayer(true);
+		  }
+		  display(screen);
+	    }
+}
+
+#+END_SRC
