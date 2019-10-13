@@ -1,0 +1,74 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; ispell-local-dictionary: "fr_FR"; org-export-with-fixed-width: t -*-
+
+#+TITLE: Exercice en Java : programme de questionnaires
+#+AUTHOR: Bernard Hugueney
+
+#+LANGUAGE: fr
+#+LANG: fr
+#+HTML_HEAD_EXTRA: <style>*{font-family: monospace !important}</style>
+
+#+BEGIN_SRC elisp :exports none :results silent
+ (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t)
+   (java . t)))
+#+END_SRC
+
+* Contexte
+
+On veut réaliser un programme de questionnaires, qui permette de poser
+des questions à l'utilisateur, la bonne réponse donnant une certain nombre de points.
+
+À la fin d'une session, éventuellement en donnant plusieurs essais, le
+programme indique le score final, somme de tous les points obtenus
+pour toutes les questions.
+
+
+* Modélisation
+
+Identifier les données manipulées par le programme et proposer des
+types pour les représenter en Java.
+
+* Implémentation préliminaire
+
+** Questions/ réponses/ nombre d'essais "en dur" dans le code
+
+Écrire un programme Java qui pose les questions suivantes :
+- "Quel langage à typage statique avez-vous vu en formation ?"
+- "Quel IDE utilisez-vous ?"
+- "Quel langage à typage dynamique avez-vous vu en formation ?"
+
+Les réponses attendues étant (respectivement) :
+- "Java"
+- "IntelliJ"
+- "Python"
+
+Et le nombre de points étant (respectivement) :
+- 3
+- 1
+- 2
+
+
+** Questions/ réponses/ nombre de points lus dans un fichier
+
+Modifier le programme pour qu'il lise les données dans un fichier. Quel format de fichier proposez-vous ?
+
+
+* Réflexion sur l'architecture du programme
+
+En quoi les types primitifs ne sont-ils pas très satisfaisant pour représenter nos données ?
+
+* Évolution
+
+On voudra avoir des questionnaires plus complexes, avec des rubriques,
+voire des sous-rubriques. Un questionnaire pourra par exemple :
+
+- commencer par une simple question (e.g. "Quel IDE utilisez-vous ?", pour 1 point)
+- Poursuivre par une rubrique (e.g. "Langages de programmation")
+  contenant plusieurs questions (e.g. 2 questions "Quel langage à typage statique avez-vous vu en formation ?" et "Quel langage à typage dynamique avez-vous vu en formation ?", pour 3 et 2 points et donc un total de 5 points)
+- Puis d'autres questions ou rubriques.
+
+Une rubrique peut contenir des questions et/ou des rubriques (elles-mêmes composées de questions et/ou rubriques, etc.).
+
+Quelle modélisation proposez-vous ?
