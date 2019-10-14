@@ -701,7 +701,7 @@ En fait, on utilise plutôt [[https://www.artima.com/intv/bloch13.html][un const
 Écrire une classe src_java[:exports code]{Seminar} qui comporte:
 - un attribut src_java[:exports code]{coach} de type src_java[:exports
   code]{Person}
-- un attribut src_java[:exports code]{attendents}= de type "tableau de
+- un attribut src_java[:exports code]{attendents} de type "tableau de
   Person"
 
 * Exercices
