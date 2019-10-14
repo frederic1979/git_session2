@@ -1,0 +1,358 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; ispell-local-dictionary: "fr_FR";-*-
+
+#+TITLE: Polymorphisme dynamique en Java
+#+AUTHOR: Bernard Hugueney
+
+#+LANGUAGE: fr
+#+LANG: fr
+#+HTML_HEAD_EXTRA: <style>*{font-family: monospace !important}</style>
+
+#+BEGIN_SRC elisp :exports none :results silent
+ (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+ (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t)
+   (plantuml . t)
+   (java . t)
+   (python . t)))
+#+END_SRC
+
+* Polymorphisme dynamique
+
+Le /polymorphisme/ en programmation, c'est la possibilité d'avoir
+plusieurs /implémentations/ correspondant à un même nom, et que ce
+soit "la bonne" qui soit exécutée.
+
+On distingue deux types de polymorphismes : le polymorphisme
+/statique/ et le polymorphisme /dynamique/.
+
+** Polymorphisme statique
+
+C'est lorsque le choix de l'implémentation a lieu à la compilation. Il y a deux types de polymorphisme statique en Java :
+- la /surcharge de méthodes/ :: c'est lorsque plusieurs méthodes d'une
+     même classe [fn:: ou d'une même /hiérarchie de
+     classes/. cf. infra.] ont la même signature. Par exemple les
+     méthodes src_java[:exports code]{print} de la classe
+     [[https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html][java.io.PrintStream]].
+- la /généricité/ :: c'est lorsqu'on utilise la notation
+     src_java[:exports code]{<X>} pour paramétrer une classe ou une
+     méthodes en fonction d'un type (de classe) donné. Le paramétrage
+     est limité en Java car la seule chose qui change au niveau des
+     implémentations, c'est la vérification de type.
+
+
+** Polymorphisme dynamique
+
+Comme on va le voir, c'est lorsqu'une méthode est /redéfinie/ (et non
+pas /surchargée/), donc avec /la même signature/[fn:: Pour éviter de
+se tromper dans la signature et de surcharger en croyant redéfinir,
+Java permet d'utiliser l'annotation src_java[:exports
+code]{@Override}], pour différentes classes d'une même /hiérarchie/.
+
+* Exemple
+
+Supposons qu'on veuille implémenter un jeu de Pacman™. On doit pouvoir
+représenter les fantômes qui vont poursuivre le Pacman. S'ils ne se
+distinguaient que par leur vitesse ou même leur couleur, on pourrait
+simplement tous les implémenter par des instances d'une même classe
+avec seulement des valeurs différentes pour les attributs
+correspondants. Mais on veut pouvoir implémenter différentes
+stratégies de déplacement pour ces différents types de fantômes (par
+exemple dans la/les méthode[s] src_java[:exports code]{move}).
+
+Les deux "solutions" suivantes présentent chacunes des inconvénients :
+- implémenter tous les types de fantômes dans une même classe
+  src_java[:exports code]{Ghost}, et doter celle-ci d'un attribut
+  d'instance src_java[:exports code]{ghostType}. Ensuite, dans la
+  méthode src_java[:exports code]{move}, faire un src_java[:exports
+  code]{switch(ghostType)} pour exécuter le code correspondant au type
+  du fantôme.
+- implémenter chaque type de fantôme dans une classe spécifique
+  (e.g. src_java[:exports code]{TimidGhost}, src_java[:exports
+  code]{AgressiveGhost},…), chacune ayant son implémentation propre
+  d'une méthode src_java[:exports code]{move}.
+
+Le problème de la première "solution" est que toutes les
+implémentations sont regroupées dans une même classe qu'il faut
+modifier pour pouvoir ajouter de nouveaux types. Le problème de la
+seconde est qu'on ne peut pas manipuler les différents types de façon
+uniforme (par exemple avoir une structure de données regroupant
+ensemble tous les fantômes pour appeler leur méthode src_java[:exports
+code]{move}).
+
+* Héritage 
+C'est le même genre de problèmes qu'avaient les concepteurs de la
+bibliothèque standard de Java avec les différents types d'exceptions
+et les différents types de collections. La solution offerte par la
+/Programmation Orientée Objet/ est de faire des classes spécifiques
+qui /héritent/ d'une même classe parente (on parle aussi de classes
+dérivées d'une classe de base) et/ou qui implémentent une même
+interface.
+
+- héritage d'une classe de base ::
+#+BEGIN_SRC plantuml :file img/ghost-poo-base-class.png
+class TimidGhost
+class AgressiveGhost
+class Ghost
+
+Ghost <|-- AgressiveGhost
+Ghost <|-- TimidGhost
+#+END_SRC
+
+- héritage (implémentation) d'interface ::
+
+#+BEGIN_SRC plantuml :file img/ghost-poo-interface.png
+class TimidGhost
+class AgressiveGhost
+interface Ghost
+
+Ghost <|-- AgressiveGhost
+Ghost <|-- TimidGhost
+#+END_SRC
+
+- héritage (implémentation) d'interface et de classe de base ::
+
+#+BEGIN_SRC plantuml :file img/ghost-poo-interface-and-base-classe.png
+class TimidGhost
+class AgressiveGhost
+interface Ghost
+class DefaultGhost
+
+Ghost <|-- DefaultGhost
+DefaultGhost <|-- AgressiveGhost
+DefaultGhost <|-- TimidGhost
+#+END_SRC
+
+La relation d'héritage étant une relation "est un" (e.g. un TimidGhost
+"est un" Ghost), elle est transitive. Le dernier diagramme est donc équivalent à :
+
+#+BEGIN_SRC plantuml :file img/ghost-poo-interface-and-base-classe-2.png
+class TimidGhost
+class AgressiveGhost
+interface Ghost
+class DefaultGhost
+
+Ghost <|-- DefaultGhost
+DefaultGhost <|-- AgressiveGhost
+DefaultGhost <|-- TimidGhost
+Ghost <|-- AgressiveGhost
+Ghost <|-- TimidGhost
+#+END_SRC
+
+Grâce au [[https://fr.wikipedia.org/wiki/Principe_de_substitution_de_Liskov][principe de substitution]],la relation d'héritage étant de type
+type "est un", tout ce qu'il est possible de faire avec une instance
+d'une classe de base est aussi possible avec une instance d'une classe
+dérivée. De même, pour qu'une classe implémente une interface, elle
+doit fournir des implémentations pour toutes les méthodes de
+l'interface. Ainsi, on pourra manipuler des objets à travers une
+référence vers l'interface (ou la classe de base) :
+#+BEGIN_SRC java -r -l "(ref:%s)" -n :exports code
+// la liste en argument contient des objets de n'importe quelle classe
+// implémentant l'interface Ghost (ou héritant de la classe Ghost).
+public game(List<Ghost> ghosts, Cell[][] maze){
+    for(Ghost ghost : ghosts){
+	ghost.move(maze);// c'est la bonne implémentation de move qui est appelée ! (ref:appel-move)
+    }
+}
+#+END_SRC
+
+- Le typage statique a permis à Java (le compilateur) de vérifier /à
+  la compilation/ (d'où le /statique/) que le code à la ligne
+  [[(appel-move)]] est correct, car tout ce que l'on fait à travers les
+  références de type src_java[:exports code]{Ghost} sera possible
+  (cf. principe de substitution).
+
+- Le polymorphisme dynamique permet à Java (la JVM) de découvrir /à
+  l'exécution/ (d'où le /dynamique/) le code à exécuter pour effectuer
+  l'appel à la méthode src_java[:exports code]{move} à la ligne
+  [[(appel-move)]]. Ce code pouvant être défini dans chacune des classes
+  implémentant l'interface / héritant de la classe de base.
+
+** Interface
+
+En Java, on déclare une [[https://en.wikipedia.org/wiki/Interface_(Java)][interface]] avec le mot-clé src_java[:exports
+code]{interface} :
+#+BEGIN_SRC java -r -l "(ref:%s)" -n :exports code
+public interface Ghost {
+    // public est optionel car les méthodes d'une interface sont par défaut publiques
+    public void move(Cell[][] maze); (ref:Ghost-move)
+}
+#+END_SRC
+
+Généralement, les méthodes déclarées dans une [[http://blog.paumard.org/cours/java/chap07-heritage-interface-interface.html][interface]] n'ont pas
+d'implémentation (à la ligne [[(Ghost-move)]], on a un src_java[:exports
+code]{;} au lieu d'un bloc de code avec l'implémentation). Depuis la
+version 8 de Java, les [[https://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html][interfaces]] peuvent définir des [[https://dzone.com/articles/interface-default-methods-java][implémentations
+par défaut]]. Par exemple, une implémentation par défaut qui ne ferait
+rien :
+#+BEGIN_SRC java -r -l "(ref:%s)" -n :exports code
+public interface Ghost {
+    default public void move(Cell[][] maze){
+    }
+}
+#+END_SRC
+
+Les interfaces ne peuvent pas contenir d'attributs d'instance, donc les éventuelles implémentations par défault ne peuvent pas
+
+On indique ensuite comme suit qu'une classe implémente une interface :
+#+BEGIN_SRC java -r -l "(ref:%s)" -n :exports code
+public class AgressiveGhost implements Ghost {
+    public void move(Cell[][] maze){ (ref:AgressiveGhost-move)
+	/*
+	  Ici, l'implémentation du déplacement d'un fantôme agressif
+	 ,*/
+    }
+}
+#+END_SRC
+
+La signature de la méthode src_java[:exports code]{move} dans
+l'implémentation de la classe src_java[:exports code]{AgressiveGhost},
+à la ligne [[(AgressiveGhost-move)]] est (et doit être !) *exactement la
+même* que celle dans l'interface src_java[:exports code]{Ghost} à la
+ligne [[(Ghost-move)]]. Il ne s'agit donc pas de /surcharge/, mais de
+/redéfinition/.
+
+Une classe peut hériter de (implémenter) plusieurs interfaces et doit
+donc fournir des implémentations pour chacune des méthodes des
+interfaces implémentées pour lesquelles il n'y a pas d'implémentation
+par défaut. Si ces interfaces déclarent des implémentations par défaut
+pour la même méthode (avec la même signature, donc), il faut qu'elle
+déclare elle-même une implémentation pour lever l'ambiguïté.
+
+
+** Classe de base
+
+Une classe peut hériter (/étendre/) une classe (*et une seule*) de
+base quelconque :
+#+BEGIN_SRC java :exports code
+public class AgressiveGhost extends DefaultGhost {
+    public void move(Cell[][] maze){
+	/*
+	 ,*/
+    }
+}
+#+END_SRC
+
+Par ailleurs, si une classe ne déclare pas explicitement hériter d'une
+classe, elle hérite directement de la classe Object. Tout se passe
+comme si l'on écrivait src_java[:exports code]{extends Object}. Comme
+la relation d'héritage est transitive, toutes les classes héritent
+donc, directement ou indirectement, de la classe Object.
+
+Tout se passe alors comme si chaque instance de la classe dérivée
+'contenait' une instance de la classe de base, avec tous les attributs
+et méthodes de celle-ci. Les attributs/méthodes déclarés en
+src_java[:exports code]{private} dans la classe de base ne sont pas
+accessibles dans les classes dérivées, contrairement aux attributs
+src_java[:exports code]{protected}. Il est possible de redéfinir les
+méthodes de la classe de base dans les classes dérivées. Par exemple,
+on redéfini les méthodes src_java[:exports code]{equals} et
+src_java[:exports code]{toString} héritées de la classe
+src_java[:exports code]{Object}. Le polymorphisme dynamique assurant
+que ce soit toujours la méthode définie dans la classe la plus dérivée
+(la plus proche de la classe d'instanciation d'un objet en remontant
+dans la hiérarchie de classes parentes) qui sera exécutée.
+
+
+Dans les constructeurs de la classe dérivée, la première chose à faire
+est d'appeler un constructeur de la classe parente avec un appel à
+src_java[:exports code]{super(/*liste d'arguments éventuels*/)}
+. Sinon, tout se passe comme si le bloc d'implémentation du
+constructeur commençait par un appel implicite au constructeur par
+défaut (i.e. sans arguments) de la classe de base : src_java[:exports
+code]{super()}.
+
+Dans les méthodes, il est possible d'appeler les méthodes
+(accessibles) de la classe de base. Pour deśigner l'implémentation de
+la classe de base lorsqu'il y a une redéfinition dans la classe
+dérivée, on emploie le mot-clé src_java[:exports code]{super} :
+
+#+BEGIN_SRC java :exports code
+public class AgressiveGhost extends DefaultGhost {
+    public AgressiveGhost(){
+	super(Color.RED);
+    }
+    public void move(Cell[][] maze){
+	/*
+	 ,*/
+	super.move(maze);
+    }
+}
+#+END_SRC
+
+
+** Classe abstraite
+
+Les interfaces ne contiennent pas d'implémentation avec des attributs
+et les classes "normales" contiennent une implémentation complète et
+peuvent être instanciées. Il y a en Java un concept intermédiaire avec
+une implémentation partielle, qui ne peut être instanciée : la [[https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html][/classe
+abstraite/]].
+
+#+BEGIN_SRC java :exports code
+public abstract class DefaultGhost {
+    Color color;
+    public DefaultGhost(Color color){
+	this.color = color;
+    }
+    public abstract move(Cell[][] maze);
+}
+#+END_SRC
+
+Une classe pourra hériter de celle-ci comme d'une classe normale, mais
+devra alors fournir des implémentations pour toutes les méthodes
+abstraites pour être elle-même concrète. La classe abstraite ne peut
+pas être instanciée et toute tentative d'appeler directement le
+constructeur provoquera une erreur de compilation.
+
+* Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?
+
+Pour garantir la plus grande réutilisabilité, il faut utiliser des
+/interfaces/. En effet, elles n'imposent aucune restriction car
+n'importe quelle nouvelle classe peut toujours implémenter une
+interface. En revanche, si deux bibliothèques ou /frameworks/
+imposaient chacun que les classes héritent d'une classe, il ne serait
+pas possible de faire une classe qui fonctionne simultanément avec les
+deux, puisqu'on ne peut hériter que d'une seule classe (mais
+implémenter autant d'interfaces qu'on veut).
+
+Lorsque plusieurs classe, par exemple qui implémentent une même
+interface, ont de l'implémentation en commun, on peut factoriser
+celle-ci dans une parente. Généralement, celle-ci n'a pas vocation à
+être instanciée et l'on utilisera des classes abstraites. Dans
+l'exemple classique implémentant la taxonomie animale, pour un
+programme gérant des animaux :
+#+BEGIN_SRC plantuml :file img/animals-classes.png
+interface Animal
+interface Flying
+interface Swimming
+interface WalkingOrCrawling
+class Mammal
+class Dog
+class Cat
+
+Animal <|-- Flying
+Animal <|-- Swimming
+Animal <|-- WalkingOrCrawling
+
+WalkingOrCrawling <|-- Mammal
+Mammal <|-- Dog
+Mammal <|-- Cat
+#+END_SRC
+
+
+Il est évident que des objets de classe src_java[:exports
+code]{Mammal} ne devraient pas être instanciés : cette classe devrait
+donc être abstraite.
+
+En pratique, l'héritage de classe concrète est souvent dû à une
+évolution de programme, lorsqu'on veut ajouter une nouvelle classe
+donc le comportement est suffisamment proche de celui d'une autre
+classe pour qu'on veuille réutiliser l'implémentation de celle-ci.
+
+* Webliographie
+
+- [[http://blog.paumard.org/cours/java/chap07-heritage-interface.html][Explications sur l'héritage en Java]]
+- [[https://docs.oracle.com/javase/tutorial/java/IandI/index.html][Tutorial officiel Interfaces and Inheritance]]
+

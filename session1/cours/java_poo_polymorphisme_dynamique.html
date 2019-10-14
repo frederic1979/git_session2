@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2019-10-14 Mon 21:28 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Polymorphisme dynamique en Java</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Bernard Hugueney" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<style>*{font-family: monospace !important}</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Polymorphisme dynamique en Java</h1>
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org5eb62db">1. Polymorphisme dynamique</a>
+<ul>
+<li><a href="#orgcc6955c">1.1. Polymorphisme statique</a></li>
+<li><a href="#orgcbd63ea">1.2. Polymorphisme dynamique</a></li>
+</ul>
+</li>
+<li><a href="#org2776aa6">2. Exemple</a></li>
+<li><a href="#orga6dfac5">3. Héritage</a>
+<ul>
+<li><a href="#org2ec0ce7">3.1. Interface</a></li>
+<li><a href="#org3167099">3.2. Classe de base</a></li>
+<li><a href="#orgc5945a9">3.3. Classe abstraite</a></li>
+</ul>
+</li>
+<li><a href="#org9d5dc29">4. Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?</a></li>
+<li><a href="#org0a0f4b2">5. Webliographie</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5eb62db" class="outline-2">
+<h2 id="org5eb62db"><span class="section-number-2">1</span> Polymorphisme dynamique</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Le <i>polymorphisme</i> en programmation, c'est la possibilité d'avoir
+plusieurs <i>implémentations</i> correspondant à un même nom, et que ce
+soit "la bonne" qui soit exécutée.
+</p>
+
+<p>
+On distingue deux types de polymorphismes : le polymorphisme
+<i>statique</i> et le polymorphisme <i>dynamique</i>.
+</p>
+</div>
+
+<div id="outline-container-orgcc6955c" class="outline-3">
+<h3 id="orgcc6955c"><span class="section-number-3">1.1</span> Polymorphisme statique</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+C'est lorsque le choix de l'implémentation a lieu à la compilation. Il y a deux types de polymorphisme statique en Java :
+</p>
+<dl class="org-dl">
+<dt>la <i>surcharge de méthodes</i></dt><dd>c'est lorsque plusieurs méthodes d'une
+même classe <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> ont la même signature. Par exemple les
+méthodes <code class="src src-java">print</code> de la classe
+<a href="https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html">java.io.PrintStream</a>.</dd>
+<dt>la <i>généricité</i></dt><dd>c'est lorsqu'on utilise la notation
+<code class="src src-java">&lt;<span style="color: #6434A3;">X</span>&gt;</code> pour paramétrer une classe ou une
+méthodes en fonction d'un type (de classe) donné. Le paramétrage
+est limité en Java car la seule chose qui change au niveau des
+implémentations, c'est la vérification de type.</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-orgcbd63ea" class="outline-3">
+<h3 id="orgcbd63ea"><span class="section-number-3">1.2</span> Polymorphisme dynamique</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Comme on va le voir, c'est lorsqu'une méthode est <i>redéfinie</i> (et non
+pas <i>surchargée</i>), donc avec <i>la même signature</i><sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>, pour différentes classes d'une même <i>hiérarchie</i>.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2776aa6" class="outline-2">
+<h2 id="org2776aa6"><span class="section-number-2">2</span> Exemple</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Supposons qu'on veuille implémenter un jeu de Pacman™. On doit pouvoir
+représenter les fantômes qui vont poursuivre le Pacman. S'ils ne se
+distinguaient que par leur vitesse ou même leur couleur, on pourrait
+simplement tous les implémenter par des instances d'une même classe
+avec seulement des valeurs différentes pour les attributs
+correspondants. Mais on veut pouvoir implémenter différentes
+stratégies de déplacement pour ces différents types de fantômes (par
+exemple dans la/les méthode[s] <code class="src src-java">move</code>).
+</p>
+
+<p>
+Les deux "solutions" suivantes présentent chacunes des inconvénients :
+</p>
+<ul class="org-ul">
+<li>implémenter tous les types de fantômes dans une même classe
+<code class="src src-java">Ghost</code>, et doter celle-ci d'un attribut
+d'instance <code class="src src-java">ghostType</code>. Ensuite, dans la
+méthode <code class="src src-java">move</code>, faire un <code class="src src-java"><span style="color: #0000FF;">switch</span>(ghostType)</code> pour exécuter le code correspondant au type
+du fantôme.</li>
+<li>implémenter chaque type de fantôme dans une classe spécifique
+(e.g. <code class="src src-java">TimidGhost</code>, <code class="src src-java">AgressiveGhost</code>,…), chacune ayant son implémentation propre
+d'une méthode <code class="src src-java">move</code>.</li>
+</ul>
+
+<p>
+Le problème de la première "solution" est que toutes les
+implémentations sont regroupées dans une même classe qu'il faut
+modifier pour pouvoir ajouter de nouveaux types. Le problème de la
+seconde est qu'on ne peut pas manipuler les différents types de façon
+uniforme (par exemple avoir une structure de données regroupant
+ensemble tous les fantômes pour appeler leur méthode <code class="src src-java">move</code>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga6dfac5" class="outline-2">
+<h2 id="orga6dfac5"><span class="section-number-2">3</span> Héritage</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+C'est le même genre de problèmes qu'avaient les concepteurs de la
+bibliothèque standard de Java avec les différents types d'exceptions
+et les différents types de collections. La solution offerte par la
+<i>Programmation Orientée Objet</i> est de faire des classes spécifiques
+qui <i>héritent</i> d'une même classe parente (on parle aussi de classes
+dérivées d'une classe de base) et/ou qui implémentent une même
+interface.
+</p>
+
+<dl class="org-dl">
+<dt>héritage d'une classe de base</dt><dd></dd>
+</dl>
+
+<div class="figure">
+<p><img src="img/ghost-poo-base-class.png" alt="ghost-poo-base-class.png" />
+</p>
+</div>
+
+<dl class="org-dl">
+<dt>héritage (implémentation) d'interface</dt><dd></dd>
+</dl>
+
+
+<div class="figure">
+<p><img src="img/ghost-poo-interface.png" alt="ghost-poo-interface.png" />
+</p>
+</div>
+
+<dl class="org-dl">
+<dt>héritage (implémentation) d'interface et de classe de base</dt><dd></dd>
+</dl>
+
+
+<div class="figure">
+<p><img src="img/ghost-poo-interface-and-base-classe.png" alt="ghost-poo-interface-and-base-classe.png" />
+</p>
+</div>
+
+<p>
+La relation d'héritage étant une relation "est un" (e.g. un TimidGhost
+"est un" Ghost), elle est transitive. Le dernier diagramme est donc équivalent à :
+</p>
+
+
+<div class="figure">
+<p><img src="img/ghost-poo-interface-and-base-classe-2.png" alt="ghost-poo-interface-and-base-classe-2.png" />
+</p>
+</div>
+
+<p>
+Grâce au <a href="https://fr.wikipedia.org/wiki/Principe_de_substitution_de_Liskov">principe de substitution</a>,la relation d'héritage étant de type
+type "est un", tout ce qu'il est possible de faire avec une instance
+d'une classe de base est aussi possible avec une instance d'une classe
+dérivée. De même, pour qu'une classe implémente une interface, elle
+doit fournir des implémentations pour toutes les méthodes de
+l'interface. Ainsi, on pourra manipuler des objets à travers une
+référence vers l'interface (ou la classe de base) :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span class="linenr">1: </span><span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">la liste en argument contient des objets de n'importe quelle classe</span>
+<span class="linenr">2: </span><span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">impl&#233;mentant l'interface Ghost (ou h&#233;ritant de la classe Ghost).</span>
+<span class="linenr">3: </span><span style="color: #0000FF;">public</span> <span style="color: #006699;">game</span>(<span style="color: #6434A3;">List</span>&lt;<span style="color: #6434A3;">Ghost</span>&gt; <span style="color: #BA36A5;">ghosts</span>, <span style="color: #6434A3;">Cell</span>[][] <span style="color: #BA36A5;">maze</span>){
+<span class="linenr">4: </span>    <span style="color: #0000FF;">for</span>(<span style="color: #6434A3;">Ghost</span> <span style="color: #BA36A5;">ghost</span> : ghosts){
+<span id="coderef-appel-move" class="coderef-off"><span class="linenr">5: </span>        ghost.move(maze);<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">c'est la bonne impl&#233;mentation de move qui est appel&#233;e !</span></span>
+<span class="linenr">6: </span>    }
+<span class="linenr">7: </span>}
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Le typage statique a permis à Java (le compilateur) de vérifier <i>à
+la compilation</i> (d'où le <i>statique</i>) que le code à la ligne
+<a href="#coderef-appel-move" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-appel-move');" onmouseout="CodeHighlightOff(this, 'coderef-appel-move');">5</a> est correct, car tout ce que l'on fait à travers les
+références de type <code class="src src-java">Ghost</code> sera possible
+(cf. principe de substitution).</li>
+
+<li>Le polymorphisme dynamique permet à Java (la JVM) de découvrir <i>à
+l'exécution</i> (d'où le <i>dynamique</i>) le code à exécuter pour effectuer
+l'appel à la méthode <code class="src src-java">move</code> à la ligne
+<a href="#coderef-appel-move" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-appel-move');" onmouseout="CodeHighlightOff(this, 'coderef-appel-move');">5</a>. Ce code pouvant être défini dans chacune des classes
+implémentant l'interface / héritant de la classe de base.</li>
+</ul>
+</div>
+
+<div id="outline-container-org2ec0ce7" class="outline-3">
+<h3 id="org2ec0ce7"><span class="section-number-3">3.1</span> Interface</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+En Java, on déclare une <a href="https://en.wikipedia.org/wiki/Interface_(Java)">interface</a> avec le mot-clé <code class="src src-java"><span style="color: #0000FF;">interface</span></code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span class="linenr">1: </span><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">Ghost</span> {
+<span class="linenr">2: </span>    <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">public est optionel car les m&#233;thodes d'une interface sont par d&#233;faut publiques</span>
+<span id="coderef-Ghost-move" class="coderef-off"><span class="linenr">3: </span>    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">move</span>(<span style="color: #6434A3;">Cell</span>[][] <span style="color: #BA36A5;">maze</span>);</span>
+<span class="linenr">4: </span>}
+</pre>
+</div>
+
+<p>
+Généralement, les méthodes déclarées dans une <a href="http://blog.paumard.org/cours/java/chap07-heritage-interface-interface.html">interface</a> n'ont pas
+d'implémentation (à la ligne <a href="#coderef-Ghost-move" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-Ghost-move');" onmouseout="CodeHighlightOff(this, 'coderef-Ghost-move');">3</a>, on a un <code class="src src-java">;</code> au lieu d'un bloc de code avec l'implémentation). Depuis la
+version 8 de Java, les <a href="https://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html">interfaces</a> peuvent définir des <a href="https://dzone.com/articles/interface-default-methods-java">implémentations
+par défaut</a>. Par exemple, une implémentation par défaut qui ne ferait
+rien :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span class="linenr">1: </span><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">Ghost</span> {
+<span class="linenr">2: </span>    <span style="color: #0000FF;">default</span> <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">move</span>(<span style="color: #6434A3;">Cell</span>[][] <span style="color: #BA36A5;">maze</span>){
+<span class="linenr">3: </span>    }
+<span class="linenr">4: </span>}
+</pre>
+</div>
+
+<p>
+Les interfaces ne peuvent pas contenir d'attributs d'instance, donc les éventuelles implémentations par défault ne peuvent pas
+</p>
+
+<p>
+On indique ensuite comme suit qu'une classe implémente une interface :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span class="linenr">1: </span><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">AgressiveGhost</span> <span style="color: #0000FF;">implements</span> <span style="color: #6434A3;">Ghost</span> {
+<span id="coderef-AgressiveGhost-move" class="coderef-off"><span class="linenr">2: </span>    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">move</span>(<span style="color: #6434A3;">Cell</span>[][] <span style="color: #BA36A5;">maze</span>){</span>
+<span class="linenr">3: </span>        <span style="color: #8D8D84;">/*</span>
+<span class="linenr">4: </span><span style="color: #8D8D84; font-style: italic;">          Ici, l'impl&#233;mentation du d&#233;placement d'un fant&#244;me agressif</span>
+<span class="linenr">5: </span><span style="color: #8D8D84; font-style: italic;">         */</span>
+<span class="linenr">6: </span>    }
+<span class="linenr">7: </span>}
+</pre>
+</div>
+
+<p>
+La signature de la méthode <code class="src src-java">move</code> dans
+l'implémentation de la classe <code class="src src-java">AgressiveGhost</code>,
+à la ligne <a href="#coderef-AgressiveGhost-move" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-AgressiveGhost-move');" onmouseout="CodeHighlightOff(this, 'coderef-AgressiveGhost-move');">2</a> est (et doit être !) <b>exactement la
+même</b> que celle dans l'interface <code class="src src-java">Ghost</code> à la
+ligne <a href="#coderef-Ghost-move" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-Ghost-move');" onmouseout="CodeHighlightOff(this, 'coderef-Ghost-move');">3</a>. Il ne s'agit donc pas de <i>surcharge</i>, mais de
+<i>redéfinition</i>.
+</p>
+
+<p>
+Une classe peut hériter de (implémenter) plusieurs interfaces et doit
+donc fournir des implémentations pour chacune des méthodes des
+interfaces implémentées pour lesquelles il n'y a pas d'implémentation
+par défaut. Si ces interfaces déclarent des implémentations par défaut
+pour la même méthode (avec la même signature, donc), il faut qu'elle
+déclare elle-même une implémentation pour lever l'ambiguïté.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org3167099" class="outline-3">
+<h3 id="org3167099"><span class="section-number-3">3.2</span> Classe de base</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Une classe peut hériter (<i>étendre</i>) une classe (<b>et une seule</b>) de
+base quelconque :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">AgressiveGhost</span> <span style="color: #0000FF;">extends</span> <span style="color: #6434A3;">DefaultGhost</span> {
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">move</span>(<span style="color: #6434A3;">Cell</span>[][] <span style="color: #BA36A5;">maze</span>){
+        <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">         */</span>
+    }
+}
+</pre>
+</div>
+
+<p>
+Par ailleurs, si une classe ne déclare pas explicitement hériter d'une
+classe, elle hérite directement de la classe Object. Tout se passe
+comme si l'on écrivait <code class="src src-java"><span style="color: #0000FF;">extends</span> <span style="color: #6434A3;">Object</span></code>. Comme
+la relation d'héritage est transitive, toutes les classes héritent
+donc, directement ou indirectement, de la classe Object.
+</p>
+
+<p>
+Tout se passe alors comme si chaque instance de la classe dérivée
+'contenait' une instance de la classe de base, avec tous les attributs
+et méthodes de celle-ci. Les attributs/méthodes déclarés en
+<code class="src src-java"><span style="color: #0000FF;">private</span></code> dans la classe de base ne sont pas
+accessibles dans les classes dérivées, contrairement aux attributs
+<code class="src src-java"><span style="color: #0000FF;">protected</span></code>. Il est possible de redéfinir les
+méthodes de la classe de base dans les classes dérivées. Par exemple,
+on redéfini les méthodes <code class="src src-java">equals</code> et
+<code class="src src-java">toString</code> héritées de la classe
+<code class="src src-java">Object</code>. Le polymorphisme dynamique assurant
+que ce soit toujours la méthode définie dans la classe la plus dérivée
+(la plus proche de la classe d'instanciation d'un objet en remontant
+dans la hiérarchie de classes parentes) qui sera exécutée.
+</p>
+
+
+<p>
+Dans les constructeurs de la classe dérivée, la première chose à faire
+est d'appeler un constructeur de la classe parente avec un appel à
+<code class="src src-java"><span style="color: #0000FF;">super</span>(<span style="color: #8D8D84;">/*</span><span style="color: #8D8D84; font-style: italic;">liste d'arguments &#233;ventuels*/</span>)</code>
+. Sinon, tout se passe comme si le bloc d'implémentation du
+constructeur commençait par un appel implicite au constructeur par
+défaut (i.e. sans arguments) de la classe de base : <code class="src src-java"><span style="color: #0000FF;">super</span>()</code>.
+</p>
+
+<p>
+Dans les méthodes, il est possible d'appeler les méthodes
+(accessibles) de la classe de base. Pour deśigner l'implémentation de
+la classe de base lorsqu'il y a une redéfinition dans la classe
+dérivée, on emploie le mot-clé <code class="src src-java"><span style="color: #0000FF;">super</span></code> :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">AgressiveGhost</span> <span style="color: #0000FF;">extends</span> <span style="color: #6434A3;">DefaultGhost</span> {
+    <span style="color: #0000FF;">public</span> <span style="color: #006699;">AgressiveGhost</span>(){
+        <span style="color: #0000FF;">super</span>(<span style="color: #D0372D;">Color</span>.RED);
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">move</span>(<span style="color: #6434A3;">Cell</span>[][] <span style="color: #BA36A5;">maze</span>){
+        <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">         */</span>
+        <span style="color: #0000FF;">super</span>.move(maze);
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc5945a9" class="outline-3">
+<h3 id="orgc5945a9"><span class="section-number-3">3.3</span> Classe abstraite</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Les interfaces ne contiennent pas d'implémentation avec des attributs
+et les classes "normales" contiennent une implémentation complète et
+peuvent être instanciées. Il y a en Java un concept intermédiaire avec
+une implémentation partielle, qui ne peut être instanciée : la <a href="https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html"><i>classe
+abstraite</i></a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">abstract</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">DefaultGhost</span> {
+    <span style="color: #6434A3;">Color</span> <span style="color: #BA36A5;">color</span>;
+    <span style="color: #0000FF;">public</span> <span style="color: #006699;">DefaultGhost</span>(<span style="color: #6434A3;">Color</span> <span style="color: #BA36A5;">color</span>){
+        <span style="color: #0000FF;">this</span>.color = color;
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">abstract</span> <span style="color: #006699;">move</span>(<span style="color: #6434A3;">Cell</span>[][] <span style="color: #BA36A5;">maze</span>);
+}
+</pre>
+</div>
+
+<p>
+Une classe pourra hériter de celle-ci comme d'une classe normale, mais
+devra alors fournir des implémentations pour toutes les méthodes
+abstraites pour être elle-même concrète. La classe abstraite ne peut
+pas être instanciée et toute tentative d'appeler directement le
+constructeur provoquera une erreur de compilation.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9d5dc29" class="outline-2">
+<h2 id="org9d5dc29"><span class="section-number-2">4</span> Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Pour garantir la plus grande réutilisabilité, il faut utiliser des
+<i>interfaces</i>. En effet, elles n'imposent aucune restriction car
+n'importe quelle nouvelle classe peut toujours implémenter une
+interface. En revanche, si deux bibliothèques ou <i>frameworks</i>
+imposaient chacun que les classes héritent d'une classe, il ne serait
+pas possible de faire une classe qui fonctionne simultanément avec les
+deux, puisqu'on ne peut hériter que d'une seule classe (mais
+implémenter autant d'interfaces qu'on veut).
+</p>
+
+<p>
+Lorsque plusieurs classe, par exemple qui implémentent une même
+interface, ont de l'implémentation en commun, on peut factoriser
+celle-ci dans une parente. Généralement, celle-ci n'a pas vocation à
+être instanciée et l'on utilisera des classes abstraites. Dans
+l'exemple classique implémentant la taxonomie animale, pour un
+programme gérant des animaux :
+</p>
+
+<div class="figure">
+<p><img src="img/animals-classes.png" alt="animals-classes.png" />
+</p>
+</div>
+
+
+<p>
+Il est évident que des objets de classe <code class="src src-java">Mammal</code> ne devraient pas être instanciés : cette classe devrait
+donc être abstraite.
+</p>
+
+<p>
+En pratique, l'héritage de classe concrète est souvent dû à une
+évolution de programme, lorsqu'on veut ajouter une nouvelle classe
+donc le comportement est suffisamment proche de celui d'une autre
+classe pour qu'on veuille réutiliser l'implémentation de celle-ci.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0a0f4b2" class="outline-2">
+<h2 id="org0a0f4b2"><span class="section-number-2">5</span> Webliographie</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li><a href="http://blog.paumard.org/cours/java/chap07-heritage-interface.html">Explications sur l'héritage en Java</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/IandI/index.html">Tutorial officiel Interfaces and Inheritance</a></li>
+</ul>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Notes de bas de page: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">ou d'une même <i>hiérarchie de
+classes</i>. cf. infra.</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">Pour éviter de
+se tromper dans la signature et de surcharger en croyant redéfinir,
+Java permet d'utiliser l'annotation <code class="src src-java"><span style="color: #D0372D;">@Override</span></code></p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Auteur: Bernard Hugueney</p>
+<p class="date">Created: 2019-10-14 Mon 21:28</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
