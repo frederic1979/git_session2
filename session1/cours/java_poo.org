@@ -33,14 +33,15 @@ Les packages sont l'organisation hiérarchique des classes
 (cf. répertoires pour les fichiers).
 
 On peut utiliser un nom complètement qualifié (/fully qualified name/)
-src_java[:exports code]{java.util.Scanner} ou utiliser des directives =import= : src_java[:exports code]{import java.util.Scanner;} ou src_java[:exports code]{import java.util.*;}.
+src_java[:exports code]{java.util.Scanner} ou utiliser des directives src_java[:exports code]{import} : src_java[:exports code]{import java.util.Scanner;} ou src_java[:exports code]{import java.util.*;}.
 
 
 - Exercices :: 
   - Créer une classe dans un package
   - Dans un programme existant, utiliser une classe par son nom
-    complètement qualifié, puis avec un =import= spécifique, puis avec
-    un =import= de tout le contenu d'un /package/.
+    complètement qualifié, puis avec un src_java[:exports
+    code]{import} spécifique, puis avec un src_java[:exports
+    code]{import} de tout le contenu d'un /package/.
 
 * Interface et implémentation
 - Interface : "quoi" / ce qui est visible
@@ -86,22 +87,24 @@ qui est qualifié:
 (sous-classe \rightarrow cf. infra héritage)
 
 - Exercices ::
-  - Créer une classe =VisiP= sans qualificatif de visibilité dans un
-    package =co.simplon.p1= avec une fonction :
+  - Créer une classe src_java[:exports code]{VisiP} sans qualificatif
+    de visibilité dans un package src_java[:exports
+    code]{co.simplon.p1} avec une fonction :
     #+BEGIN_SRC java
 static void message(){
     System.out.println("Hello from VisiP !");
 }
     #+END_SRC
-  - Créer une classe =Main= dans un package =co.simplon.p1= avec une
-    fonction =public static void main(String[] args)= qui essaie
-    d'appeler =VisiP.message()=.
-  - Que se passe-t'il si =Main= est dans un package =co.simplon= ?
+  - Créer une classe src_java[:exports code]{Main} dans un package src_java[:exports code]{co.simplon.p1} avec une
+    fonction src_java[:exports code]{public static void main(String[] args)} qui essaie
+    d'appeler src_java[:exports code]{VisiP.message()}.
+  - Que se passe-t'il si src_java[:exports code]{Main} est dans un package src_java[:exports code]{co.simplon} ?
     Quelle(s) modification(s) faut-il faire ?
 
 * Mot clé =static=
-Ce qui est qualifié de =static= concerne la classe (n'est pas créé en
-cours d'exécution). Cf. =public static void main(String[] args)=.
+Ce qui est qualifié de src_java[:exports code]{static} concerne la
+classe (n'est pas créé en cours d'exécution). Cf. src_java[:exports
+code]{public static void main(String[] args)}.
 
 * Attributs de classe
 
@@ -124,11 +127,13 @@ public static final int NB_OF_RETRIES= 3;
 
 ** En pratique 1/2
 
-Dans la classe =VisiP=, mettre un attribut de classe =GREETING= de
-type =String= pour remplacer le ="hello"= de la classe =VisiP=.
+Dans la classe src_java[:exports code]{VisiP}, mettre un attribut de
+classe src_java[:exports code]{GREETING} de type src_java[:exports
+code]{String} pour remplacer le src_java[:exports code]{"hello"} de la
+classe src_java[:exports code]{VisiP}.
 
 ** En pratique 2/2
-Modifier la classe =Quizz= pour que la fonction =main= soit comme suit :
+Modifier la classe src_java[:exports code]{Quizz} pour que la fonction src_java[:exports code]{main} soit comme suit :
 #+BEGIN_SRC java
   public static void main(String[] args){
    for(int i=0; i != questions.length; ++i){
@@ -193,7 +198,7 @@ public void setXXX( TypeOfXXX xxx ){
 }
 #+END_SRC
 * Méthodes
-Une méthode d'instance (non qualifiée par =static=) :
+Une méthode d'instance (non qualifiée par src_java[:exports code]{static}) :
 - est appelée sur une instance 
   #+BEGIN_SRC java
   System.out.println();
@@ -204,11 +209,12 @@ Une méthode d'instance (non qualifiée par =static=) :
 On réimplémente (cf. infra héritage) généralement au moins les
 méthodes [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-][equals]] et [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--][toString]]. Cette dernière est appellée
 automatiquement lors d'une concaténation ou d'un affichage avec
-=println=.
+src_java[:exports code]{println}.
 
 * Références
-En fait, tous les objets sont manipulés par
-références (comme les instances de =String=, =Integer=,…).
+En fait, tous les objets sont manipulés par références (comme les
+instances de src_java[:exports code]{String}, src_java[:exports
+code]{Integer},…).
 
  Cf. implications pour arguments, ==, …
 
@@ -218,23 +224,24 @@ Si tous les attributs d'instance sont constants, il n'y a pas de
 risques de modifications problématiques.
 
 * En pratique 1/2
-Modifier le programme =Quizz= pour utiliser des objets d'une classe
-=TestItem=.
+Modifier le programme src_java[:exports code]{Quizz} pour utiliser des
+objets d'une classe src_java[:exports code]{TestItem}.
 
 ** Classe QuizzItem immutable
-Utiliser une classe =QuizzItem= immutable, avec une méthode qui
-retourne le nombre de points obtenus en validant ou non une réponse
-proposée.
+Utiliser une classe src_java[:exports code]{QuizzItem} immutable, avec
+une méthode qui retourne le nombre de points obtenus en validant ou
+non une réponse proposée.
 
 ** Classe QuizzItem mutable
-Utiliser une classe =QuizzItem= mutable avec un attribut qui permette
-de reproposer la question en cas de réponse erronée.
+Utiliser une classe src_java[:exports code]{QuizzItem} mutable avec un
+attribut qui permette de reproposer la question en cas de réponse
+erronée.
 
 ** Instances de la classe Quizz
 
-Modifier la classe =Quizz= pour que le main instancie un objet
-paramétré par le nombre d'essais:
-#+BEGIN_SRC java
+Modifier la classe src_java[:exports code]{Quizz} pour que le main
+instancie un objet paramétré par le nombre d'essais:
+#+BEGIN_SRC java :exports code
   public static void main(String[] args){
       Quizz session= new Quizz(nbRetries);
       session.doTest();

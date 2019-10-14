@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-14 Mon 15:25 -->
+<!-- 2019-10-14 Mon 16:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Initiation la Programmation Orientée Objet en Java</title>
@@ -248,45 +248,45 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org7aeccec">1. Principe</a></li>
-<li><a href="#org8dcdb55">2. Classe et objet</a></li>
-<li><a href="#orga93a31b">3. Classes en Java</a></li>
-<li><a href="#orgd264bb2">4. Packages</a></li>
-<li><a href="#orga070eee">5. Interface et implémentation</a></li>
-<li><a href="#org4de60f8">6. Minimisation de la compléxité</a></li>
-<li><a href="#org20520df">7. Visibilités</a></li>
-<li><a href="#orgc7d733b">8. Mot clé <code>static</code></a></li>
-<li><a href="#org6c14b14">9. Attributs de classe</a></li>
-<li><a href="#org96787a4">10. Attributs constants</a>
+<li><a href="#orgcfb6c2a">1. Principe</a></li>
+<li><a href="#org602a011">2. Classe et objet</a></li>
+<li><a href="#orga7f352a">3. Classes en Java</a></li>
+<li><a href="#orge2a75d5">4. Packages</a></li>
+<li><a href="#org2cb473b">5. Interface et implémentation</a></li>
+<li><a href="#org552a41b">6. Minimisation de la compléxité</a></li>
+<li><a href="#orgaae1765">7. Visibilités</a></li>
+<li><a href="#org4e48366">8. Mot clé <code>static</code></a></li>
+<li><a href="#org6de2c63">9. Attributs de classe</a></li>
+<li><a href="#org2663ce6">10. Attributs constants</a>
 <ul>
-<li><a href="#orgdde148a">10.1. En pratique 1/2</a></li>
-<li><a href="#orga85a0db">10.2. En pratique 2/2</a></li>
+<li><a href="#orgfe31562">10.1. En pratique 1/2</a></li>
+<li><a href="#org4b1c6a1">10.2. En pratique 2/2</a></li>
 </ul>
 </li>
-<li><a href="#org1bad432">11. Objets</a></li>
-<li><a href="#org1961edd">12. Constructeurs</a>
+<li><a href="#orgced0ba6">11. Objets</a></li>
+<li><a href="#org51df06c">12. Constructeurs</a>
 <ul>
-<li><a href="#org6923b88">12.1. mot clé <code>this</code></a></li>
+<li><a href="#org1bb39bc">12.1. mot clé <code>this</code></a></li>
 </ul>
 </li>
-<li><a href="#orgbbd9eb7">13. Accesseurs</a></li>
-<li><a href="#orgc6ca0eb">14. Méthodes</a></li>
-<li><a href="#orgee4fdec">15. equals et toString</a></li>
-<li><a href="#orgfaaa5fb">16. Références</a></li>
-<li><a href="#org5e7dd07">17. Classes immutables</a></li>
-<li><a href="#org8cd9a3d">18. En pratique 1/2</a>
+<li><a href="#org799fc15">13. Accesseurs</a></li>
+<li><a href="#org51635a1">14. Méthodes</a></li>
+<li><a href="#org94f17b4">15. equals et toString</a></li>
+<li><a href="#orgbfce777">16. Références</a></li>
+<li><a href="#org84a2cbe">17. Classes immutables</a></li>
+<li><a href="#orgb969d44">18. En pratique 1/2</a>
 <ul>
-<li><a href="#orge1cdb2f">18.1. Classe QuizzItem immutable</a></li>
-<li><a href="#org23313ce">18.2. Classe QuizzItem mutable</a></li>
-<li><a href="#org4291a7f">18.3. Instances de la classe Quizz</a></li>
+<li><a href="#org0ad03db">18.1. Classe QuizzItem immutable</a></li>
+<li><a href="#orgc0e7814">18.2. Classe QuizzItem mutable</a></li>
+<li><a href="#org4f9baf4">18.3. Instances de la classe Quizz</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org7aeccec" class="outline-2">
-<h2 id="org7aeccec"><span class="section-number-2">1</span> Principe</h2>
+<div id="outline-container-orgcfb6c2a" class="outline-2">
+<h2 id="orgcfb6c2a"><span class="section-number-2">1</span> Principe</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Un programme est constitué de données et de code manipulant ces
@@ -296,8 +296,8 @@ code qui les manipule.
 </div>
 </div>
 
-<div id="outline-container-org8dcdb55" class="outline-2">
-<h2 id="org8dcdb55"><span class="section-number-2">2</span> Classe et objet</h2>
+<div id="outline-container-org602a011" class="outline-2">
+<h2 id="org602a011"><span class="section-number-2">2</span> Classe et objet</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>Une classe est le type d'un objet.</li>
@@ -306,16 +306,16 @@ code qui les manipule.
 </ul>
 </div>
 </div>
-<div id="outline-container-orga93a31b" class="outline-2">
-<h2 id="orga93a31b"><span class="section-number-2">3</span> Classes en Java</h2>
+<div id="outline-container-orga7f352a" class="outline-2">
+<h2 id="orga7f352a"><span class="section-number-2">3</span> Classes en Java</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 En Java, tout le code est implémenté sous forme de classes.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd264bb2" class="outline-2">
-<h2 id="orgd264bb2"><span class="section-number-2">4</span> Packages</h2>
+<div id="outline-container-orge2a75d5" class="outline-2">
+<h2 id="orge2a75d5"><span class="section-number-2">4</span> Packages</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Les packages sont l'organisation hiérarchique des classes
@@ -324,7 +324,7 @@ Les packages sont l'organisation hiérarchique des classes
 
 <p>
 On peut utiliser un nom complètement qualifié (<i>fully qualified name</i>)
-<code class="src src-java"><span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.Scanner</code> ou utiliser des directives <code>import</code> : <code class="src src-java"><span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">Scanner</span>;</code> ou <code class="src src-java"><span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.*;</code>.
+<code class="src src-java"><span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.Scanner</code> ou utiliser des directives <code class="src src-java"><span style="color: #0000FF;">import</span></code> : <code class="src src-java"><span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">Scanner</span>;</code> ou <code class="src src-java"><span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.*;</code>.
 </p>
 
 
@@ -332,15 +332,14 @@ On peut utiliser un nom complètement qualifié (<i>fully qualified name</i>)
 <dt>Exercices</dt><dd><ul class="org-ul">
 <li>Créer une classe dans un package</li>
 <li>Dans un programme existant, utiliser une classe par son nom
-complètement qualifié, puis avec un <code>import</code> spécifique, puis avec
-un <code>import</code> de tout le contenu d'un <i>package</i>.</li>
+complètement qualifié, puis avec un <code class="src src-java"><span style="color: #0000FF;">import</span></code> spécifique, puis avec un <code class="src src-java"><span style="color: #0000FF;">import</span></code> de tout le contenu d'un <i>package</i>.</li>
 </ul></dd>
 </dl>
 </div>
 </div>
 
-<div id="outline-container-orga070eee" class="outline-2">
-<h2 id="orga070eee"><span class="section-number-2">5</span> Interface et implémentation</h2>
+<div id="outline-container-org2cb473b" class="outline-2">
+<h2 id="org2cb473b"><span class="section-number-2">5</span> Interface et implémentation</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li>Interface : "quoi" / ce qui est visible</li>
@@ -375,8 +374,8 @@ et <code class="src src-java"><span style="color: #D0372D;">java</span>.<span st
 </div>
 </div>
 
-<div id="outline-container-org4de60f8" class="outline-2">
-<h2 id="org4de60f8"><span class="section-number-2">6</span> Minimisation de la compléxité</h2>
+<div id="outline-container-org552a41b" class="outline-2">
+<h2 id="org552a41b"><span class="section-number-2">6</span> Minimisation de la compléxité</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 On minimise ce qui est visible : il n'y a pas de dépendance envers ce
@@ -385,8 +384,8 @@ qui n'est pas visible (&rarr; possibilité d'évolutions).
 </div>
 </div>
 
-<div id="outline-container-org20520df" class="outline-2">
-<h2 id="org20520df"><span class="section-number-2">7</span> Visibilités</h2>
+<div id="outline-container-orgaae1765" class="outline-2">
+<h2 id="orgaae1765"><span class="section-number-2">7</span> Visibilités</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Les différents <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html">niveaux de visibilité</a> indiquent quel code a accès à ce
@@ -458,8 +457,8 @@ qui est qualifié:
 <dl class="org-dl">
 <dt>Exercices</dt><dd><ul class="org-ul">
 <li><p>
-Créer une classe <code>VisiP</code> sans qualificatif de visibilité dans un
-package <code>co.simplon.p1</code> avec une fonction :
+Créer une classe <code class="src src-java">VisiP</code> sans qualificatif
+de visibilité dans un package <code class="src src-java">co.simplon.p1</code> avec une fonction :
 </p>
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">message</span>(){
@@ -467,28 +466,28 @@ package <code>co.simplon.p1</code> avec une fonction :
 }
 </pre>
 </div></li>
-<li>Créer une classe <code>Main</code> dans un package <code>co.simplon.p1</code> avec une
-fonction <code>public static void main(String[] args)</code> qui essaie
-d'appeler <code>VisiP.message()</code>.</li>
-<li>Que se passe-t'il si <code>Main</code> est dans un package <code>co.simplon</code> ?
+<li>Créer une classe <code class="src src-java">Main</code> dans un package <code class="src src-java">co.simplon.p1</code> avec une
+fonction <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code> qui essaie
+d'appeler <code class="src src-java">VisiP.message()</code>.</li>
+<li>Que se passe-t'il si <code class="src src-java">Main</code> est dans un package <code class="src src-java">co.simplon</code> ?
 Quelle(s) modification(s) faut-il faire ?</li>
 </ul></dd>
 </dl>
 </div>
 </div>
 
-<div id="outline-container-orgc7d733b" class="outline-2">
-<h2 id="orgc7d733b"><span class="section-number-2">8</span> Mot clé <code>static</code></h2>
+<div id="outline-container-org4e48366" class="outline-2">
+<h2 id="org4e48366"><span class="section-number-2">8</span> Mot clé <code>static</code></h2>
 <div class="outline-text-2" id="text-8">
 <p>
-Ce qui est qualifié de <code>static</code> concerne la classe (n'est pas créé en
-cours d'exécution). Cf. <code>public static void main(String[] args)</code>.
+Ce qui est qualifié de <code class="src src-java"><span style="color: #0000FF;">static</span></code> concerne la
+classe (n'est pas créé en cours d'exécution). Cf. <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6c14b14" class="outline-2">
-<h2 id="org6c14b14"><span class="section-number-2">9</span> Attributs de classe</h2>
+<div id="outline-container-org6de2c63" class="outline-2">
+<h2 id="org6de2c63"><span class="section-number-2">9</span> Attributs de classe</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 On peut associer des données à une classe avec des
@@ -505,8 +504,8 @@ On accède à un attribut d'une classe comme à une fonction (<i>méthode</i>) d
 </div>
 
 
-<div id="outline-container-org96787a4" class="outline-2">
-<h2 id="org96787a4"><span class="section-number-2">10</span> Attributs constants</h2>
+<div id="outline-container-org2663ce6" class="outline-2">
+<h2 id="org2663ce6"><span class="section-number-2">10</span> Attributs constants</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 En fait, pour limiter le <i>couplage</i> on utilise généralement des
@@ -518,21 +517,22 @@ attributs de classe qui sont déclarés constant :
 </div>
 </div>
 
-<div id="outline-container-orgdde148a" class="outline-3">
-<h3 id="orgdde148a"><span class="section-number-3">10.1</span> En pratique 1/2</h3>
+<div id="outline-container-orgfe31562" class="outline-3">
+<h3 id="orgfe31562"><span class="section-number-3">10.1</span> En pratique 1/2</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
-Dans la classe <code>VisiP</code>, mettre un attribut de classe <code>GREETING</code> de
-type <code>String</code> pour remplacer le <code>"hello"</code> de la classe <code>VisiP</code>.
+Dans la classe <code class="src src-java">VisiP</code>, mettre un attribut de
+classe <code class="src src-java">GREETING</code> de type <code class="src src-java">String</code> pour remplacer le <code class="src src-java"><span style="color: #008000;">"hello"</span></code> de la
+classe <code class="src src-java">VisiP</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orga85a0db" class="outline-3">
-<h3 id="orga85a0db"><span class="section-number-3">10.2</span> En pratique 2/2</h3>
+<div id="outline-container-org4b1c6a1" class="outline-3">
+<h3 id="org4b1c6a1"><span class="section-number-3">10.2</span> En pratique 2/2</h3>
 <div class="outline-text-3" id="text-10-2">
 <p>
-Modifier la classe <code>Quizz</code> pour que la fonction <code>main</code> soit comme suit :
+Modifier la classe <code class="src src-java">Quizz</code> pour que la fonction <code class="src src-java">main</code> soit comme suit :
 </p>
 <div class="org-src-container">
 <pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
@@ -551,8 +551,8 @@ Modifier la classe <code>Quizz</code> pour que la fonction <code>main</code> soi
 </div>
 </div>
 
-<div id="outline-container-org1bad432" class="outline-2">
-<h2 id="org1bad432"><span class="section-number-2">11</span> Objets</h2>
+<div id="outline-container-orgced0ba6" class="outline-2">
+<h2 id="orgced0ba6"><span class="section-number-2">11</span> Objets</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 Lorsque l'on veut manipuler différents <i>valeurs</i> pour un même type
@@ -575,8 +575,8 @@ On utilise le mot-clé <code class="src src-java"><span style="color: #0000FF;">
 </div>
 </div>
 </div>
-<div id="outline-container-org1961edd" class="outline-2">
-<h2 id="org1961edd"><span class="section-number-2">12</span> Constructeurs</h2>
+<div id="outline-container-org51df06c" class="outline-2">
+<h2 id="org51df06c"><span class="section-number-2">12</span> Constructeurs</h2>
 <div class="outline-text-2" id="text-12">
 <p>
 On initialise les <i>attributs</i> d'un objet à l'occasion de la
@@ -595,8 +595,8 @@ constructeur) on peut accéder directement aux attributs de l'instance.
 </div>
 </div>
 
-<div id="outline-container-org6923b88" class="outline-3">
-<h3 id="org6923b88"><span class="section-number-3">12.1</span> mot clé <code>this</code></h3>
+<div id="outline-container-org1bb39bc" class="outline-3">
+<h3 id="org1bb39bc"><span class="section-number-3">12.1</span> mot clé <code>this</code></h3>
 <div class="outline-text-3" id="text-12-1">
 <p>
 On peut aussi préfixer avec le mot-clé <code class="src src-java"><span style="color: #0000FF;">this</span></code> :
@@ -614,8 +614,8 @@ On peut aussi préfixer avec le mot-clé <code class="src src-java"><span style=
 </div>
 </div>
 </div>
-<div id="outline-container-orgbbd9eb7" class="outline-2">
-<h2 id="orgbbd9eb7"><span class="section-number-2">13</span> Accesseurs</h2>
+<div id="outline-container-org799fc15" class="outline-2">
+<h2 id="org799fc15"><span class="section-number-2">13</span> Accesseurs</h2>
 <div class="outline-text-2" id="text-13">
 <p>
 Généralement, on ne permet pas l'accès direct aux attributs, mais l'on
@@ -632,11 +632,11 @@ utilise <b>si nécessaire</b> des <i>accesseurs</i> : <i>getter</i> et <i>setter
 </div>
 </div>
 </div>
-<div id="outline-container-orgc6ca0eb" class="outline-2">
-<h2 id="orgc6ca0eb"><span class="section-number-2">14</span> Méthodes</h2>
+<div id="outline-container-org51635a1" class="outline-2">
+<h2 id="org51635a1"><span class="section-number-2">14</span> Méthodes</h2>
 <div class="outline-text-2" id="text-14">
 <p>
-Une méthode d'instance (non qualifiée par <code>static</code>) :
+Une méthode d'instance (non qualifiée par <code class="src src-java"><span style="color: #0000FF;">static</span></code>) :
 </p>
 <ul class="org-ul">
 <li><p>
@@ -651,24 +651,24 @@ est appelée sur une instance
 </ul>
 </div>
 </div>
-<div id="outline-container-orgee4fdec" class="outline-2">
-<h2 id="orgee4fdec"><span class="section-number-2">15</span> equals et toString</h2>
+<div id="outline-container-org94f17b4" class="outline-2">
+<h2 id="org94f17b4"><span class="section-number-2">15</span> equals et toString</h2>
 <div class="outline-text-2" id="text-15">
 <p>
 On réimplémente (cf. infra héritage) généralement au moins les
 méthodes <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-">equals</a> et <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--">toString</a>. Cette dernière est appellée
 automatiquement lors d'une concaténation ou d'un affichage avec
-<code>println</code>.
+<code class="src src-java">println</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgfaaa5fb" class="outline-2">
-<h2 id="orgfaaa5fb"><span class="section-number-2">16</span> Références</h2>
+<div id="outline-container-orgbfce777" class="outline-2">
+<h2 id="orgbfce777"><span class="section-number-2">16</span> Références</h2>
 <div class="outline-text-2" id="text-16">
 <p>
-En fait, tous les objets sont manipulés par
-références (comme les instances de <code>String</code>, <code>Integer</code>,…).
+En fait, tous les objets sont manipulés par références (comme les
+instances de <code class="src src-java">String</code>, <code class="src src-java">Integer</code>,…).
 </p>
 
 <p>
@@ -678,8 +678,8 @@ Cf. implications pour arguments, ==, …
 </div>
 
 
-<div id="outline-container-org5e7dd07" class="outline-2">
-<h2 id="org5e7dd07"><span class="section-number-2">17</span> Classes immutables</h2>
+<div id="outline-container-org84a2cbe" class="outline-2">
+<h2 id="org84a2cbe"><span class="section-number-2">17</span> Classes immutables</h2>
 <div class="outline-text-2" id="text-17">
 <p>
 Si tous les attributs d'instance sont constants, il n'y a pas de
@@ -688,42 +688,43 @@ risques de modifications problématiques.
 </div>
 </div>
 
-<div id="outline-container-org8cd9a3d" class="outline-2">
-<h2 id="org8cd9a3d"><span class="section-number-2">18</span> En pratique 1/2</h2>
+<div id="outline-container-orgb969d44" class="outline-2">
+<h2 id="orgb969d44"><span class="section-number-2">18</span> En pratique 1/2</h2>
 <div class="outline-text-2" id="text-18">
 <p>
-Modifier le programme <code>Quizz</code> pour utiliser des objets d'une classe
-<code>TestItem</code>.
+Modifier le programme <code class="src src-java">Quizz</code> pour utiliser des
+objets d'une classe <code class="src src-java">TestItem</code>.
 </p>
 </div>
 
-<div id="outline-container-orge1cdb2f" class="outline-3">
-<h3 id="orge1cdb2f"><span class="section-number-3">18.1</span> Classe QuizzItem immutable</h3>
+<div id="outline-container-org0ad03db" class="outline-3">
+<h3 id="org0ad03db"><span class="section-number-3">18.1</span> Classe QuizzItem immutable</h3>
 <div class="outline-text-3" id="text-18-1">
 <p>
-Utiliser une classe <code>QuizzItem</code> immutable, avec une méthode qui
-retourne le nombre de points obtenus en validant ou non une réponse
-proposée.
+Utiliser une classe <code class="src src-java">QuizzItem</code> immutable, avec
+une méthode qui retourne le nombre de points obtenus en validant ou
+non une réponse proposée.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org23313ce" class="outline-3">
-<h3 id="org23313ce"><span class="section-number-3">18.2</span> Classe QuizzItem mutable</h3>
+<div id="outline-container-orgc0e7814" class="outline-3">
+<h3 id="orgc0e7814"><span class="section-number-3">18.2</span> Classe QuizzItem mutable</h3>
 <div class="outline-text-3" id="text-18-2">
 <p>
-Utiliser une classe <code>QuizzItem</code> mutable avec un attribut qui permette
-de reproposer la question en cas de réponse erronée.
+Utiliser une classe <code class="src src-java">QuizzItem</code> mutable avec un
+attribut qui permette de reproposer la question en cas de réponse
+erronée.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org4291a7f" class="outline-3">
-<h3 id="org4291a7f"><span class="section-number-3">18.3</span> Instances de la classe Quizz</h3>
+<div id="outline-container-org4f9baf4" class="outline-3">
+<h3 id="org4f9baf4"><span class="section-number-3">18.3</span> Instances de la classe Quizz</h3>
 <div class="outline-text-3" id="text-18-3">
 <p>
-Modifier la classe <code>Quizz</code> pour que le main instancie un objet
-paramétré par le nombre d'essais:
+Modifier la classe <code class="src src-java">Quizz</code> pour que le main
+instancie un objet paramétré par le nombre d'essais:
 </p>
 <div class="org-src-container">
 <pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>){
@@ -739,7 +740,7 @@ paramétré par le nombre d'essais:
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Bernard Hugueney</p>
-<p class="date">Created: 2019-10-14 Mon 15:25</p>
+<p class="date">Created: 2019-10-14 Mon 16:43</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
