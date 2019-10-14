@@ -1,67 +1,67 @@
-- [Références en Java](#orgcc24045)
-- [Égalité et identité](#org04b8d01)
-  - [Contra. types primitifs](#org6deed97)
-    - [Déclaration](#org6fa15b5)
-    - [Affectation](#org69968ed)
-  - [Chaîne de caractères](#org3e7409d)
-    - [Déclaration](#org8d2bb04)
-    - [Affectation](#orgf34507d)
-    - [Affectations](#orged669e9)
-    - [Affectations 2](#org8fe3f64)
-  - [Tableaux](#org92aefc9)
-    - [Déclaration](#orgffec61b)
-    - [Affectation](#org2405a33)
-    - [Affectations](#orgada9548)
-    - [Affectations 2](#org2722826)
-  - [Objets](#org4f21e06)
-    - [Déclaration](#org4cce3a5)
-    - [Affectation](#orgb1784cc)
-    - [Affectations](#orgdecb114)
-    - [Affectations 2](#orga046ab3)
-    - [equals()](#org20fd195)
-- [Combinaisons](#org0c36c10)
-  - [Tableaux de tableaux](#orge333a3e)
-    - [Déclaration](#orge3e90fd)
-    - [Initialisation partielle](#orgce9f0c1)
-    - [Initialisation](#org0177d34)
-    - [Affectation](#orgec97c35)
-    - [Copie superficielle](#orgf82605b)
-    - [Copie profonde](#orgc12c95a)
-    - [Égalité](#org79a372e)
-  - [Objets contenant des objets](#orgf464bb8)
-    - [Déclaration](#org7254739)
-    - [Affectations](#org0867b1c)
-    - [clone()](#orgfdd8d0e)
-    - [constructeur par copie](#org48e4e52)
-  - [Tableaux d'objets](#orgfa7e8c8)
-- [Exercices](#orgc40d00f)
-  - [Tableau à deux dimensions de caractères](#org19687fa)
-  - [Tableaux à deux dimensions d'objets](#orgba52d71)
+- [Références en Java](#org2c5b8cf)
+- [Égalité et identité](#org07f1281)
+  - [Contra. types primitifs](#orgd5eb6be)
+    - [Déclaration](#org3969fd1)
+    - [Affectation](#org238acd6)
+  - [Chaîne de caractères](#org189bd3f)
+    - [Déclaration](#orgbd403ca)
+    - [Affectation](#org7fcdb3a)
+    - [Affectations](#org66b8bdd)
+    - [Affectations 2](#org4ad52fa)
+  - [Tableaux](#orgb1baaac)
+    - [Déclaration](#orgc2a6589)
+    - [Affectation](#org5678a97)
+    - [Affectations](#orgd68c33e)
+    - [Affectations 2](#org3e973b8)
+  - [Objets](#org7f87082)
+    - [Déclaration](#org44ef336)
+    - [Affectation](#orgbfa87b5)
+    - [Affectations](#org4b78f2d)
+    - [Affectations 2](#orga730ea7)
+    - [equals()](#org59664c4)
+- [Combinaisons](#org5200f32)
+  - [Tableaux de tableaux](#org14cb245)
+    - [Déclaration](#org935d5e9)
+    - [Initialisation partielle](#org84e0ce9)
+    - [Initialisation](#org1574175)
+    - [Affectation](#orgfb7036d)
+    - [Copie superficielle](#org6a9ce1b)
+    - [Copie profonde](#org63d9ee7)
+    - [Égalité](#org8f0b95f)
+  - [Objets contenant des objets](#orgcb56dd3)
+    - [Déclaration](#org9084a1f)
+    - [Affectations](#orgb5c0450)
+    - [clone()](#org9134557)
+    - [constructeur par copie](#org243c557)
+  - [Tableaux d'objets](#org9df0c06)
+- [Exercices](#orgee3a69f)
+  - [Tableau à deux dimensions de caractères](#org8882139)
+  - [Tableaux à deux dimensions d'objets](#orgf6e77ca)
 
 
 
-<a id="orgcc24045"></a>
+<a id="org2c5b8cf"></a>
 
 # Références en Java
 
 Tous les objets et tous les tableaux sont manipulés à travers des **références**. En fait, elles correspondent à l'adresse d'un objet ou d'un tableau.
 
 
-<a id="org04b8d01"></a>
+<a id="org07f1281"></a>
 
 # Égalité et identité
 
 Si 'deux' valeurs sont au même endroit en mémoire, il s'agit en fait de la même valeurs : elles sont **identiques**.
 
 
-<a id="org6deed97"></a>
+<a id="orgd5eb6be"></a>
 
 ## Contra. types primitifs
 
 Des valeurs de types primitifs ne sont jamais **identiques**.
 
 
-<a id="org6fa15b5"></a>
+<a id="org3969fd1"></a>
 
 ### Déclaration
 
@@ -76,7 +76,7 @@ Il y a un `int` en mémoire.
 ![img](img/ref-int-0.png)
 
 
-<a id="org69968ed"></a>
+<a id="org238acd6"></a>
 
 ### Affectation
 
@@ -90,12 +90,12 @@ int other= score;
 ![img](img/ref-int-1.png)
 
 
-<a id="org3e7409d"></a>
+<a id="org189bd3f"></a>
 
 ## Chaîne de caractères
 
 
-<a id="org8d2bb04"></a>
+<a id="orgbd403ca"></a>
 
 ### Déclaration
 
@@ -110,7 +110,7 @@ Il n'y a **AUCUNE** chaîne de caractères en mémoire.
 ![img](img/ref-string-0.png)
 
 
-<a id="orgf34507d"></a>
+<a id="org7fcdb3a"></a>
 
 ### Affectation
 
@@ -121,7 +121,7 @@ String firstname= "Bernard";
 ![img](img/ref-string-1.png)
 
 
-<a id="orged669e9"></a>
+<a id="org66b8bdd"></a>
 
 ### Affectations
 
@@ -135,7 +135,7 @@ String other= firstname;
 ![img](img/ref-string-2.png)
 
 
-<a id="org8fe3f64"></a>
+<a id="org4ad52fa"></a>
 
 ### Affectations 2
 
@@ -150,12 +150,12 @@ String another= "Ber"+"nard";
 ![img](img/ref-string-3.png)
 
 
-<a id="org92aefc9"></a>
+<a id="orgb1baaac"></a>
 
 ## Tableaux
 
 
-<a id="orgffec61b"></a>
+<a id="orgc2a6589"></a>
 
 ### Déclaration
 
@@ -170,7 +170,7 @@ Il n'y a **AUCUN** tableau en mémoire.
 ![img](img/ref-array-0.png)
 
 
-<a id="org2405a33"></a>
+<a id="org5678a97"></a>
 
 ### Affectation
 
@@ -181,7 +181,7 @@ int[] originalData= {1,3,0};
 ![img](img/ref-array-1.png)
 
 
-<a id="orgada9548"></a>
+<a id="orgd68c33e"></a>
 
 ### Affectations
 
@@ -195,7 +195,7 @@ int[] other= originalData;
 ![img](img/ref-array-2.png)
 
 
-<a id="org2722826"></a>
+<a id="org3e973b8"></a>
 
 ### Affectations 2
 
@@ -210,12 +210,12 @@ int[] another= {1,3,0};// or with new int[] and assignments
 ![img](img/ref-array-3.png)
 
 
-<a id="org4f21e06"></a>
+<a id="org7f87082"></a>
 
 ## Objets
 
 
-<a id="org4cce3a5"></a>
+<a id="org44ef336"></a>
 
 ### Déclaration
 
@@ -243,7 +243,7 @@ Il n'y a **AUCUN** objet de classe `Person` en mémoire.
 ![img](img/ref-object-0.png)
 
 
-<a id="orgb1784cc"></a>
+<a id="orgbfa87b5"></a>
 
 ### Affectation
 
@@ -254,7 +254,7 @@ Person customer= new Person("Clark", "Kent", 42);
 ![img](img/ref-object-1.png)
 
 
-<a id="orgdecb114"></a>
+<a id="org4b78f2d"></a>
 
 ### Affectations
 
@@ -268,7 +268,7 @@ Person other= customer;
 ![img](img/ref-objects-2.png)
 
 
-<a id="orga046ab3"></a>
+<a id="orga730ea7"></a>
 
 ### Affectations 2
 
@@ -283,7 +283,7 @@ Person another= new Person("Clark", "Kent", 42);
 ![img](img/ref-object-3.png)
 
 
-<a id="org20fd195"></a>
+<a id="org59664c4"></a>
 
 ### equals()
 
@@ -316,17 +316,17 @@ On redéfini la méthode [equals(Object other)](https://docs.oracle.com/javase/8
 Analyser et comprendre chacune des opérations de cette méthode.
 
 
-<a id="org0c36c10"></a>
+<a id="org5200f32"></a>
 
 # Combinaisons
 
 
-<a id="orge333a3e"></a>
+<a id="org14cb245"></a>
 
 ## Tableaux de tableaux
 
 
-<a id="orge3e90fd"></a>
+<a id="org935d5e9"></a>
 
 ### Déclaration
 
@@ -339,7 +339,7 @@ int[][] data;
 ![img](img/ref-array2d-0.png)
 
 
-<a id="orgce9f0c1"></a>
+<a id="org84e0ce9"></a>
 
 ### Initialisation partielle
 
@@ -352,7 +352,7 @@ int[][] data= new int[2][];
 ![img](img/ref-array2d-1.png)
 
 
-<a id="org0177d34"></a>
+<a id="org1574175"></a>
 
 ### Initialisation
 
@@ -368,7 +368,7 @@ for(int i=0; i != data.length; ++i){
 ![img](img/ref-array2d-2.png)
 
 
-<a id="orgec97c35"></a>
+<a id="orgfb7036d"></a>
 
 ### Affectation
 
@@ -385,7 +385,7 @@ int [][] other= data;
 ![img](img/ref-array2d-3.png)
 
 
-<a id="orgf82605b"></a>
+<a id="org6a9ce1b"></a>
 
 ### Copie superficielle
 
@@ -405,7 +405,7 @@ for(int i=0; i != data.length; ++i){
 ![img](img/ref-array2d-4.png)
 
 
-<a id="orgc12c95a"></a>
+<a id="org63d9ee7"></a>
 
 ### Copie profonde
 
@@ -425,14 +425,14 @@ for(int i=0; i != data.length; ++i){
 ![img](img/ref-array2d-5.png)
 
 
-<a id="org79a372e"></a>
+<a id="org8f0b95f"></a>
 
 ### Égalité
 
 Comment tester l'égalité ?
 
 
-<a id="orgf464bb8"></a>
+<a id="orgcb56dd3"></a>
 
 ## Objets contenant des objets
 
@@ -451,7 +451,7 @@ public class ProgrammingPair {
 ```
 
 
-<a id="org7254739"></a>
+<a id="org9084a1f"></a>
 
 ### Déclaration
 
@@ -464,7 +464,7 @@ ProgrammingPair pair;
 ![img](img/ref-object-object-0.png)
 
 
-<a id="org0867b1c"></a>
+<a id="orgb5c0450"></a>
 
 ### Affectations
 
@@ -503,11 +503,11 @@ other.setNavigator(pair.getNavigator());
 ![img](img/ref-object-object-4.png)
 
 
-<a id="orgfdd8d0e"></a>
+<a id="org9134557"></a>
 
 ### clone()
 
-Pour construire un nouvel objet qui est une copie, il est conventionnel d'utiliser une méthode `clone`.
+Pour construire un nouvel objet qui est une copie, il a été conventionnel d'utiliser une méthode `clone`.
 
 ```java
   public ProgrammingPair clone(){
@@ -522,10 +522,10 @@ ProgrammingPair other= pair.clone();
 
 ![img](img/ref-object-object-3.png)
 
-En fait, on utilise souvent [un constructeur par copie](https://www.artima.com/intv/bloch13.html).
+En fait, on utilise plutôt [un constructeur par copie](https://www.artima.com/intv/bloch13.html).
 
 
-<a id="org48e4e52"></a>
+<a id="org243c557"></a>
 
 ### constructeur par copie
 
@@ -536,73 +536,65 @@ En fait, on utilise souvent [un constructeur par copie](https://www.artima.com/i
   }
 ```
 
-Écrire une classe `Seminar` qui comporte:
 
--   un attribut `coach` de type `Person`
--   un attribut `attendents` de type "tableau de Person"
-
-
-<a id="orgfa7e8c8"></a>
+<a id="org9df0c06"></a>
 
 ## Tableaux d'objets
 
 Écrire une classe `Seminar` qui comporte:
 
 -   un attribut `coach` de type `Person`
--   un attribut `attendents` de type "tableau de Person"
+-   un attribut `attendents`= de type "tableau de Person"
 
 
-<a id="orgc40d00f"></a>
+<a id="orgee3a69f"></a>
 
 # Exercices
 
 
-<a id="org19687fa"></a>
+<a id="org8882139"></a>
 
 ## Tableau à deux dimensions de caractères
 
 Que fait le programme suivant ? Pourquoi ? Comment le corriger (pour qu'il affiche une croix) ?
 
 ```java
-  public class DebugArr2D {
-      public static char[] initializedArray(char c, int nb){
-	  char[] res= new char[nb];
-	  for(int i=0; i != res.length; ++i){
-	      res[i]= c;
-	  }
-	  return res;
-      }
-      public static char[][] initializedArray2D(char[] arr, int nb){
-	  char[][] res= new char[nb][];
-	  for(int i=0; i != res.length; ++i){
-	      res[i]= arr;
-	  }
-	  return res;
-      }
-```
-
-```java
-      public static void display(char[][] arr2D){
-	  for(char[] row : arr2D){
-	      for(char c : row){
-		  System.out.print(c);
-	      }
-	      System.out.println();
-	  }
-      }
-      public static void main(String[] args){
-	  char[][] screen= initializedArray2D(initializedArray(' ', 20), 20);
-	  for(int i= 0; i != Math.min(screen.length, screen[0].length); ++i){
-	      screen[i][i]='X';
-	      screen[screen.length-i-1][i]='X';
-	  }
-	  display(screen);
-      }
-  }
+public class DebugArr2D {
+    public static char[] initializedArray(char c, int nb){
+	char[] res= new char[nb];
+	for(int i=0; i != res.length; ++i){
+	    res[i]= c;
+	}
+	return res;
+    }
+    public static char[][] initializedArray2D(char[] arr, int nb){
+	char[][] res= new char[nb][];
+	for(int i=0; i != res.length; ++i){
+	    res[i]= arr;
+	}
+	return res;
+    }
+    public static void display(char[][] arr2D){
+	for(char[] row : arr2D){
+	    for(char c : row){
+		System.out.print(c);
+	    }
+	    System.out.println();
+	}
+    }
+    public static void main(String[] args){
+	char[][] screen= initializedArray2D(initializedArray(' ', 20), 20);
+	for(int i= 0; i != Math.min(screen.length, screen[0].length); ++i){
+	    screen[i][i]='X';
+	    screen[screen.length-i-1][i]='X';
+	}
+	display(screen);
+    }
+}
 ```
 
 
-<a id="orgba52d71"></a>
+<a id="orgf6e77ca"></a>
 
 ## Tableaux à deux dimensions d'objets
 
@@ -610,58 +602,53 @@ Que fait le programme suivant ? Pourquoi ? Comment le corriger (pour qu'il affic
 
 ```java
 class Stone{
-	private boolean firstPlayer;
-	public Stone(boolean firstPlayer) {
-		this.firstPlayer= firstPlayer;
-	}
-	public boolean isFirstPlayer() {
-		return firstPlayer;
-	}
-	public void setFirstPlayer(boolean firstPlayer) {
-		this.firstPlayer= firstPlayer;
-	}
-	public String toString() {
-		return firstPlayer ? "O":"X";
-	}
+    private boolean firstPlayer;
+    public Stone(boolean firstPlayer) {
+	this.firstPlayer= firstPlayer;
+    }
+    public boolean isFirstPlayer() {
+	return firstPlayer;
+    }
+    public void setFirstPlayer(boolean firstPlayer) {
+	this.firstPlayer= firstPlayer;
+    }
+    public String toString() {
+	return firstPlayer ? "O":"X";
+    }
 }
-
 ```
 
 ```java
 public class DebugArray2DObjects {
     public static Stone[] initializedArray(Stone s, int nb){
-	  Stone[] res= new Stone[nb];
-	  for(int i=0; i != res.length; ++i){
-	      res[i]= s;
-	  }
-	  return res;
+	Stone[] res= new Stone[nb];
+	for(int i=0; i != res.length; ++i){
+	    res[i]= s;
+	}
+	return res;
     }
     public static Stone[][] initializedArray2D(Stone[] arr, int nb){
-	  Stone[][] res= new Stone[nb][];
-	  for(int i=0; i != res.length; ++i){
-	      res[i]= arr;
-	  }
-	  return res;
+	Stone[][] res= new Stone[nb][];
+	for(int i=0; i != res.length; ++i){
+	    res[i]= arr;
+	}
+	return res;
     }
-```
-
-```java
-	public static void display(Stone[][] board){
-		  for(Stone[] row : board){
-		      for(Stone c : row){
-			  System.out.print(c);
-		      }
-		      System.out.println();
-		  }
+    public static void display(Stone[][] board){
+	for(Stone[] row : board){
+	    for(Stone c : row){
+		System.out.print(c);
 	    }
-	 public static void main(String[] args){
-		  Stone[][] screen= initializedArray2D(initializedArray(new Stone(false), 20), 20);
-		  for(int i= 0; i != Math.min(screen.length, screen[0].length); ++i){
-		      screen[i][i].setFirstPlayer(true);
-		      screen[screen.length-i-1][i].setFirstPlayer(true);
-		  }
-		  display(screen);
-	    }
+	    System.out.println();
+	}
+    }
+    public static void main(String[] args){
+	Stone[][] screen= initializedArray2D(initializedArray(new Stone(false), 20), 20);
+	for(int i= 0; i != Math.min(screen.length, screen[0].length); ++i){
+	    screen[i][i].setFirstPlayer(true);
+	    screen[screen.length-i-1][i].setFirstPlayer(true);
+	}
+	display(screen);
+    }
 }
-
 ```
