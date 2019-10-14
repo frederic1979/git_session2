@@ -1,38 +1,38 @@
-- [Principe](#org69d6ab9)
-- [Classe et objet](#org8ef95cf)
-- [Classes en Java](#org6173e29)
-- [Packages](#org79b7510)
-- [Interface et implémentation](#orgd3fd615)
-- [Minimisation de la compléxité](#org6af9a03)
-- [Visibilités](#orgcd11bb7)
-- [Mot clé `static`](#org85a2bc8)
-- [Attributs de classe](#orgfb7f95a)
-- [Attributs constants](#orgb171259)
-  - [En pratique 1/2](#org44d2f83)
-  - [En pratique 2/2](#orga819159)
-- [Objets](#orgbe93532)
-- [Constructeurs](#org2fc45b5)
-  - [mot clé `this`](#org252a1ac)
-- [Accesseurs](#orgc10585e)
-- [Méthodes](#org37d24b9)
-- [equals et toString](#org8d1739c)
-- [Références](#org4e8023f)
-- [Classes immutables](#org9518245)
-- [En pratique 1/2](#orgff62dc0)
-  - [Classe QuizzItem immutable](#orgb684f76)
-  - [Classe QuizzItem mutable](#orgf84d0f9)
-  - [Instances de la classe Quizz](#org2ce45e9)
+- [Principe](#org66fa7c8)
+- [Classe et objet](#org7d0d6da)
+- [Classes en Java](#org497a112)
+- [Packages](#org4bb37eb)
+- [Interface et implémentation](#org7340577)
+- [Minimisation de la compléxité](#org0e46c83)
+- [Visibilités](#org30e230e)
+- [Mot clé `static`](#org190d29b)
+- [Attributs de classe](#org9aa9908)
+- [Attributs constants](#org11d5332)
+  - [En pratique 1/2](#org9ec76f9)
+  - [En pratique 2/2](#org82bca4f)
+- [Objets](#org0784018)
+- [Constructeurs](#org5aded6d)
+  - [mot clé `this`](#org5f71b62)
+- [Accesseurs](#orga064f84)
+- [Méthodes](#org7027647)
+- [equals et toString](#org231355e)
+- [Références](#orga897090)
+- [Classes immutables](#org1a12841)
+- [En pratique 1/2](#orgba12b15)
+  - [Classe QuizzItem immutable](#orgbbbeb4c)
+  - [Classe QuizzItem mutable](#orgf43b252)
+  - [Instances de la classe Quizz](#orgb5afd19)
 
 
 
-<a id="org69d6ab9"></a>
+<a id="org66fa7c8"></a>
 
 # Principe
 
 Un programme est constitué de données et de code manipulant ces données. Les classes sont des unités de décomposition de données et du code qui les manipule.
 
 
-<a id="org8ef95cf"></a>
+<a id="org7d0d6da"></a>
 
 # Classe et objet
 
@@ -41,14 +41,14 @@ Un programme est constitué de données et de code manipulant ces données. Les 
 -   Un objet est une instance d'une classe
 
 
-<a id="org6173e29"></a>
+<a id="org497a112"></a>
 
 # Classes en Java
 
 En Java, tout le code est implémenté sous forme de classes.
 
 
-<a id="org79b7510"></a>
+<a id="org4bb37eb"></a>
 
 # Packages
 
@@ -60,7 +60,7 @@ On peut utiliser un nom complètement qualifié (*fully qualified name*) `java.u
     -   Dans un programme existant, utiliser une classe par son nom complètement qualifié, puis avec un `import` spécifique, puis avec un `import` de tout le contenu d'un *package*.
 
 
-<a id="orgd3fd615"></a>
+<a id="org7340577"></a>
 
 # Interface et implémentation
 
@@ -78,14 +78,14 @@ On parle d'*encapsulation*.
     -   `getMessage` de `IndexOutOfBoundsException` et `FileNotfoundException`.
 
 
-<a id="org6af9a03"></a>
+<a id="org0e46c83"></a>
 
 # Minimisation de la compléxité
 
 On minimise ce qui est visible : il n'y a pas de dépendance envers ce qui n'est pas visible (&rarr; possibilité d'évolutions).
 
 
-<a id="orgcd11bb7"></a>
+<a id="org30e230e"></a>
 
 # Visibilités
 
@@ -111,14 +111,14 @@ Les différents [niveaux de visibilité](https://docs.oracle.com/javase/tutorial
     -   Que se passe-t'il si `Main` est dans un package `co.simplon` ? Quelle(s) modification(s) faut-il faire ?
 
 
-<a id="org85a2bc8"></a>
+<a id="org190d29b"></a>
 
 # Mot clé `static`
 
-Ce qui est qualifié de `static` concerne la classe (n'est pas créé en cours d'exécution). Cf. `public static vois main(String[] args)`.
+Ce qui est qualifié de `static` concerne la classe (n'est pas créé en cours d'exécution). Cf. `public static void main(String[] args)`.
 
 
-<a id="orgfb7f95a"></a>
+<a id="org9aa9908"></a>
 
 # Attributs de classe
 
@@ -130,7 +130,7 @@ Integer.MAX_VALUE;
 ```
 
 
-<a id="orgb171259"></a>
+<a id="org11d5332"></a>
 
 # Attributs constants
 
@@ -141,14 +141,14 @@ public static final int NB_OF_RETRIES= 3;
 ```
 
 
-<a id="org44d2f83"></a>
+<a id="org9ec76f9"></a>
 
 ## En pratique 1/2
 
 Dans la classe `VisiP`, mettre un attribut de classe `GREETING` de type `String` pour remplacer le `"hello"` de la classe `VisiP`.
 
 
-<a id="orga819159"></a>
+<a id="org82bca4f"></a>
 
 ## En pratique 2/2
 
@@ -168,7 +168,7 @@ Modifier la classe `Quizz` pour que la fonction `main` soit comme suit :
 ```
 
 
-<a id="orgbe93532"></a>
+<a id="org0784018"></a>
 
 # Objets
 
@@ -189,7 +189,7 @@ TestItem ti= new TestItem();
 ```
 
 
-<a id="org2fc45b5"></a>
+<a id="org5aded6d"></a>
 
 # Constructeurs
 
@@ -206,7 +206,7 @@ On initialise les *attributs* d'un objet à l'occasion de la *construction* d'un
 ```
 
 
-<a id="org252a1ac"></a>
+<a id="org5f71b62"></a>
 
 ## mot clé `this`
 
@@ -223,7 +223,7 @@ On peut aussi préfixer avec le mot-clé `this` :
 ```
 
 
-<a id="orgc10585e"></a>
+<a id="orga064f84"></a>
 
 # Accesseurs
 
@@ -239,7 +239,7 @@ public void setXXX( TypeOfXXX xxx ){
 ```
 
 
-<a id="org37d24b9"></a>
+<a id="org7027647"></a>
 
 # Méthodes
 
@@ -254,14 +254,14 @@ Une méthode d'instance (non qualifiée par `static`) :
 -   a accès implicite aux attributs d'instance (Cf. accesseurs)
 
 
-<a id="org8d1739c"></a>
+<a id="org231355e"></a>
 
 # equals et toString
 
 On réimplémente (cf. infra héritage) généralement au moins les méthodes [equals](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-) et [toString](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--). Cette dernière est appellée automatiquement lors d'une concaténation ou d'un affichage avec `println`.
 
 
-<a id="org4e8023f"></a>
+<a id="orga897090"></a>
 
 # Références
 
@@ -270,35 +270,35 @@ En fait, tous les objets sont manipulés par références (comme les instances d
 Cf. implications pour arguments, ==, …
 
 
-<a id="org9518245"></a>
+<a id="org1a12841"></a>
 
 # Classes immutables
 
 Si tous les attributs d'instance sont constants, il n'y a pas de risques de modifications problématiques.
 
 
-<a id="orgff62dc0"></a>
+<a id="orgba12b15"></a>
 
 # En pratique 1/2
 
 Modifier le programme `Quizz` pour utiliser des objets d'une classe `TestItem`.
 
 
-<a id="orgb684f76"></a>
+<a id="orgbbbeb4c"></a>
 
 ## Classe QuizzItem immutable
 
 Utiliser une classe `QuizzItem` immutable, avec une méthode qui retourne le nombre de points obtenus en validant ou non une réponse proposée.
 
 
-<a id="orgf84d0f9"></a>
+<a id="orgf43b252"></a>
 
 ## Classe QuizzItem mutable
 
 Utiliser une classe `QuizzItem` mutable avec un attribut qui permette de reproposer la question en cas de réponse erronée.
 
 
-<a id="org2ce45e9"></a>
+<a id="orgb5afd19"></a>
 
 ## Instances de la classe Quizz
 

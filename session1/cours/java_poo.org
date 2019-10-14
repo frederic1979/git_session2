@@ -101,7 +101,7 @@ static void message(){
 
 * Mot clé =static=
 Ce qui est qualifié de =static= concerne la classe (n'est pas créé en
-cours d'exécution). Cf. =public static vois main(String[] args)=.
+cours d'exécution). Cf. =public static void main(String[] args)=.
 
 * Attributs de classe
 
