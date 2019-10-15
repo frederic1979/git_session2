@@ -578,30 +578,32 @@ pair-+
 ProgrammingPair pair= new ProgrammingPair();
 pair.setDriver(new Person("Clark", "Kent", 42));
 pair.setNavigator(new Person("Lex", "Luthor", 45));
-ProgrammingPair other= originalPair;
+ProgrammingPair other= pair;
 #+END_SRC
 
 #+BEGIN_SRC ditaa :file img/ref-object-object-3.png :cmdline -E
-  pair-+
-+-+    |
-| |    |
-| v    v
-| +---------------------+
-| | +-------+---------+ |  +-------+---------+----+
-| | |driver |navigator|-|->|"Lex"  | "Luthor"| 45 |
-| | +--+----+---------+ |  +-------+---------+----+
-| |    |                |
-| |    |                |
-| +---------------------+
-|      |
-|      v
-| +-------+--------+----+
-| |"Clark"| "Kent" | 42 |
-| +-------+--------+----+
-|
-+-+
-  |
-other
+   pair--+
+         |
+         |
+         |
+         v
+     +---------------------+
+ +-->| +-------+---------+ |  +-------+---------+----+
+ |   | |driver |navigator|-|->|"Lex"  | "Luthor"| 45 |
+ |   | +--+----+---------+ |  +-------+---------+----+
+ |   |    |                |
+ |   |    |                |
+ |   +---------------------+
+ |        |
+ |        v
+ |   +-------+--------+----+
+ |   |"Clark"| "Kent" | 42 |
+ |   +-------+--------+----+
+ |
+ +--+
+    |
+  other
+
 #+END_SRC
 
 #+BEGIN_SRC java
@@ -665,27 +667,6 @@ ProgrammingPair pair= new ProgrammingPair("Clark", "Kent", 42);
 ProgrammingPair other= pair.clone();
 #+END_SRC
 
-#+BEGIN_SRC ditaa :file img/ref-object-object-3.png :cmdline -E
-  pair-+
-      |
-      v
-  +---------------------+
-  | +-------+---------+ |  +-------+---------+----+
-  | |driver |navigator|-|->|"Lex"  | "Luthor"| 45 |
-  | +--+----+---------+ |  +-------+---------+----+
-  |    |                |
-  |    |                |
-  +---------------------+
-       |
-       v
-  +-------+--------+----+
-  |"Clark"| "Kent" | 42 |
-  +-------+--------+----+
- 
-  
-other
-#+END_SRC
-
 En fait, on utilise plutôt [[https://www.artima.com/intv/bloch13.html][un constructeur par copie]].
 
 *** constructeur par copie
@@ -696,6 +677,42 @@ En fait, on utilise plutôt [[https://www.artima.com/intv/bloch13.html][un const
       navigator= new Person(other.navigator);
   }
 #+END_SRC
+
+#+BEGIN_SRC ditaa :file img/ref-object-object-copy-cstor.png :cmdline -E
+  pair-+
+       |
+       |
+       v
+  +---------------------+
+  | +-------+---------+ |  +-------+---------+----+
+  | |driver |navigator|-|->|"Lex"  | "Luthor"| 45 |
+  | +--+----+---------+ |  +-------+---------+----+
+  |    |                |
+  |    |                |
+  +---------------------+
+       |                 
+       v                 
+  +-------+--------+----+
+  |"Clark"| "Kent" | 42 |
+  +-------+--------+----+
+
+
+  +-------+--------+----+
+  |"Clark"| "Kent" | 42 |
+  +-------+--------+----+
+          ^
+          |
+  +---------------------+  
+  |       |             |  						 
+  | +-----+-+---------+ |  +-------+---------+----+    	       	       	  
+  | |driver |navigator|-|->|"Lex"  | "Luthor"| 45 |			 
+  | +--+----+---------+ |  +-------+---------+----+			 
+  +---------------------+						 
+      ^									 
+      |									 
+other-+									 
+#+END_SRC
+
 
 ** Tableaux d'objets
 Écrire une classe src_java[:exports code]{Seminar} qui comporte:
