@@ -227,9 +227,9 @@ another -->|1 |3 |0 |
 Si l'on exécute le code suivant:
 #+BEGIN_SRC java
   public class Person{
-      String firstname;
-      String lastname;
-      int age;
+      private String firstname;
+      private String lastname;
+      private int age;
       public Person(String firstname, String lastname, int age){
 	  this.firstname= firstname;
 	  this.lastname= lastname;
@@ -324,9 +324,9 @@ another -->| |Clark |Kent |42| |
 On redéfini la méthode [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-][equals(Object other)]]:
 #+BEGIN_SRC java
   public class Person{
-      String firstname;
-      String lastname;
-      int age;
+      private String firstname;
+      private String lastname;
+      private int age;
       public Person(String firstname, String lastname, int age){
 	  this.firstname= firstname;
 	  this.lastname= lastname;
@@ -509,8 +509,8 @@ Comment tester l'égalité ?
 Soit la classe (problématique) suivante :
 #+BEGIN_SRC java
 public class ProgrammingPair {
-  Person driver;
-  Person navigator;
+  private Person driver;
+  private Person navigator;
   public Person getDriver(){ return driver;}
   public void setDriver(Person driver){ this.driver= driver;}
   public Person getNavigator(){ return navigator;}

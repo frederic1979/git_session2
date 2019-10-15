@@ -1,67 +1,67 @@
-- [Références en Java](#orgcbe35d9)
-- [Égalité et identité](#orgf26834d)
-  - [Contra. types primitifs](#org5f0ce4f)
-    - [Déclaration](#org620a22a)
-    - [Affectation](#org5174da6)
-  - [Chaîne de caractères](#org2933f79)
-    - [Déclaration](#org2745bf6)
-    - [Affectation](#orgdda30fc)
-    - [Affectations](#orgffeb6dd)
-    - [Affectations 2](#orgc92a8f3)
-  - [Tableaux](#orga8cdb99)
-    - [Déclaration](#orgf8c388e)
-    - [Affectation](#org30a317d)
-    - [Affectations](#org10d2b16)
-    - [Affectations 2](#orgd265112)
-  - [Objets](#orge7c508d)
-    - [Déclaration](#org52f3263)
-    - [Affectation](#orga1a0827)
-    - [Affectations](#orgcfa7ec1)
-    - [Affectations 2](#org70b3dec)
-    - [equals()](#org2856791)
-- [Combinaisons](#orgc089778)
-  - [Tableaux de tableaux](#org7993897)
-    - [Déclaration](#org8e7f966)
-    - [Initialisation partielle](#orgea8de6a)
-    - [Initialisation](#org0683660)
-    - [Affectation](#orgedeac54)
-    - [Copie superficielle](#org5c4732c)
-    - [Copie profonde](#org51daa00)
-    - [Égalité](#orgf7797f2)
-  - [Objets contenant des objets](#orgf915618)
-    - [Déclaration](#org52eea6c)
-    - [Affectations](#orgf9ee629)
-    - [clone()](#org03f0b16)
-    - [constructeur par copie](#org7e28897)
-  - [Tableaux d'objets](#orgbb8348d)
-- [Exercices](#org845a393)
-  - [Tableau à deux dimensions de caractères](#orgec7a2ba)
-  - [Tableaux à deux dimensions d'objets](#org001f456)
+- [Références en Java](#orgcd5e50d)
+- [Égalité et identité](#org7643368)
+  - [Contra. types primitifs](#orgf04bc5c)
+    - [Déclaration](#org4c4f9e0)
+    - [Affectation](#org94b4ffb)
+  - [Chaîne de caractères](#orgaeb2254)
+    - [Déclaration](#orga941052)
+    - [Affectation](#org1f86adc)
+    - [Affectations](#org6ff4abe)
+    - [Affectations 2](#org67b999b)
+  - [Tableaux](#org946d135)
+    - [Déclaration](#org67a64a1)
+    - [Affectation](#org575a2ad)
+    - [Affectations](#orgaf9f0da)
+    - [Affectations 2](#org8df3c52)
+  - [Objets](#orged78e18)
+    - [Déclaration](#org5f6f791)
+    - [Affectation](#orgc486367)
+    - [Affectations](#orgf9750b7)
+    - [Affectations 2](#org6eff766)
+    - [equals()](#org7dd926d)
+- [Combinaisons](#org07d36a1)
+  - [Tableaux de tableaux](#org465fa7f)
+    - [Déclaration](#org64ba011)
+    - [Initialisation partielle](#orgb58b3bc)
+    - [Initialisation](#orgd6ef2dc)
+    - [Affectation](#orgfc81736)
+    - [Copie superficielle](#org080d67a)
+    - [Copie profonde](#org1260ea8)
+    - [Égalité](#org8c25100)
+  - [Objets contenant des objets](#orgc577570)
+    - [Déclaration](#org34d3073)
+    - [Affectations](#orgae63091)
+    - [clone()](#org35dcc00)
+    - [constructeur par copie](#orga80679c)
+  - [Tableaux d'objets](#org1303b13)
+- [Exercices](#org66de5df)
+  - [Tableau à deux dimensions de caractères](#org3eefe1b)
+  - [Tableaux à deux dimensions d'objets](#org46b7cd0)
 
 
 
-<a id="orgcbe35d9"></a>
+<a id="orgcd5e50d"></a>
 
 # Références en Java
 
 Tous les objets et tous les tableaux sont manipulés à travers des **références**. En fait, elles correspondent à l'adresse d'un objet ou d'un tableau.
 
 
-<a id="orgf26834d"></a>
+<a id="org7643368"></a>
 
 # Égalité et identité
 
 Si 'deux' valeurs sont au même endroit en mémoire, il s'agit en fait de la même valeurs : elles sont **identiques**.
 
 
-<a id="org5f0ce4f"></a>
+<a id="orgf04bc5c"></a>
 
 ## Contra. types primitifs
 
 Des valeurs de types primitifs ne sont jamais **identiques**.
 
 
-<a id="org620a22a"></a>
+<a id="org4c4f9e0"></a>
 
 ### Déclaration
 
@@ -76,7 +76,7 @@ Il y a un `int` en mémoire.
 ![img](img/ref-int-0.png)
 
 
-<a id="org5174da6"></a>
+<a id="org94b4ffb"></a>
 
 ### Affectation
 
@@ -90,12 +90,12 @@ int other= score;
 ![img](img/ref-int-1.png)
 
 
-<a id="org2933f79"></a>
+<a id="orgaeb2254"></a>
 
 ## Chaîne de caractères
 
 
-<a id="org2745bf6"></a>
+<a id="orga941052"></a>
 
 ### Déclaration
 
@@ -110,7 +110,7 @@ Il n'y a **AUCUNE** chaîne de caractères en mémoire.
 ![img](img/ref-string-0.png)
 
 
-<a id="orgdda30fc"></a>
+<a id="org1f86adc"></a>
 
 ### Affectation
 
@@ -121,7 +121,7 @@ String firstname= "Bernard";
 ![img](img/ref-string-1.png)
 
 
-<a id="orgffeb6dd"></a>
+<a id="org6ff4abe"></a>
 
 ### Affectations
 
@@ -135,7 +135,7 @@ String other= firstname;
 ![img](img/ref-string-2.png)
 
 
-<a id="orgc92a8f3"></a>
+<a id="org67b999b"></a>
 
 ### Affectations 2
 
@@ -150,12 +150,12 @@ String another= "Ber"+"nard";
 ![img](img/ref-string-3.png)
 
 
-<a id="orga8cdb99"></a>
+<a id="org946d135"></a>
 
 ## Tableaux
 
 
-<a id="orgf8c388e"></a>
+<a id="org67a64a1"></a>
 
 ### Déclaration
 
@@ -170,7 +170,7 @@ Il n'y a **AUCUN** tableau en mémoire.
 ![img](img/ref-array-0.png)
 
 
-<a id="org30a317d"></a>
+<a id="org575a2ad"></a>
 
 ### Affectation
 
@@ -181,7 +181,7 @@ int[] originalData= {1,3,0};
 ![img](img/ref-array-1.png)
 
 
-<a id="org10d2b16"></a>
+<a id="orgaf9f0da"></a>
 
 ### Affectations
 
@@ -195,7 +195,7 @@ int[] other= originalData;
 ![img](img/ref-array-2.png)
 
 
-<a id="orgd265112"></a>
+<a id="org8df3c52"></a>
 
 ### Affectations 2
 
@@ -210,12 +210,12 @@ int[] another= {1,3,0};// or with new int[] and assignments
 ![img](img/ref-array-3.png)
 
 
-<a id="orge7c508d"></a>
+<a id="orged78e18"></a>
 
 ## Objets
 
 
-<a id="org52f3263"></a>
+<a id="org5f6f791"></a>
 
 ### Déclaration
 
@@ -223,9 +223,9 @@ Si l'on exécute le code suivant:
 
 ```java
   public class Person{
-      String firstname;
-      String lastname;
-      int age;
+      private String firstname;
+      private String lastname;
+      private int age;
       public Person(String firstname, String lastname, int age){
 	  this.firstname= firstname;
 	  this.lastname= lastname;
@@ -243,7 +243,7 @@ Il n'y a **AUCUN** objet de classe `Person` en mémoire.
 ![img](img/ref-object-0.png)
 
 
-<a id="orga1a0827"></a>
+<a id="orgc486367"></a>
 
 ### Affectation
 
@@ -254,7 +254,7 @@ Person customer= new Person("Clark", "Kent", 42);
 ![img](img/ref-object-1.png)
 
 
-<a id="orgcfa7ec1"></a>
+<a id="orgf9750b7"></a>
 
 ### Affectations
 
@@ -268,7 +268,7 @@ Person other= customer;
 ![img](img/ref-objects-2.png)
 
 
-<a id="org70b3dec"></a>
+<a id="org6eff766"></a>
 
 ### Affectations 2
 
@@ -283,7 +283,7 @@ Person another= new Person("Clark", "Kent", 42);
 ![img](img/ref-object-3.png)
 
 
-<a id="org2856791"></a>
+<a id="org7dd926d"></a>
 
 ### equals()
 
@@ -291,9 +291,9 @@ On redéfini la méthode [equals(Object other)](https://docs.oracle.com/javase/8
 
 ```java
   public class Person{
-      String firstname;
-      String lastname;
-      int age;
+      private String firstname;
+      private String lastname;
+      private int age;
       public Person(String firstname, String lastname, int age){
 	  this.firstname= firstname;
 	  this.lastname= lastname;
@@ -316,17 +316,17 @@ On redéfini la méthode [equals(Object other)](https://docs.oracle.com/javase/8
 Analyser et comprendre chacune des opérations de cette méthode.
 
 
-<a id="orgc089778"></a>
+<a id="org07d36a1"></a>
 
 # Combinaisons
 
 
-<a id="org7993897"></a>
+<a id="org465fa7f"></a>
 
 ## Tableaux de tableaux
 
 
-<a id="org8e7f966"></a>
+<a id="org64ba011"></a>
 
 ### Déclaration
 
@@ -339,7 +339,7 @@ int[][] data;
 ![img](img/ref-array2d-0.png)
 
 
-<a id="orgea8de6a"></a>
+<a id="orgb58b3bc"></a>
 
 ### Initialisation partielle
 
@@ -352,7 +352,7 @@ int[][] data= new int[2][];
 ![img](img/ref-array2d-1.png)
 
 
-<a id="org0683660"></a>
+<a id="orgd6ef2dc"></a>
 
 ### Initialisation
 
@@ -368,7 +368,7 @@ for(int i=0; i != data.length; ++i){
 ![img](img/ref-array2d-2.png)
 
 
-<a id="orgedeac54"></a>
+<a id="orgfc81736"></a>
 
 ### Affectation
 
@@ -385,7 +385,7 @@ int [][] other= data;
 ![img](img/ref-array2d-3.png)
 
 
-<a id="org5c4732c"></a>
+<a id="org080d67a"></a>
 
 ### Copie superficielle
 
@@ -405,7 +405,7 @@ for(int i=0; i != data.length; ++i){
 ![img](img/ref-array2d-4.png)
 
 
-<a id="org51daa00"></a>
+<a id="org1260ea8"></a>
 
 ### Copie profonde
 
@@ -425,14 +425,14 @@ for(int i=0; i != data.length; ++i){
 ![img](img/ref-array2d-5.png)
 
 
-<a id="orgf7797f2"></a>
+<a id="org8c25100"></a>
 
 ### Égalité
 
 Comment tester l'égalité ?
 
 
-<a id="orgf915618"></a>
+<a id="orgc577570"></a>
 
 ## Objets contenant des objets
 
@@ -440,8 +440,8 @@ Soit la classe (problématique) suivante :
 
 ```java
 public class ProgrammingPair {
-  Person driver;
-  Person navigator;
+  private Person driver;
+  private Person navigator;
   public Person getDriver(){ return driver;}
   public void setDriver(Person driver){ this.driver= driver;}
   public Person getNavigator(){ return navigator;}
@@ -451,7 +451,7 @@ public class ProgrammingPair {
 ```
 
 
-<a id="org52eea6c"></a>
+<a id="org34d3073"></a>
 
 ### Déclaration
 
@@ -464,7 +464,7 @@ ProgrammingPair pair;
 ![img](img/ref-object-object-0.png)
 
 
-<a id="orgf9ee629"></a>
+<a id="orgae63091"></a>
 
 ### Affectations
 
@@ -503,7 +503,7 @@ other.setNavigator(pair.getNavigator());
 ![img](img/ref-object-object-4.png)
 
 
-<a id="org03f0b16"></a>
+<a id="org35dcc00"></a>
 
 ### clone()
 
@@ -525,7 +525,7 @@ ProgrammingPair other= pair.clone();
 En fait, on utilise plutôt [un constructeur par copie](https://www.artima.com/intv/bloch13.html).
 
 
-<a id="org7e28897"></a>
+<a id="orga80679c"></a>
 
 ### constructeur par copie
 
@@ -537,7 +537,7 @@ En fait, on utilise plutôt [un constructeur par copie](https://www.artima.com/i
 ```
 
 
-<a id="orgbb8348d"></a>
+<a id="org1303b13"></a>
 
 ## Tableaux d'objets
 
@@ -547,12 +547,12 @@ En fait, on utilise plutôt [un constructeur par copie](https://www.artima.com/i
 -   un attribut `attendents` de type "tableau de Person"
 
 
-<a id="org845a393"></a>
+<a id="org66de5df"></a>
 
 # Exercices
 
 
-<a id="orgec7a2ba"></a>
+<a id="org3eefe1b"></a>
 
 ## Tableau à deux dimensions de caractères
 
@@ -594,7 +594,7 @@ public class DebugArr2D {
 ```
 
 
-<a id="org001f456"></a>
+<a id="org46b7cd0"></a>
 
 ## Tableaux à deux dimensions d'objets
 
