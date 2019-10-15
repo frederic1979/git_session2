@@ -322,28 +322,32 @@ another -->| |Clark |Kent |42| |
 
 *** equals()
 On redéfini la méthode [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-][equals(Object other)]]:
-#+BEGIN_SRC java
-  public class Person{
-      private String firstname;
-      private String lastname;
-      private int age;
-      public Person(String firstname, String lastname, int age){
-	  this.firstname= firstname;
-	  this.lastname= lastname;
-	  this.age= age;
-      }
-      public boolean equals(Object other){
-	  if(other != null && (other instanceof Person)){
-	      Person otherPerson= (Person) other;
-	      if(firstname.equals(otherPerson.firstname) 
-	      && lastname.equals(otherPerson.lastname)
-		 && (age == otherPerson.age)){
-		  return true;
-	      }
-	  }
-	  return false;
-      }
-  }
+#+BEGIN_SRC java :exports :tangle Person.java
+public class Person{
+    private String firstname;
+    private String lastname;
+    private int age;
+
+    public Person(String firstname, String lastname, int age){
+	this.firstname= firstname;
+	this.lastname= lastname;
+	this.age= age;
+    }
+    public Person(Person other){
+	this(other.firstname, other.lastname, other.age);
+    }
+    public boolean equals(Object other){
+	if(other != null && (other instanceof Person)){
+	    Person otherPerson= (Person) other;
+	    if(firstname.equals(otherPerson.firstname) 
+	       && lastname.equals(otherPerson.lastname)
+	       && (age == otherPerson.age)){
+		return true;
+	    }
+	}
+	return false;
+    }
+}
 #+END_SRC
 Analyser et comprendre chacune des opérations de cette méthode.
 
@@ -772,12 +776,72 @@ des objets de classe src_java[:exports code]{String} identiques :
 other-+									 
 #+END_SRC
 
+** equals()
+
+On doit aussi redéfinir la méthode src_java[:exports code]{public
+boolean equals(Object other)} :
+#+BEGIN_SRC java :exports code
+public boolean equals(Object other){
+    if((other == null) || !(other instanceof ProgrammingPair)){
+	return false;
+    }
+    ProgrammingPair otherProgrammingPair = (ProgrammingPair) other;
+    return driver.equals(otherProgrammingPair.driver)
+	&& navigator.equals(otherProgrammingPair.navigator);
+}
+
+#+END_SRC
+
 ** Tableaux d'objets
 Écrire une classe src_java[:exports code]{Seminar} qui comporte:
 - un attribut src_java[:exports code]{coach} de type src_java[:exports
   code]{Person}
 - un attribut src_java[:exports code]{attendents} de type "tableau de
   Person"
+
+#+BEGIN_SRC java :exports code :tangle Seminar.java
+import java.util.Arrays;
+
+public class Seminar {
+    private Person coach;
+    private Person[] attendants;
+
+    public Seminar(Person coach, Person[] attendants){
+	this.coach = new Person(coach);
+	this.attendants = new Person[attendants.length];
+	for(int i=0; i != attendants.length; ++i){
+	    this.attendants[i] = new Person(attendants[i]);
+	}
+    }
+    public Seminar(Seminar other){
+	this(other.coach, other.attendants);
+    }
+/*    public boolean equals(Object other){
+	if((other == null) || !(other instanceof Seminar)){
+	    return false;
+	}
+	Seminar otherSeminar = (Seminar)other;
+	return coach.equals(otherSeminar.coach)
+	    && Arrays.deepEquals(attendants, otherSeminar.attendants);
+	// on peut faire Arrays.equals(attendants, otherSeminar.attendants)
+	// on NE PEUT PAS faire attendants.equals(otherSeminar.attendants) !!!
+    }
+,*/
+    public boolean equals(Object other){
+	if((other == null) || !(other instanceof Seminar)){
+	    return false;
+	}
+	Seminar otherSeminar = (Seminar)other;
+	boolean res = coach.equals(otherSeminar.coach);
+	res &= attendants.length == otherSeminar.attendants.length;
+	for(int i=0;  res && (i != attendants.length); ++i){
+	    res &= attendants[i].equals(otherSeminar.attendants[i]);
+	}
+	return res;
+    }
+}
+#+END_SRC
+
 
 * Exercices
 
@@ -875,3 +939,4 @@ public class DebugArray2DObjects {
     }
 }
 #+END_SRC
+
