@@ -92,9 +92,15 @@ interface.
 
 - héritage d'une classe de base ::
 #+BEGIN_SRC plantuml :file img/ghost-poo-base-class.png
-class TimidGhost
-class AgressiveGhost
-class Ghost
+class TimidGhost{
++ void move(Cell[][] maze)
+}
+class AgressiveGhost{
++ void move(Cell[][] maze)
+}
+class Ghost{
++ void move(Cell[][] maze)
+}
 
 Ghost <|-- AgressiveGhost
 Ghost <|-- TimidGhost
@@ -103,21 +109,33 @@ Ghost <|-- TimidGhost
 - héritage (implémentation) d'interface ::
 
 #+BEGIN_SRC plantuml :file img/ghost-poo-interface.png
-class TimidGhost
-class AgressiveGhost
-interface Ghost
+class TimidGhost{
++ void move(Cell[][] maze)
+}
+class AgressiveGhost{
++ void move(Cell[][] maze)
+}
+interface Ghost{
++ {abstract} void move(Cell[][] maze)
+}
 
 Ghost <|-- AgressiveGhost
 Ghost <|-- TimidGhost
 #+END_SRC
 
-- héritage (implémentation) d'interface et de classe de base ::
-
 #+BEGIN_SRC plantuml :file img/ghost-poo-interface-and-base-classe.png
-class TimidGhost
-class AgressiveGhost
-interface Ghost
-class DefaultGhost
+class TimidGhost{
++ void move(Cell[][] maze)
+}
+class AgressiveGhost{
++ void move(Cell[][] maze)
+}
+interface Ghost{
++ {abstract} void move(Cell[][] maze)
+}
+class DefaultGhost{
++ {abstract} void move(Cell[][] maze)
+}
 
 Ghost <|-- DefaultGhost
 DefaultGhost <|-- AgressiveGhost
@@ -128,10 +146,18 @@ La relation d'héritage étant une relation "est un" (e.g. un TimidGhost
 "est un" Ghost), elle est transitive. Le dernier diagramme est donc équivalent à :
 
 #+BEGIN_SRC plantuml :file img/ghost-poo-interface-and-base-classe-2.png
-class TimidGhost
-class AgressiveGhost
-interface Ghost
-class DefaultGhost
+class TimidGhost{
++ void move(Cell[][] maze)
+}
+class AgressiveGhost{
++ void move(Cell[][] maze)
+}
+interface Ghost{
++ {abstract} void move(Cell[][] maze)
+}
+class DefaultGhost{
++ {abstract} void move(Cell[][] maze)
+}
 
 Ghost <|-- DefaultGhost
 DefaultGhost <|-- AgressiveGhost
@@ -323,6 +349,7 @@ celle-ci dans une parente. Généralement, celle-ci n'a pas vocation à
 être instanciée et l'on utilisera des classes abstraites. Dans
 l'exemple classique implémentant la taxonomie animale, pour un
 programme gérant des animaux :
+
 #+BEGIN_SRC plantuml :file img/animals-classes.png
 interface Animal
 interface Flying
@@ -340,7 +367,6 @@ WalkingOrCrawling <|-- Mammal
 Mammal <|-- Dog
 Mammal <|-- Cat
 #+END_SRC
-
 
 Il est évident que des objets de classe src_java[:exports
 code]{Mammal} ne devraient pas être instanciés : cette classe devrait
