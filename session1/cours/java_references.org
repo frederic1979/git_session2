@@ -713,6 +713,64 @@ En fait, on utilise plutôt [[https://www.artima.com/intv/bloch13.html][un const
 other-+									 
 #+END_SRC
 
+** Remarque sur les objets de classes immuables
+
+L'intérêt de créer des copies, plutôt que de partager des références
+sur des objets identiques, est d'assurer l'indépendance entre la copie
+et l'original : aucune modification de l'un n'aura d'impacts sur
+l'autre.
+
+Dans le cas d'objets qui ne peuvent pas être modifiés car ils sont
+des instances de classes /immuables/ (/immutable/), il n'y a pas
+d'inconvénients à avoir des objets identiques. Ainsi, on considère la
+copie de instances des classes src_java[:exports
+code]{ProgrammingPair} et des classes src_java[:exports code]{Person}
+comme profondes même si les attributs contiennent des références vers
+des objets de classe src_java[:exports code]{String} identiques :
+
+#+BEGIN_SRC ditaa :file img/ref-object-object-copy-cstor-str.png :cmdline -E
+  pair-+
+       |
+       |
+       v                      +---------+---------+----+
+  +---------------------+ +-> |firstname| lastname| 45 |
+  | +-------+---------+ | |   +---+-----+--+------+----+
+  | |driver |navigator|-|-+       |        |
+  | +--+----+---------+ |         |        |
+  |    |                |         v        |
+  |    |                |      +------+	   |   +----------+
+  +---------------------+      |"Lex" |    +-->| "Luthor" |
+       |                       +------+	       +----------+
+       v			  ^               ^
+  +---------+---------+----+	  |               |
+  |firstname| lastname| 42 |	  |               |
+  +------+--+----+----+----+	  |               |
+         |       |                |               |
+	 |       +------+         |               |
+         |              |         |               |
+         v	 	v	  |               |
+     +-------+	   +---------+	  |               |
+     |"Clark"|	   |  "Kent" |	  |               |
+     +-------+	   +---------+	  |               |
+        ^                ^        |               |
+        |                |        |               |
+        |        +-------+    +---+        +------+
+        |        |            |            |
+  +-----+---+----+----+----+  |            |
+  |firstname| lastname| 42 |  |            |
+  +---------+---------+----+  |            |
+          ^		      |            |
+          |		      |            |
+  +---------------------+     |            |
+  |       |             |     |            |
+  | +-----+-+---------+ |  +--+-------+----+----+----+
+  | |driver |navigator|-|->|firstname | lastname| 45 |			 
+  | +--+----+---------+ |  +----------+---------+----+			 
+  +---------------------+						 
+      ^									 
+      |									 
+other-+									 
+#+END_SRC
 
 ** Tableaux d'objets
 Écrire une classe src_java[:exports code]{Seminar} qui comporte:
