@@ -406,4 +406,4 @@ une src_java[:exports code]{Collection<X>}.
   de leurs principales opérations]]
 - [[http://www.iro.umontreal.ca/~dift1020/cours/ift1020/communs/Cours/C10/ComparableComparator.pdf][Les interfaces Comparable et Comparator]]
 - [[https://www.baeldung.com/java-comparator-comparable][Comparators / Comparable on Baeldung]]
-
+- [[http://www.falkhausen.de/Java-8/java.util/Collection-Hierarchy.html][Visualisation de la hiérarchie des classes implémentant les structures de données en Java]]
