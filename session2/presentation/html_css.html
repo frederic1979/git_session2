@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Découverte du HTML et CSS</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../../reveal/css/reveal.css">
+  <link rel="stylesheet" href="../../reveal/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="../../reveal/css/presentation.css">
+  <link rel="stylesheet" href="../../reveal/lib/css/atom-one-dark.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '../../reveal/css/print/pdf.css' :
+      '../../reveal/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+  <div class="reveal">
+    <!-- Wrap all slides in a single "slides" class -->
+    <div class="slides">
+
+      <!-- ALL SLIDES GO HERE -->
+      <!-- Each section element contains an individual slide -->
+      <section>
+        <h1>Découverte du HTML et CSS</h1>
+        <img class="no-border" src="../../reveal/images/logo_simplon.png" alt="Logo Simplon">
+      </section>
+
+      <section>
+        <section>
+          <h3>Généralités</h3>
+        </section>
+        <section>
+          <h3>Applications web : basées sur Internet et le Web</h3>
+          <p class="fragment">Oui, mais quelle différence entre Internet et Web ?</p>
+        </section>
+        <section>
+          <h3>Internet</h3>
+          <p class="fragment">Réseau informatique mondial</p>
+          <ul class="fragment">
+            <li>Courrier électronique</li>
+            <li>Messagerie instantanée</li>
+            <li>World Wide Web</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Web</h3>
+          <p class="fragment">Consultation de pages mises à disposition par des sites (ou serveurs)</p>
+          <p class="fragment">Le web se base sur Internet</p>
+        </section>
+        <section>
+          <h3>Le modèle client serveur</h3>
+          <img src="../ressource/html_css/web.png" alt="Network web requests">
+        </section>
+        <section>
+          <h3>Consultation de pages web</h3>
+          <p>Mise à disposition par des serveurs</p>
+          <div class="side-by-side">
+            <figure class="fragment">
+              <img src="../ressource/html_css/html5_logo.png" alt="HTML 5 logo">
+              <figcaption>Contenu</figcaption>
+            </figure>
+            <figure class="fragment">
+              <img src="../ressource/html_css/css3_logo.png" alt="CSS 3 logo">
+              <figcaption>Mise en forme</figcaption>
+            </figure>
+            <figure class="fragment">
+              <img src="../ressource/html_css/js_logo.png" alt="JS logo">
+              <figcaption>Interactivité</figcaption>
+            </figure>
+          </div>
+        </section>
+        <section>
+          <h3>Interprétation vs Compilation</h3>
+          <p class="fragment">Compilation = transformation du code pour le rendre utilisable</p>
+          <p class="fragment">Interprétation = lecture du code source directement utilisable</p>
+        </section>
+        <section>
+          <h3>Faites le test</h3>
+          <p>Copiez ce bout de code dans un fichier <span class="code-font">test.html</span> et ouvrez-le avec votre
+            navigateur</p>
+          <pre><code class="hljs html" data-trim>
+            &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+              &lt;head&gt;
+                &lt;meta charset="utf-8"&gt;
+                &lt;title&gt;Formation Simplon&lt;/title&gt;
+              &lt;/head&gt;
+              &lt;body&gt;
+                &lt;p&gt;Je suis en formation chez Simplon, ne pas me déranger !&lt;/p&gt;
+              &lt;/body&gt;
+            &lt;/html&gt;
+          </code></pre>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>HTML</h3>
+          <figure>
+            <img src="../ressource/html_css/html5_logo.png" alt="HTML 5 logo">
+            <figcaption>Le contenu</figcaption>
+          </figure>
+        </section>
+        <section>
+          <h3>L'histoire du HTML</h3>
+          <img width="300px" src="../ressource/html_css/sir-tim-berners-lee.jpg" alt="Sir Tim Berners Lee">
+          <figcaption>L'inventeur du langage</figcaption>
+        </section>
+        <section>
+          <h3>Les commentaires !</h3>
+          <pre><code class="hljs html" data-trim>
+            <!-- Ceci est mon commentaire -->
+          </code></pre>
+        </section>
+        <section>
+          <h3>Les balises</h3>
+          <figure>
+            <img src="../ressource/html_css/html_tag.png" alt="HTML tag picture">
+            <figcaption>Structure d'un élément HTML</figcaption>
+          </figure>
+        </section>
+        <section>
+          <h3>Les attributs</h3>
+          <p>Donner des informations sur les balises sans afficher dans la page</p>
+          <p>Exemple de la balise qui permet de créer des liens</p>
+          <pre><code class="hljs html" data-trim>
+            &lt;body&gt;
+              &lt;p&gt;Je suis en formation chez &lt;a href="http://simplon.co"&gt;Simplon.co&lt;/a&gt; !&lt;/p&gt;
+            &lt;/body&gt;
+          </code></pre>
+        </section>
+        <section>
+          <h3>Les éléments vides</h3>
+          <p>Certains élement n'ont pas de contenu textuel</p>
+          <p>Exemple de la balise qui permet d'afficher une image</p>
+          <pre><code class="hljs html" data-trim>
+            &lt;body&gt;
+              &lt;img src="images/logo_simplon.png" alt="Logo Simplon"&gt;
+            &lt;/body&gt;
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Structure de base d'un fichier HTML</h3>
+          <ul>
+            <li>DOCTYPE : Relique des anciennes versions HTML</li>
+            <li><span class="code-font">&lt;html&gt;</span> : Racine du document</li>
+            <li><span class="code-font">&lt;head&gt;</span> : Informations sur le document</li>
+            <li><span class="code-font">&lt;body&gt;</span> : Corps du document</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Les balises de texte</h3>
+          <ul>
+            <li>Les titres : de <span class="code-font">&lt;h1&gt;</span> à <span class="code-font">&lt;h6&gt;</span>
+            </li>
+            <li>Les paragraphes avec <span class="code-font">&lt;p&gt;</span> </li>
+            <li>Les listes avec <span class="code-font">&lt;ol&gt;</span> et <span class="code-font">&lt;ul&gt;</span>
+            </li>
+            <li>Les liens avec <span class="code-font">&lt;a&gt;</span> </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Les tableaux</h3>
+          <pre><code class="hljs html" data-trim>
+            &lt;table&gt;
+              &lt;caption&gt;Liste des apprenants Simplon&lt;/caption&gt;
+              &lt;thead&gt;
+                &lt;tr&gt;
+                  &lt;th scope="col"&gt;Nom&lt;/th&gt;
+                  &lt;th scope="col"&gt;Prénom&lt;/th&gt;
+                &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tbody&gt;
+                &lt;tr&gt;
+                  &lt;td&gt;Jobs&lt;/td&gt;
+                  &lt;td&gt;Steve&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                  &lt;td&gt;Ma&lt;/td&gt;
+                  &lt;td&gt;Jack&lt;/td&gt;
+                &lt;/tr&gt;
+              &lt;/tbody&gt;
+            &lt;/table&gt;
+          </code></pre>
+        </section>
+        <section>
+          <h3>Le contenu multimédia</h3>
+          <ul>
+            <li>Les images avec <span class="code-font">&lt;img&gt;</span></li>
+            <li>Le contenu vidéo avec <span class="code-font">&lt;video&gt;</span> </li>
+            <li>Le contenu vidéo avec <span class="code-font">&lt;audio&gt;</span> </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Les formulaires</h3>
+        </section>
+        <section>
+          <h3>La balise <span class="code-font">&lt;form&gt;</span></h3>
+          <pre><code class="hljs html" data-trim>
+              &lt;form action="/traitement" method="post"&gt;
+  
+              &lt;/form&gt;
+            </code></pre>
+          <ul>
+            <li>La balise <span class="code-font">&lt;action&gt;</span> indique quelle page appeler lors de l'envoi</li>
+            <li>La balise <span class="code-font">&lt;method&gt;</span> indique quelle methode HTTP utiliser lors de
+              l'envoi</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Un exemple de formulaire</h3>
+          <pre><code class="hljs html" data-trim>
+              &lt;form action="traitement" method="post"&gt;
+                &lt;!-- Last name field --&gt;
+                &lt;label for="last_name"&gt;Last Name&lt;/label&gt;
+                &lt;input placeholder="Jobs" id="last_name" type="text" name="last_name"&gt;
+                &lt;!-- First name field --&gt;
+                &lt;label for="first_name"&gt;First Name&lt;/label&gt;
+                &lt;input placeholder="Bill" id="first_name" type="text" name="first_name"&gt;
+                &lt;!-- Origin country field --&gt;
+                &lt;label&gt;Origin&lt;/label&gt;
+                &lt;select&gt;
+                  &lt;option value="" disabled selected&gt;Choose your origin country&lt;/option&gt;
+                  &lt;option value="1"&gt;China&lt;/option&gt;
+                  &lt;option value="2"&gt;France&lt;/option&gt;
+                &lt;/select&gt;
+                &lt;!-- Submit button --&gt;
+                &lt;button type="submit"&gt;Add&lt;/button&gt;
+              &lt;/form&gt;
+            </code></pre>
+        </section>
+
+        <section>
+          <h3>Les balises de survie</h3>
+          <ul>
+            <li><span class="code-font">&lt;label&gt;</span> pour décrire un champ</li>
+            <li><span class="code-font">&lt;input&gt;</span> pour définir un champ</li>
+            <li><span class="code-font">&lt;select&gt;</span> pour afficher une liste déroulante</li>
+            <li><span class="code-font">&lt;button&gt;</span> pour définir une action sur le forumlaire</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Les bonnes pratiques</h3>
+          <ul>
+            <li>Donner un titre à son formulaire</li>
+            <li>Rester simple (demander uniquement ce qui est vital)</li>
+            <li>Découper son formulaire s'il y a beaucoup de champs</li>
+            <li>Grouper les champs</li>
+            <li>Choisir le bon type d'input (text, email, password, ...)</li>
+            <li>Utiliser l'attribut `placeholder` pour donner un exemple</li>
+            <li>Offrir des suggestions (essayer la balise <span class="code-font">&lt;datalist&gt;</span>)</li>
+            <li>Mettre en valeur le bouton de validation</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Pour plus de détails</h3>
+          <ul>
+            <li><a
+                href="https://developer.mozilla.org/fr/Apprendre/HTML/Introduction_%C3%A0_HTML/Document_and_website_structure">La
+                structure des sites sur MDN</a></li>
+            <li><a
+                href="https://openclassrooms.com/courses/apprenez-a-creer-votre-site-web-avec-html5-et-css3/structurer-sa-page">Structurer
+                sa page sur OpenClassrooms</a></li>
+            <li><a href="https://developer.mozilla.org/fr/docs/Web/Guide/HTML/Formulaires">Une liste d'articles MDN sur
+                les formulaires</a></li>
+            <li><a
+                href="https://openclassrooms.com/courses/apprenez-a-creer-votre-site-web-avec-html5-et-css3/les-formulaires-8">Les
+                formulaires HTML sur OpenClassrooms</a></li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Le CSS</h3>
+          <figure>
+            <img src="../ressource/html_css/css3_logo.png" alt="CSS 3 logo">
+            <figcaption>La mise en forme</figcaption>
+          </figure>
+        </section>
+        <section>
+          <h3>Le HTML tout seul n'est pas très sexy</h3>
+          <p>Heureusement on peut le mettre en forme avec CSS</p>
+        </section>
+        <section>
+          <h3>Lier un fichier CSS à son HTML</h3>
+          <pre><code class="hljs html" data-trim>
+              &lt;head&gt;
+                &lt;meta charset="utf-8"&gt;
+                &lt;title&gt;Formation Simplon&lt;/title&gt;
+                &lt;link rel="stylesheet" href="test.css"&gt;
+              &lt;/head&gt;
+            </code></pre>
+        </section>
+        <section>
+          <h3>Les règles CSS</h3>
+          <p>Un exemple :</p>
+          <pre><code class="hljs css" data-trim>
+            h1 {
+              color: blue;
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h3>Structure d'une règle</h3>
+          <figure>
+            <img src="../ressource/html_css/rule_css.png" alt="CSS rule picture">
+            <figcaption>Structure d'une règle CSS</figcaption>
+          </figure>
+        </section>
+        <section>
+          <h3>La puissance des sélecteurs</h3>
+          <ul>
+            <li>Les sélecteurs de type</li>
+            <li>Les sélecteurs de classe</li>
+            <li>Les sélecteurs d'identifiant</li>
+          </ul>
+          <p>Et tout ça peut se combiner !</p>
+        </section>
+        <section>
+          <h3>Les propriétés CSS</h3>
+          <p>Un exemple avec le modèle des boites</p>
+          <pre><code class="hljs css" data-trim>
+            p {
+              border: 2px solid black;
+              margin: auto;
+              padding: 10px 5px;
+              text-align: center;
+              width: 500px;
+            }
+          </code></pre>
+          <figure class="fragment">
+            <img src="../ressource/html_css/box_model_css.png" alt="CSS box model picture">
+          </figure>
+        </section>
+      </section>
+    </div>
+  </div>
+  <script src="../../reveal/lib/js/head.min.js"></script>
+  <script src="../../reveal/js/reveal.js"></script>
+
+  <script>
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+      // More info https://github.com/hakimel/reveal.js#dependencies
+      dependencies: [{
+          src: '../../reveal/lib/js/classList.js',
+          condition: function () {
+            return !document.body.classList;
+          }
+        },
+        {
+          src: '../../reveal/plugin/highlight/highlight.js',
+          async: true,
+          callback: function () {
+            hljs.initHighlightingOnLoad();
+          }
+        },
+        {
+          src: '../../reveal/plugin/search/search.js',
+          async: true
+        },
+        {
+          src: '../../reveal/plugin/zoom-js/zoom.js',
+          async: true
+        },
+        {
+          src: '../../reveal/plugin/notes/notes.js',
+          async: true
+        }
+      ]
+    });
+  </script>
+</body>
+
+</html>

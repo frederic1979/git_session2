@@ -3,3 +3,6 @@ reveal/node_modules
 
 ### Ignore macOS specific files ###
 .DS_Store
+
+### Ignore feedbacks
+*/pedagogie/feedback*

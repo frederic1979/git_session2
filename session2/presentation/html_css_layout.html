@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Gérer sa mise en page</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../../reveal/css/reveal.css">
+  <link rel="stylesheet" href="../../reveal/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="../../reveal/css/presentation.css">
+  <link rel="stylesheet" href="../../reveal/lib/css/atom-one-dark.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '../../reveal/css/print/pdf.css' :
+      '../../reveal/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+  <div class="reveal">
+    <!-- Wrap all slides in a single "slides" class -->
+    <div class="slides">
+
+      <!-- ALL SLIDES GO HERE -->
+      <!-- Each section element contains an individual slide -->
+      <section>
+        <h1>Agencement des pages web</h1>
+        <img class="no-border" src="../../reveal/images/logo_simplon.png" alt="Logo Simplon">
+      </section>
+
+      <section>
+        <section>
+          <h2>HTML Sémantique</h2>
+        </section>
+        <section>
+          <h3>La sémantique c'est quoi ?</h3>
+          <p class="fragment">D'après le Larousse :
+            <q cite="http://www.larousse.fr/dictionnaires/francais/s%C3%A9mantique/71932">l'étude du
+              <strong>sens</strong> des unités linguistiques et de leurs combinaisons.</q>
+          </p>
+        </section>
+        <section>
+          <h3>Les balises qui ont du sens</h3>
+          <p>Exemples :</p>
+          <p><span class="code-font">&lt;p&gt;</span> permet de délimiter un paragraphe</p>
+          <p><span class="code-font">&lt;h1&gt;</span> permet de délimiter un "titre très important"</p>
+        </section>
+        <section>
+          <h3>Les balises de mise en forme</h3>
+          <p>A éviter maintenant que CSS est bien supporté</p>
+          <p>Mettre en forme avec <span class="code-font">&lt;b&gt;, &lt;i&gt;, &lt;center&gt;</span></p>
+          <pre><code class="hljs html" data-trim>
+            &lt;!-- Bon exemple --&gt;
+            &lt;p&gt;La sémantique est &lt;strong&gt;très&lt;/strong&gt; importante.&lt;/p&gt;
+
+            &lt;!-- Mauvais exemple --&gt;
+            &lt;p&gt;La sémantique est &lt;b&gt;très&lt;/b&gt; importante.&lt;/p&gt;
+          </code></pre>
+        </section>
+        <section>
+          <h3>Les balises neutres</h3>
+          <p>La balise de type block <span class="code-font">&lt;div&gt;</span></p>
+          <p>La balise de type inline <span class="code-font">&lt;span&gt;</span></p>
+        </section>
+        <section>
+          <h3>Depuis HTML5 : les balises structurantes</h3>
+          <ul>
+            <li><span class="code-font">&lt;header&gt;</span> pour l'entête</li>
+            <li><span class="code-font">&lt;main&gt;</span> pour le contenu</li>
+            <li><span class="code-font">&lt;section&gt;</span> pour délimiter une section de page</li>
+            <li><span class="code-font">&lt;article&gt;</span> pour du contenu autonome</li>
+            <li><span class="code-font">&lt;nav&gt;</span> pour faire un menu</li>
+            <li><span class="code-font">&lt;footer&gt;</span> pour le pied de page</li>
+          </ul>
+        </section>
+        <section>
+          <img src="../ressource/html_css/html_layout.png" alt="HTML layout schema">
+        </section>
+        <section>
+          <h3>Pourquoi être sémantique ?</h3>
+          <p class="fragment">Pour l'accessibilité !</p>
+          <p class="fragment">Pour le Search Engine Optimization !</p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h2>Gérer la mise en page avec CSS</h2>
+        </section>
+        <section>
+          <h3>Avant Flexbox et CSS grid</h3>
+          <ul>
+            <li>Tableaux</li>
+            <li>float</li>
+            <li>Positions absolues</li>
+            <li>inline-block</li>
+            <li>...</li>
+          </ul>
+        </section>
+        <section data-background-image="https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy-downsized-large.gif">
+          <!-- Mind blown -->
+        </section>
+        <section>
+          <h3>Flexbox</h3>
+          <h4>HTML</h4>
+          <pre><code class="hljs html" data-trim>
+            &lt;h1&gt;Mon application&lt;/h1&gt;
+            &lt;ul&gt;
+                &lt;li&gt;Menu 1&lt;/li&gt;
+                &lt;li&gt;Menu 2&lt;/li&gt;
+                &lt;li&gt;Menu 3&lt;/li&gt;
+            &lt;/ul&gt;
+          </code></pre>
+        </section>
+        <section>
+          <h3>Flexbox</h3>
+          <h4>CSS</h4>
+          <pre><code class="hljs css" data-trim>
+            ul {
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+            }
+            
+            li {
+              list-style-type: none;
+              padding: 10px;
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h3>CSS Grid</h3>
+          <h4>HTML</h4>
+          <pre><code class="hljs html" data-trim>
+            &lt;h1&gt;Agencement de la salle&lt;/h1&gt;
+            &lt;div class="classroom"&gt;
+                &lt;div class="table-one"&gt;Table 1&lt;/div&gt;
+                &lt;div class="table-two"&gt;Table 2&lt;/div&gt;
+                &lt;div class="table-three"&gt;Table 3&lt;/div&gt;
+                &lt;div class="table-four"&gt;Table 4&lt;/div&gt;
+                &lt;div class="table-five"&gt;Bureau de Bernard&lt;/div&gt;
+            &lt;/div&gt;
+          </code></pre>
+        </section>
+        <section>
+          <h3>CSS Grid</h3>
+          <h4>CSS #1</h4>
+          <pre><code class="hljs css" data-trim>
+            .classroom {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                grid-gap: 10px;
+                grid-auto-rows: 200px;
+                width: 500px;
+            }
+            
+            .classroom div {
+                background-color: cadetblue;
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h3>CSS Grid</h3>
+          <h4>CSS #2</h4>
+          <pre><code class="hljs css" data-trim>
+            .table-one {
+                grid-column: 2 / 4;
+                grid-row: 1;
+            }
+            
+            .table-two {
+                grid-column: 5 / 7;
+                grid-row: 1;
+            }
+            
+            .table-three {
+                grid-column: 2 / 4;
+                grid-row: 2;
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h3>CSS Grid</h3>
+          <h4>CSS #3</h4>
+          <pre><code class="hljs css" data-trim>
+            .table-four {
+                grid-column: 5 / 7;
+                grid-row: 2;
+            }
+            
+            .table-five {
+                grid-column: 1;
+                grid-row: 3;
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h4>Résultat</h4>
+          <img src="../ressource/html_css/css_grid_example.png" width="400px" alt="CSS grid layout result">
+        </section>
+      </section>
+    </div>
+  </div>
+  <script src="../../reveal/lib/js/head.min.js"></script>
+  <script src="../../reveal/js/reveal.js"></script>
+
+  <script>
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+      // More info https://github.com/hakimel/reveal.js#dependencies
+      dependencies: [{
+          src: '../../reveal/lib/js/classList.js',
+          condition: function () {
+            return !document.body.classList;
+          }
+        },
+        {
+          src: '../../reveal/plugin/highlight/highlight.js',
+          async: true,
+          callback: function () {
+            hljs.initHighlightingOnLoad();
+          }
+        },
+        {
+          src: '../../reveal/plugin/search/search.js',
+          async: true
+        },
+        {
+          src: '../../reveal/plugin/zoom-js/zoom.js',
+          async: true
+        },
+        {
+          src: '../../reveal/plugin/notes/notes.js',
+          async: true
+        }
+      ]
+    });
+  </script>
+</body>
+
+</html>

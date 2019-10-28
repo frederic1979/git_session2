@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Soyez responsive !</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../../reveal/css/reveal.css">
+  <link rel="stylesheet" href="../../reveal/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="../../reveal/css/presentation.css">
+  <link rel="stylesheet" href="../../reveal/lib/css/atom-one-dark.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../../reveal/css/print/pdf.css' : '../../reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+
+<body>
+  <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+  <div class="reveal">
+    <!-- Wrap all slides in a single "slides" class -->
+    <div class="slides">
+
+      <!-- ALL SLIDES GO HERE -->
+      <!-- Each section element contains an individual slide -->
+      <section>
+        <h1>Soyez responsive !</h1>
+        <img class="no-border" src="../../reveal/images/logo_simplon.png" alt="Logo Simplon">
+      </section>
+      <section>
+        <section>
+          <h3>La diversité des écrans</h3>
+          <ul>
+            <li>PC de bureau</li>
+            <li>PC portable</li>
+            <li>Tablette</li>
+            <li>Téléphone portable</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Pratique obligatoire</h3>
+          <p>Exemples (essayez F12 dans votre navigateur)</p>
+          <ul>
+            <li><a href="https://www.headspace.com/">Headspace</a></li>
+            <li><a href="https://www.lingscars.com/">LingsCars</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Le responsive desing en image</h3>
+          <img src="../ressource/html_css/responsive_layout.png" alt="Responsive layout image">
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3>Comment faire ?</h3>
+          <p>Utiliser les media queries</p>
+          <pre><code class="hljs css" data-trim>
+            @media print {
+              // Ici mes rules specifiques pour impression.
+            }
+            
+            @media screen {
+              // Ici mes rules specifiques pour affichage sur ecran
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h3>En pratique</h3>
+          <pre><code class="hljs css" data-trim>
+            @media screen and (max-width: 1024px) {
+              // Ici mes rules specifiques pour affichage sur ecran
+              // dont la taille est inferieure a 1024px.
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h3>Le viewport</h3>
+          <p>Attention à la taille du viewport !</p>
+          <pre><code class="hljs html" data-trim>
+            &lt;meta name="viewport" content="width=device-width" /&gt;
+          </code></pre>
+        </section>
+      </section>
+    </div>
+  </div>
+  <script src="../../reveal/lib/js/head.min.js"></script>
+  <script src="../../reveal/js/reveal.js"></script>
+
+  <script>
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../../reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: '../../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: '../../reveal/plugin/search/search.js', async: true },
+      { src: '../../reveal/plugin/zoom-js/zoom.js', async: true },
+      { src: '../../reveal/plugin/notes/notes.js', async: true }
+    ]
+  });
+  </script>
+</body>
+
+</html>
