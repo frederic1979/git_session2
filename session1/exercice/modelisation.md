@@ -1,0 +1,24 @@
+- [Objectif](#orgff22bc0)
+- [Spécifications](#orgcf0450c)
+
+
+
+<a id="orgff22bc0"></a>
+
+# Objectif
+
+L'objectif de cet exercice est de réfléchir aux types (notamment les classes qu'on pourra définir et les structures de données mises disposition par la bibliothèque standard Java) permettant d'implémenter un programme. Il n'est pas nécessaire d'implémenter effectivement la totalité du programme et notamment les interactions avec les utilisateurs ou le chargement des données. Il est en revanche nécessaire d'anticiper ces aspects pour faire en sorte que les "classes métier" permettront ceux-ci.
+
+
+<a id="orgcf0450c"></a>
+
+# Spécifications
+
+On voudra permettre d'implémenter à minima un [CRUD](https://fr.wikipedia.org/wiki/CRUD), c'est-à-dire une application qui permette de Créer (*Create*), Lire (*Read*), Mettre à jour (*Update*) et Effacer (*Delete*) des données relatives au fonctionnement d'une entreprises de transport de biens et marchandises. Les données à modéliser sont les suivantes :
+
+-   **le personnel:** Chaque individu est caractérisé par son nom et son prénom, mais aussi les éventuels permis de conduire pour différents véhicules (moto, voiture, poids lourds). Un travailleur peut ne pas avoir de permis de conduire et être seulement utile pour les chargements/déchargements.
+-   **la flotte de vehicule:** Chaque véhicule est caractérisé par sa plaque d'immatriculation, sa catégorie (cf. permis de conduire nécessaire), les dimensions de son volume utile et sa charge utile, ainsi que la capacité à conserver au frais / réfrigérer son chargement.
+-   **les marchandises:** Chaque marchandise est caractérisée par une dénomination, un poids, des dimensions et le fait qu'elle nécessite d'être conservée au frais ou frigorifiée. La date et la localisation à laquelle elle doit être enlevée ainsi que la date et la localisation à laquelle elle doit être déposée.
+-   **les dépôts:** Chaque dépôt est caractérisé par un nom, une localisation, des capacités de stockages à température ambiante ou réfrigérée ou frigorifiée et des capacités de parking pour les différents véhicules.
+
+Le système devra permettre d'affecter les véhicules et les marchandises aux dépôts et de planifier les tournées du personnel.
