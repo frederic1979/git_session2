@@ -1,0 +1,84 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; ispell-local-dictionary: "fr_FR";-*-
+
+#+TITLE: Chargement et sélection de données en Java
+#+AUTHOR: Bernard Hugueney
+
+#+LANGUAGE: fr
+#+LANG: fr
+
+#+BEGIN_SRC elisp :exports none :results silent
+ (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t)
+   (java . t)
+   (python . t)))
+#+END_SRC
+
+* Contexte
+
+Considérant les programmes qui composent un [[https://fr.wikipedia.org/wiki/Syst%C3%A8me_d%27information][/système d'information/]], on a vu que
+la modélisation des données qui nous intéressent spécifiquement (/entités/ du
+domaine d'application) pouvaient être modélisées en Java par des /objets/, instances de /classes/.
+
+Pour que ces données survivent à l'exécution des programmes, il faut qu'elles
+/persistent/ sous la forme d'un stockage permanent, par exemple sous la forme de
+fichier.
+
+Grâce aux possibilités d'abstractions fournies par le langage (héritage,
+implémentation d'/interfaces/), l'implémentation proprement dites (fichier local
+ou données récupérées à partir d'une URL par exemple), n'ont pas vraiment
+d'impact tant qu'on peut considérer la source comme un /flux/ de données. On
+peut facilement lire l'intégralité des données et /construire/ les objets au fur
+et à mesure en les stockant dans une structure de données, par exemple l'une des
+nombreuses /collections/ de la bibliothèque standard Java.
+
+
+On pourra ensuite utiliser ces données pour interroger le programme afin de
+sélectionner un certain sous-ensemble des données selon divers critères.
+
+* Données
+
+On va devoir manipuler des communes caractérisées par :
+- un nom
+- une latitude
+- une longitude
+
+
+- Exercice :: Définir une classe src_java[:exports code]{City} avec
+              les attributs nécessaires, ainsi qu'un constructeur
+              permettant de les initialiser.
+
+* Opérations
+
+On veut permettre de :
+- calculer la distance d'une commune à un point quelconque repéré par
+  ses latitude et longitude.
+- calculer la distance d'une commune à une autre commune.
+- trouver la commune la plus proche d'une commune, parmi un ensemble
+  quelconque de communes.
+- trouver les communes qui sont présentes dans un rayon donné autour
+  d'un point quelconque repéré par ses latitude et longitude.
+- trouver les communes qui sont simultanément dans un rayon donnée
+  d'un ensemble de points quelconques repérés par leur latitude et
+  longitude.
+
+- Exercice :: Définir les méthodes de la classe src_java[:exports
+              code]{City} nécessaires à ces opérations.
+
+* Chargement
+
+On voudra pouvoir charger des données à partir de fichiers comme
+[[file:~/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/Communes.csv][celui-ci]].
+
+
+- Exercice :: Définir les méthodes ou fonctions permettant de charger
+              ces données. Il faut gérer le fait que le fichier puisse
+              contenir des erreurs.
+- Bonus :: Permettre le chargement à partir d'une URL.
+
+* Programme principal
+
+Écrire un programme qui permette à l'utilisateur d'utiliser les
+différentes fonctionnalités en passant le fichier (chemin ou URL) en
+argument.
