@@ -10,4 +10,6 @@ Les cours et exercices de la formation sont stockés dans ce repository et sont 
 
 Les trois premières semaines sont consacrées à l'apprentissage de l'algorithmique avec Python et Java. Rendez-vous sur [Objectifs pédagogiques Session 1](./session1/pedagogie/objectifs-pedago.md) pour en savoir un peu plus.
 
-## Session 2 : To-Do
+## Session 2 : Découverte du web et Java saison 2
+
+La semaine 45 sera dédiée à la découverte du développement Web et la semaine 46 sera dédiée à approfondir les fondements de Java (Héritage, Polymorphisme, ...). Rendez-vous sur [Objectifs pédagogiques Session 2](./session2/pedagogie/objectifs-pedago.md) pour en savoir un peu plus.

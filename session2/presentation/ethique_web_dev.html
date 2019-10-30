@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Développer éthique</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../remark/remark-prez.css">
+    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Abel&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <textarea id="source">
+
+class: center, middle
+
+# Etre un•e dévelopeur•euse éthique
+
+![Logo Simplon](../../reveal/images/logo_simplon.png)
+
+---
+
+## Mais pourquoi ?
+
+--
+
+> Un grand pouvoir implique de grandes responsabilités.
+
+--
+
+En devenant développeur•euse•s vous avez maintenant un **grand pouvoir** !
+
+--
+
+Vous devez avoir en tête :
+
+- Les critères de **performance** et **d'éco-conception**.
+- Que certain•e•s personnes peuvent avoir un ou plusieurs **handicaps**
+- Que si vous gérez des données personnelles vous devez vous plier au **RGPD**.
+
+---
+
+## Développer green / performant
+
+### Le numérique en 2019
+
+--
+
+- **34 milliards** d’équipements
+- **4,1 milliards** d’utilisateurs
+- **8 équipements** par utilisateur•ice
+
+**Consommation électrique des terminaux** : **deuxième** source d'impact du numérique derrière la **fabrication des terminaux utilisateur•ice•s**.
+
+--
+
+Si le numérique était un pays :
+
+.center[![Pictogramme représentant la France](../ressource/ethique_web_dev/france.png)![Pictogramme représentant la France](../ressource/ethique_web_dev/france.png)
+![Pictogramme représentant la France](../ressource/ethique_web_dev/france.png)]
+
+---
+
+## Développer green / performant
+
+### Votre impact
+
+--
+
+Imaginez :
+
+- Votre application utilisée sur **autant de terminaux** et par **autant de personnes**
+- Un oubli de supprimer des images **non compressées** et **non utilisées** sur votre site
+- Des fonctionnalités développées mais qui ne sont **jamais utilisées**
+
+--
+
+Pensez un moment à **la consommation d'énergie que cela peut représenter** !
+
+--
+
+On peut contribuer à **diminuer** la durée de vie des terminaux en les faisant "ramer" et à **augmenter** la consommation de ressources.
+
+---
+
+## Développer green / performant
+
+### Comment limiter les effets
+
+--
+
+Appliquer des bonnes pratiques :
+
+--
+
+- De conception fonctionnelle :
+  - Eliminer les fonctionnalités non essentielles (frugalité)
+  - Quantifier précisement le besoin (sobriété)
+
+--
+
+- D'ergonomie :
+  - Préférer la saisie assisté à l'autocomplétion
+  - Favoriser un design simple, épuré, adapté au Web
+  - Créer un site responsive
+
+--
+
+- De conception technique :
+  - Limiter le nombre de requête HTTP
+  - Stocker les données statiques localement
+
+---
+
+## Développer green / performant
+
+### Comment limiter les effets
+
+Appliquer des bonnes pratiques :
+
+--
+
+- De conception graphique :
+  - Préférer le CSS aux images
+  - Ecrire des sélecteurs efficaces
+
+--
+
+- De développement :
+  - Valider les pages auprès du W3C
+  - Valider le code JavaScript
+
+--
+
+- D'hébergement :
+  - Minifier les fichiers CSS
+  - Minifier les fichiers JavaScript
+
+---
+
+## Développer accessible
+
+### C'est quoi l'accessibilité
+
+--
+
+**Mise à disposition** des sites ou applications **pour tous**.
+
+--
+
+- Prise en compte les personnes en situation de handicap
+- Prise en compte des différents terminaux (mobile, ...)
+- Prinse en compte des connexions internet limitée en débit.
+
+---
+
+## Développer accessible
+
+### Pourquoi le faire
+
+--
+
+Parce que :
+
+- C'est faire preuve **d'éthique** et **de morale**
+- Cela participe à **l'optimisation** de votre site ou application
+- Cela devient **obligatoire** : [Décret du 25 Juillet 2019](https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000038811937&categorieLien=id)
+
+--
+
+### Quand le faire
+
+**Dès le début** de votre projet ! 
+
+---
+
+## Développer accessible
+
+### Comment faire
+
+En appliquant certains principes :
+
+--
+
+- Sémantique des balises HTML = structure du site compréhensible
+
+--
+
+- Texte alternatif pour les images (attribut `alt` de la balise `img`)
+
+--
+
+- Eviter à tout prix le `<a href="http://mysite.com/download">Cliquez ici</a>`
+
+--
+
+- Proposer une confirmation pour les actions impactantes (supprimer son compte, ...)
+
+--
+
+- Vérifier que la navigation est possible au clavier
+
+--
+
+- Développer mobile first
+
+--
+
+- Choisir une mise en page aérée
+
+--
+
+- Ne pas se baser uniquement sur l'aspect visuel de l'application
+
+---
+
+## Développer accessible
+
+### Comment tester son application
+
+- En auditant son site ou application (ex : [Wave](http://wave.webaim.org/))
+- En utilisant des plugins des outils de développement du navigateur (ex : [aXe](https://www.deque.com/axe/))
+
+---
+
+## RGPD
+
+### Qu'est ce que le RGPD
+
+--
+
+Le [Réglement Général pour la Protection des Données](https://www.cnil.fr/fr/reglement-europeen-protection-donnees) vise à :
+
+--
+
+- encadrer les **traitements des données personnelles**
+- harmoniser les lois au niveau européen
+
+Toute personne ou entreprise gérant des données personnelles **doit s'y conformer**.
+
+---
+
+## RGPD
+
+### Qu'est-ce qu'une donnée personnelle
+
+> Une « donnée personnelle » est « toute information se rapportant à une personne physique identifiée ou identifiable ».
+
+--
+
+Définition **très large**.
+
+On peut identifier une personne :
+
+- **directement** (avec son nom et son prénom)
+- **indirectement** (avec son numéro de téléphone, son numéro de sécurité sociale, son adresse IP, ...)
+
+--
+
+On peut réaliser l'identification :
+
+- Avec une donnée (ex : numéro de sécurité sociale)
+- Avec plusieurs données  (ex : combinaison de l'adresse et de la date de naissance d'une personne)
+
+--
+
+[Les bases du RGPD par la CNIL](https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on).
+
+---
+
+## RGPD
+
+### Qu'est-ce qu'un traitement d'une donnée personnelle
+
+--
+
+Concept très large :
+
+--
+
+- **Stockage**
+- **Consultation**
+- **Comparaison**
+- **Transmission**
+- ...
+
+--
+
+[Les bases du RGPD par la CNIL](https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on).
+
+---
+
+## RGPD
+
+### Le rôle du•de la développeur•euse
+
+--
+
+Super boulot de la CNIL : [Le kit RGPD pour les développeur•euse•s](https://www.cnil.fr/fr/kit-developpeur).
+
+--
+
+Ce dont il faut s'assurer :
+
+- **Outils de travail** sont en **conformité** avec la protection des données de vos utilisateurs
+- Concepts de **security by design** et **privacy by design**
+- Bonne gestion des **permissions**, **pas de secrets en ligne** (type mot de passe de base de données)
+- Librairies et frameworks **à jour** (notamment en terme de sécurité)
+- Code est **propre** et bien **documenté**
+
+
+    </textarea>
+    <script src="../../remark/2019-10-remark.min.js">
+    </script>
+    <script>
+        var slideshow = remark.create({
+            // Set the slideshow display ratio
+            // Default: '4:3'
+            // Alternatives: '16:9', ...
+            ratio: '16:9',
+
+            // Navigation options
+            navigation: {
+                // Enable or disable navigating using scroll
+                // Default: true
+                // Alternatives: false
+                scroll: true,
+
+                // Enable or disable navigation using touch
+                // Default: true
+                // Alternatives: false
+                touch: true,
+
+                // Enable or disable navigation using click
+                // Default: false
+                // Alternatives: true
+                click: false,
+            },
+
+            // Enable or disable counting of incremental slides in the slide counting
+            countIncrementalSlides: false,
+        });
+    </script>
+</body>
+
+</html>
