@@ -26,7 +26,7 @@
 
 #### **Mar 5 et Mer 6 Nov :** Développement web éthique et découverte du Javascript
 
-* **Notions :** [Web Dev Ethique](../cours/ethique_web_dev.md), [Les bases du JavaScript](../cours/js-intro.md)
+* **Notions :** [Web Dev Ethique](../cours/ethique_web_dev.md), [Les bases du JavaScript](../cours/js_intro.md)
 * **Objectif•s :**
   * Connaître les grands principes du développement web éthique :
     * Green coding / performance
