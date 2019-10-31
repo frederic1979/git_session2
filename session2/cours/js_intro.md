@@ -90,7 +90,7 @@ La bonne pratique est toujours de faire du plus strict au moins strict. (`const`
 
 Attention, les types primitifs sont copiés par valeur alors que les objets le sont par référence. Pour rappel :
 
-![Valeurs vs Références](../resources/js-intro/ref-vs-value.png)
+![Valeurs vs Références](../ressource/js-intro/ref-vs-value.png)
 
 ### L'égalité faible `==` vs l'égalité stricte `===`
 
@@ -244,7 +244,7 @@ Attention, ça ne fonctionne pas lorsqu'on déclare des variables de type `let` 
 
 Le scope en le contexte d'exécution. Il s'agit de l'environnement dans lequel s'exécute notre code. Ci après un enchaînement de fonction qui représente le phénomène :
 
-![Contextes d'exécution](../resources/js-intro/js-call-stack.gif)
+![Contextes d'exécution](../ressource/js-intro/js-call-stack.gif)
 
 #### Le scope **global**
 
