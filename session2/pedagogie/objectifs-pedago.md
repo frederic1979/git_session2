@@ -44,7 +44,7 @@
     * Insérer des éléments
     * Supprimer des éléments
 * **Compétence•s visées•s :** 2 et 3
-* **Modalité•s pédagogique•s :** Exercices pratiques : [Documentation du mini projet en HTML et CSS](../exercice/html_css.md) et [Documentation du mini projet responsive](../exercice/html_css_responsive.md)
+* **Modalité•s pédagogique•s :** Exercices pratiques : [Introduction au JS](../exercice/js-intro.md)
 * **Temporalité :** 14h
 
 #### **Jeu 7 et Ven 8 Nov :** Mini projet Station météo

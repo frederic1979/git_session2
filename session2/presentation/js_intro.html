@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Soyons dynamiques avec JS</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../../reveal/css/reveal.css">
+  <link rel="stylesheet" href="../../reveal/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="../../reveal/css/presentation.css">
+  <link rel="stylesheet" href="../../reveal/lib/css/atom-one-dark.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../../reveal/css/print/pdf.css' : '../../reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+
+<body>
+  <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+  <div class="reveal">
+    <!-- Wrap all slides in a single "slides" class -->
+    <div class="slides">
+
+      <!-- ALL SLIDES GO HERE -->
+      <!-- Each section element contains an individual slide -->
+      <section>
+        <h1>Soyons dynamiques avec JS</h1>
+        <img class="no-border" src="../../reveal/images/logo_simplon.png" alt="Logo Simplon">
+      </section>
+
+      <section>
+        <section>
+          <h3>C'est quoi JavaScript ?</h3>
+          <img src="../ressource/js-intro/js_logo.png" alt="JavaScript logo">
+        </section>
+
+        <section>
+          <h3>A votre avis ?</h3>
+          <p class="fragment">Un langage de programmation</p>
+          <p class="fragment">Un langage interprété (et compilé)</p>
+          <p class="fragment">Un des langages les plus célèbres aujourd'hui</p>
+          <p class="fragment"><a href="https://pypl.github.io/PYPL.html">PopularitY of Programming Language</a>,
+            <a href="https://www.tiobe.com/tiobe-index/">TIOBE Index</a></p>
+        </section>
+
+        <section>
+          <h3>Que permet-il de faire ?</h3>
+          <p class="fragment">De manipuler des pages HTML</p>
+          <p class="fragment">Et bien plus encore... (cf <a href="https://nodejs.org/en/">NodeJS</a>)</p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Comment profiter pleinement de ce cours ?</h3>
+          <p>En refaisant les exemples du cours en même temps !</p>
+          <ul>
+            <li>Créez un fichier <span class="code-font">index.html</span></li>
+            <li>Créez un fichier <span class="code-font">script.js</span></li>
+            <li>Appelez le fichier <span class="code-font">script.js</span> dans le fichier <span class="code-font">index.html</span></li>
+          </ul>
+        </section>
+        <section>
+           <img src="../ressource/js-intro/call-js-in-html.gif" alt="Gif to show js script call in HTML">
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Le langage</h3>
+        </section>
+        <section>
+          <h3>Un langage de programmation dynamique ...</h3>
+          <p class="fragment">JavaScript est <strong>interprété</strong>. <br>
+            Vous ne compilez pas votre code pour le rendre exécutable.
+          </p>
+          <h3 class="fragment">... orienté prototype</h3>
+          <p class="fragment">
+            Les <strong>objets</strong> se construisent à la volée. <br>
+            Il n'y a pas besoin de <strong>classes</strong> comme en Java.
+          </p>
+        </section>
+        <section>
+          <h3>Les différents types de variables</h3>
+          <h4>Les types primitifs</h4>
+          <ul>
+            <li><span class="code-font">Boolean : true or false</span></li>
+            <li><span class="code-font">Number : 1 or 4.5 or 6e34</span></li>
+            <li><span class="code-font">String : "Hello"</span></li>
+            <li><span class="code-font">undefined</span> : la valeur initiale d'une variable</li>
+            <li><span class="code-font">null</span> : la valeur nulle d'une variable</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Les différents types de variables</h3>
+          <h4>Les objets</h4>
+          <pre><code class="hljs javascript" data-trim>
+            // Déclaration de mon premier objet
+            var formateur = {
+              name: "Jules",
+              role: "Formateur"
+            };
+          </code></pre>
+        </section>
+        <section>
+          <h3>Comment déclarer ses variables ?</h3>
+          <pre><code class="hljs javascript" data-trim>
+            // Déclare une variable de scope fonction si dans une fonction
+            // Global sinon
+            var formateur1 = "Jules";
+            
+            // Déclare une variable de bloc
+            let formateur2 = "Bernard";
+
+            // Déclare une constante
+            const chefProjet = "Hanifa";
+          </code></pre>
+          <p>
+            La bonne pratique est toujours de faire du plus strict au moins strict<br>
+            <span class="code-font">const > let > var</span>
+          </p>
+        </section>
+        <section>
+          <h3>Rappel : valeurs vs références</h3>
+          <img src="../ressource/js-intro/ref-vs-value.png" alt="Picture of JS memory content when declaring variables">
+        </section>
+        <section>
+          <h3>L'égalité faible vs stricte</h3>
+          <p>2 façons de tester <strong>l'égalité</strong><br>
+            <span class="code-font">== vs ===</span>
+          </p>
+          <pre><code class="hljs javascript" data-trim>
+            1   ==  1  // true
+            "1" ==  1  // true
+            1   === 1  // true
+            "1" === 1  // false
+          </code></pre>
+          <p>C'est la même chose pour <strong>l'inégalité</strong></p>
+        </section>
+        <section>
+          <h3>Les fonctions</h3>
+          <p>Les fonctions sont des objets !</p>
+          <pre><code class="hljs javascript" data-trim>
+            // Je crée une fonction que je stocke dans une variable
+            const sayHello = function () {
+              console.log("Hello there!");
+            }
+
+            // J'appelle ma fonction en utilisant le nom de ma variable
+            // Suivi de parenthèses
+            sayHello();
+          </code></pre>
+        </section>
+        <section>
+          <h3>Vous allez rencontrer des fonctions fléchées</h3>
+          <p>N'ayez pas peur !</p>
+          <pre><code class="hljs javascript" data-trim>
+            // La même chose qu'avant mais en fléché
+            const sayBonjour = () => console.log("Bonjour toi!");
+
+            sayBonjour();
+          </code></pre>
+        </section>
+        <section>
+          <h3>On peut définir des fonctions dans des fonctions !</h3>
+          <p class="fragment">Oui, oui c'est <strong>Inception</strong> !</p>
+          <img class="fragment" src="../ressource/js-intro/inception.gif" alt="Picture of L. Dicaprio in Inception movie">
+        </section>
+        <section>
+          <h3>Une fonction dans une fonction</h3>
+          <pre><code class="hljs javascript" data-trim>
+            function sayHello(string) {
+              const hello = string;
+              return function(name) {
+                return hello + " " + name;
+              }
+            }
+
+            // J'exécute directement les deux fonctions
+            console.log(sayHello("Bonjour")("Jules"));
+          </code></pre>
+        </section>
+        <section>
+          <h3>Les objets</h3>
+          <p>Exemple basique</p>
+          <pre><code class="hljs javascript" data-trim>
+            // Je déclare un objet robert
+            const robert = {
+              firstName: "Robert",
+              lastName: "De Niro",
+
+              // Present function
+              present: function() {
+                return "Mr " + this.firstName + " " + this.lastName;
+              }
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h3>Les prototypes</h3>
+          <p>Tous les objets ont un prototype</p>
+          <p>Le prototype est l'équivalent de la classe Java</p>
+          <p>On range souvent les fonctions d'un objet dans son prototype</p>
+        </section>
+        <section>
+          <h3>Utilisation du prototype</h3>
+          <pre><code class="hljs javascript" data-trim>
+            // Je déclare un objet george
+            const george = {
+              firstName: "George",
+              lastName: "Clooney"
+            }
+
+            // J'ajoute au prototype de george une fonction present
+            george.__proto__.present = function() {
+              return "Mr " + this.firstName + " " + this.lastName;
+            };
+
+            console.log(george.present());
+          </code></pre>
+        </section>
+        <section>
+          <h3>Essayez dans le navigateur :</h3>
+          <img class="fragment" src="../ressource/js-intro/object-declare.gif" alt="JS code object declaration and run in navigator">
+        </section>
+        <section>
+          <h3>Utiliser un prototype comme modèle</h3>
+          <pre><code class="hljs javascript" data-trim>
+            const leonardo = Object.create(george);
+            leonardo.firstName = "Leonardo";
+            leonardo.lastName = "Di Caprio";
+
+            console.log(leonardo.present());
+          </code></pre>
+        </section>
+        <section>
+          <h3>Plus d'informations</h3>
+          <p>En complément pour les bases : <br>
+            <a href="https://openclassrooms.com/courses/apprenez-a-coder-avec-javascript">Un cours pour débutants sur OC</a>
+          </p>
+          <p>Pour en savoir plus sur les scopes, le hoisting, ...</p>
+          <ul>
+            <li><a href="../course/js-intro.md">Le cours</a></li>
+            <li><a href="https://developer.mozilla.org/fr/Apprendre/JavaScript">Des tonnes de ressources sur MDN</a></li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>L'interactivité des pages Web</h3>
+        </section>
+        <section>
+          <h3>Le DOM</h3>
+          <p>Document Object Model</p>
+          <p>Représentation objet d'un page HTML</p>
+        </section>
+        <section>
+          <h3>L'objet <strong>document</strong> pour</h3>
+          <ul>
+            <li>Créer des nouveaux éléments</li>
+            <li>Retrouver un élément grâce à son identifiant</li>
+            <li>Retrouver un élément grâce à son identification CSS</li>
+            <li>Et bien d'autres choses encore ...</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Exemple (1/2)</h3>
+          <p>Mon fichier HTML</p>
+          <pre><code class="hljs html" data-trim>
+            &lt;body&gt;
+              &lt;h1&gt;Gestion des apprenants Simplon&lt;/h1&gt;
+              &lt;div id="contenu"&gt;
+                &lt;p class="lien"&gt;Ceci est un paragraphe où il y aura des liens.&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;script src="script.js"&gt;&lt;/script&gt;
+            &lt;/body&gt;
+          </code></pre>
+        </section>
+        <section>
+          <h3>Exemple (2/2)</h3>
+          <p>Mon fichier JS</p>
+          <pre><code class="hljs javascript" data-trim>
+            // Je crée un nouveau contenu
+            const newParagraph = document.createElement("p");
+            // Je récupère l'élément dont l'ID est contenu
+            const contenu = document.getElementById("contenu");
+            // Je récupère le premier élément HTML qui correspond au sélecteur CSS p.lien
+            const pLien = document.querySelector("p.lien");
+          </code></pre>
+        </section>
+        <section>
+          <h3>Ajouter ou modifier du contenu</h3>
+          <ul>
+            <li><span class="code-font">parent.insertBefore(newChild, refChild)</span></li>
+            <li><span class="code-font">parent.appendChild(newChild)</span></li>
+            <li><span class="code-font">parent.removeChild(oldChild)</span></li>
+            <li><span class="code-font">parent.replaceChild(newChild, oldChild)</span></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Exemple</h3>
+          <pre><code class="hljs javascript" data-trim>
+            // Récupération du paragraphe p avec class lien
+            const pLien = document.querySelector("p.lien");
+
+            const newLink = document.createElement("a"); // Création du lien
+            newLink.href = "http://simplon.co"; // Remplissage de l'url du lien
+            newLink.textContent = "Simplon"; // Remplissage du titre du lien
+            newLink.style.color = "rgb(206, 15, 15)"; // Lien en rouge
+            newLink.style.textDecoration = "none"; // Texte non souligné
+
+            pLien.appendChild(newLink); // Ajout de la balise a au paragraphe
+          </code></pre>
+        </section>
+        <section>
+          <h3>Les évènements</h3>
+          <p class="fragment">Quand appeler le code vu juste avant ?</p>
+          <p class="fragment">Lorsqu'un évènement se produit !</p>
+          <p class="fragment">Lors d'une action utilisateur par exemple</p>
+        </section>
+        <section>
+          <h3>Comment déclencher une fonction sur une action utilisateur ?</h3>
+        </section>
+        <section>
+          <h3>Les EventListeners</h3>
+          <pre><code class="hljs javascript" data-trim>
+            // Si l'utilisateur.trice clique sur mon lien
+            // alors je lui demande s'il.elle est sûr.e de vouloir partir
+            const simplonLink = document.getElementById("simplon-link");
+            simplonLink.addEventListener("click", function(event) {
+              const conf = confirm("Are you sure that you want to leave? :'(");
+
+              // S'il.elle n'est pas sûr.e, j'annule la navigation vers le lien
+              if (!conf) {
+                event.preventDefault();
+              }
+            });
+          </code></pre>
+        </section>
+        <section>
+            <h3>Plus d'informations</h3>
+            <p>En complément pour les bases : <br>
+              <a href="https://openclassrooms.com/courses/creez-des-pages-web-interactives-avec-javascript">Un cours pour débutants sur OC</a>
+            </p>
+            <p>
+                <a href="https://developer.mozilla.org/fr/Apprendre/JavaScript">Des tonnes de ressources sur MDN</a>
+            </p>
+          </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Je parie que vous vous sentez comme ça, non ?</h3>
+          <img src="../ressource/js-intro/information-overload.gif" alt="Information overload Gif">
+        </section>
+        <section>
+          <h3>C'est que c'est le moment de pratiquer</h3>
+          <p><a href="../exercice/js-intro.md">Les exercices</a></p>
+        </section>
+      </section>
+    </div>
+  </div>
+  <script src="../../reveal/lib/js/head.min.js"></script>
+  <script src="../../reveal/js/reveal.js"></script>
+
+  <script>
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../../reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: '../../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: '../../reveal/plugin/search/search.js', async: true },
+      { src: '../../reveal/plugin/zoom-js/zoom.js', async: true },
+      { src: '../../reveal/plugin/notes/notes.js', async: true }
+    ]
+  });
+  </script>
+</body>
+
+</html>
