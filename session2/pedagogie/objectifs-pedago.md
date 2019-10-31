@@ -21,25 +21,40 @@
     * Utiliser Flexbox ou CSS Grid pour disposer les éléments.
   * Savoir définir une média query pour gérer l'affichage sur différents écrans.
 * **Compétence•s visées•s :** 2
-* **Modalité•s pédagogique•s :** Exercices pratiques : TODO
+* **Modalité•s pédagogique•s :** Exercices pratiques : [Documentation du mini projet en HTML et CSS](../exercice/html_css.md) et [Documentation du mini projet responsive](../exercice/html_css_responsive.md)
 * **Temporalité :** 7h
 
-#### **Mar 5 Nov :** Développement web éthique et découverte du Javascript
+#### **Mar 5 et Mer 6 Nov :** Développement web éthique et découverte du Javascript
 
-TODO
+* **Notions :** [Web Dev Ethique](../cours/ethique_web_dev.md), [Les bases du JavaScript](../cours/js-intro.md)
+* **Objectif•s :**
+  * Connaître les grands principes du développement web éthique :
+    * Green coding / performance
+    * Accessibilité
+    * RGPD
+  * Comprendre les notions de bases de JavaScript :
+    * Concept de prototype
+    * Valeurs vs référence
+    * Egalité faible vs égalité forte
+    * Fonctions
+    * Hoisting et scope
+  * Utiliser JavaScript pour manipuler le DOM :
+    * Créer des éléments
+    * Trouver des éléments
+    * Insérer des éléments
+    * Supprimer des éléments
+* **Compétence•s visées•s :** 2 et 3
+* **Modalité•s pédagogique•s :** Exercices pratiques : [Documentation du mini projet en HTML et CSS](../exercice/html_css.md) et [Documentation du mini projet responsive](../exercice/html_css_responsive.md)
+* **Temporalité :** 14h
 
-#### **Mer 6 Nov :** Javascript et les évènements
+#### **Jeu 7 et Ven 8 Nov :** Mini projet Station météo
 
-Matin :
-
-TODO
-
-Après-midi :
-
-TODO
-
-#### **Jeu 7 et Ven 8 Nov :** Python
-
-TODO
+* **Notions :** HTML, CSS et JS
+* **Objectif•s :** Pratique des conepts vus le lundi, mardi et mercredi en mode projet
+* **Compétence•s visées•s :** 1, 2 et 3
+* **Modalité•s pédagogique•s :** [Mini projet](https://simplonline.co/briefs/detail/256MGvp2nsHYNKx7L)
+* **Temporalité :** 14h
 
 ### Semaine 46
+
+TODO
