@@ -14,8 +14,11 @@ Refaire la même chose mais avec une autre étagère à afficher à côté de la
 
 Pour corser la chose :
 
-- Mettre plusieurs boites côté à côté sur la même étagère
+- Permettre de ranger plusieurs boites côte à côte sur la même rangée.
 - Donner des couleurs différentes aux boites sur les différentes étagères.
+- Donner des tailles différentes aux boites.
+
+![Exercice Etagère Ikea](../ressource/html_css/etagere-double.png)
 
 ## Etape 3 : Et si je déménage
 

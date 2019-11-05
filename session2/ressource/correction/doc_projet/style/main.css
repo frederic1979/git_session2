@@ -112,7 +112,7 @@ label {
     }
 
     nav>ul>li {
-        padding: 0 5px;
+        padding: 0 10px 20px;
     }
 }
 
@@ -120,5 +120,9 @@ label {
 {
     nav>ul {
         flex-direction: column;
+    }
+
+    nav>ul>li {
+        padding: 10px 5px;
     }
 }
