@@ -33,7 +33,7 @@ main {
 }
 
 video {
-    width: 80%;
+    width: 100%;
     height: auto;
     margin: auto;
 }
@@ -52,7 +52,8 @@ nav>ul>li {
 }
 
 code {
-    width: fit-content;
+    /* width: fit-content; */
+    white-space: pre-wrap;
     padding: 3px 20px;
     border-radius: 3px;
 }
@@ -91,4 +92,33 @@ input {
 
 label {
     min-width: 100px;
+}
+
+@media screen and (max-width: 1024px)
+{
+    body {
+        width: 100%;
+    }
+
+    main {
+        width: 95%;
+        margin: auto;
+    }
+
+    header {
+        height: 90px;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    nav>ul>li {
+        padding: 0 5px;
+    }
+}
+
+@media screen and (max-width: 560px)
+{
+    nav>ul {
+        flex-direction: column;
+    }
 }
