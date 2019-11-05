@@ -1,0 +1,61 @@
+body{
+    text-align: center;
+    width: 90vw;
+    margin: auto;
+}
+
+.atelier {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.etagere {
+    border: solid black 4px;
+    border-top-style: none;
+    border-bottom-style: none;
+    width: 450px;
+    margin: auto;
+}
+
+.rangee {
+    border: dashed saddlebrown 2px;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    border-right-style: none;
+    border-left-style: none;
+    border-top-style: none;
+}
+
+.boite {
+    height: 100px;
+    width: 200px;
+    background-color: sandybrown;
+    margin: 5px auto;
+}
+
+.boite.grosse {
+    height: 150px;
+    width: 250px;
+    background-color: lightseagreen;
+}
+
+.boite.petite {
+    height: 50px;
+    width: 150px;
+    background-color: orange;
+}
+
+.boite:hover {
+    animation-name: boite-hover;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes boite-hover {
+    to {
+        border-radius: 5px;
+        background-color: grey;
+    }
+}
