@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Puissance 4 : Déploiement</title>
+
+    <link rel="stylesheet" href="../style/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Abel&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../highlight/styles/atom-one-dark.css">
+
+    <script src="../highlight/highlight.pack.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Documentation du projet Puissance 4</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="code.html">Organisation du code</a></li>
+            <li class="selected"><a href="deploy.html">Déploiement</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Comment compiler mon programme Java ?</h2>
+
+        <p>Etape 1 : Créer un dossier pour compiler mon programme</p>
+        <pre><code class="shell">
+mkdir out
+        </code></pre>
+
+        <p>Etape 2 : Compiler mon programme</p>
+        <pre><code class="shell">
+javac src/co/simplon/game/puissance4/*.java -d out
+        </code></pre>
+
+        <h2>Comment lancer mon programme Java ?</h2>
+
+        <p>Etape 1 : Aller dans le dossier out</p>
+        <pre><code class="shell">
+cd out
+        </code></pre>
+
+        <p>Etape 2 : Lancer le programme</p>
+        <pre><code class="shell">
+java co.simplon.game.puissance4.Main
+        </code></pre>        
+
+    </main>
+</body>
+
+</html>
