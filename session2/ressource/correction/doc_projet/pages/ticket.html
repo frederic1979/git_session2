@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Puissance 4 : Accueil</title>
+
+    <link rel="stylesheet" href="../style/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Abel&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Documentation du projet Puissance 4</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="code.html">Organisation du code</a></li>
+            <li><a href="deploy.html">Déploiement</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li class="selected"><a href="#">Tickets</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Gestion des tickets</h2>
+        <h3>Formulaire de soumission</h3>
+        <form id="ticket-form" action="">
+            <div class="form-field">
+                <label for="frmLastName">Nom</label>
+                <input type="text" name="lastName" id="frmLastName" placeholder="Rambo" required>
+            </div>
+
+            <div class="form-field">
+                <label for="frmFirstName">Prenom</label>
+                <input type="text" name="firstName" id="frmFirstName" placeholder="John" required>
+            </div>
+
+            <div class="form-field">
+                <label for="frmEmail">Email</label>
+                <input type="email" name="email" id="frmEmail" placeholder="john.rambo@colonel.us" required>
+            </div>
+
+            <div class="form-field">
+                <label for="frmNature">Nature</label>
+                <select name="nature" id="frmNature">
+                    <option value="1">Bug</option>
+                    <option value="2">Feature</option>
+                </select></div>
+
+            <div class="form-field">
+                <label for="frmPriority">Priorité</label>
+                <select name="priority" id="frmPriority">
+                    <option value="1">High</option>
+                    <option value="2">Normal</option>
+                    <option value="3">Low</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="frmDescription">Description</label>
+                <textarea name="description" id="frmDescription" cols="80" rows="4" placeholder="Cette appli est super !" required></textarea>
+            </div>
+            <button type="submit">Soumettre le ticket</button>
+        </form>
+        <h3>Tickets soumis</h3>
+        <table id="ticket-table">
+            <thead>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Nature</th>
+                <th>Priorité</th>
+                <th>Description</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Grand</td>
+                    <td>Jules</td>
+                    <td>jgrand@simplon.co</td>
+                    <td>Bug</td>
+                    <td>High</td>
+                    <td>L'application ne fonctionne pas !!!</td>
+                </tr>
+                <tr>
+                    <td>Redford</td>
+                    <td>Robert</td>
+                    <td>robert.redford@gmail.com</td>
+                    <td>Feature</td>
+                    <td>Normal</td>
+                    <td>Would be good to have application in English bro!</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+<script src="../scripts/ticket.js"></script>
+
+</html>
