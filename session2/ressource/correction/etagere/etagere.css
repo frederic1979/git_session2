@@ -4,17 +4,47 @@ body{
     margin: auto;
 }
 
+button {
+    height: 48px;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+    
+}
+
+#ajouter-boite {
+    border: solid lightskyblue 2px;
+    color: lightskyblue;
+}
+
+#supprimer-boite {
+    border: solid red 2px;
+    color: red;
+}
+
+#ajouter-boite:hover {
+    color:whitesmoke;
+    background: lightskyblue;
+}
+
+
+#supprimer-boite:hover {
+    color:whitesmoke;
+    background: red;
+}
+
 .atelier {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-top: 30px;
 }
 
 .etagere {
     border: solid black 4px;
     border-top-style: none;
     border-bottom-style: none;
-    width: 450px;
+    width: 470px;
     margin: auto;
 }
 
@@ -44,6 +74,12 @@ body{
     height: 50px;
     width: 150px;
     background-color: orange;
+}
+
+.boite.derniere {
+    border: solid black 3px;
+    border-radius: 5px;
+    background-color: yellow;
 }
 
 .boite:hover {
