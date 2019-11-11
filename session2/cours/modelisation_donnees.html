@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-11-11 Mon 21:09 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Modèles de données</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Bernard Hugueney" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Modèles de données</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org2df431d">1. Introduction</a></li>
+<li><a href="#org1f78ca7">2. Modèle Relationnel</a></li>
+<li><a href="#orgde4b38e">3. Exemples</a>
+<ul>
+<li><a href="#org398d793">3.1. Vente en ligne</a></li>
+<li><a href="#org7cab535">3.2. Bibliothèques virtuelles</a></li>
+<li><a href="#org22da8dd">3.3. Organisation de circuits touristiques</a></li>
+<li><a href="#orge014fb7">3.4. Planification de repas équilibrés</a></li>
+</ul>
+</li>
+<li><a href="#orgad59748">4. Modèle conceptuel de données</a></li>
+<li><a href="#org345c74f">5. Modèle logique de données</a></li>
+<li><a href="#orge460f2a">6. Modèle physique de données</a></li>
+<li><a href="#orged9ea92">7. À approfondir</a></li>
+<li><a href="#org36566bd">8. En pratique</a>
+<ul>
+<li><a href="#org7e76f0e">8.1. Schémas UML</a></li>
+<li><a href="#orgfc210da">8.2. Implémentation de SGBDR : SQL</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2df431d" class="outline-2">
+<h2 id="org2df431d"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+On a vu que pour l'écriture d'un programme, il fallait se poser en
+premier lieu la question des entités manipulées et de leur
+représentation en mémoire dans l'ordinateur, sous forme de types.
+</p>
+
+<p>
+On a aussi eu l'occasion de remarquer que le stockage de données sous
+la forme de fichiers textes était problématique (format et validité
+des données notamment). Dans le cadre d'un système d'informations
+(<i>SI</i>), on aura aussi des problématiques de performance et de fiabilité,
+notamment dans le cas d'accès <i>concurrents</i>.
+</p>
+
+<p>
+La modélisation de données manipulées par un SI est aussi une étape
+fondamentale préalable au développement.
+</p>
+
+<p>
+Elle se décompose, du plus abstrait/général au plus concret/détaillé,
+du passage des spécifications (représentations mentales) à
+l'implémentation (représentation dans le SI):
+</p>
+<ul class="org-ul">
+<li>spécification / receuil des besoins</li>
+<li>modèle conceptuel de données</li>
+<li>modèle logique de données</li>
+<li>modèle physique de données</li>
+<li>implémentation de la base de données</li>
+</ul>
+
+<p>
+On s'intéressera non seulement aux entités, mais aussi à leurs
+relations. L'approche suivi est donc celle d'une <a href="https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model">modęlisation
+Entités-Relations</a>. Des représentations graphiques sont
+particulièrement adaptées et l'on utilisera des schémas de
+représentation selon un langage conventionnel. Pour simplifier, on
+utilisera un sous-ensemble de la représentation UML des diagrammes de
+classe (utilisé par ailleurs pour documenter les classe d'un projet
+implémenté en POO) pour représenter les entités et leurs relations.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1f78ca7" class="outline-2">
+<h2 id="org1f78ca7"><span class="section-number-2">2</span> Modèle Relationnel</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Le <a href="https://en.wikipedia.org/wiki/Relational_model">modèle relationnel</a> représente les entités et leurs relations sous
+la forme de tuples. Dans un système de bases de données relationnelles
+(SGBDR), ces tuples sont les lignes de <i>tables</i>, les colonnes
+correspondent aux attributs de la relation.
+</p>
+
+
+<p>
+Par rapport à une modélisation objet, on a les correspondances
+suivantes :
+</p>
+<dl class="org-dl">
+<dt>table</dt><dd>classe</dd>
+<dt>colonne</dt><dd>attribut</dd>
+<dt>ligne</dt><dd>objet</dd>
+</dl>
+
+<p>
+L'ordre des lignes d'une table n'est pas défini, il n'y a donc pas
+d'équivalent d'une adresse pouvant servir de référence. Si l'on veut
+pouvoir distinguer l'identité de deux entités égales, il faudra
+définir un identifiant dont on garantira l'unicité.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgde4b38e" class="outline-2">
+<h2 id="orgde4b38e"><span class="section-number-2">3</span> Exemples</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+On va s'intéresser à différents cas d'applications :
+</p>
+</div>
+
+<div id="outline-container-org398d793" class="outline-3">
+<h3 id="org398d793"><span class="section-number-3">3.1</span> Vente en ligne</h3>
+</div>
+
+<div id="outline-container-org7cab535" class="outline-3">
+<h3 id="org7cab535"><span class="section-number-3">3.2</span> Bibliothèques virtuelles</h3>
+</div>
+
+<div id="outline-container-org22da8dd" class="outline-3">
+<h3 id="org22da8dd"><span class="section-number-3">3.3</span> Organisation de circuits touristiques</h3>
+</div>
+
+<div id="outline-container-orge014fb7" class="outline-3">
+<h3 id="orge014fb7"><span class="section-number-3">3.4</span> Planification de repas équilibrés</h3>
+</div>
+</div>
+
+
+<div id="outline-container-orgad59748" class="outline-2">
+<h2 id="orgad59748"><span class="section-number-2">4</span> Modèle conceptuel de données</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+La première étape, le <a href="https://en.wikipedia.org/wiki/Conceptual_schema">modèle conceptuel de données</a> consiste à définir
+tout et seulement ce qui est nécessaire pour exprimer les besoins
+métiers. Les entités et leurs relations sont seulement (?) nommées. Le
+nommage est une activité <b>essentielle</b> (et difficile).
+</p>
+
+
+<div class="figure">
+<p><img src="conceptual-model-store.png" alt="conceptual-model-store.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org345c74f" class="outline-2">
+<h2 id="org345c74f"><span class="section-number-2">5</span> Modèle logique de données</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+On précise le modèle conceptuel :
+</p>
+<ul class="org-ul">
+<li>Relations :
+<ul class="org-ul">
+<li>Orientation (bidirectionnelle ou non)</li>
+<li>Cardinalité</li>
+<li>Dépendance ou non sur les durées de vie (agrégation ou
+composition)</li>
+<li>Les relations peuvent être réifiées (avec des attributs). Voir la
+notion d'<a href="https://en.wikipedia.org/wiki/Associative_entity">entité d'association</a>.</li>
+</ul></li>
+<li>Entités :
+<ol class="org-ol">
+<li>attributs</li>
+<li>domaines de définition (plus précis qu'un type)</li>
+<li>identifiants</li>
+</ol></li>
+<li>Contraintes d'intégrité :
+<ul class="org-ul">
+<li>sur les attributs (cf. domaines de définition)</li>
+<li>entre différentes entités</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge460f2a" class="outline-2">
+<h2 id="orge460f2a"><span class="section-number-2">6</span> Modèle physique de données</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+On prend en compte l'implémentation sous forme de base de données
+relationnelle et l'on défini les <i>tables</i> :
+</p>
+<ul class="org-ul">
+<li><a href="http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html">types précis</a> (mais cf. infra : dialects)</li>
+<li>cĺés :
+<ul class="org-ul">
+<li>primaires</li>
+<li>étrangères</li>
+</ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Check_constraint">contraintes d'intégrités explicites</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orged9ea92" class="outline-2">
+<h2 id="orged9ea92"><span class="section-number-2">7</span> À approfondir</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+La performance des SGDBR est souvent un aspect critique. Par rapport à
+ce qui a été abordé, il faudra aussi considérer :
+</p>
+<ul class="org-ul">
+<li><a href="https://use-the-index-luke.com/">les index</a> qui permettent d'accélérer certaines requêtes en lecture
+au prix d'un coût en espace de stockage et en temps d'écriture.</li>
+<li><a href="https://en.wikipedia.org/wiki/Denormalization">la dénormalisation</a> qui permet d'accélérer certaines requêtes en
+lecture (éliminant des jointures) au prix de redondances de données
+stockée (coût en espace de stockage et problématique de maintient de
+cohérence en modification)</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org36566bd" class="outline-2">
+<h2 id="org36566bd"><span class="section-number-2">8</span> En pratique</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-org7e76f0e" class="outline-3">
+<h3 id="org7e76f0e"><span class="section-number-3">8.1</span> Schémas UML</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Notation : on utilise un sous-ensemble de la notation des diagrammes
+de classe en UML. On peut utiliser pour cela n'importe quel logiciel,
+par exemple un <a href="http://plantuml.com/fr/eclipse">plugin PlantUML pour Eclipse</a> ou un <a href="https://plugins.jetbrains.com/plugin/7017-plantuml-integration/">plugin pour
+IntelliJ</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfc210da" class="outline-3">
+<h3 id="orgfc210da"><span class="section-number-3">8.2</span> Implémentation de SGBDR : SQL</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+<a href="https://en.wikipedia.org/wiki/SQL">SQL</a> est le langage <b>standard</b> des SGDBR. Malheureusement, les
+différents SGDBR implémentent des <b>dialectes</b> plus ou moins complets /
+compatibles entre eux. Il faudra donc s'intéresser au SGDBR utilisé
+pour l'implémentation lors de la conception du modèle physique de
+données. Ce sera aussi l'une des motivations pour utiliser une couche
+d'abstraction qui automatisera l'utilisation de divers dialectes de SQL
+à partir de programmes Java au travers d'une interface uniforme.
+</p>
+
+<p>
+On peut pratiquer SQL de différentes façons :
+</p>
+
+<ul class="org-ul">
+<li><a href="http://sqlfiddle.com/#!17">console sql en ligne</a></li>
+
+<li><a href="https://customer.elephantsql.com/instance/create?plan=turtle">(petite) base de donnée PostgreSQL en ligne gratuite</a></li>
+
+<li><a href="https://www.postgresql.org/">installation locale de PostgreSQL</a></li>
+</ul>
+
+
+<p>
+La <a href="https://www.postgresql.org/docs/9.6/static/index.html">documentation en ligne</a> et des <a href="http://www.postgresqltutorial.com/">tutoriels</a> de qualité sont disponibles
+pour PostgreSQL.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Bernard Hugueney</p>
+<p class="date">Created: 2019-11-11 Mon 21:09</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
