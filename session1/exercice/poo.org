@@ -1,0 +1,163 @@
+#+TITLE: Exercices sur l'héritage
+#+AUTHOR: Bernard Hugueney
+
+#+LANGUAGE: fr
+#+LANG: fr
+#+HTML_HEAD_EXTRA: <style>*{font-family: monospace !important}</style>
+
+#+BEGIN_SRC elisp :exports none :results silent
+ (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+ (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t)
+   (plantuml . t)
+   (java . t)
+   (python . t)))
+#+END_SRC
+
+
+* Objectifs
+Pratiquer la redéfinition de méthodes et l'implémentation d'interfaces.
+
+* Préliminaires
+
+
+Créer une classe Person :
+#+BEGIN_SRC plantuml :file Person.png
+class Person{
+firstname
+lastname
+}
+#+END_SRC
+
+#+RESULTS:
+[[file:Person.png]]
+
+Avec un constructeur qui permette d'initialiser les attributs.
+
+* Permettre les tests d'égalité entre instances
+
+** Définir une méthode equals(Person p)
+
+On pourrait être tenté de définir une méthode src_java[:exports
+code]{public boolean equals(Person p)}.
+
+Définir une telle méthode et essayer de l'utiliser :
+#+BEGIN_SRC java :exports code
+    Person p1 = new Person ("Bernard", "h");
+    Person p2 = new Person("Bernard", "h");
+    System.out.println(p1.equals(p2));
+#+END_SRC
+
+Puis comme ceci :
+#+BEGIN_SRC java :exports code
+    Object p1 = new Person ("Bernard", "h");
+    Object p2 = new Person("Bernard", "h");
+    System.out.println(p1.equals(p2));
+#+END_SRC
+
+Expliquer le deuxième résultat.
+
+On a voulu redéfinir la méthode src_java[:exports code]{equals}
+définie dans la classe [[https://docs.oracle.com/javase/10/docs/api/java/lang/Object.html][Object]]. On peut indiquer cette intention de
+/redéfinir/ une méthode avec l'[[https://www.baeldung.com/java-override][annotation @Override]]. Qualifier la
+méthode src_java[:exports code]{public boolean equals(Person p)} avec
+l'annotation src_java[:exports code]{@Override} : que se passe-t-il ?
+
+** Définir une méthode equals(Object o)
+
+Il faut se persuader que le deuxième cas de figure (lorsque l'on
+manipule un objet de classe src_java[:exports code]{Person} à travers
+une référence de classe src_java[:exports code]{Object} qui est la
+plus utile ! En effet, à chaque fois qu'une classe déjà existante (par
+exemple les structures de données de la bibliothèque standard Java
+(e.g. src_java[:exports code]{ArrayList} ou src_java[:exports
+code]{TreeSet}), elle ne peut évidemment pas avoir été écrite ou même
+compilée en prenant en compte notre nouvelle classe. On doit donc
+pouvoir gérer ce cas de figure, en redéfinissant vraiment (et non en
+surchargeant) la méthode [[https://docs.oracle.com/javase/10/docs/api/java/lang/Object.html#equals(java.lang.Object)][equals]] définie dans la classe [[https://docs.oracle.com/javase/10/docs/api/java/lang/Object.html][Object]].
+
+Redéfinir la méthode src_java[:exports code]{public boolean
+equals(Object o)}. Vérifier que le code suivant donne cette fois-ci le
+résultat attendu :
+#+BEGIN_SRC java :exports code
+    Object p1 = new Person ("Bernard", "h");
+    Object p2 = new Person("Bernard", "h");
+    System.out.println(p1.equals(p2));
+#+END_SRC
+
+* Implémentation d'interface
+
+On voudra désormais en plus être capable d'ordonner des instances de
+notre classe src_java[:exports code]{Person} (ordre alphabétique sur
+src_java[:exports code]{lastname} puis sur src_java[:exports
+code]{firstname} en cas d'égalité), par exemple pour pouvoir exécuter
+le code suivant :
+#+BEGIN_SRC java :exports code
+    TreeSet<Person> group= new TreeSet<Person>();
+    group.add(new Person("Bernard","H"));
+    group.add(new Person("Jules", "L"));
+    System.out.println(group);
+
+#+END_SRC
+
+Quel est le message d'erreur à l'exécution ?
+** Implémentation de l'interface Comparable
+
+Implémenter l'interface Comparable [[https://docs.oracle.com/javase/10/docs/api/java/lang/Comparable.html][Comparable]] avec une méthode
+src_java[:exports code]{public int compareTo(Object o)}.
+
+** Implémentation de l'interface Comparable<Person>
+
+Implémenter l'interface [[https://docs.oracle.com/javase/10/docs/api/java/lang/Comparable.html][Comparable<Person>]]. Quels sont les avantages
+par rapport à l'implémentation précédente ?
+
+* Solutions :noexport:
+#+BEGIN_SRC java :classname Person :exports code
+import java.util.TreeSet;
+
+public class Person{
+    private String firstname;
+    private String lastname;
+    public Person(String firstname, String lastname){
+	this.firstname= firstname;
+	this.lastname= lastname;
+    }
+
+    //@Override
+    public boolean equals(Person p){
+	return lastname.equals(p.lastname)
+	    && firstname.equals(p.firstname);
+    }
+
+    @Override
+    public boolean equals(Object p){
+	if(!(p instanceof Person)){
+	    return false;
+	}
+	Person pp= ((Person) p);
+	return lastname.equals(pp.lastname)
+	    && firstname.equals(pp.firstname);
+    }
+
+public static void main(String[] args){
+    Object p1 = new Person ("Bernard", "h");
+    Object p2 = new Person("Bernard", "h");
+    //p1.equals("toto");
+   
+ System.out.println(p1.equals(p2));
+
+    TreeSet<Person> group= new TreeSet<Person>();
+    group.add(new Person("Bernard","H"));
+    group.add(new Person("Jules", "L"));
+    System.out.println(group);
+
+}
+}
+#+END_SRC
+
+#+RESULTS:
+: false
+
+
