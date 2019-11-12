@@ -1,12 +1,12 @@
-- [Contexte](#orgd3a59ca)
-- [Données](#org72cb031)
-- [Opérations](#org456cd01)
-- [Chargement](#orgba5f592)
-- [Programme principal](#org7993883)
+- [Contexte](#org2b49f88)
+- [Données](#org1ffd950)
+- [Opérations](#org3680241)
+- [Chargement](#orgd807425)
+- [Programme principal](#org587c39d)
 
 
 
-<a id="orgd3a59ca"></a>
+<a id="org2b49f88"></a>
 
 # Contexte
 
@@ -19,7 +19,7 @@ Grâce aux possibilités d'abstractions fournies par le langage (héritage, impl
 On pourra ensuite utiliser ces données pour interroger le programme afin de sélectionner un certain sous-ensemble des données selon divers critères.
 
 
-<a id="org72cb031"></a>
+<a id="org1ffd950"></a>
 
 # Données
 
@@ -32,7 +32,7 @@ On va devoir manipuler des communes caractérisées par :
 -   **Exercice:** Définir une classe `City` avec les attributs nécessaires, ainsi qu'un constructeur permettant de les initialiser.
 
 
-<a id="org456cd01"></a>
+<a id="org3680241"></a>
 
 # Opérations
 
@@ -47,17 +47,17 @@ On veut permettre de :
 -   **Exercice:** Définir les méthodes de la classe `City` nécessaires à ces opérations.
 
 
-<a id="orgba5f592"></a>
+<a id="orgd807425"></a>
 
 # Chargement
 
-On voudra pouvoir charger des données à partir de fichiers comme [celui-ci](file:///home/bernard/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/Communes.csv).
+On voudra pouvoir charger des données à partir de fichiers comme [celui-ci](https://github.com/simplonco/corp-bnp-renault/blob/master/session1/ressource/Communes.csv).
 
 -   **Exercice:** Définir les méthodes ou fonctions permettant de charger ces données. Il faut gérer le fait que le fichier puisse contenir des erreurs.
 -   **Bonus:** Permettre le chargement à partir d'une URL.
 
 
-<a id="org7993883"></a>
+<a id="org587c39d"></a>
 
 # Programme principal
 

@@ -69,7 +69,7 @@ On veut permettre de :
 * Chargement
 
 On voudra pouvoir charger des données à partir de fichiers comme
-[[file:~/Documents/Workspaces/Teaching/corp-bnp-renault/session1/ressource/Communes.csv][celui-ci]].
+[[https://github.com/simplonco/corp-bnp-renault/blob/master/session1/ressource/Communes.csv][celui-ci]].
 
 
 - Exercice :: Définir les méthodes ou fonctions permettant de charger
