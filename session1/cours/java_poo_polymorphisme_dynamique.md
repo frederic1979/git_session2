@@ -1,17 +1,17 @@
-- [Polymorphisme dynamique](#org36d540b)
-  - [Polymorphisme statique](#org9eae515)
-  - [Polymorphisme dynamique](#orgae92138)
-- [Exemple](#orge79875f)
-- [Héritage](#org78ed18a)
-  - [Interface](#orgbf8437d)
-  - [Classe de base](#org4dc403d)
-  - [Classe abstraite](#orgf9d45e1)
-- [Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?](#org09c5cde)
-- [Webliographie](#org102948c)
+- [Polymorphisme dynamique](#orge7f4793)
+  - [Polymorphisme statique](#org45645c0)
+  - [Polymorphisme dynamique](#org1284d47)
+- [Exemple](#orgb2c2fcc)
+- [Héritage](#org64c1ea1)
+  - [Interface](#orgdf2d10b)
+  - [Classe de base](#org775529c)
+  - [Classe abstraite](#org001d782)
+- [Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?](#org3e9149f)
+- [Webliographie](#orgb49470c)
 
 
 
-<a id="org36d540b"></a>
+<a id="orge7f4793"></a>
 
 # Polymorphisme dynamique
 
@@ -20,7 +20,7 @@ Le *polymorphisme* en programmation, c'est la possibilité d'avoir plusieurs *im
 On distingue deux types de polymorphismes : le polymorphisme *statique* et le polymorphisme *dynamique*.
 
 
-<a id="org9eae515"></a>
+<a id="org45645c0"></a>
 
 ## Polymorphisme statique
 
@@ -30,14 +30,14 @@ C'est lorsque le choix de l'implémentation a lieu à la compilation. Il y a deu
 -   **la *généricité*:** c'est lorsqu'on utilise la notation `<X>` pour paramétrer une classe ou une méthodes en fonction d'un type (de classe) donné. Le paramétrage est limité en Java car la seule chose qui change au niveau des implémentations, c'est la vérification de type.
 
 
-<a id="orgae92138"></a>
+<a id="org1284d47"></a>
 
 ## Polymorphisme dynamique
 
 Comme on va le voir, c'est lorsqu'une méthode est *redéfinie* (et non pas *surchargée*), donc avec *la même signature*<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>, pour différentes classes d'une même *hiérarchie*.
 
 
-<a id="orge79875f"></a>
+<a id="orgb2c2fcc"></a>
 
 # Exemple
 
@@ -51,7 +51,7 @@ Les deux "solutions" suivantes présentent chacunes des inconvénients :
 Le problème de la première "solution" est que toutes les implémentations sont regroupées dans une même classe qu'il faut modifier pour pouvoir ajouter de nouveaux types. Le problème de la seconde est qu'on ne peut pas manipuler les différents types de façon uniforme (par exemple avoir une structure de données regroupant ensemble tous les fantômes pour appeler leur méthode `move`).
 
 
-<a id="org78ed18a"></a>
+<a id="org64c1ea1"></a>
 
 # Héritage
 
@@ -65,15 +65,13 @@ C'est le même genre de problèmes qu'avaient les concepteurs de la bibliothèqu
 
 ![img](img/ghost-poo-interface.png)
 
--   **héritage (implémentation) d'interface et de classe de base:** 
-
 ![img](img/ghost-poo-interface-and-base-classe.png)
 
 La relation d'héritage étant une relation "est un" (e.g. un TimidGhost "est un" Ghost), elle est transitive. Le dernier diagramme est donc équivalent à :
 
 ![img](img/ghost-poo-interface-and-base-classe-2.png)
 
-Grâce au [principe de substitution](https://fr.wikipedia.org/wiki/Principe_de_substitution_de_Liskov),la relation d'héritage étant de type type "est un", tout ce qu'il est possible de faire avec une instance d'une classe de base est aussi possible avec une instance d'une classe dérivée. De même, pour qu'une classe implémente une interface, elle doit fournir des implémentations pour toutes les méthodes de l'interface. Ainsi, on pourra manipuler des objets à travers une référence vers l'interface (ou la classe de base) :
+Grâce au [principe de substitution](https://fr.wikipedia.org/wiki/Principe_de_substitution_de_Liskov),la relation d'héritage étant de type "est un", tout ce qu'il est possible de faire avec une instance d'une classe de base est aussi possible avec une instance d'une classe dérivée. De même, pour qu'une classe implémente une interface, elle doit fournir des implémentations pour toutes les méthodes de l'interface. Ainsi, on pourra manipuler des objets à travers une référence vers l'interface (ou la classe de base) :
 
 ```java
 1  // la liste en argument contient des objets de n'importe quelle classe
@@ -90,7 +88,7 @@ Grâce au [principe de substitution](https://fr.wikipedia.org/wiki/Principe_de_s
 -   Le polymorphisme dynamique permet à Java (la JVM) de découvrir *à l'exécution* (d'où le *dynamique*) le code à exécuter pour effectuer l'appel à la méthode `move` à la ligne 5. Ce code pouvant être défini dans chacune des classes implémentant l'interface / héritant de la classe de base.
 
 
-<a id="orgbf8437d"></a>
+<a id="orgdf2d10b"></a>
 
 ## Interface
 
@@ -131,7 +129,7 @@ La signature de la méthode `move` dans l'implémentation de la classe `Agressiv
 Une classe peut hériter de (implémenter) plusieurs interfaces et doit donc fournir des implémentations pour chacune des méthodes des interfaces implémentées pour lesquelles il n'y a pas d'implémentation par défaut. Si ces interfaces déclarent des implémentations par défaut pour la même méthode (avec la même signature, donc), il faut qu'elle déclare elle-même une implémentation pour lever l'ambiguïté.
 
 
-<a id="org4dc403d"></a>
+<a id="org775529c"></a>
 
 ## Classe de base
 
@@ -168,7 +166,7 @@ public class AgressiveGhost extends DefaultGhost {
 ```
 
 
-<a id="orgf9d45e1"></a>
+<a id="org001d782"></a>
 
 ## Classe abstraite
 
@@ -187,7 +185,7 @@ public abstract class DefaultGhost {
 Une classe pourra hériter de celle-ci comme d'une classe normale, mais devra alors fournir des implémentations pour toutes les méthodes abstraites pour être elle-même concrète. La classe abstraite ne peut pas être instanciée et toute tentative d'appeler directement le constructeur provoquera une erreur de compilation.
 
 
-<a id="org09c5cde"></a>
+<a id="org3e9149f"></a>
 
 # Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?
 
@@ -202,7 +200,7 @@ Il est évident que des objets de classe `Mammal` ne devraient pas être instanc
 En pratique, l'héritage de classe concrète est souvent dû à une évolution de programme, lorsqu'on veut ajouter une nouvelle classe donc le comportement est suffisamment proche de celui d'une autre classe pour qu'on veuille réutiliser l'implémentation de celle-ci.
 
 
-<a id="org102948c"></a>
+<a id="orgb49470c"></a>
 
 # Webliographie
 

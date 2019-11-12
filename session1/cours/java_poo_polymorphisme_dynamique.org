@@ -167,8 +167,8 @@ Ghost <|-- TimidGhost
 #+END_SRC
 
 Grâce au [[https://fr.wikipedia.org/wiki/Principe_de_substitution_de_Liskov][principe de substitution]],la relation d'héritage étant de type
-type "est un", tout ce qu'il est possible de faire avec une instance
-d'une classe de base est aussi possible avec une instance d'une classe
+"est un", tout ce qu'il est possible de faire avec une instance d'une
+classe de base est aussi possible avec une instance d'une classe
 dérivée. De même, pour qu'une classe implémente une interface, elle
 doit fournir des implémentations pour toutes les méthodes de
 l'interface. Ainsi, on pourra manipuler des objets à travers une
