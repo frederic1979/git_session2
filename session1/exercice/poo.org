@@ -87,6 +87,18 @@ résultat attendu :
     System.out.println(p1.equals(p2));
 #+END_SRC
 
+* Permettre l'affichage du contenu d'une instance
+
+Si l'on passe une instance de la classe src_java[:exports
+code]{Person} en argument de la méthode [[https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#print(java.lang.Object)][print]] (ou [[https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#println(java.lang.Object)][println]]) de
+src_java[:exports code]{System.out}, le résultat est décevant. Aussi
+décevant que lorsqu'on passait des tableaux en espérant voir afficher
+leur contenu.  En fait, la méthode [[https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#print(java.lang.Object)][print]] (ou [[https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#println(java.lang.Object)][println]]) va utiliser le
+résultat de la méthode [[https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#toString()][toString]] définie dans la classe [[https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html][Object]].
+
+Faire en sorte que l'affichage des instances de la classe
+src_java[:exports code]{Person} affiche le nom et le prénom.
+
 * Implémentation d'interface
 
 On voudra désormais en plus être capable d'ordonner des instances de

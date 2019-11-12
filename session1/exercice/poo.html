@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-11-12 Tue 14:58 -->
+<!-- 2019-11-12 Tue 15:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Exercices sur l'héritage</title>
@@ -248,26 +248,27 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9963dcc">1. Objectifs</a></li>
-<li><a href="#org16bb672">2. Préliminaires</a></li>
-<li><a href="#org2b7b288">3. Permettre les tests d'égalité entre instances</a>
+<li><a href="#org3d535e4">1. Objectifs</a></li>
+<li><a href="#orgac00801">2. Préliminaires</a></li>
+<li><a href="#orgef9bab7">3. Permettre les tests d'égalité entre instances</a>
 <ul>
-<li><a href="#org96f4dca">3.1. Définir une méthode equals(Person p)</a></li>
-<li><a href="#org61c1e50">3.2. Définir une méthode equals(Object o)</a></li>
+<li><a href="#org806814f">3.1. Définir une méthode equals(Person p)</a></li>
+<li><a href="#org05ee8cd">3.2. Définir une méthode equals(Object o)</a></li>
 </ul>
 </li>
-<li><a href="#orgd1a9db6">4. Implémentation d'interface</a>
+<li><a href="#orgf440547">4. Permettre l'affichage du contenu d'une instance</a></li>
+<li><a href="#org5ba87e4">5. Implémentation d'interface</a>
 <ul>
-<li><a href="#org9bf826e">4.1. Implémentation de l'interface Comparable</a></li>
-<li><a href="#org8a14970">4.2. Implémentation de l'interface Comparable&lt;Person&gt;</a></li>
+<li><a href="#org35b9339">5.1. Implémentation de l'interface Comparable</a></li>
+<li><a href="#org445e004">5.2. Implémentation de l'interface Comparable&lt;Person&gt;</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9963dcc" class="outline-2">
-<h2 id="org9963dcc"><span class="section-number-2">1</span> Objectifs</h2>
+<div id="outline-container-org3d535e4" class="outline-2">
+<h2 id="org3d535e4"><span class="section-number-2">1</span> Objectifs</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Pratiquer la redéfinition de méthodes et l'implémentation d'interfaces.
@@ -275,8 +276,8 @@ Pratiquer la redéfinition de méthodes et l'implémentation d'interfaces.
 </div>
 </div>
 
-<div id="outline-container-org16bb672" class="outline-2">
-<h2 id="org16bb672"><span class="section-number-2">2</span> Préliminaires</h2>
+<div id="outline-container-orgac00801" class="outline-2">
+<h2 id="orgac00801"><span class="section-number-2">2</span> Préliminaires</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Créer une classe Person :
@@ -293,12 +294,12 @@ Avec un constructeur qui permette d'initialiser les attributs.
 </div>
 </div>
 
-<div id="outline-container-org2b7b288" class="outline-2">
-<h2 id="org2b7b288"><span class="section-number-2">3</span> Permettre les tests d'égalité entre instances</h2>
+<div id="outline-container-orgef9bab7" class="outline-2">
+<h2 id="orgef9bab7"><span class="section-number-2">3</span> Permettre les tests d'égalité entre instances</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org96f4dca" class="outline-3">
-<h3 id="org96f4dca"><span class="section-number-3">3.1</span> Définir une méthode equals(Person p)</h3>
+<div id="outline-container-org806814f" class="outline-3">
+<h3 id="org806814f"><span class="section-number-3">3.1</span> Définir une méthode equals(Person p)</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 On pourrait être tenté de définir une méthode <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #6434A3;">boolean</span> <span style="color: #006699;">equals</span>(<span style="color: #6434A3;">Person</span> <span style="color: #BA36A5;">p</span>)</code>.
@@ -338,8 +339,8 @@ l'annotation <code class="src src-java"><span style="color: #D0372D;">@Override<
 </div>
 </div>
 
-<div id="outline-container-org61c1e50" class="outline-3">
-<h3 id="org61c1e50"><span class="section-number-3">3.2</span> Définir une méthode equals(Object o)</h3>
+<div id="outline-container-org05ee8cd" class="outline-3">
+<h3 id="org05ee8cd"><span class="section-number-3">3.2</span> Définir une méthode equals(Object o)</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Il faut se persuader que le deuxième cas de figure (lorsque l'on
@@ -367,9 +368,27 @@ résultat attendu :
 </div>
 </div>
 
-<div id="outline-container-orgd1a9db6" class="outline-2">
-<h2 id="orgd1a9db6"><span class="section-number-2">4</span> Implémentation d'interface</h2>
+<div id="outline-container-orgf440547" class="outline-2">
+<h2 id="orgf440547"><span class="section-number-2">4</span> Permettre l'affichage du contenu d'une instance</h2>
 <div class="outline-text-2" id="text-4">
+<p>
+Si l'on passe une instance de la classe <code class="src src-java">Person</code> en argument de la méthode <a href="https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#print(java.lang.Object)">print</a> (ou <a href="https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#println(java.lang.Object)">println</a>) de
+<code class="src src-java">System.out</code>, le résultat est décevant. Aussi
+décevant que lorsqu'on passait des tableaux en espérant voir afficher
+leur contenu.  En fait, la méthode <a href="https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#print(java.lang.Object)">print</a> (ou <a href="https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#println(java.lang.Object)">println</a>) va utiliser le
+résultat de la méthode <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#toString()">toString</a> définie dans la classe <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html">Object</a>.
+</p>
+
+<p>
+Faire en sorte que l'affichage des instances de la classe
+<code class="src src-java">Person</code> affiche le nom et le prénom.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5ba87e4" class="outline-2">
+<h2 id="org5ba87e4"><span class="section-number-2">5</span> Implémentation d'interface</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 On voudra désormais en plus être capable d'ordonner des instances de
 notre classe <code class="src src-java">Person</code> (ordre alphabétique sur
@@ -389,9 +408,9 @@ le code suivant :
 Quel est le message d'erreur à l'exécution ?
 </p>
 </div>
-<div id="outline-container-org9bf826e" class="outline-3">
-<h3 id="org9bf826e"><span class="section-number-3">4.1</span> Implémentation de l'interface Comparable</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-org35b9339" class="outline-3">
+<h3 id="org35b9339"><span class="section-number-3">5.1</span> Implémentation de l'interface Comparable</h3>
+<div class="outline-text-3" id="text-5-1">
 <p>
 Implémenter l'interface Comparable <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Comparable.html">Comparable</a> avec une méthode
 <code class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #6434A3;">int</span> <span style="color: #006699;">compareTo</span>(<span style="color: #6434A3;">Object</span> <span style="color: #BA36A5;">o</span>)</code>.
@@ -399,9 +418,9 @@ Implémenter l'interface Comparable <a href="https://docs.oracle.com/javase/10/d
 </div>
 </div>
 
-<div id="outline-container-org8a14970" class="outline-3">
-<h3 id="org8a14970"><span class="section-number-3">4.2</span> Implémentation de l'interface Comparable&lt;Person&gt;</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org445e004" class="outline-3">
+<h3 id="org445e004"><span class="section-number-3">5.2</span> Implémentation de l'interface Comparable&lt;Person&gt;</h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
 Implémenter l'interface <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Comparable.html">Comparable&lt;Person&gt;</a>. Quels sont les avantages
 par rapport à l'implémentation précédente ?
@@ -412,7 +431,7 @@ par rapport à l'implémentation précédente ?
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Bernard Hugueney</p>
-<p class="date">Created: 2019-11-12 Tue 14:58</p>
+<p class="date">Created: 2019-11-12 Tue 15:54</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

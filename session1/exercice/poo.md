@@ -1,22 +1,23 @@
-- [Objectifs](#orgb8303dc)
-- [Préliminaires](#orgb71462d)
-- [Permettre les tests d'égalité entre instances](#orge3beec8)
-  - [Définir une méthode equals(Person p)](#org9b7c643)
-  - [Définir une méthode equals(Object o)](#org735e739)
-- [Implémentation d'interface](#org9fd07d6)
-  - [Implémentation de l'interface Comparable](#orgab50fca)
-  - [Implémentation de l'interface Comparable<Person>](#org42eb079)
+- [Objectifs](#orgda26ac9)
+- [Préliminaires](#orgcaff152)
+- [Permettre les tests d'égalité entre instances](#org58dc5e6)
+  - [Définir une méthode equals(Person p)](#org035629e)
+  - [Définir une méthode equals(Object o)](#org2c461dc)
+- [Permettre l'affichage du contenu d'une instance](#org233b741)
+- [Implémentation d'interface](#orga6ba42e)
+  - [Implémentation de l'interface Comparable](#org0d1ea87)
+  - [Implémentation de l'interface Comparable<Person>](#org732fcf4)
 
 
 
-<a id="orgb8303dc"></a>
+<a id="orgda26ac9"></a>
 
 # Objectifs
 
 Pratiquer la redéfinition de méthodes et l'implémentation d'interfaces.
 
 
-<a id="orgb71462d"></a>
+<a id="orgcaff152"></a>
 
 # Préliminaires
 
@@ -27,12 +28,12 @@ Créer une classe Person :
 Avec un constructeur qui permette d'initialiser les attributs.
 
 
-<a id="orge3beec8"></a>
+<a id="org58dc5e6"></a>
 
 # Permettre les tests d'égalité entre instances
 
 
-<a id="org9b7c643"></a>
+<a id="org035629e"></a>
 
 ## Définir une méthode equals(Person p)
 
@@ -59,7 +60,7 @@ Expliquer le deuxième résultat.
 On a voulu redéfinir la méthode `equals` définie dans la classe [Object](https://docs.oracle.com/javase/10/docs/api/java/lang/Object.html). On peut indiquer cette intention de *redéfinir* une méthode avec l'[annotation @Override](https://www.baeldung.com/java-override). Qualifier la méthode `public boolean equals(Person p)` avec l'annotation `@Override` : que se passe-t-il ?
 
 
-<a id="org735e739"></a>
+<a id="org2c461dc"></a>
 
 ## Définir une méthode equals(Object o)
 
@@ -74,7 +75,16 @@ Redéfinir la méthode `public boolean equals(Object o)`. Vérifier que le code 
 ```
 
 
-<a id="org9fd07d6"></a>
+<a id="org233b741"></a>
+
+# Permettre l'affichage du contenu d'une instance
+
+Si l'on passe une instance de la classe `Person` en argument de la méthode [print](https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#print(java.lang.Object)) (ou [println](https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#println(java.lang.Object))) de `System.out`, le résultat est décevant. Aussi décevant que lorsqu'on passait des tableaux en espérant voir afficher leur contenu. En fait, la méthode [print](https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#print(java.lang.Object)) (ou [println](https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#println(java.lang.Object))) va utiliser le résultat de la méthode [toString](https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#toString()) définie dans la classe [Object](https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html).
+
+Faire en sorte que l'affichage des instances de la classe `Person` affiche le nom et le prénom.
+
+
+<a id="orga6ba42e"></a>
 
 # Implémentation d'interface
 
@@ -91,14 +101,14 @@ On voudra désormais en plus être capable d'ordonner des instances de notre cla
 Quel est le message d'erreur à l'exécution ?
 
 
-<a id="orgab50fca"></a>
+<a id="org0d1ea87"></a>
 
 ## Implémentation de l'interface Comparable
 
 Implémenter l'interface Comparable [Comparable](https://docs.oracle.com/javase/10/docs/api/java/lang/Comparable.html) avec une méthode `public int compareTo(Object o)`.
 
 
-<a id="org42eb079"></a>
+<a id="org732fcf4"></a>
 
 ## Implémentation de l'interface Comparable<Person>
 
