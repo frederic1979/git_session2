@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-17 Thu 17:28 -->
+<!-- 2019-11-13 Wed 11:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Les collections en Java</title>
@@ -248,44 +248,44 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9ce9a47">1. Limites des tableaux</a></li>
-<li><a href="#org7a0e93f">2. Introduction aux classes génériques</a>
+<li><a href="#orgc0b6e1b">1. Limites des tableaux</a></li>
+<li><a href="#org547c95d">2. Introduction aux classes génériques</a>
 <ul>
-<li><a href="#orgad20e3c">2.1. Pourquoi des classes génériques ?</a></li>
-<li><a href="#orgc60261a">2.2. Les classes 'wrappers'</a></li>
+<li><a href="#orge449eba">2.1. Pourquoi des classes génériques ?</a></li>
+<li><a href="#org8561f1a">2.2. Les classes 'wrappers'</a></li>
 </ul>
 </li>
-<li><a href="#org4ddd9ab">3. Stocker un nombre indéterminé d'éléments</a>
+<li><a href="#orgfee024b">3. Stocker un nombre indéterminé d'éléments</a>
 <ul>
-<li><a href="#org76d0cbc">3.1. Listes</a></li>
-<li><a href="#orgeafcbeb">3.2. Piles (<i>Stack</i>)</a></li>
-<li><a href="#org0cd9dc3">3.3. Files (<i>Queues</i>)</a></li>
+<li><a href="#orgabbb860">3.1. Listes</a></li>
+<li><a href="#org038cc51">3.2. Piles (<i>Stack</i>)</a></li>
+<li><a href="#org28d0521">3.3. Files (<i>Queues</i>)</a></li>
 </ul>
 </li>
-<li><a href="#orga68d57c">4. Stocker et rechercher des valeurs sans doublons</a></li>
-<li><a href="#org95990b4">5. Associer des valeurs à des clés</a></li>
-<li><a href="#org56147b0">6. Implémenter des classes qui peuvent être utilisées dans des Collections</a>
+<li><a href="#org998989b">4. Stocker et rechercher des valeurs sans doublons</a></li>
+<li><a href="#org9c83fcd">5. Associer des valeurs à des clés</a></li>
+<li><a href="#org417f94f">6. Implémenter des classes qui peuvent être utilisées dans des Collections</a>
 <ul>
-<li><a href="#org0603d82">6.1. equals</a></li>
-<li><a href="#org70be587">6.2. hashCode</a></li>
-<li><a href="#orgbbe756e">6.3. Interface Comparable ou objet Comparator</a></li>
+<li><a href="#orgf76e931">6.1. equals</a></li>
+<li><a href="#orgc402794">6.2. hashCode</a></li>
+<li><a href="#orge4bc9f5">6.3. Interface Comparable ou objet Comparator</a></li>
 </ul>
 </li>
-<li><a href="#orgbe36773">7. Interfaces</a>
+<li><a href="#org493a4f1">7. Interfaces</a>
 <ul>
-<li><a href="#org0febc12">7.1. List</a></li>
-<li><a href="#orgccde1af">7.2. Set</a></li>
-<li><a href="#orgbf0de88">7.3. Map</a></li>
-<li><a href="#orgb08cf00">7.4. Collection</a></li>
+<li><a href="#org29be130">7.1. List</a></li>
+<li><a href="#org87b4a59">7.2. Set</a></li>
+<li><a href="#org46d4627">7.3. Map</a></li>
+<li><a href="#org14f579f">7.4. Collection</a></li>
 </ul>
 </li>
-<li><a href="#orga4c8c99">8. Webliographie</a></li>
+<li><a href="#org2e2e250">8. Webliographie</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9ce9a47" class="outline-2">
-<h2 id="org9ce9a47"><span class="section-number-2">1</span> Limites des tableaux</h2>
+<div id="outline-container-orgc0b6e1b" class="outline-2">
+<h2 id="orgc0b6e1b"><span class="section-number-2">1</span> Limites des tableaux</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Si l'on peut tout faire avec les types primitifs et des tableaux comme
@@ -310,8 +310,8 @@ efficacement des principaux cas d'utilisations.
 </div>
 </div>
 
-<div id="outline-container-org7a0e93f" class="outline-2">
-<h2 id="org7a0e93f"><span class="section-number-2">2</span> Introduction aux classes génériques</h2>
+<div id="outline-container-org547c95d" class="outline-2">
+<h2 id="org547c95d"><span class="section-number-2">2</span> Introduction aux classes génériques</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Les classes implémentant les structures de données sont différentes
@@ -324,8 +324,8 @@ Il s'agit de <a href="https://en.wikipedia.org/wiki/Generics_in_Java">classes g�
 </p>
 </div>
 
-<div id="outline-container-orgad20e3c" class="outline-3">
-<h3 id="orgad20e3c"><span class="section-number-3">2.1</span> Pourquoi des classes génériques ?</h3>
+<div id="outline-container-orge449eba" class="outline-3">
+<h3 id="orge449eba"><span class="section-number-3">2.1</span> Pourquoi des classes génériques ?</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 En fait, on pourrait stocker des objets de n'importe quel type
@@ -344,7 +344,7 @@ l'exécution, alors qu'on aurait voulu avoir une erreur de compilation
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Programme&nbsp;1&nbsp;: </span><a id="orge94862d"></a> Erreur avec une collection hétérogène</label><pre class="src src-java"><span class="linenr"> 1: </span><span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">ArrayList</span>;
+<label class="org-src-name"><span class="listing-number">Programme&nbsp;1&nbsp;: </span><a id="orga5cb744"></a> Erreur avec une collection hétérogène</label><pre class="src src-java"><span class="linenr"> 1: </span><span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">ArrayList</span>;
 <span class="linenr"> 2: </span>
 <span class="linenr"> 3: </span><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">HeterogenousContainerError</span>{
 <span class="linenr"> 4: </span>    <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">ArrayList</span> <span style="color: #BA36A5;">data</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">ArrayList</span>();
@@ -387,8 +387,8 @@ java.lang.ClassCastException: java.lang.String cannot be cast to java.lang.Integ
 </div>
 
 
-<div id="outline-container-orgc60261a" class="outline-3">
-<h3 id="orgc60261a"><span class="section-number-3">2.2</span> Les classes 'wrappers'</h3>
+<div id="outline-container-org8561f1a" class="outline-3">
+<h3 id="org8561f1a"><span class="section-number-3">2.2</span> Les classes 'wrappers'</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 On vient de voir que les classes implémentant les structures de
@@ -422,8 +422,8 @@ ligne  <a href="#coderef-no-autounboxing" class="coderef" onmouseover="CodeHighl
 </div>
 </div>
 
-<div id="outline-container-org4ddd9ab" class="outline-2">
-<h2 id="org4ddd9ab"><span class="section-number-2">3</span> Stocker un nombre indéterminé d'éléments</h2>
+<div id="outline-container-orgfee024b" class="outline-2">
+<h2 id="orgfee024b"><span class="section-number-2">3</span> Stocker un nombre indéterminé d'éléments</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Lorsqu'on veut stocker un nombre a priori indéterminé de valeurs, suivant qu'on s'intéresse à pouvoir efficacement :
@@ -443,8 +443,8 @@ Ces trois cas d'utilisation correspondent à différentes classes de la
 bibliothèque standard.
 </p>
 </div>
-<div id="outline-container-org76d0cbc" class="outline-3">
-<h3 id="org76d0cbc"><span class="section-number-3">3.1</span> Listes</h3>
+<div id="outline-container-orgabbb860" class="outline-3">
+<h3 id="orgabbb860"><span class="section-number-3">3.1</span> Listes</h3>
 <div class="outline-text-3" id="text-3-1">
 <dl class="org-dl">
 <dt><a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">java.util.ArrayList&lt;E&gt;</a> (où E est la classe des éléments à stocker)</dt><dd>c'est
@@ -468,8 +468,8 @@ efficacement, il faut accéder aux éléments dans l'ordre.</dd>
 </div>
 </div>
 
-<div id="outline-container-orgeafcbeb" class="outline-3">
-<h3 id="orgeafcbeb"><span class="section-number-3">3.2</span> Piles (<i>Stack</i>)</h3>
+<div id="outline-container-org038cc51" class="outline-3">
+<h3 id="org038cc51"><span class="section-number-3">3.2</span> Piles (<i>Stack</i>)</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Les structures de données de type <i>LIFO</i> (Last In First Out), ou
@@ -483,8 +483,8 @@ liste, soit en ajoutant et retirant en fin de liste.
 </div>
 </div>
 
-<div id="outline-container-org0cd9dc3" class="outline-3">
-<h3 id="org0cd9dc3"><span class="section-number-3">3.3</span> Files (<i>Queues</i>)</h3>
+<div id="outline-container-org28d0521" class="outline-3">
+<h3 id="org28d0521"><span class="section-number-3">3.3</span> Files (<i>Queues</i>)</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Les structures de données de type <i>FIFO</i> (First In First Out), ou
@@ -496,8 +496,8 @@ de liste (ou l'inverse).
 </div>
 </div>
 
-<div id="outline-container-orga68d57c" class="outline-2">
-<h2 id="orga68d57c"><span class="section-number-2">4</span> Stocker et rechercher des valeurs sans doublons</h2>
+<div id="outline-container-org998989b" class="outline-2">
+<h2 id="org998989b"><span class="section-number-2">4</span> Stocker et rechercher des valeurs sans doublons</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Si l'on veut stocker des valeurs sans doublons <sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> et pouvoir
@@ -525,8 +525,8 @@ sont dans <a href="file:///home/bernard/Documents/Workspaces/Teaching/corp-bnp-r
 </div>
 </div>
 
-<div id="outline-container-org95990b4" class="outline-2">
-<h2 id="org95990b4"><span class="section-number-2">5</span> Associer des valeurs à des clés</h2>
+<div id="outline-container-org9c83fcd" class="outline-2">
+<h2 id="org9c83fcd"><span class="section-number-2">5</span> Associer des valeurs à des clés</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Les tableaux permettent d'associer une valeur (le contenu d'une case
@@ -559,8 +559,8 @@ fichier de mots</a>.</dd>
 </div>
 </div>
 
-<div id="outline-container-org56147b0" class="outline-2">
-<h2 id="org56147b0"><span class="section-number-2">6</span> Implémenter des classes qui peuvent être utilisées dans des Collections</h2>
+<div id="outline-container-org417f94f" class="outline-2">
+<h2 id="org417f94f"><span class="section-number-2">6</span> Implémenter des classes qui peuvent être utilisées dans des Collections</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 On peut utiliser les structures de données pour stocker des instances
@@ -573,8 +573,8 @@ classes soient utilisables dans ces structures de données.
 </p>
 </div>
 
-<div id="outline-container-org0603d82" class="outline-3">
-<h3 id="org0603d82"><span class="section-number-3">6.1</span> equals</h3>
+<div id="outline-container-orgf76e931" class="outline-3">
+<h3 id="orgf76e931"><span class="section-number-3">6.1</span> equals</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Même si elle n'est pas aussi performante que pour les ensembles
@@ -592,6 +592,29 @@ Généralement, des instances seront égales lorsque tous leurs attributs
 sont égaux (au sens de leur <a href="https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html">méthode equals</a> lorsqu'il s'agit d'objets).
 </p>
 
+<p>
+En pratique, on va redéfinir la méthode <code class="src src-java">equals</code> en combinants les résultats des tests d'égalité (et non
+pas d'ientité !) des différents attributs avec l'opérateur
+<code class="src src-java">&amp;&amp;</code> (ET logique):
+</p>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Person</span> {
+      <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">firstname</span>;
+      <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">lastname</span>;
+      <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">age</span>;
+
+      <span style="color: #D0372D;">@Override</span>
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">boolean</span> <span style="color: #006699;">equals</span>(<span style="color: #6434A3;">Object</span> <span style="color: #BA36A5;">o</span>){
+          <span style="color: #0000FF;">if</span>(! o <span style="color: #0000FF;">instanceof</span> Person){
+              <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">false</span>;
+          }
+          <span style="color: #6434A3;">Person</span> <span style="color: #BA36A5;">other</span>= (<span style="color: #6434A3;">Person</span>) o;
+          <span style="color: #0000FF;">return</span> firstname.equals(o.firstname) &amp;&amp; lastname.equals(o.lastname) &amp;&amp; (age == o.age);
+      }
+  }
+</pre>
+</div>
+
 
 <dl class="org-dl">
 <dt>Note</dt><dd>Lorsqu'on <a href="https://jmdoudoux.developpez.com/cours/developpons/java/chap-techniques_java.php#techniques_java-2">redéfinit equals, il faut aussi redéfinir
@@ -600,8 +623,8 @@ hashcode</a> (cf. infra).</dd>
 </div>
 </div>
 
-<div id="outline-container-org70be587" class="outline-3">
-<h3 id="org70be587"><span class="section-number-3">6.2</span> hashCode</h3>
+<div id="outline-container-orgc402794" class="outline-3">
+<h3 id="orgc402794"><span class="section-number-3">6.2</span> hashCode</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 Les structures de données basées sur des index (<a href="https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html">HashSet&lt;E&gt;</a>,
@@ -618,12 +641,31 @@ c'est-à-dire qu'on essaie d'éviter que des objets qui ne sont pas
 égaux (toujours au sens de la <a href="https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html">méthode equals</a>) aient la même
 valeur de hashcode.</dd>
 </dl>
+
+<p>
+En pratique, on va redéfinir la méthode <code class="src src-java">hashCode</code> en combinants les résultats des <code class="src src-java">hashCode()</code> des différents attributs avec l'opérateur
+<code class="src src-java">^</code> (OU eXclusif) :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Person</span> {
+        <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">firstname</span>;
+        <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">lastname</span>;
+        <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">age</span>;
+        <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">height</span>;
+
+        <span style="color: #D0372D;">@Override</span>
+        <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">int</span> <span style="color: #006699;">hashCode</span>(){
+            <span style="color: #0000FF;">return</span>  firstname.hashCode() ^ lastname.hashCode() ^ age ^ Double.valueOf(height).hashCode();
+        }
+    }
+</pre>
+</div>
 </div>
 </div>
 
 
-<div id="outline-container-orgbbe756e" class="outline-3">
-<h3 id="orgbbe756e"><span class="section-number-3">6.3</span> <a id="orge3e0bed"></a> Interface Comparable ou objet Comparator</h3>
+<div id="outline-container-orge4bc9f5" class="outline-3">
+<h3 id="orge4bc9f5"><span class="section-number-3">6.3</span> <a id="orgbfaea8f"></a> Interface Comparable ou objet Comparator</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 Lorsque l'on utilise une structure de donnée ( <a href="https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html">TreeSet&lt;E&gt;</a>,
@@ -652,8 +694,8 @@ listes avec la méthode <a href="https://docs.oracle.com/javase/8/docs/api/java/
 </div>
 </div>
 
-<div id="outline-container-orgbe36773" class="outline-2">
-<h2 id="orgbe36773"><span class="section-number-2">7</span> Interfaces</h2>
+<div id="outline-container-org493a4f1" class="outline-2">
+<h2 id="org493a4f1"><span class="section-number-2">7</span> Interfaces</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 On a pu constater que plusieurs classes pouvaient offrir les mêmes
@@ -701,8 +743,8 @@ et donc mises à déclarées dans l'interface <a href="https://docs.oracle.com/j
 </div>
 
 
-<div id="outline-container-org0febc12" class="outline-3">
-<h3 id="org0febc12"><span class="section-number-3">7.1</span> List</h3>
+<div id="outline-container-org29be130" class="outline-3">
+<h3 id="org29be130"><span class="section-number-3">7.1</span> List</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 <a href="https://jmdoudoux.developpez.com/cours/developpons/java/chap-collections.php#collections-3">L'interface List est implémentée par de nombreuses classes</a> et à chaque
@@ -739,8 +781,8 @@ ou
 </div>
 
 
-<div id="outline-container-orgccde1af" class="outline-3">
-<h3 id="orgccde1af"><span class="section-number-3">7.2</span> Set</h3>
+<div id="outline-container-org87b4a59" class="outline-3">
+<h3 id="org87b4a59"><span class="section-number-3">7.2</span> Set</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 <a href="https://jmdoudoux.developpez.com/cours/developpons/java/chap-collections.php#collections-4">L'interface Set fait partie d'une hiérarchies de classes</a> et on
@@ -777,8 +819,8 @@ ou
 </div>
 
 
-<div id="outline-container-orgbf0de88" class="outline-3">
-<h3 id="orgbf0de88"><span class="section-number-3">7.3</span> Map</h3>
+<div id="outline-container-org46d4627" class="outline-3">
+<h3 id="org46d4627"><span class="section-number-3">7.3</span> Map</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 <a href="https://jmdoudoux.developpez.com/cours/developpons/java/chap-collections.php#collections-5">L'interface Map fait partie d'une hiérarchie de classes</a> et on
@@ -814,8 +856,8 @@ ou
 </div>
 </div>
 
-<div id="outline-container-orgb08cf00" class="outline-3">
-<h3 id="orgb08cf00"><span class="section-number-3">7.4</span> Collection</h3>
+<div id="outline-container-org14f579f" class="outline-3">
+<h3 id="org14f579f"><span class="section-number-3">7.4</span> Collection</h3>
 <div class="outline-text-3" id="text-7-4">
 <p>
 En fait, il y a quelques fonctionnalités qui sont communes à toutes
@@ -837,8 +879,8 @@ une <code class="src src-java"><span style="color: #6434A3;">Collection</span>&l
 </div>
 </div>
 
-<div id="outline-container-orga4c8c99" class="outline-2">
-<h2 id="orga4c8c99"><span class="section-number-2">8</span> Webliographie</h2>
+<div id="outline-container-org2e2e250" class="outline-2">
+<h2 id="org2e2e250"><span class="section-number-2">8</span> Webliographie</h2>
 <div class="outline-text-2" id="text-8">
 <ul class="org-ul">
 <li><a href="https://www.jmdoudoux.fr/java/dej/chap-collections.htm#collections">Les collections</a></li>
@@ -871,7 +913,7 @@ ensemble (<i>set</i>), elle ne sera présente qu'une seule fois.</p></div></div>
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Bernard Hugueney</p>
-<p class="date">Created: 2019-10-17 Thu 17:28</p>
+<p class="date">Created: 2019-11-13 Wed 11:36</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

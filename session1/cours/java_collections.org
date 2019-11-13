@@ -241,6 +241,27 @@ se fait en Java en redéfinissant la [[https://docs.oracle.com/javase/tutorial/j
 Généralement, des instances seront égales lorsque tous leurs attributs
 sont égaux (au sens de leur [[https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html][méthode equals]] lorsqu'il s'agit d'objets).
 
+En pratique, on va redéfinir la méthode src_java[:exports
+code]{equals} en combinants les résultats des tests d'égalité (et non
+pas d'ientité !) des différents attributs avec l'opérateur
+src_java[:exports code]{&&} (ET logique):
+#+BEGIN_SRC java :exports code
+  public class Person {
+      private String firstname;
+      private String lastname;
+      private int age;
+
+      @Override
+      public boolean equals(Object o){
+	  if(! o instanceof Person){
+	      return false;
+	  }
+	  Person other= (Person) o;
+	  return firstname.equals(o.firstname) && lastname.equals(o.lastname) && (age == o.age);
+      }
+  }
+#+END_SRC
+
 
 - Note :: Lorsqu'on [[https://jmdoudoux.developpez.com/cours/developpons/java/chap-techniques_java.php#techniques_java-2][redéfinit equals, il faut aussi redéfinir
           hashcode]] (cf. infra).
@@ -258,6 +279,24 @@ méthode [[https://fr.wikipedia.org/wiki/Java_hashCode()][hashcode en java]]) do
      c'est-à-dire qu'on essaie d'éviter que des objets qui ne sont pas
      égaux (toujours au sens de la [[https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html][méthode equals]]) aient la même
      valeur de hashcode.
+
+En pratique, on va redéfinir la méthode src_java[:exports
+code]{hashCode} en combinants les résultats des src_java[:exports
+code]{hashCode()} des différents attributs avec l'opérateur
+src_java[:exports code]{^} (OU eXclusif) :
+#+BEGIN_SRC java :exports code :tangle Person.java
+    public class Person {
+	private String firstname;
+	private String lastname;
+	private int age;
+	private double height;
+
+	@Override
+	public int hashCode(){
+	    return  firstname.hashCode() ^ lastname.hashCode() ^ age ^ Double.valueOf(height).hashCode();
+	}
+    }
+#+END_SRC
 
 
 ** <<sec:Comparable>> Interface Comparable ou objet Comparator
