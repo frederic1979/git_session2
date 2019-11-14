@@ -1,0 +1,183 @@
+# -*- mode: org; org-confirm-babel-evaluate: nil; org-babel-noweb-wrap-start: "«"; org-babel-noweb-wrap-end: "»"; ispell-local-dictionary: "fr_FR";-*-
+
+#+TITLE: Chargement et sélection de données en Java : élements de correction
+#+AUTHOR: Bernard Hugueney
+
+#+LANGUAGE: fr
+#+LANG: fr
+
+#+BEGIN_SRC elisp :exports none :results silent
+ (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t)
+   (java . t)
+   (python . t)))
+#+END_SRC
+
+
+
+* Modélisation
+
+La principale question est de décider comment on va représenter les coordonnées géographiques. Il y a trois possibilités (en plus du fait de choisir un type src_java[:exports code]{float} ou src_java[:exports code]{double] pour les latitudes et longitudes) :
+- les représenter juste par deux nombres distincts
+- les regrouper :
+  - dans un tableau de deux cases
+  - dans une classe dédiée (par exemple src_java[:exports
+    code]{GeoCoords}).
+
+Il s'agit de différents compromis entre facilité, simplicité et performance. Les problèmes posés par le fait de ne pas regrouper les coordonnées sont :
+- il faudra faire attention à l'ordre dans lequel on passe les
+  paramètres à chaque fois (même si l'IDE peut nous aider)
+- pour la méthode qui implémentera l'opération «trouver les communes
+  qui sont simultanément dans un rayon donnée d'un ensemble de points
+  quelconques repérés par leur latitude et longitude.», il ne sera pas
+  commode de passer ces points.
+
+Un tableau de deux cases peut résoudre le problème, mais le
+compilateur ne pourra pas vérifier que le tableau fait effectivement
+deux cases. *ATTENTION !* Si l'on utilise un tableau comme attribut de
+notre classe src_java[:exports code]{City}, il faut se poser la
+question de l'égalité et du hashage de tableaux (utiliser
+[[https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#equals-double:A-double:A-][Arrays.equals]] et non le src_java[:exports code]{equals} qui est [[https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#equals-java.lang.Object-][celui
+de Object]], et [[https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#hashCode-double:A-][Arrays.hashCode]] et non le src_java[:exports
+code]{hashCode} qui est [[https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#hashCode--][celui de Object]]).
+
+On peut aussi se demander si l'on a besoin d'une classe pour modéliser
+les ou les ensembles de communes. À priori, cela ne semble pas
+nécessaire.
+
+
+* Implémentation
+
+** Fonctionnalités de base
+
+*** equals
+
+*** hashCode
+
+** Fonctionnalités demandées
+
+Certaines opérations qui se réfèrent à une commune en particulier, on
+les implémentera donc sous la forme de méthodes d'instance. Pour les
+autres, on utilisera des méthodes de classe. Pour les ensembles de
+communes acceptés en argument et retournés, on doit se demander le
+type à utiliser. Pour le type acceptés, on voudra utiliser l'interface
+la plus générique : [[https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html][Collection]]. Pour les types retournés, on doit
+décider si l'on veut supprimer les doublons et/ou si l'on veut pouvoir
+faire efficacement des intersections. Dans ces cas, on utilisera des
+[[https://docs.oracle.com/javase/8/docs/api/java/util/Set.html][Set]] (par exemple [[https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html][HashSet]] si l'on a pas d'ordre à gérer). Sinon, on
+pourra utiliser des [[https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html][ArrayList]] qu'on pourra retourner en tant que [[https://docs.oracle.com/javase/7/docs/api/java/util/List.html][List]],
+voire [[https://docs.oracle.com/javase/7/docs/api/java/util/Collection.html][Collection]]. Retourner une  [[https://docs.oracle.com/javase/7/docs/api/java/util/List.html][List]] permet de faire plus de choses, mais 
+
+*** distance d'une commune à un point
+#+BEGIN_SRC java :exports code
+    public double distanceTo(double latitude, double longitude){
+        double R= 6371e3;
+        double phi1=Math.toRadians(this.latitude);
+        double phi2=Math.toRadians(latitude);
+        double deltaPhi=Math.toRadians(latitude- this.latitude);
+        double deltaLambda= Math.toRadians(longitude- this.longitude);
+        double a= Math.sin(deltaPhi/2) * Math.sin(deltaPhi/2) +
+            Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaLambda/2) * Math.sin(deltaLambda/2);
+        double c= 2* Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c;
+    }
+#+END_SRC
+*** distance d'une commune à une autre
+#+BEGIN_SRC java :exports code
+    public double distanceTo(City other){
+        return distanceTo(other.latitude, other.longitude);
+    }
+#+END_SRC
+
+*** commune la plus proche
+
+Il faut juste faire attention à ne pas retourner l'instance elle-même
+qui est évidemment la plus proche à elle-même. Les questions à se poser sont :
+
+- quel est le type à utiliser pour l'ensemble des communes reçues en argument ?
+- est-ce qu'on veut retourner une instance qui serait égale à
+  l'instance de référence, si elle est présente dans l'ensemble reçu
+  en argument.
+- que retourner s'il n'y a pas de communes la plus proche ! (Ce qui
+  arrive si et seulement si l'ensemble de communes est vide ou ne
+  contient que des instances égales à la commune de référence).
+
+#+BEGIN_SRC java :exports code
+public City closestCity(Collection<City> cities){
+    City res = null;
+    double minDist = Double.MAX_VALUE;
+    for(City city : cities){
+	if( !equals(city) ){
+	    double d = distanceTo(city);
+	    if (d < minDist){
+		minDist = d;
+		res = city;
+	    }
+	}
+    }
+    return res;
+}
+#+END_SRC
+
+*** communes dans un rayon par rapport à un point
+
+Comme on retourne 
+
+#+BEGIN_SRC java :exports code
+public static List<City> inRadius(double radius, double latitude, double longitude, Collection<City> cities){
+    List<City> res = new ArrayList<City>();
+    for(City city : cities){
+	if(city.distanceTo(latitude, longitude) <= radius){
+	    res.add(city);
+	}
+    }
+    return res;
+}
+#+END_SRC
+
+*** Communes dans un rayon par rapport à un ensemble de points
+
+Si l'on a pas utilisé de classe dédiée (i.e. src_java[:exports
+code]{GeoCoords}) ou de tableau pour regrouper les latitude et
+longitude, on doit se poser la question du type utilisé pour recevoir
+les coordonnées en argument. On ne voudra pas avoir deux tableaux
+src_java[:exports code]{double[] latitudes} et src_java[:exports
+code]{double[] longitudes}. Il faut aussi décider de la valeur
+retournée lorsque l'ensemble de points est vide. On pourrait aussi
+bien décider de retourner une liste vide qu'une liste contenant toutes
+les communes passées en argument.
+
+#+BEGIN_SRC java
+public static List<City> inRadius(double radius, Collection<double[]> points, Collection<City> cities){
+    List<City> res= new ArrayList<City>(cities);
+    for(double[] p : points){
+	res= inRadius(radius, p[0], p[1], res);
+    }
+    return res;
+}	
+#+END_SRC
+
+** Lecture des données
+
+#+BEGIN_SRC java :exports code
+public static List<City> read(String citiesURL) throws IOException {
+    List<City> res = new ArrayList<City>();
+    URL url = new URL(citiesURL);
+    try(BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))){
+	br.readLine(); // on passe la ligne d'entête
+	for(String line = br.readLine(); line != null; line = br.readLine()){
+	    String[] data = line.split(";");
+	    if(data.length == 3){
+		try{
+		    res.add(new City(data[0], Double.parseDouble(data[1]), Double.parseDouble(data[2])));
+		}catch(Exception e){
+		    System.err.println("Erreur à la lecture de la ligne:\n"+line);
+		    System.err.println(e);
+		}
+	    }
+	}
+    }
+}
+#+END_SRC
