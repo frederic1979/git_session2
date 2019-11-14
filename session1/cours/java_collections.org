@@ -262,6 +262,13 @@ src_java[:exports code]{&&} (ET logique):
   }
 #+END_SRC
 
+*Attention !* Lorsqu'on a des attributs qui sont des tableaux, non
+seulement il ne faut pas utiliser l'opérateur src_java[:exports
+code]{==}, mais la méthode src_java[:exports code]{equals} ne marche
+pas non plus (c'est celle de src_java[:exports code]{Object} qui teste
+en fait l'/identité/ ! Il faut utiliser l'une des surcharges de
+[[https://docs.oracle.com/javase/10/docs/api/java/util/Arrays.html#equals(java.lang.Object%255B%255D,java.lang.Object%255B%255D)][Arrays.equals]], voire de [[https://docs.oracle.com/javase/10/docs/api/java/util/Arrays.html#deepEquals(java.lang.Object%255B%255D,java.lang.Object%255B%255D)][deepEquals]] pour les tableaux de tableaux.
+
 
 - Note :: Lorsqu'on [[https://jmdoudoux.developpez.com/cours/developpons/java/chap-techniques_java.php#techniques_java-2][redéfinit equals, il faut aussi redéfinir
           hashcode]] (cf. infra).
@@ -298,6 +305,8 @@ src_java[:exports code]{^} (OU eXclusif) :
     }
 #+END_SRC
 
+On peut aussi utiliser plus simplement [[https://docs.oracle.com/javase/8/docs/api/java/util/Objects.html#hash-java.lang.Object...-][Objects.hash]] en passant en
+argument les attributs.
 
 ** <<sec:Comparable>> Interface Comparable ou objet Comparator
 
