@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-11-12 Tue 13:43 -->
+<!-- 2019-11-15 Fri 01:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Polymorphisme dynamique en Java</title>
@@ -248,28 +248,34 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org300ceeb">1. Polymorphisme dynamique</a>
+<li><a href="#org981a4c4">1. Polymorphisme dynamique</a>
 <ul>
-<li><a href="#orgf5f883f">1.1. Polymorphisme statique</a></li>
-<li><a href="#orgb99d1c3">1.2. Polymorphisme dynamique</a></li>
+<li><a href="#org1d00884">1.1. Polymorphisme statique</a></li>
+<li><a href="#orgac5ec56">1.2. Polymorphisme dynamique</a></li>
 </ul>
 </li>
-<li><a href="#org0774aa7">2. Exemple</a></li>
-<li><a href="#org8cfa1fc">3. Héritage</a>
+<li><a href="#org1aeeda1">2. Exemple</a></li>
+<li><a href="#org0321a20">3. Héritage</a>
 <ul>
-<li><a href="#orga6be6af">3.1. Interface</a></li>
-<li><a href="#org0fb578c">3.2. Classe de base</a></li>
-<li><a href="#org5aef86a">3.3. Classe abstraite</a></li>
+<li><a href="#orgfe4233b">3.1. Interface</a></li>
+<li><a href="#org355eeb7">3.2. Classe de base</a></li>
+<li><a href="#org24c6e2d">3.3. Classe abstraite</a></li>
 </ul>
 </li>
-<li><a href="#org82057b3">4. Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?</a></li>
-<li><a href="#org94cb0fa">5. Webliographie</a></li>
+<li><a href="#org98aa0cb">4. Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?</a></li>
+<li><a href="#org8a065f1">5. Webliographie</a></li>
+<li><a href="#orge636673">6. Annexe : code de l'exemple Pacman™</a>
+<ul>
+<li><a href="#org14cb3d5">6.1. Cas avec seulement une interface</a></li>
+<li><a href="#org572438a">6.2. Cas avec une interface et une classe abstraite</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org300ceeb" class="outline-2">
-<h2 id="org300ceeb"><span class="section-number-2">1</span> Polymorphisme dynamique</h2>
+<div id="outline-container-org981a4c4" class="outline-2">
+<h2 id="org981a4c4"><span class="section-number-2">1</span> Polymorphisme dynamique</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le <i>polymorphisme</i> en programmation, c'est la possibilité d'avoir
@@ -283,8 +289,8 @@ On distingue deux types de polymorphismes : le polymorphisme
 </p>
 </div>
 
-<div id="outline-container-orgf5f883f" class="outline-3">
-<h3 id="orgf5f883f"><span class="section-number-3">1.1</span> Polymorphisme statique</h3>
+<div id="outline-container-org1d00884" class="outline-3">
+<h3 id="org1d00884"><span class="section-number-3">1.1</span> Polymorphisme statique</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 C'est lorsque le choix de l'implémentation a lieu à la compilation. Il y a deux types de polymorphisme statique en Java :
@@ -304,8 +310,8 @@ implémentations, c'est la vérification de type.</dd>
 </div>
 
 
-<div id="outline-container-orgb99d1c3" class="outline-3">
-<h3 id="orgb99d1c3"><span class="section-number-3">1.2</span> Polymorphisme dynamique</h3>
+<div id="outline-container-orgac5ec56" class="outline-3">
+<h3 id="orgac5ec56"><span class="section-number-3">1.2</span> Polymorphisme dynamique</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Comme on va le voir, c'est lorsqu'une méthode est <i>redéfinie</i> (et non
@@ -315,8 +321,8 @@ pas <i>surchargée</i>), donc avec <i>la même signature</i><sup><a id="fnr.2" c
 </div>
 </div>
 
-<div id="outline-container-org0774aa7" class="outline-2">
-<h2 id="org0774aa7"><span class="section-number-2">2</span> Exemple</h2>
+<div id="outline-container-org1aeeda1" class="outline-2">
+<h2 id="org1aeeda1"><span class="section-number-2">2</span> Exemple</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Supposons qu'on veuille implémenter un jeu de Pacman™. On doit pouvoir
@@ -354,8 +360,8 @@ ensemble tous les fantômes pour appeler leur méthode <code class="src src-java
 </div>
 </div>
 
-<div id="outline-container-org8cfa1fc" class="outline-2">
-<h2 id="org8cfa1fc"><span class="section-number-2">3</span> Héritage</h2>
+<div id="outline-container-org0321a20" class="outline-2">
+<h2 id="org0321a20"><span class="section-number-2">3</span> Héritage</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 C'est le même genre de problèmes qu'avaient les concepteurs de la
@@ -438,8 +444,8 @@ implémentant l'interface / héritant de la classe de base.</li>
 </ul>
 </div>
 
-<div id="outline-container-orga6be6af" class="outline-3">
-<h3 id="orga6be6af"><span class="section-number-3">3.1</span> Interface</h3>
+<div id="outline-container-orgfe4233b" class="outline-3">
+<h3 id="orgfe4233b"><span class="section-number-3">3.1</span> Interface</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 En Java, on déclare une <a href="https://en.wikipedia.org/wiki/Interface_(Java)">interface</a> avec le mot-clé <code class="src src-java"><span style="color: #0000FF;">interface</span></code> :
@@ -506,8 +512,8 @@ déclare elle-même une implémentation pour lever l'ambiguïté.
 </div>
 
 
-<div id="outline-container-org0fb578c" class="outline-3">
-<h3 id="org0fb578c"><span class="section-number-3">3.2</span> Classe de base</h3>
+<div id="outline-container-org355eeb7" class="outline-3">
+<h3 id="org355eeb7"><span class="section-number-3">3.2</span> Classe de base</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Une classe peut hériter (<i>étendre</i>) une classe (<b>et une seule</b>) de
@@ -581,8 +587,8 @@ dérivée, on emploie le mot-clé <code class="src src-java"><span style="color:
 </div>
 
 
-<div id="outline-container-org5aef86a" class="outline-3">
-<h3 id="org5aef86a"><span class="section-number-3">3.3</span> Classe abstraite</h3>
+<div id="outline-container-org24c6e2d" class="outline-3">
+<h3 id="org24c6e2d"><span class="section-number-3">3.3</span> Classe abstraite</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Les interfaces ne contiennent pas d'implémentation avec des attributs
@@ -614,8 +620,8 @@ constructeur provoquera une erreur de compilation.
 </div>
 </div>
 
-<div id="outline-container-org82057b3" class="outline-2">
-<h2 id="org82057b3"><span class="section-number-2">4</span> Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?</h2>
+<div id="outline-container-org98aa0cb" class="outline-2">
+<h2 id="org98aa0cb"><span class="section-number-2">4</span> Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Pour garantir la plus grande réutilisabilité, il faut utiliser des
@@ -657,13 +663,187 @@ classe pour qu'on veuille réutiliser l'implémentation de celle-ci.
 </div>
 </div>
 
-<div id="outline-container-org94cb0fa" class="outline-2">
-<h2 id="org94cb0fa"><span class="section-number-2">5</span> Webliographie</h2>
+<div id="outline-container-org8a065f1" class="outline-2">
+<h2 id="org8a065f1"><span class="section-number-2">5</span> Webliographie</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li><a href="http://blog.paumard.org/cours/java/chap07-heritage-interface.html">Explications sur l'héritage en Java</a></li>
 <li><a href="https://docs.oracle.com/javase/tutorial/java/IandI/index.html">Tutorial officiel Interfaces and Inheritance</a></li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-orge636673" class="outline-2">
+<h2 id="orge636673"><span class="section-number-2">6</span> Annexe : code de l'exemple Pacman™</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org14cb3d5" class="outline-3">
+<h3 id="org14cb3d5"><span class="section-number-3">6.1</span> Cas avec seulement une interface</h3>
+<div class="outline-text-3" id="text-6-1">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">Ghost</span> {
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">Color</span> <span style="color: #006699;">getColor</span>();
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">int</span> <span style="color: #006699;">getSpeed</span>();
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">move</span>(<span style="color: #6434A3;">Cell</span>[][] <span style="color: #BA36A5;">maze</span>);
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">TimidGhost</span>  <span style="color: #0000FF;">implements</span> <span style="color: #6434A3;">Ghost</span> {
+    <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">Color</span> <span style="color: #BA36A5;">color</span>;
+    <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">speed</span>;
+
+    <span style="color: #0000FF;">public</span> <span style="color: #006699;">TimidGhost</span>(){
+        color = <span style="color: #D0372D;">Color</span>.BLUE;
+        speed = 2;
+    }
+    
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">Color</span> <span style="color: #006699;">getColor</span>(){
+        <span style="color: #0000FF;">return</span> color;
+    }
+    
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">int</span> <span style="color: #006699;">getSpeed</span>(){
+        <span style="color: #0000FF;">return</span> speed;
+    }
+    
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">move</span>(<span style="color: #6434A3;">Cell</span>[][] <span style="color: #BA36A5;">maze</span>){
+        <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">          code pour s'approcher timidement du Pacman</span>
+<span style="color: #8D8D84; font-style: italic;">         */</span>
+    }
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">AgressiveGhost</span>  <span style="color: #0000FF;">implements</span> <span style="color: #6434A3;">Ghost</span> {
+    <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">Color</span> <span style="color: #BA36A5;">color</span>;
+    <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">speed</span>;
+
+    <span style="color: #0000FF;">public</span> <span style="color: #006699;">AgressiveGhost</span>(){
+        color = <span style="color: #D0372D;">Color</span>.RED;
+        speed = 4;
+    }
+    
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">Color</span> <span style="color: #006699;">getColor</span>(){
+        <span style="color: #0000FF;">return</span> color;
+    }
+    
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">int</span> <span style="color: #006699;">getSpeed</span>(){
+        <span style="color: #0000FF;">return</span> speed;
+    }
+    
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">move</span>(<span style="color: #6434A3;">Cell</span>[][] <span style="color: #BA36A5;">maze</span>){
+        <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">          code pour foncer sur le Pacman</span>
+<span style="color: #8D8D84; font-style: italic;">         */</span>
+    }
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Game</span> {
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">int</span> <span style="color: #006699;">play</span>(){
+        <span style="color: #8D8D84;">/* </span>
+<span style="color: #8D8D84; font-style: italic;">           code pour initialiser le plateau de jeu et les param&#232;tres</span>
+<span style="color: #8D8D84; font-style: italic;">           comme la vitesse de jeu gameSpeed</span>
+<span style="color: #8D8D84; font-style: italic;">         */</span>
+        <span style="color: #6434A3;">List</span>&lt;<span style="color: #6434A3;">Ghost</span>&gt; <span style="color: #BA36A5;">ghosts</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">ArrayList</span>&lt;<span style="color: #6434A3;">Ghost</span>&gt;();
+        ghost.add(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">TimidGhost</span>());
+        ghosts.add(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">AgressiveGhost</span>());
+        <span style="color: #0000FF;">for</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">turn</span>=0; pacman.isAlive(); ++turn){
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">d&#233;placement des fant&#244;mes</span>
+            <span style="color: #0000FF;">for</span>(<span style="color: #6434A3;">Ghost</span> <span style="color: #BA36A5;">ghost</span> : ghosts){
+                <span style="color: #0000FF;">if</span>(turn % (gameSpeed / ghost.getSpeed())){
+                    ghost.move(maze);
+                }
+            }
+            <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">              code pour d&#233;placer le pacman</span>
+<span style="color: #8D8D84; font-style: italic;">            */</span>
+            <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">              code pour afficher le labyrinthe</span>
+<span style="color: #8D8D84; font-style: italic;">              utilisant getColor() sur chaque ghost</span>
+<span style="color: #8D8D84; font-style: italic;">              */</span>
+         }
+        <span style="color: #8D8D84;">/* </span>
+<span style="color: #8D8D84; font-style: italic;">           fin de partie, calcul du score</span>
+<span style="color: #8D8D84; font-style: italic;">        */</span>
+        <span style="color: #0000FF;">return</span> score;
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org572438a" class="outline-3">
+<h3 id="org572438a"><span class="section-number-3">6.2</span> Cas avec une interface et une classe abstraite</h3>
+<div class="outline-text-3" id="text-6-2">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">abstract</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">DefaultGhost</span> <span style="color: #0000FF;">implements</span> <span style="color: #6434A3;">Ghost</span>{
+    <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">Color</span> <span style="color: #BA36A5;">color</span>;
+    <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">speed</span>;
+
+    <span style="color: #0000FF;">public</span> <span style="color: #006699;">AbstractGhost</span>(<span style="color: #6434A3;">Color</span> <span style="color: #BA36A5;">color</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">speed</span>){
+        <span style="color: #0000FF;">this</span>.color = color;
+        <span style="color: #0000FF;">this</span>.speed = speed;
+    }
+    
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">Color</span> <span style="color: #006699;">getColor</span>(){
+        <span style="color: #0000FF;">return</span> color;
+    }
+    
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">int</span> <span style="color: #006699;">getSpeed</span>(){
+        <span style="color: #0000FF;">return</span> speed;
+    }
+    
+}
+    
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">TimidGhost</span>  <span style="color: #0000FF;">extends</span> <span style="color: #6434A3;">DefaultGhost</span> {
+
+    <span style="color: #0000FF;">public</span> <span style="color: #006699;">TimidGhost</span>(){
+        <span style="color: #0000FF;">super</span>(<span style="color: #D0372D;">Color</span>.BLUE, 2);
+    }
+    
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">move</span>(<span style="color: #6434A3;">Cell</span>[][] <span style="color: #BA36A5;">maze</span>){
+        <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">          code pour s'approcher timidement du Pacman</span>
+<span style="color: #8D8D84; font-style: italic;">         */</span>
+    }
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">AgressiveGhost</span>  <span style="color: #0000FF;">extends</span> <span style="color: #6434A3;">DefaultGhost</span> {
+
+    <span style="color: #0000FF;">public</span> <span style="color: #006699;">AgressiveGhost</span>(){
+        <span style="color: #0000FF;">super</span>(<span style="color: #D0372D;">Color</span>.RED, 4);
+    }
+    
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">move</span>(<span style="color: #6434A3;">Cell</span>[][] <span style="color: #BA36A5;">maze</span>){
+        <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">          code pour foncer sur le Pacman</span>
+<span style="color: #8D8D84; font-style: italic;">         */</span>
+    }
+}
+</pre>
+</div>
+
+
+<p>
+Le reste du code (interface <code class="src src-java">Ghost</code> et classe
+<code class="src src-java">Game</code>) est inchangé.
+</p>
+</div>
 </div>
 </div>
 <div id="footnotes">
@@ -682,7 +862,7 @@ Java permet d'utiliser l'annotation <code class="src src-java"><span style="colo
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Bernard Hugueney</p>
-<p class="date">Created: 2019-11-12 Tue 13:43</p>
+<p class="date">Created: 2019-11-15 Fri 01:14</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -382,3 +382,158 @@ classe pour qu'on veuille réutiliser l'implémentation de celle-ci.
 - [[http://blog.paumard.org/cours/java/chap07-heritage-interface.html][Explications sur l'héritage en Java]]
 - [[https://docs.oracle.com/javase/tutorial/java/IandI/index.html][Tutorial officiel Interfaces and Inheritance]]
 
+* Annexe : code de l'exemple Pacman™
+
+** Cas avec seulement une interface
+
+#+BEGIN_SRC java :exports code
+public interface Ghost {
+    public Color getColor();
+    public int getSpeed();
+    public void move(Cell[][] maze);
+}
+#+END_SRC
+
+#+BEGIN_SRC java :exports code
+public class TimidGhost  implements Ghost {
+    private Color color;
+    private int speed;
+
+    public TimidGhost(){
+	color = Color.BLUE;
+	speed = 2;
+    }
+    
+    public Color getColor(){
+	return color;
+    }
+    
+    public int getSpeed(){
+	return speed;
+    }
+    
+    public void move(Cell[][] maze){
+	/*
+	  code pour s'approcher timidement du Pacman
+	 ,*/
+    }
+}
+#+END_SRC
+
+#+BEGIN_SRC java :exports code
+public class AgressiveGhost  implements Ghost {
+    private Color color;
+    private int speed;
+
+    public AgressiveGhost(){
+	color = Color.RED;
+	speed = 4;
+    }
+    
+    public Color getColor(){
+	return color;
+    }
+    
+    public int getSpeed(){
+	return speed;
+    }
+    
+    public void move(Cell[][] maze){
+	/*
+	  code pour foncer sur le Pacman
+	 ,*/
+    }
+}
+#+END_SRC
+
+#+BEGIN_SRC java :exports code
+public class Game {
+    public int play(){
+	/* 
+	   code pour initialiser le plateau de jeu et les paramètres
+	   comme la vitesse de jeu gameSpeed
+	 ,*/
+	List<Ghost> ghosts = new ArrayList<Ghost>();
+	ghost.add(new TimidGhost());
+	ghosts.add(new AgressiveGhost());
+	for(int turn=0; pacman.isAlive(); ++turn){
+	    // déplacement des fantômes
+	    for(Ghost ghost : ghosts){
+		if(turn % (gameSpeed / ghost.getSpeed())){
+		    ghost.move(maze);
+		}
+	    }
+	    /*
+	      code pour déplacer le pacman
+	    ,*/
+	    /*
+	      code pour afficher le labyrinthe
+	      utilisant getColor() sur chaque ghost
+	      ,*/
+	 }
+	/* 
+	   fin de partie, calcul du score
+	,*/
+	return score;
+    }
+}
+#+END_SRC
+
+
+** Cas avec une interface et une classe abstraite
+
+#+BEGIN_SRC java :exports code
+public abstract class DefaultGhost implements Ghost{
+    private Color color;
+    private int speed;
+
+    public AbstractGhost(Color color, int speed){
+	this.color = color;
+	this.speed = speed;
+    }
+    
+    public Color getColor(){
+	return color;
+    }
+    
+    public int getSpeed(){
+	return speed;
+    }
+    
+}
+    
+#+END_SRC
+
+#+BEGIN_SRC java :exports code
+public class TimidGhost  extends DefaultGhost {
+
+    public TimidGhost(){
+	super(Color.BLUE, 2);
+    }
+    
+    public void move(Cell[][] maze){
+	/*
+	  code pour s'approcher timidement du Pacman
+	 ,*/
+    }
+}
+#+END_SRC
+
+#+BEGIN_SRC java :exports code
+public class AgressiveGhost  extends DefaultGhost {
+
+    public AgressiveGhost(){
+	super(Color.RED, 4);
+    }
+    
+    public void move(Cell[][] maze){
+	/*
+	  code pour foncer sur le Pacman
+	 ,*/
+    }
+}
+#+END_SRC
+
+
+Le reste du code (interface src_java[:exports code]{Ghost} et classe
+src_java[:exports code]{Game}) est inchangé.
