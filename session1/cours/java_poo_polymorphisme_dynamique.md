@@ -1,20 +1,20 @@
-- [Polymorphisme dynamique](#org8b8da4c)
-  - [Polymorphisme statique](#orgb0d06c6)
-  - [Polymorphisme dynamique](#orgad92ec5)
-- [Exemple](#org869d4bf)
-- [Héritage](#org045af70)
-  - [Interface](#org57c755f)
-  - [Classe de base](#org72ee41c)
-  - [Classe abstraite](#orgb3cda49)
-- [Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?](#orgb005935)
-- [Webliographie](#org6f6a5cb)
-- [Annexe : code de l'exemple Pacman™](#org60fdc90)
-  - [Cas avec seulement une interface](#org7f6a084)
-  - [Cas avec une interface et une classe abstraite](#org6be3a8d)
+- [Polymorphisme dynamique](#org2ab0664)
+  - [Polymorphisme statique](#org3bd2fa0)
+  - [Polymorphisme dynamique](#org83cb400)
+- [Exemple](#orgf3c2c83)
+- [Héritage](#org103123e)
+  - [Interface](#org9845ad1)
+  - [Classe de base](#org9ce5b18)
+  - [Classe abstraite](#org84bf4f8)
+- [Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?](#org4ebab35)
+- [Webliographie](#orge7cb26c)
+- [Annexe : code de l'exemple Pacman™](#orgd204c49)
+  - [Cas avec seulement une interface](#org48c2d43)
+  - [Cas avec une interface et une classe abstraite](#orge19397c)
 
 
 
-<a id="org8b8da4c"></a>
+<a id="org2ab0664"></a>
 
 # Polymorphisme dynamique
 
@@ -23,7 +23,7 @@ Le *polymorphisme* en programmation, c'est la possibilité d'avoir plusieurs *im
 On distingue deux types de polymorphismes : le polymorphisme *statique* et le polymorphisme *dynamique*.
 
 
-<a id="orgb0d06c6"></a>
+<a id="org3bd2fa0"></a>
 
 ## Polymorphisme statique
 
@@ -33,14 +33,14 @@ C'est lorsque le choix de l'implémentation a lieu à la compilation. Il y a deu
 -   **la *généricité*:** c'est lorsqu'on utilise la notation `<X>` pour paramétrer une classe ou une méthodes en fonction d'un type (de classe) donné. Le paramétrage est limité en Java car la seule chose qui change au niveau des implémentations, c'est la vérification de type.
 
 
-<a id="orgad92ec5"></a>
+<a id="org83cb400"></a>
 
 ## Polymorphisme dynamique
 
 Comme on va le voir, c'est lorsqu'une méthode est *redéfinie* (et non pas *surchargée*), donc avec *la même signature*<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>, pour différentes classes d'une même *hiérarchie*.
 
 
-<a id="org869d4bf"></a>
+<a id="orgf3c2c83"></a>
 
 # Exemple
 
@@ -54,7 +54,7 @@ Les deux "solutions" suivantes présentent chacunes des inconvénients :
 Le problème de la première "solution" est que toutes les implémentations sont regroupées dans une même classe qu'il faut modifier pour pouvoir ajouter de nouveaux types. Le problème de la seconde est qu'on ne peut pas manipuler les différents types de façon uniforme (par exemple avoir une structure de données regroupant ensemble tous les fantômes pour appeler leur méthode `move`).
 
 
-<a id="org045af70"></a>
+<a id="org103123e"></a>
 
 # Héritage
 
@@ -91,7 +91,7 @@ Grâce au [principe de substitution](https://fr.wikipedia.org/wiki/Principe_de_s
 -   Le polymorphisme dynamique permet à Java (la JVM) de découvrir *à l'exécution* (d'où le *dynamique*) le code à exécuter pour effectuer l'appel à la méthode `move` à la ligne 5. Ce code pouvant être défini dans chacune des classes implémentant l'interface / héritant de la classe de base.
 
 
-<a id="org57c755f"></a>
+<a id="org9845ad1"></a>
 
 ## Interface
 
@@ -132,7 +132,7 @@ La signature de la méthode `move` dans l'implémentation de la classe `Agressiv
 Une classe peut hériter de (implémenter) plusieurs interfaces et doit donc fournir des implémentations pour chacune des méthodes des interfaces implémentées pour lesquelles il n'y a pas d'implémentation par défaut. Si ces interfaces déclarent des implémentations par défaut pour la même méthode (avec la même signature, donc), il faut qu'elle déclare elle-même une implémentation pour lever l'ambiguïté.
 
 
-<a id="org72ee41c"></a>
+<a id="org9ce5b18"></a>
 
 ## Classe de base
 
@@ -169,7 +169,7 @@ public class AgressiveGhost extends DefaultGhost {
 ```
 
 
-<a id="orgb3cda49"></a>
+<a id="org84bf4f8"></a>
 
 ## Classe abstraite
 
@@ -188,7 +188,7 @@ public abstract class DefaultGhost {
 Une classe pourra hériter de celle-ci comme d'une classe normale, mais devra alors fournir des implémentations pour toutes les méthodes abstraites pour être elle-même concrète. La classe abstraite ne peut pas être instanciée et toute tentative d'appeler directement le constructeur provoquera une erreur de compilation.
 
 
-<a id="orgb005935"></a>
+<a id="org4ebab35"></a>
 
 # Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?
 
@@ -203,7 +203,7 @@ Il est évident que des objets de classe `Mammal` ne devraient pas être instanc
 En pratique, l'héritage de classe concrète est souvent dû à une évolution de programme, lorsqu'on veut ajouter une nouvelle classe donc le comportement est suffisamment proche de celui d'une autre classe pour qu'on veuille réutiliser l'implémentation de celle-ci.
 
 
-<a id="org6f6a5cb"></a>
+<a id="orge7cb26c"></a>
 
 # Webliographie
 
@@ -211,12 +211,12 @@ En pratique, l'héritage de classe concrète est souvent dû à une évolution d
 -   [Tutorial officiel Interfaces and Inheritance](https://docs.oracle.com/javase/tutorial/java/IandI/index.html)
 
 
-<a id="org60fdc90"></a>
+<a id="orgd204c49"></a>
 
 # Annexe : code de l'exemple Pacman™
 
 
-<a id="org7f6a084"></a>
+<a id="org48c2d43"></a>
 
 ## Cas avec seulement une interface
 
@@ -314,9 +314,11 @@ public class Game {
 ```
 
 
-<a id="org6be3a8d"></a>
+<a id="orge19397c"></a>
 
 ## Cas avec une interface et une classe abstraite
+
+Le code présenté ci-dessus permet d'obtenir la modularité voulue : le code de la classe `Game` est parfaitement indépendant des implémentations des différents types de fantômes, et celles-ci sont parfaitement indépendantes les unes des autres. Cependant, une partie de ces dernières implémentations sont en fait les mêmes : tout ce qui concerne la couleur et la vitesse de nos fantômes. Plutôt que de dupliquer le code correspondant, on peut le factoriser dans une classe de base. On crée alors une classe abstraite `DefaultGhost` qui ne peut pas être instanciée car son implémentation de l'interface `Ghost` n'est que partielle : elle n'implémente pas la méthode `move` :
 
 ```java
 public abstract class DefaultGhost implements Ghost{

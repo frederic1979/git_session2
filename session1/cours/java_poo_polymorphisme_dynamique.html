@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-11-15 Fri 01:14 -->
+<!-- 2019-11-15 Fri 09:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Polymorphisme dynamique en Java</title>
@@ -248,34 +248,34 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org981a4c4">1. Polymorphisme dynamique</a>
+<li><a href="#orge34f1ad">1. Polymorphisme dynamique</a>
 <ul>
-<li><a href="#org1d00884">1.1. Polymorphisme statique</a></li>
-<li><a href="#orgac5ec56">1.2. Polymorphisme dynamique</a></li>
+<li><a href="#org9ff06ad">1.1. Polymorphisme statique</a></li>
+<li><a href="#org20ea6a1">1.2. Polymorphisme dynamique</a></li>
 </ul>
 </li>
-<li><a href="#org1aeeda1">2. Exemple</a></li>
-<li><a href="#org0321a20">3. Héritage</a>
+<li><a href="#orge9675b1">2. Exemple</a></li>
+<li><a href="#orgb8728a7">3. Héritage</a>
 <ul>
-<li><a href="#orgfe4233b">3.1. Interface</a></li>
-<li><a href="#org355eeb7">3.2. Classe de base</a></li>
-<li><a href="#org24c6e2d">3.3. Classe abstraite</a></li>
+<li><a href="#org928a7c3">3.1. Interface</a></li>
+<li><a href="#orgaefb27e">3.2. Classe de base</a></li>
+<li><a href="#org1a35ac3">3.3. Classe abstraite</a></li>
 </ul>
 </li>
-<li><a href="#org98aa0cb">4. Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?</a></li>
-<li><a href="#org8a065f1">5. Webliographie</a></li>
-<li><a href="#orge636673">6. Annexe : code de l'exemple Pacman™</a>
+<li><a href="#org7d4778f">4. Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?</a></li>
+<li><a href="#org91bdc24">5. Webliographie</a></li>
+<li><a href="#org5d9baf7">6. Annexe : code de l'exemple Pacman™</a>
 <ul>
-<li><a href="#org14cb3d5">6.1. Cas avec seulement une interface</a></li>
-<li><a href="#org572438a">6.2. Cas avec une interface et une classe abstraite</a></li>
+<li><a href="#orgc4b0056">6.1. Cas avec seulement une interface</a></li>
+<li><a href="#orgd06d1e8">6.2. Cas avec une interface et une classe abstraite</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org981a4c4" class="outline-2">
-<h2 id="org981a4c4"><span class="section-number-2">1</span> Polymorphisme dynamique</h2>
+<div id="outline-container-orge34f1ad" class="outline-2">
+<h2 id="orge34f1ad"><span class="section-number-2">1</span> Polymorphisme dynamique</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le <i>polymorphisme</i> en programmation, c'est la possibilité d'avoir
@@ -289,8 +289,8 @@ On distingue deux types de polymorphismes : le polymorphisme
 </p>
 </div>
 
-<div id="outline-container-org1d00884" class="outline-3">
-<h3 id="org1d00884"><span class="section-number-3">1.1</span> Polymorphisme statique</h3>
+<div id="outline-container-org9ff06ad" class="outline-3">
+<h3 id="org9ff06ad"><span class="section-number-3">1.1</span> Polymorphisme statique</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 C'est lorsque le choix de l'implémentation a lieu à la compilation. Il y a deux types de polymorphisme statique en Java :
@@ -310,8 +310,8 @@ implémentations, c'est la vérification de type.</dd>
 </div>
 
 
-<div id="outline-container-orgac5ec56" class="outline-3">
-<h3 id="orgac5ec56"><span class="section-number-3">1.2</span> Polymorphisme dynamique</h3>
+<div id="outline-container-org20ea6a1" class="outline-3">
+<h3 id="org20ea6a1"><span class="section-number-3">1.2</span> Polymorphisme dynamique</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Comme on va le voir, c'est lorsqu'une méthode est <i>redéfinie</i> (et non
@@ -321,8 +321,8 @@ pas <i>surchargée</i>), donc avec <i>la même signature</i><sup><a id="fnr.2" c
 </div>
 </div>
 
-<div id="outline-container-org1aeeda1" class="outline-2">
-<h2 id="org1aeeda1"><span class="section-number-2">2</span> Exemple</h2>
+<div id="outline-container-orge9675b1" class="outline-2">
+<h2 id="orge9675b1"><span class="section-number-2">2</span> Exemple</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Supposons qu'on veuille implémenter un jeu de Pacman™. On doit pouvoir
@@ -360,8 +360,8 @@ ensemble tous les fantômes pour appeler leur méthode <code class="src src-java
 </div>
 </div>
 
-<div id="outline-container-org0321a20" class="outline-2">
-<h2 id="org0321a20"><span class="section-number-2">3</span> Héritage</h2>
+<div id="outline-container-orgb8728a7" class="outline-2">
+<h2 id="orgb8728a7"><span class="section-number-2">3</span> Héritage</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 C'est le même genre de problèmes qu'avaient les concepteurs de la
@@ -444,8 +444,8 @@ implémentant l'interface / héritant de la classe de base.</li>
 </ul>
 </div>
 
-<div id="outline-container-orgfe4233b" class="outline-3">
-<h3 id="orgfe4233b"><span class="section-number-3">3.1</span> Interface</h3>
+<div id="outline-container-org928a7c3" class="outline-3">
+<h3 id="org928a7c3"><span class="section-number-3">3.1</span> Interface</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 En Java, on déclare une <a href="https://en.wikipedia.org/wiki/Interface_(Java)">interface</a> avec le mot-clé <code class="src src-java"><span style="color: #0000FF;">interface</span></code> :
@@ -512,8 +512,8 @@ déclare elle-même une implémentation pour lever l'ambiguïté.
 </div>
 
 
-<div id="outline-container-org355eeb7" class="outline-3">
-<h3 id="org355eeb7"><span class="section-number-3">3.2</span> Classe de base</h3>
+<div id="outline-container-orgaefb27e" class="outline-3">
+<h3 id="orgaefb27e"><span class="section-number-3">3.2</span> Classe de base</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Une classe peut hériter (<i>étendre</i>) une classe (<b>et une seule</b>) de
@@ -587,8 +587,8 @@ dérivée, on emploie le mot-clé <code class="src src-java"><span style="color:
 </div>
 
 
-<div id="outline-container-org24c6e2d" class="outline-3">
-<h3 id="org24c6e2d"><span class="section-number-3">3.3</span> Classe abstraite</h3>
+<div id="outline-container-org1a35ac3" class="outline-3">
+<h3 id="org1a35ac3"><span class="section-number-3">3.3</span> Classe abstraite</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Les interfaces ne contiennent pas d'implémentation avec des attributs
@@ -620,8 +620,8 @@ constructeur provoquera une erreur de compilation.
 </div>
 </div>
 
-<div id="outline-container-org98aa0cb" class="outline-2">
-<h2 id="org98aa0cb"><span class="section-number-2">4</span> Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?</h2>
+<div id="outline-container-org7d4778f" class="outline-2">
+<h2 id="org7d4778f"><span class="section-number-2">4</span> Qu'utiliser ? Interface ? Classe concrète ? Classe abstraite ?</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Pour garantir la plus grande réutilisabilité, il faut utiliser des
@@ -663,8 +663,8 @@ classe pour qu'on veuille réutiliser l'implémentation de celle-ci.
 </div>
 </div>
 
-<div id="outline-container-org8a065f1" class="outline-2">
-<h2 id="org8a065f1"><span class="section-number-2">5</span> Webliographie</h2>
+<div id="outline-container-org91bdc24" class="outline-2">
+<h2 id="org91bdc24"><span class="section-number-2">5</span> Webliographie</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li><a href="http://blog.paumard.org/cours/java/chap07-heritage-interface.html">Explications sur l'héritage en Java</a></li>
@@ -673,12 +673,12 @@ classe pour qu'on veuille réutiliser l'implémentation de celle-ci.
 </div>
 </div>
 
-<div id="outline-container-orge636673" class="outline-2">
-<h2 id="orge636673"><span class="section-number-2">6</span> Annexe : code de l'exemple Pacman™</h2>
+<div id="outline-container-org5d9baf7" class="outline-2">
+<h2 id="org5d9baf7"><span class="section-number-2">6</span> Annexe : code de l'exemple Pacman™</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org14cb3d5" class="outline-3">
-<h3 id="org14cb3d5"><span class="section-number-3">6.1</span> Cas avec seulement une interface</h3>
+<div id="outline-container-orgc4b0056" class="outline-3">
+<h3 id="orgc4b0056"><span class="section-number-3">6.1</span> Cas avec seulement une interface</h3>
 <div class="outline-text-3" id="text-6-1">
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">Ghost</span> {
@@ -780,9 +780,24 @@ classe pour qu'on veuille réutiliser l'implémentation de celle-ci.
 </div>
 
 
-<div id="outline-container-org572438a" class="outline-3">
-<h3 id="org572438a"><span class="section-number-3">6.2</span> Cas avec une interface et une classe abstraite</h3>
+<div id="outline-container-orgd06d1e8" class="outline-3">
+<h3 id="orgd06d1e8"><span class="section-number-3">6.2</span> Cas avec une interface et une classe abstraite</h3>
 <div class="outline-text-3" id="text-6-2">
+<p>
+Le code présenté ci-dessus permet d'obtenir la modularité voulue : le
+code de la classe <code class="src src-java">Game</code> est parfaitement
+indépendant des implémentations des différents types de fantômes, et
+celles-ci sont parfaitement indépendantes les unes des
+autres. Cependant, une partie de ces dernières implémentations sont en
+fait les mêmes : tout ce qui concerne la couleur et la vitesse de nos
+fantômes. Plutôt que de dupliquer le code correspondant, on peut le
+factoriser dans une classe de base. On crée alors une classe abstraite
+<code class="src src-java">DefaultGhost</code> qui ne peut pas être instanciée
+car son implémentation de l'interface <code class="src src-java">Ghost</code>
+n'est que partielle : elle n'implémente pas la méthode
+<code class="src src-java">move</code> :
+</p>
+
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #0000FF;">public</span> <span style="color: #0000FF;">abstract</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">DefaultGhost</span> <span style="color: #0000FF;">implements</span> <span style="color: #6434A3;">Ghost</span>{
     <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">Color</span> <span style="color: #BA36A5;">color</span>;
@@ -862,7 +877,7 @@ Java permet d'utiliser l'annotation <code class="src src-java"><span style="colo
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Bernard Hugueney</p>
-<p class="date">Created: 2019-11-15 Fri 01:14</p>
+<p class="date">Created: 2019-11-15 Fri 09:01</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

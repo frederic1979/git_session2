@@ -482,6 +482,19 @@ public class Game {
 
 ** Cas avec une interface et une classe abstraite
 
+Le code présenté ci-dessus permet d'obtenir la modularité voulue : le
+code de la classe src_java[:exports code]{Game} est parfaitement
+indépendant des implémentations des différents types de fantômes, et
+celles-ci sont parfaitement indépendantes les unes des
+autres. Cependant, une partie de ces dernières implémentations sont en
+fait les mêmes : tout ce qui concerne la couleur et la vitesse de nos
+fantômes. Plutôt que de dupliquer le code correspondant, on peut le
+factoriser dans une classe de base. On crée alors une classe abstraite
+src_java[:exports code]{DefaultGhost} qui ne peut pas être instanciée
+car son implémentation de l'interface src_java[:exports code]{Ghost}
+n'est que partielle : elle n'implémente pas la méthode
+src_java[:exports code]{move} :
+
 #+BEGIN_SRC java :exports code
 public abstract class DefaultGhost implements Ghost{
     private Color color;
