@@ -94,7 +94,7 @@ On peut aussi appliquer des contraintes sur nos données afin d'assurer leur coh
 
 Une fois la conception effectuée, il est nécessaire de passer à la création de la base de données puis à son exploitation. Pour ce faire, on va utiliser un [système de gestion de base de données](https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_base_de_donn%C3%A9es). Les logiciels de gestion de base de données permettent de dialoguer avec une base de données grâce au langage [SQL](https://fr.wikipedia.org/wiki/Structured_Query_Language). Ce langage permet à la fois d'éditer la structure des bases et de manipuler les données qu'elles contiennent.
 
-Lorsque l'on écrit du code pour **éditer** la structure d'une base, on parle de [Data Definition Language](https://fr.wikipedia.org/wiki/Langage_de_d%C3%A9finition_de_donn%C3%A9es) et lorsque l'on en écrit pour **modifier** des données, on parle de [DML](https://fr.wikipedia.org/wiki/Langage_de_manipulation_de_donn%C3%A9es).
+Lorsque l'on écrit du code pour **éditer** la structure d'une base, on parle de [Data Definition Language](https://fr.wikipedia.org/wiki/Langage_de_d%C3%A9finition_de_donn%C3%A9es) et lorsque l'on en écrit pour **modifier** des données, on parle de [Data Modification Language](https://fr.wikipedia.org/wiki/Langage_de_manipulation_de_donn%C3%A9es).
 
 Le langage SQL est **indépendant** des logiciels de gestion de base de données. La défition des tables et l'exploitation des données se fait donc de la même manière (ou presque) quel que soit le SGBD.
 
@@ -227,14 +227,14 @@ Résultat :
 
 ###### Jointure
 
+Le grand avantage des bases de données relationnelle est que l'on a des relations entre les tables. On peut utiliser les jointures pour aggréger les données :
+
 ```sql
 select personne.nom, personne.prenom,
        voiture.marque, voiture.modele, voiture.couleur, voiture.puissance
 from personne
 join voiture on personne.id = voiture.id_proprietaire;
 ```
-
-Le grand avantage des bases de données relationnelle est que l'on a des relations entre les tables. On peut les utiliser pour aggréger les données :
 
 | nom      | prenom  | marque  | modele | couleur | puissance |
 |----------|---------|---------|--------|---------|-----------|

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Introduction aux bases de données</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../remark/remark-prez.css">
+    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Abel&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <textarea id="source">
+
+class: center, middle
+
+# Les bases de données relationnelles
+
+![Logo Simplon](../../reveal/images/logo_simplon.png)
+
+---
+
+## Un peu de vocabulaire
+
+### Qu'est-ce qu'une donnée
+
+--
+
+> Une **donnée** est une **information relative à un objet**
+
+Exemples
+
+- La couleur d'une voiture (_rouge_, _bleu_, _noir_, _jaune_, _vert_, _rose_ ...)
+- La puissance du moteur d'une voiture (65 chevaux, 660 chevaux, ...)
+
+---
+
+## Un peu de vocabulaire
+
+### Qu'est-ce qu'une relation
+
+--
+
+> Une relation est un **lien** qui existe entre des choses
+
+Exemple : la couleur de **ma** voiture.
+
+---
+
+## Un peu de vocabulaire
+
+### Qu'est-ce qu'une base de données relationnelle
+
+--
+
+> Système informatique permettant de stocker des données tout en permettant de représenter les **liens** qui existent entre ces données.
+
+--
+
+Exemple : Une voiture peut appartenir à une personne, une personne peut avoir plusieurs voitures.
+
+---
+
+## Un peu de vocabulaire
+
+### Qu'est ce qu'un système de gestion de base de données relationnelle
+
+--
+
+Logiciels permettant :
+
+- Le stockage des données
+- La récupération des données
+- La gestion de l'accès concurrent
+- ...
+
+---
+
+## Un peu d'histoire
+
+### Les premiers systèmes
+
+.center[![Colossus](../ressource/Colossus.jpg)]
+
+---
+
+## Un peu d'histoire
+
+### Les premiers systèmes
+
+.center[![ENIAC](../ressource/ENIAC.jpg)]
+
+---
+
+## L'apparition des bases de données relationnelles
+
+--
+
+Invention dans les années 1970 par l'anglais [Edgar Codd](https://history-computer.com/ModernComputer/Software/Codd.html).
+
+--
+
+Données gérées sous forme de **tables** liées entre elles :
+
+- Chaque **table** représente un **type d'objet**
+- Chaque **colonne** permet de définir les **attributs** de l'objet
+- Chaque **ligne** représente une instance d'un objet
+
+---
+
+## L'apparition des bases de données relationnelles
+
+--
+
+Exemple :
+
+.center[Une table `Personne`]
+
+| Identifiant | Nom      | Prénom     |
+|-------------|----------|------------|
+| 1           | Grand    | Jules      |
+| 2           | Hugueney | Bernard    |
+
+--
+
+.center[Une table `Voiture`]
+
+| Identifiant | Couleur | Marque  | Modèle | Puissance | Id du Propriétaire |
+|-------------|---------|---------|--------|-----------|--------------------|
+| 1           | Jaune   | Renault | Twingo | 65        | 2                  |
+| 2           | Rouge   | Ferrari | Enzo   | 660       | 1                  |
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Concevoir la base de données
+
+--
+
+On part du **modèle de données** :
+
+- **diagramme de classe** objet en UML
+- **modèle conceptuel de données** en Merise
+
+Classes et relations (ou entités et associations) ==> Pour arriver au **schéma** de base de données
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Concevoir la base de données
+
+--
+
+Lors de la conception, on doit veiller à :
+
+- garantir **l'atomicité** des données
+- ne **pas mélanger** les données
+- éviter la **redondance** des données
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Concevoir la base de données
+
+#### Créer une table
+
+--
+
+Nommer la table (pour identifier le type d'objet à stocker `Voiture` ou `Personne`)
+
+--
+
+Définir les colonnes
+
+Une colonne par attribut de l'objet avec :
+
+- Un nom pour l'attribut
+- Un type de donnée
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Concevoir la base de données
+
+#### Créer une table
+
+--
+
+Définir une clé primaire par table :
+
+**Identifiant unique** d'un enregistrement (ou ligne) d'une table
+
+--
+
+Exemple : Pour une donnée de type `Personne` :
+
+- Couple `nom` et `prénom`
+- _email_ (en théorie unique)
+- _identifiant_ (nombre entier s'incrémentant automatiquement)
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Concevoir la base de données
+
+#### Créer une table
+
+--
+
+Exemple de clé primaire sur la table personne : `Identifiant`
+
+.center[La table `Personne`]
+
+| Identifiant | Nom      | Prénom     |
+|-------------|----------|------------|
+| 1           | Grand    | Jules      |
+| 2           | Hugueney | Bernard    |
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Concevoir la base de données
+
+#### Créer une table
+
+--
+
+Définir des clés étrangères :
+
+Utilisation des clés primaires dans **d'autres tables** pour créer des **relations** entre différentes données
+
+--
+
+.center[La table `Voiture`]
+
+| Identifiant | Couleur | Marque  | Modèle | Puissance | Id du Propriétaire |
+|-------------|---------|---------|--------|-----------|--------------------|
+| 1           | Jaune   | Renault | Twingo | 65        | 2                  |
+| 2           | Rouge   | Ferrari | Enzo   | 660       | 1                  |
+
+Clé étrangère : `Id du Propriétaire` (référence à `Identifiant` de la table `Personne`).
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Exploiter la base de données
+
+--
+
+Les étapes :
+
+- _Conception (done)_
+- Création
+- Exploitation
+
+Utilisation d'un [système de gestion de base de données](https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_base_de_donn%C3%A9es)
+
+Avec le langage [SQL](https://fr.wikipedia.org/wiki/Structured_Query_Language) :
+
+- [Data Definition Language](https://fr.wikipedia.org/wiki/Langage_de_d%C3%A9finition_de_donn%C3%A9es)
+- [Data Modification Language](https://fr.wikipedia.org/wiki/Langage_de_manipulation_de_donn%C3%A9es)
+
+---
+
+    </textarea>
+    <script src="../../remark/2019-10-remark.min.js">
+    </script>
+    <script>
+        var slideshow = remark.create({
+            // Set the slideshow display ratio
+            // Default: '4:3'
+            // Alternatives: '16:9', ...
+            ratio: '16:9',
+
+            // Navigation options
+            navigation: {
+                // Enable or disable navigating using scroll
+                // Default: true
+                // Alternatives: false
+                scroll: true,
+
+                // Enable or disable navigation using touch
+                // Default: true
+                // Alternatives: false
+                touch: true,
+
+                // Enable or disable navigation using click
+                // Default: false
+                // Alternatives: true
+                click: false,
+            },
+
+            // Enable or disable counting of incremental slides in the slide counting
+            countIncrementalSlides: false,
+        });
+    </script>
+    <script src="../../remark/2019-10-last-heading.js"></script>
+</body>
+
+</html>
