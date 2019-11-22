@@ -269,6 +269,244 @@ Avec le langage [SQL](https://fr.wikipedia.org/wiki/Structured_Query_Language) :
 
 ---
 
+## Le travail du•de la programmeur•euse
+
+### Exploiter la base de données
+
+#### Créer des tables de base de données
+
+--
+
+Voici comment créer la table `Personne` :
+
+```sql
+create table personne (
+  -- definition de la clé primaire
+  id serial
+    constraint personne_pk
+      primary key,
+  -- puis les autres colonnes
+  nom varchar,
+  prenom varchar
+);
+```
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Exploiter la base de données
+
+#### Créer des tables de base de données
+
+--
+
+Et comment créer la table `Voiture` :
+
+```sql
+create table voiture(
+  -- definition de la clé primaire
+  id serial
+    constraint voiture_pk
+      primary key,
+  -- puis les autres colonnes
+  couleur varchar, marque varchar, modele varchar, puissance int,
+  -- puis la clé étrangère qui fait référence à la table personne
+  id_proprietaire int
+    constraint proprietaire_fk
+      references personne
+        on delete cascade
+);
+```
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Exploiter la base de données
+
+#### Créer des tables de base de données
+
+--
+
+On peut aussi :
+
+- **supprimer des tables** (avec `drop table`)
+- **modifier des tables** (avec `alter table`)
+- **vider le contenu des tables** (avec `truncate table`)
+
+Et bien plus encore !
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Exploiter la base de données
+
+#### Insérer des données
+
+--
+
+Voici comment insérer des données dans la table `Personne` :
+
+```sql
+insert into personne (id, nom, prenom) values (1, 'Grand', 'Jules');
+insert into personne (id, nom, prenom) values (2, 'Hugueney', 'Bernard');
+```
+
+--
+
+Voici comment insérer des données dans la table `Voiture` :
+
+```sql
+insert into voiture (id, couleur, marque, modele, puissance, id_proprietaire)
+  VALUES (1, 'Jaune', 'Renault', 'Twingo', 65, 2);
+
+insert into voiture (id, couleur, marque, modele, puissance, id_proprietaire)
+  VALUES (2, 'Rouge', 'Ferrari', 'Enzo', 660, 1);
+```
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Exploiter la base de données
+
+#### Mettre à jour des données
+
+--
+
+Aidons **Bernard** à repeindre sa Twingo en bleu avec un `update` :
+
+```sql
+update voiture set couleur = 'Bleu' where id = 1;
+```
+
+--
+
+Attention au mot clé `where` ==> permet de **restreindre** les lignes à modifier.
+
+Oubli de `where` ==> **catastrophe** (dans 99% des cas).
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Exploiter la base de données
+
+#### Supprimer des données
+
+Je vends ma Ferrari, trop gourmande en essence avec un `delete` :
+
+```sql
+delete from voiture where id = 2;
+```
+
+--
+
+Attention au mot clé `where` ==> permet de **restreindre** les lignes à supprimer.
+
+Oubli de `where` ==> **catastrophe** (dans 99% des cas).
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Exploiter la base de données
+
+#### Selectionner des données
+
+--
+
+Selection de toutes les personnes dans la table `personne` :
+
+```sql
+select * from personne;
+```
+
+Résultat :
+
+| id | nom      | prenom  |
+|----|----------|---------|
+| 1  | Grand    | Jules   |
+| 2  | Hugueney | Bernard |
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Exploiter la base de données
+
+#### Selectionner des données
+
+--
+
+Selection de toutes les personnes présentes dans la table et affichage des prénoms :
+
+```sql
+select prenom from personne;
+```
+
+Résultat :
+
+| prenom  |
+|---------|
+| Jules   |
+| Bernard |
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Exploiter la base de données
+
+#### Selectionner des données
+
+--
+
+On peut aussi utiliser le mot clé `where` pour filtrer nos données :
+
+```sql
+select * from personne where prenom = 'Bernard';
+```
+
+Résultat :
+
+| id | nom      | prenom  |
+|----|----------|---------|
+| 2  | Hugueney | Bernard |
+
+---
+
+## Le travail du•de la programmeur•euse
+
+### Exploiter la base de données
+
+#### Selectionner des données
+
+--
+
+On peut aussi faire des **jointures** entre tables :
+
+```sql
+select personne.nom, personne.prenom,
+       voiture.marque, voiture.modele,
+       voiture.couleur, voiture.puissance
+from personne
+join voiture on personne.id = voiture.id_proprietaire;
+```
+
+| nom      | prenom  | marque  | modele | couleur | puissance |
+|----------|---------|---------|--------|---------|-----------|
+| Hugueney | Bernard | Renault | Twingo | Jaune   | 65        |
+| Grand    | Jules   | Ferrari | Enzo   | Rouge   | 660       |
+
+---
+
+class: center, middle
+
+# Au boulot !
+
     </textarea>
     <script src="../../remark/2019-10-remark.min.js">
     </script>
@@ -299,6 +537,9 @@ Avec le langage [SQL](https://fr.wikipedia.org/wiki/Structured_Query_Language) :
 
             // Enable or disable counting of incremental slides in the slide counting
             countIncrementalSlides: false,
+
+            // Code highlight style
+            highlightStyle: 'monokai',
         });
     </script>
     <script src="../../remark/2019-10-last-heading.js"></script>

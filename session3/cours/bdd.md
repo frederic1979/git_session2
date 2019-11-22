@@ -132,14 +132,14 @@ create table voiture
   modele varchar,
   puissance int,
   -- puis la clé étrangère qui fait référence à la table personne
-  id_proprietaire serial
+  id_proprietaire int
     constraint proprietaire_fk
       references personne
         on delete cascade
 );
 ```
 
-On peut aussi **supprimer des tables** (avec `delete table`), **modifier des tables** (avec `alter table`), **vider le contenu des tables** (`truncate table`) et bien plus encore !
+On peut aussi **supprimer des tables** (avec `drop table`), **modifier des tables** (avec `alter table`), **vider le contenu des tables** (avec `truncate table`) et bien plus encore !
 
 #### Exploiter des données
 

@@ -17,7 +17,7 @@ h4, h5, h6 {
 }
 
 .last-heading {
-    margin-bottom: 70px;
+    margin-bottom: 50px;
 }
 
 strong {
@@ -55,6 +55,15 @@ p {
     background-repeat: no-repeat;
     background-size: 10%;
     font-size: 25px;
+}
+
+pre {
+    display: flex;
+    justify-content: center;
+}
+
+.remark-code {
+    border-radius: 5px;
 }
 
 .remark-slide-content h1 {
