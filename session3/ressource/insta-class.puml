@@ -1,0 +1,48 @@
+```plantuml
+@startuml
+class Photo {
+  Long id
+  String caption
+  Double latitude
+  Double longitude
+  String imagePath
+  Integer imageSize
+  LocalDateTime creationDate
+  LocalDateTime lastUpdateDate
+}
+
+class User {
+  Long id
+  String username
+  String email
+  String saltedPassword
+  String firstName
+  String lastName
+  String lastConnectedIp
+  LocalDateTime registrationDate
+  LocalDateTime lastLoginDate
+}
+
+class Comment {
+  Long id
+  String Comment
+}
+
+class Like {
+  Long id
+  LocalDateTime dateCreated
+}
+
+class HashTag {
+  Long id
+  String hashtag
+}
+
+Photo "0..*" -- "0..*" HashTag
+User "1" -- "0..*" Photo
+User "1" -- "0..*" Like
+Like "0..*" -- "1" Photo
+Photo "1" -- "..*" Comment
+Comment "0..*" -- "1" User
+@enduml
+```
