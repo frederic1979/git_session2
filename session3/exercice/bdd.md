@@ -66,7 +66,7 @@ Essayez :
 
 ## Etape 3 : Requêtage d'une base
 
-Vous allez devoir créer et remplir une nouvelle base de données : `simplon_airlines` grâce à ce script : [DDL Simplon Airlines](../ressource/simplon_airline.sql).
+Vous allez devoir créer et remplir une nouvelle base de données : `simplon_airlines` grâce à ce script : [DDL Simplon Airlines](../ressource/bdd/simplon_airline.sql).
 
 Ensuite vous aurez pour mission de réaliser les requêtes suivantes :
 
