@@ -183,3 +183,42 @@ Résultat attendu _(5 lignes)_ :
 | Fontenay-sous-Bois | Rochester | 6 |
 | Bjuv | Edosaki | 5 |
 | Yujiawu | Nîmes | 5 |
+
+### 8. Afficher les personnes travaillant moins d'une heure dans la compagnie
+
+Résultat attendu _(32 lignes)_ :
+
+| first_name | last_name | hour_work |
+| :--- | :--- | :--- |
+| Cordie | Vidgeon | 0.02 |
+| Auguste | Lohoar | 0.06 |
+| Corly | Clunie | 0.06 |
+| Kellen | VanBrugh | 0.17 |
+| Sheila-kathryn | Kermott | 0.17 |
+| Niels | Mochar | 0.17 |
+| Erda | Townes | 0.17 |
+| Simonette | Trillow | 0.19 |
+| Annemarie | Takle | 0.23 |
+| Georgetta | O'Shirine | 0.24 |
+| Jonathon | Michal | 0.38 |
+| Alexandrina | Vuittet | 0.41 |
+| Leela | Nellis | 0.41 |
+| Richy | Molineaux | 0.42 |
+| Derick | Durdle | 0.47 |
+| Hilliard | Crosfeld | 0.47 |
+| Hodge | Griffe | 0.48 |
+| Berty | Jorin | 0.48 |
+| Correy | Seldner | 0.55 |
+| Bartolemo | Ianiello | 0.64 |
+| Cristionna | Scambler | 0.7 |
+| Orella | Kenrack | 0.71 |
+| Eulalie | Brussell | 0.71 |
+| Vernen | Jenne | 0.71 |
+| Idalia | Bauer | 0.76 |
+| Loretta | Ely | 0.76 |
+| Celisse | Bertolaccini | 0.83 |
+| Evelin | Cunradi | 0.86 |
+| Chariot | Draysay | 0.89 |
+| Karyn | Pomfrey | 0.9 |
+| Felisha | Ronnay | 0.98 |
+| Clerkclaude | Collinson | 0.98 |
