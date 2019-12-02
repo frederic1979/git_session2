@@ -1,6 +1,6 @@
 # Objectifs pédagogiques session 2
 
-## Session 1 - Les bases du développement Web & Java Saison 2
+## Session 2 - Les bases du développement Web & Java Saison 2
 
 ### Semaine 45
 

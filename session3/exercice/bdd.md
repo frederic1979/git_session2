@@ -100,7 +100,7 @@ Résultat attendu _(14 lignes)_ :
 | 777 |
 | 787 |
 
-### 3. Affichage des villes couvertes et leurs pays
+### 3. Affichage de toutes les villes et leurs pays
 
 Résultat attendu _(400 lignes)_ :
 
@@ -148,7 +148,7 @@ Résultat attendu _(41 lignes)_ :
 | China | Haikoudajie | Longxing |
 | Philippines | Himaya | Villa Aglipay |
 
-### Affichage des vols intérieurs plus longs que 5h triés par durée décroissante
+### 6. Affichage des vols intérieurs plus longs que 5h triés par durée décroissante
 
 Résultat attendu _(17 lignes)_ :
 
@@ -172,7 +172,7 @@ Résultat attendu _(17 lignes)_ :
 | Sweden | Solna | Tyresö | 5 |
 | China | Rangxi | Chuoyuan | 5 |
 
-### Afficher les 5 vols ayant le plus de personnel navigant
+### 7. Afficher les 5 vols ayant le plus de personnel navigant
 
 Résultat attendu _(5 lignes)_ :
 
