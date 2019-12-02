@@ -222,3 +222,51 @@ Résultat attendu _(32 lignes)_ :
 | Karyn | Pomfrey | 0.9 |
 | Felisha | Ronnay | 0.98 |
 | Clerkclaude | Collinson | 0.98 |
+
+### 9. Afficher les durées des vols intérieur en utilisant intersect
+
+Résultat attendu _(41 lignes)_ :
+
+| flight_duration_hour | country_name |
+| :--- | :--- |
+| 9.92 | China |
+| 9.76 | Philippines |
+| 9.52 | China |
+| 9.13 | China |
+| 8.16 | China |
+| 8.15 | China |
+| 8.05 | China |
+| 7.34 | China |
+| 6.97 | China |
+| 6.68 | China |
+| 6.29 | China |
+| 6.27 | Poland |
+| 6.24 | Japan |
+| 6.2 | China |
+| 5.83 | China |
+| 5.52 | Sweden |
+| 5.12 | China |
+| 4.77 | China |
+| 4.28 | China |
+| 4.24 | China |
+| 4.06 | China |
+| 3.58 | China |
+| 3.4 | China |
+| 3.28 | China |
+| 3.18 | China |
+| 2.79 | China |
+| 2.72 | China |
+| 2.55 | China |
+| 2.52 | China |
+| 2.32 | Philippines |
+| 2.05 | Sweden |
+| 2.01 | China |
+| 1.86 | China |
+| 1.86 | United States |
+| 1.1 | China |
+| 0.86 | China |
+| 0.57 | China |
+| 0.47 | China |
+| 0.42 | China |
+| 0.23 | China |
+| 0.19 | Poland |
