@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-12-04 Wed 01:29 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gestion de dépendances avec Maven</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="bernard" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Gestion de dépendances avec Maven</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org009d503">1. Maven pour la gestion de dépendances</a></li>
+<li><a href="#org492a592">2. En pratique</a>
+<ul>
+<li><a href="#orgaf8242a">2.1. Création du projet Maven</a></li>
+<li><a href="#orga1e1958">2.2. Ajout d'une dépendance</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org009d503" class="outline-2">
+<h2 id="org009d503"><span class="section-number-2">1</span> Maven pour la gestion de dépendances</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<a href="https://fr.wikipedia.org/wiki/Apache_Maven">Maven</a> est un outils de construction (<i>build</i>) de projets java. Il
+permet de gérer notamment, mais pas seulement, les dépendances
+(i.e. bibliothèques) en téléchargeant automatiquement celles-ci et en
+gérant le <code>CLASSPATH</code> pour que celles-ci soient directement
+utilisables.
+</p>
+
+<p>
+La configuration de Maven est gérée par un fichier au format XML : <code>pom.xml</code>.
+</p>
+
+<p>
+Les dépendances sont indiquées dans un bloc <code>dependencies</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-nxml">&lt;<span style="color: #000088; background-color: #DEDEDE;">dependencies</span>&gt;
+
+    <span style="color: #8D8D84;">&lt;!-- </span><span style="color: #8D8D84; font-style: italic;">les d&#233;pendances sont indiqu&#233;es ici </span><span style="color: #8D8D84;">--&gt;</span>
+
+&lt;/<span style="color: #000088; background-color: #DEDEDE;">dependencies</span>&gt;
+
+</pre>
+</div>
+
+<p>
+Chaque dépendance est indiquée dans un bloc <code>dependency</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-nxml">    &lt;<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+
+    <span style="color: #8D8D84;">&lt;!-- </span><span style="color: #8D8D84; font-style: italic;">la d&#233;pendance est indiqu&#233;e ici </span><span style="color: #8D8D84;">--&gt;</span>
+
+    &lt;/<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+</pre>
+</div>
+
+<p>
+Les informations caractérisant la dépendance sont :
+</p>
+<dl class="org-dl">
+<dt>groupId</dt><dd>identifie l'organisme qui publie la bibliothèque.</dd>
+<dt>artifactId</dt><dd>identifie la bibliothèque parmi celle publiées par
+l'organisme.</dd>
+<dt>version</dt><dd>indique la version de la bibliothèque à utiliser.</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-org492a592" class="outline-2">
+<h2 id="org492a592"><span class="section-number-2">2</span> En pratique</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgaf8242a" class="outline-3">
+<h3 id="orgaf8242a"><span class="section-number-3">2.1</span> Création du projet Maven</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Sous l'environnement de développement (e.g. Eclipse ou IntelliJ), lors
+de la création du projet, choisir un projet Maven. Par exemple sous
+IntelliJ <code>File</code> &rarr; <code>New</code> &rarr; <code>Project…</code>, choisir
+<code>Maven</code> dans la marge de gauche.
+</p>
+
+<p>
+Dans un premier temps, on ne choisira pas d'archetype. Le projet maven
+a alors un <code>GroupId</code>, un <code>ArtifactId</code> et une version, comme les
+dépendances. Par défaut, l'<code>ArtifactId</code> est le nom du projet.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Créer un projet maven appelé <code>TestMavenCsv</code> (Choisir
+<code>Enable Auto-Import</code> lorsque cela est proposé).</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-orga1e1958" class="outline-3">
+<h3 id="orga1e1958"><span class="section-number-3">2.2</span> Ajout d'une dépendance</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Dans le fichier <code>pom.xml</code>, ajouter un bloc <code class="src src-nxml">&lt;<span style="color: #000088; background-color: #DEDEDE;">dependencies</span>&gt; &lt;/<span style="color: #000088; background-color: #DEDEDE;">dependencies</span>&gt;</code>.
+</p>
+
+<p>
+Ensuite, on va chercher les informations pour indiquer une dépendance
+envers une bibliothèque d'utilisation de fichiers au format csv,
+<a href="http://commons.apache.org/proper/commons-csv/">Apache Common CSV</a>. Il suffit de <a href="https://mvnrepository.com/search?q=apache+common+csv">chercher sur le site mvnrepository.com</a>
+pour trouver <a href="https://mvnrepository.com/artifact/org.apache.commons/commons-csv">la page avec les informations nécessaires</a> :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-nxml"><span style="color: #8D8D84;">&lt;!-- </span><span style="color: #8D8D84; font-style: italic;">https://mvnrepository.com/artifact/org.apache.commons/commons-csv </span><span style="color: #8D8D84;">--&gt;</span>
+&lt;<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;org.apache.commons&lt;/<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;commons-csv&lt;/<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;1.7&lt;/<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;
+&lt;/<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+</pre>
+</div>
+
+<p>
+On peut ensuite écrire le code suivant :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">import</span> <span style="color: #D0372D;">org</span>.<span style="color: #D0372D;">apache</span>.<span style="color: #D0372D;">commons</span>.<span style="color: #D0372D;">csv</span>.<span style="color: #6434A3;">CSVFormat</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">org</span>.<span style="color: #D0372D;">apache</span>.<span style="color: #D0372D;">commons</span>.<span style="color: #D0372D;">csv</span>.<span style="color: #6434A3;">CSVPrinter</span>;
+
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">FileWriter</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">IOException</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">HashMap</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">Map</span>;
+
+<span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Main</span> {
+    <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">HEADERS</span> = {<span style="color: #008000;">"nom_commune"</span>, <span style="color: #008000;">"latitude"</span>, <span style="color: #008000;">"longitude"</span>};
+    <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">Map</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">double</span>[]&gt; <span style="color: #BA36A5;">nameToCoords</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">HashMap</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">double</span>[]&gt;();
+
+    <span style="color: #0000FF;">static</span> {
+        nameToCoords.put(<span style="color: #008000;">"Attignat"</span>, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[]{46.283333, 5.166667});
+        nameToCoords.put(<span style="color: #008000;">"Beaupont"</span>, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[]{46.4, 5.266667});
+        nameToCoords.put(<span style="color: #008000;">"B&#233;ny"</span>, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[]{46.333333, 5.283333});
+    }
+
+    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>) <span style="color: #0000FF;">throws</span> <span style="color: #6434A3;">IOException</span> {
+        <span style="color: #6434A3;">FileWriter</span> <span style="color: #BA36A5;">out</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">FileWriter</span>(<span style="color: #008000;">"communes_new.csv"</span>);
+        <span style="color: #0000FF;">try</span> (<span style="color: #6434A3;">CSVPrinter</span> <span style="color: #BA36A5;">printer</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">CSVPrinter</span>(out, <span style="color: #D0372D;">CSVFormat</span>.DEFAULT
+                .withHeader(HEADERS))) {
+            <span style="color: #0000FF;">for</span> (<span style="color: #D0372D;">Map</span>.<span style="color: #6434A3;">Entry</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">double</span>[]&gt; <span style="color: #006699;">city</span> : nameToCoords.entrySet()) {
+                <span style="color: #6434A3;">double</span>[] <span style="color: #BA36A5;">coords</span> = city.getValue();
+                printer.printRecord(city.getKey(), coords[0], coords[1]);
+            }
+        }
+    }
+}
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">org</span>.<span style="color: #D0372D;">apache</span>.<span style="color: #D0372D;">commons</span>.<span style="color: #D0372D;">csv</span>.<span style="color: #6434A3;">CSVFormat</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">org</span>.<span style="color: #D0372D;">apache</span>.<span style="color: #D0372D;">commons</span>.<span style="color: #D0372D;">csv</span>.<span style="color: #6434A3;">CSVPrinter</span>;
+
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">FileWriter</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">IOException</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">HashMap</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">Map</span>;
+
+<span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Main</span> {
+    <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">HEADERS</span> = {<span style="color: #008000;">"nom_commune"</span>, <span style="color: #008000;">"latitude"</span>, <span style="color: #008000;">"longitude"</span>};
+    <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">Map</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">double</span>[]&gt; <span style="color: #BA36A5;">nameToCoords</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">HashMap</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">double</span>[]&gt;();
+
+    <span style="color: #0000FF;">static</span> {
+        nameToCoords.put(<span style="color: #008000;">"Attignat"</span>, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[]{46.283333, 5.166667});
+        nameToCoords.put(<span style="color: #008000;">"Beaupont"</span>, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[]{46.4, 5.266667});
+        nameToCoords.put(<span style="color: #008000;">"B&#233;ny"</span>, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[]{46.333333, 5.283333});
+    }
+
+    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>) <span style="color: #0000FF;">throws</span> <span style="color: #6434A3;">IOException</span> {
+        <span style="color: #6434A3;">FileWriter</span> <span style="color: #BA36A5;">out</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">FileWriter</span>(<span style="color: #008000;">"communes_new.csv"</span>);
+        <span style="color: #0000FF;">try</span> (<span style="color: #6434A3;">CSVPrinter</span> <span style="color: #BA36A5;">printer</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">CSVPrinter</span>(out, <span style="color: #D0372D;">CSVFormat</span>.DEFAULT
+                .withDelimiter(<span style="color: #008000;">';'</span>).withHeader(HEADERS))) {
+            <span style="color: #0000FF;">for</span> (<span style="color: #D0372D;">Map</span>.<span style="color: #6434A3;">Entry</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">double</span>[]&gt; <span style="color: #006699;">city</span> : nameToCoords.entrySet()) {
+                <span style="color: #6434A3;">double</span>[] <span style="color: #BA36A5;">coords</span> = city.getValue();
+                printer.printRecord(city.getKey(), coords[0], coords[1]);
+            }
+        }
+    }
+}
+
+</pre>
+</div>
+
+<p>
+Attention ! :: IntelliJ <a href="https://youtrack.jetbrains.com/issue/IDEA-222668">oblige à modifier la configuration pour que le programme puisse s'exécuter</a>. (<code>File</code> &rarr; <code>Settings…</code> &rarr; <code>Build, Execution, Deployment</code> &rarr; <code>Compiler</code> &rarr; <code>Java Compiler</code> &rarr; <code>Per-module bytecode version</code> , mettre le <code>Target bytecode version</code> à 1.8 au moins).
+</p>
+
+
+<p>
+Le programme peut être compilé et exécuté, Maven gérant automatiquement la dépendance à la bibliothèque <code>Apache Commons CSV</code>.
+</p>
+
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Compiler et exécuter le code.</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: bernard</p>
+<p class="date">Created: 2019-12-04 Wed 01:29</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
