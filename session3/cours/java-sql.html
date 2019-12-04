@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-12-04 Wed 01:23 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Exécuter des requêtes SQL en Java</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="bernard" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Exécuter des requêtes SQL en Java</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org99f2af5">1. Types d'utilisations de bases de données</a></li>
+<li><a href="#org4b9c811">2. Utilisation de SGBDR en Java : préliminaires</a>
+<ul>
+<li><a href="#orga59d3f6">2.1. Chargement de drivers</a></li>
+<li><a href="#org6150988">2.2. Établissement de la connection au SGBDR</a></li>
+</ul>
+</li>
+<li><a href="#org078b928">3. Utilisation de SGBDR en Java : requêtes SQL</a>
+<ul>
+<li><a href="#org734e85d">3.1. java.sql.Statement</a></li>
+<li><a href="#orgceb75e3">3.2. java.sql.PreparedStatement</a></li>
+<li><a href="#org5f6d65e">3.3. Lecture des résultats d'une requête SELECT</a></li>
+<li><a href="#org6081f53">3.4. Exemple de relation Many to Many, table d'associations</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org99f2af5" class="outline-2">
+<h2 id="org99f2af5"><span class="section-number-2">1</span> Types d'utilisations de bases de données</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Il y a plusieurs façons d'utiliser des bases de données avec un
+logiciel écrit en Java :
+</p>
+
+<dl class="org-dl">
+<dt>Embarquée</dt><dd>Lorsque le programme de gestion de bases de données est
+écrit en Java, il peut être directement intégré en tant
+que bibliothèque Java. Dans ce cas, on peut même
+utiliser une "base de données" virtuelle en mémoire. Si
+l'accès aux données est alors très rapide, il n'y a
+évidemment pas de durabilité, donc ceci est plutôt
+réservé aux situations de tests.</dd>
+<dt>Serveur (local) et tables dédiés</dt><dd>Le serveur est utilisé pour
+permettre la durabilité des entités manipulées par le logiciel.</dd>
+<dt>Serveurs (distant) et tables partagés</dt><dd>Le logiciel est utilisé
+pour manipuler des entités déjà existantes.</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-org4b9c811" class="outline-2">
+<h2 id="org4b9c811"><span class="section-number-2">2</span> Utilisation de SGBDR en Java : préliminaires</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Les SGDBR et leurs drivers Java permettent différents niveaux de
+fonctionnalités. Dans un soucis de simplicité et de compatibilité maximale, on
+ne s'intéresse ici qu'aux fonctionnalités les plus basiques dont la
+disponibilité est garantie. En cas de besoin, et si le SGDBR est connu et fixé,
+on pourra utiliser <a href="https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html">des fonctionnalités plus avancées</a>.
+</p>
+</div>
+
+<div id="outline-container-orga59d3f6" class="outline-3">
+<h3 id="orga59d3f6"><span class="section-number-3">2.1</span> Chargement de drivers</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Tout d'abord, il faut utiliser le(s) driver(s) JDBC (Java DataBase Connectivity)
+adapté(s) au(x) SGBDR utilisé(s).
+</p>
+
+<p>
+Ensuite, il faut rendre les drivers accessibles au programme Java.
+Habituellement, il suffit d'utiliser <code>import</code> pour utiliser n'importe quelle
+classe (sous réserve qu'elle soit disponible dans le <code>CLASSPATH</code> lors de la
+compilation et de l'exécution du programme.
+</p>
+
+<p>
+Dans le cas des classes de drivers JDBC, on veut pouvoir choisir le SGDBR, et
+donc le driver, à l'exécution et non à la compilation. En effet, on peut vouloir
+utiliser différents SGDBR en environnement de test et en production. Évidemment,
+il faut que ce soit le même programme compilé qui soit exécuté en test et en
+production. Pour la même raison, parce que les URL d'accès au SGBDR et les
+comptes (login et mot de passe associé) ne sont pas forcément les mêmes en test
+et en production, on fera aussi en sorte que ces informations soient aussi
+paramétrables sans recompilation, donc hors du code source.
+</p>
+
+<p>
+En fait, pour les mots de passe, il est aussi essentiel de ne jamais les écrire
+dans un code source. En effet, les codes sources sont souvent diffusés
+largement, notamment par des systèmes de gestion de version et doivent donc
+contenir aucune information confidentielle. Par exemple, lorsqu'on stocke des
+informations confidentielles dans un fichier .properties dans un projet géré par
+git, il est essentiel d'exclure ce fichier de la gestion de version à l'aide de
+<a href="https://git-scm.com/docs/gitignore">gitignore</a>.
+</p>
+
+
+<p>
+Pour que les classes des drivers JDBC soient chargées dynamiquement (à
+l'exécution), il faut exécuter la méthode statique <code>forName</code> de la classe <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html">Class</a>  :
+</p>
+
+<ul class="org-ul">
+<li>pour Postgresql :</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-java">Class.forName(<span style="color: #008000;">"org.postgresql.Driver"</span>);
+</pre>
+</div>
+<ul class="org-ul">
+<li>pour H2 :</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-java">Class.forName(<span style="color: #008000;">"org.h2.Driver"</span>);
+</pre>
+</div>
+<ul class="org-ul">
+<li>pour MySQL :</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-java">Class.forName(<span style="color: #008000;">"com.mysql.jdbc.Driver"</span>);
+</pre>
+</div>
+
+<p>
+Cet appel de méthode peut lancer une exception de type <code>ClassNotFoundException</code>
+qu'il faut donc gérer.
+</p>
+
+<p>
+Ensuite, le driver correspondant au SGBDR sera choisi en fonction de l'URL de
+connection à la base. Cette URL étant dans une chaîne de caractères, elle est
+donc aussi configurable à l'exécution.
+</p>
+
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Créer un projet Maven avec une dépendance sur la
+bibliothèque de driver Postgresql et une autre sur la
+bibliothèque de driver H2. Écrire un programme qui
+charge ainsi le driver à l'exécution, suivant ce qui est passé en argument :</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org6150988" class="outline-3">
+<h3 id="org6150988"><span class="section-number-3">2.2</span> Établissement de la connection au SGBDR</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+La connection au SGDBR est matérialisée par un objet instance d'une classe
+implémentant l'interface <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a> . Cette connection peut être en
+<a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html#getAutoCommit()">mode autocommit ou non</a>. On récupère cet objet par un appel à la méthode
+<a href="https://docs.oracle.com/javase/7/docs/api/java/sql/DriverManager.html#getConnection(java.lang.String,%20java.lang.String,%20java.lang.String)">java.sql.DriverManager.getConnection()</a>. Par exemple, si les URL, login et mot de
+passe sont stockés dans une <code>Map&lt;String,String&gt; env</code> et assocés aux clés <code>"URL"</code>, <code>"USER"</code> et <code>"PASS"</code> :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">Connection</span> <span style="color: #BA36A5;">conn</span>= DriverManager.getConnection(env.get(<span style="color: #008000;">"URL"</span>), env.get(<span style="color: #008000;">"USER"</span>), env.get(<span style="color: #008000;">"PASS"</span>));
+</pre>
+</div>
+
+<p>
+L'url étant de la forme "jdbc:SGBD_NAME://DBSERVER_NAME:DBSERVER_PORT/DATABASE_NAME".
+</p>
+
+<p>
+Il faudra s'assurer que la connection sera fermée à un appel à la méthode
+<a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html#close()">close()</a>. On remarque que l'interface <code>java.sql.Connection</code> hérite de l'interface
+<code>java.lang.AutoClosable</code>, ce qui implique donc qu'on peut faire l'initialisation
+dans un bloc <code>try(){}</code> (dit «try with resources»). Attention : cette méthode
+<code>.close()</code> peut elle-même lancer une <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/SQLException.html">SQLException</a> qu'il faut donc aussi gérer.
+</p>
+
+<p>
+On passera l'objet connection aux différentes méthodes qui s'en serviront pour
+interagir avec le SGBDR.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org078b928" class="outline-2">
+<h2 id="org078b928"><span class="section-number-2">3</span> Utilisation de SGBDR en Java : requêtes SQL</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Il y a deux façons de faire exécuter des requêtes SQL en Java, suivant qu'on
+utilise des <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html">java.sql.Statement</a> ou des <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html">java.sql.PreparedStatement</a>.
+</p>
+</div>
+
+
+<div id="outline-container-org734e85d" class="outline-3">
+<h3 id="org734e85d"><span class="section-number-3">3.1</span> java.sql.Statement</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+On commence par créer l'objet par un appel à <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html#createStatement()">createStatement()</a> sur l'objet qui
+implémente l'interface <code>Connection</code>. Cet objet nouvellement créé devra lui aussi
+être fermé par un appel à sa méthode <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html#close()">close()</a>. Comme il implémente l'interface
+<code>AutoCloseable</code>, on peut créer l'objet dans un <code>try(){}</code> («try with resources»).
+</p>
+
+<p>
+Ensuite, on peut appeler sur cet objet l'une des méthodes suivante :
+</p>
+
+<ul class="org-ul">
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html#execute(java.lang.String)">execute(String sql)</a> pour exécuter la commande SQL passée en paramètre, en
+ayant en valeur de retour un booléen indiquant si l'exécution s'est déroulée
+sans erreur ou non.</li>
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html#executeUpdate(java.lang.String)">executeUpdate(String sql)</a> pour exécuter la commande SQL passée en paramètre,
+en ayant en valeur de retour le nombre de lignes modifiées (comme son nom
+l'indique, on utilise cette méthode pour des commandes SQL <code>UPDATE</code>).</li>
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html#executeQuery(java.lang.String)">executeQuery(String sql)</a> pour exécuter la commande SQL passée en paramètre, en
+ayant en valeur de retour un objet implémentant l'interface <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html">java.sql.ResultSet</a>
+qui permettra de récupérer les résultat d'une commande SQL <code>SELECT</code>.</li>
+</ul>
+
+
+<p>
+De plus, si l'on veut exécuter plusieurs commandes SQL en une seule fois, pour
+des raisons de performance, on peut à la place utiliser la méthode
+<a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html#addBatch(java.lang.String)">addBatch(String sql)</a> pour chacune des commandes, puis déclencher l'exécution de
+toutes celles-ci par un appel à <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html#executeBatch()">executeBatch()</a>.
+</p>
+
+
+<p>
+Souvent, la commande SQL à exécuter dépend de valeurs qui ne sont connues qu'à
+ l'exécution, par exemple les données à ajouter dans un <code>INSERT</code> ou des critères
+ d'une clause <code>WHERE</code>. Il est possible de construire dynamiquement la commande
+ SQL en concaténant des chaînes de caractères mais il faut alors faire très
+ attention au risque d'<a href="https://fr.wikipedia.org/wiki/Injection_SQL">injection SQL</a>. Même sans utilisateurs hostiles, il faut
+ de toutes façons prendre en compte l'échappement des caractères spéciaux dans
+ une chaîne de caractères. Par exemple, le guillemet simple, utilisé souvernt
+ pour l'apostrophe, doit être remplacé par deux guillemets simples pour éviter
+ qu'il soit interprété comme la fin de chaîne. On peut faire pour cela un appel comme ceci :
+ <code>.replaceAll("'","''")</code>.
+</p>
+
+
+<p>
+Il est cependant préférable d'utiliser des <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html">java.sql.PreparedStatement</a> pour ne
+pas avoir à gérer soi-même les arguments.
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgceb75e3" class="outline-3">
+<h3 id="orgceb75e3"><span class="section-number-3">3.2</span> java.sql.PreparedStatement</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Toujours à partir de l'objet implémentant l'interface <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a>, on
+peut utiliser la méthode <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html#prepareStatement(java.lang.String)">prepareStatement(String sql)</a> pour créer un objet
+implémentant l'interface <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html">java.sql.PreparedStatement</a>. La chaîne de caractère
+passée en argument contient le code de la commande SQL avec des '?' à la place
+des arguments de la commande. Par exemple, pour insérer une nouvelle ligne dans
+notre table <code>city</code>, on pourra utiliser :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">insertCmd</span>= <span style="color: #008000;">"INSERT INTO cities VALUES(DEFAULT, ?, ?, ?);"</span>;
+<span style="color: #0000FF;">try</span>(<span style="color: #6434A3;">PreparedStatement</span> <span style="color: #BA36A5;">stmt</span>= conn.prepareStatement(insertCmd)){
+}
+</pre>
+</div>
+
+<p>
+Le <code>DEFAULT</code> permet de laisser la base de données attribuer la valeur
+de la clé primaire.
+</p>
+
+<p>
+Comme pour la création d'un <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html">java.sql.Statement</a>, on peut (devrait ?) utiliser un
+<i>try with resources</i> parce que l'objet créé implémente l'interface
+<code>java.lang.AutoCloseable</code>.
+</p>
+
+<p>
+Ensuite, on peut utiliser sur cet objet les méthodes <code>setXXX()</code> comme
+<a href="https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html#setDouble(int,%20double)">setDouble(int parameterIndex, double parameterValue)</a> ou <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html#setString(int,%20java.lang.String)">setString(int
+parameterIndex, String parameterValue)</a> pour donner des valeurs à chacun des
+paramètres représentés par un '?' dans la chaîne passée en argument de
+<a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html#prepareStatement(java.lang.String)">prepareStatement(String sql)</a>. Attention ! Les <code>parameterIndex</code> commencent à 1 et
+non à 0. Si l'on veut insérer une valeur manquante <code>NULL</code>, il faut utiliser la
+méthode <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html#setNull(int,%20int)">setNull(int parameterIndex, int sqlType)</a>. L'argument <code>sqlType</code> étant
+l'une des constantes nommées définies dans la classe <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Types.html">java.sql.Types</a>.
+</p>
+
+<p>
+Ensuite, une fois que tous les arguments on reçu une valeur, on peut appeler
+l'une des méthodes <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html#execute()">execute()</a>, <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html#executeQuery()">executeQuery()</a> ou <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html#executeUpdate()">executeUpdate()</a>. On peut aussi
+créer un batch de plusieurs commandes à executer à l'aide des méthodes
+<a href="https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html#addBatch()">addBatch()</a> et <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html#executeBatch()">executeBatch()</a>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org5f6d65e" class="outline-3">
+<h3 id="org5f6d65e"><span class="section-number-3">3.3</span> Lecture des résultats d'une requête SELECT</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Lorsque l'on exécute une requête <code>SELECT</code>, on utilise la méthode <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html#executeQuery()">executeQuery()</a>
+qui retourne un objet implémentant l'interface <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html">java.sql.ResultSet</a>. Cet objet
+permet de récupérer chacunes des données de chacune des lignes correspondant à
+la requête. Pour passer à la ligne suivante en testant s'il y en a une, on
+utilise la méthode <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html#next()">next()</a> (le plus souvent comme condition de continuation dans
+une boucle <code>while()</code> pour traiter toutes les lignes de la première à la
+dernière). Ensuite, pour chacune des lignes (à l'intérieur de la boucle, donc),
+on peut récupérer la valeur de chacune des colonnes avec des appels aux méthodes
+<a href="https://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html#getDouble(java.lang.String)">getDouble(String colName)</a>, <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html#getInt(java.lang.String)">getInt(String colName)</a>, <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html#getLong(java.lang.String)">getLong(String colName)</a>,
+<a href="https://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html#getString(java.lang.String)">getString(String colName)</a> et autres. Il est aussi possible de passer des numéros
+de colonne en argument plutôt que d'utiliser les noms, mais il faut alors se
+souvenir non seulement de l'ordre des colonnes dans le resultat, mais aussi que
+leur numérotation commence à 1 et non à 0. Toujours dans un soucis de plus
+grande compatibilité avec tous les drivers JDBC disponibles, mais aussi dans un
+soucis de performance, il est préférable de se contenter de lire les lignes les
+unes après les autres et pour chaque ligne et de ne lire les données qu'une
+seule fois pour une instance de <code>ResultSet</code> donnée.
+</p>
+
+<p>
+Par exemple, pour afficher le contenue d'une table <code>city</code> contenant des communes avec leur latitude et longitude, on pourrait écrire le code suivant :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #0000FF;">try</span> (<span style="color: #6434A3;">Statement</span> <span style="color: #BA36A5;">stmt</span> = conn.createStatement()) {
+    <span style="color: #6434A3;">ResultSet</span> <span style="color: #BA36A5;">rs</span> = stmt.executeQuery(<span style="color: #008000;">"SELECT id, name, latitude, longitude from city"</span>);
+    <span style="color: #0000FF;">while</span> (rs.next()) {
+        <span style="color: #0000FF;">try</span> {
+            System.out.println(String.format(<span style="color: #008000;">"id: %d, name: %s, latitude: %f, longitude: %f"</span>,
+                                             rs.getLong(<span style="color: #008000;">"id"</span>),
+                                             rs.getString(<span style="color: #008000;">"name"</span>),
+                                             rs.getDouble(<span style="color: #008000;">"latitude"</span>),
+                                             rs.getDouble(<span style="color: #008000;">"longitude"</span>)));
+        } <span style="color: #0000FF;">catch</span> (<span style="color: #6434A3;">Exception</span> <span style="color: #BA36A5;">e</span>) {
+            System.err.println(e);
+        }
+    }
+
+} <span style="color: #0000FF;">catch</span> (<span style="color: #6434A3;">SQLException</span> <span style="color: #BA36A5;">e</span>) {
+    e.printStackTrace();
+}
+
+</pre>
+</div>
+
+<p>
+On lit des (références vers des) objets plutôt que des valeurs de types
+primitifs lorsque les colonnes peuvent contenir des <code>NULL</code>, auquel cas la
+référence retournées est nulle.
+</p>
+
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Écrire un programme qui afficher le contenu d'une table
+<code>city</code> contenant des communes avec leur latitude et
+longitude. Vous pouvez créer une telle table en local,
+mais aussi utiliser une table <code>city</code> disponible sur le
+serveur <code>horton.elephantsql.com</code> au port <code>5432</code> avec
+comme login <code>vnzaekhx</code> et comme mot de passe
+<code>oWN4ryvxxdjYWsko1u3WTW23k6yB7bM9</code>.</dd>
+<dt>Exercice</dt><dd>Écrire un programme qui remplisse une table d'une base
+de données locale à partir du fichier <code>Communes.csv</code> qui
+avait été donné lors de la session précédente.</dd>
+<dt>Exercice</dt><dd>Écrire un programme qui remplisse une table d'une base
+de données locales à partir des donnés mises à
+disposition par <a href="http://sql.sh/736-base-donnees-villes-francaises">données mises à disposition par Tony
+Archambeau</a>.</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org6081f53" class="outline-3">
+<h3 id="org6081f53"><span class="section-number-3">3.4</span> Exemple de relation Many to Many, table d'associations</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Pour le stockage de l'information concernant les codes postaux de chacune des
+villes, le format proposé (une colonne de type chaîne de caractères pouvant
+contenir une liste de codes postaux séparés par des '-', n'est ni pratique ni
+performant. On va écrire un programme implémentant la relation «Many to Many»
+par une table d'associations. Il s'agit d'une relation «Many to Many» car une
+ville peut avoir plusieurs codes postaux, mais un code postal peut être associé
+à plusieurs villes. Pour représenter cette association, on va créer deux tables :
+</p>
+<ul class="org-ul">
+<li>une table <code>postalcodes</code> qui va contenir la chaîne de caractère du code
+postal et un identifiant.</li>
+<li>une table <code>city_postalcode</code> qui va contenir les associations entre la table
+<code>cities</code> et la table <code>postalcodes</code>, avec seulement les deux colonnes
+<code>cities_pk</code> et <code>postalcodes_pk</code> ("pk" pour Primary Key). La clé primaire de
+cette table est constituée par ces deux colonnes.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: bernard</p>
+<p class="date">Created: 2019-12-04 Wed 01:23</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
