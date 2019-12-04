@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2019-12-04 Wed 01:28 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Checklist pour auto-évaluation du mini projet JDBC</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Checklist pour auto-évaluation du mini projet JDBC</h1>
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org5ca9314">1. Manuels</a>
+<ul>
+<li><a href="#org672bbeb">1.1. Manuel de déploiement</a></li>
+<li><a href="#orgf37892e">1.2. Manuel d'utilisation</a></li>
+<li><a href="#orgaf86fed">1.3. Manuel de développement</a></li>
+</ul>
+</li>
+<li><a href="#org8b2fcd6">2. Code</a>
+<ul>
+<li><a href="#org6cb4430">2.1. Architecture</a></li>
+<li><a href="#org3f6c69c">2.2. Durées de vie et portées</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5ca9314" class="outline-2">
+<h2 id="org5ca9314"><span class="section-number-2">1</span> Manuels</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org672bbeb" class="outline-3">
+<h3 id="org672bbeb"><span class="section-number-3">1.1</span> Manuel de déploiement</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Il faut rendre accessible sur/à partir du poste :
+</p>
+<ul class="org-ul">
+<li>le programme</li>
+<li>la/une base de données</li>
+</ul>
+</div>
+
+<div id="outline-container-org234955a" class="outline-4">
+<h4 id="org234955a"><span class="section-number-4">1.1.1</span> Déploiement du programme</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Comment l'application sera-t'elle utilisée ?
+</p>
+<dl class="org-dl">
+<dt>À partir d'Eclipse</dt><dd>Dans ce cas, le 'déploiement' sera la recopie
+du répertoire contenant le projet, et son 'import' sous Eclipse ☹.</dd>
+<dt>En utilisant les classes compilées et éventuel fichier .properties</dt><dd>Dans ce cas, on doit recopier
+les fichiers '.class' et la structure de répertoires /
+sous-répertoires correspondant aux <i>packages</i>.</dd>
+<dt>En utilisant un fichier .jar</dt><dd>il suffit de recopier le fichier
+.jar.</dd>
+</dl>
+
+<p>
+Dans les deux derniers cas, comme les fichiers <i>.class</i> et <i>.jar</i> ne
+sont pas versionnés sous git, il faut les mettre à disposition. Par
+exemple dans le cadre d'une <a href="https://blog.github.com/2013-07-02-release-your-software/">release github</a>. Le manuel de déploiement
+doit alors indiquer quelles sont les versions (minimum) requises.
+</p>
+
+<p>
+Il faut aussi penser aux dépendances, par exemple la bibliothèque de
+pilote JDBC pour Postgresql. Dans le cas d'une distribution de sources
+(utilisation d'Eclipse), <code>maven</code> prendra en charge le téléchargement
+automatiquement. Dans le cas de l'utilisation des fichiers .class
+compilés, il faudra que le fichier .jar du pilote soit dans le
+<a href="https://en.wikipedia.org/wiki/Classpath_(Java)">CLASSPATH</a>. Dans le cas d'un fichier .jar, il faudra choisir si l'on
+laisse (oblige à) utiliser un driver dans le <i>CLASSPATH</i> (comme
+précédemment), ou si l'on produit un <i>fat jar</i> (ou <i>uber jar</i>) (par
+exemple <a href="https://dzone.com/articles/creating-executable-uber-jar%E2%80%99s">avec maven</a>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf3f4f3b" class="outline-4">
+<h4 id="orgf3f4f3b"><span class="section-number-4">1.1.2</span> Déploiement de la base</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+Deux cas de figure :
+</p>
+<ul class="org-ul">
+<li>le programme utilise une base déjà existante et accessible (par
+exemple <a href="http://elephantsql.com/">hébergée</a>. Le manuel de déploiement doit alors indiquer ses
+caractéristiques (URL, login, pass, ports utilisés).</li>
+<li>le programme utilise une base spécifiquement crée. Le manuel de
+déploiement indique quel SGBDR est nécessaire et fourni les script
+SQL éventuellement nécessaire pour initialiser la base de données
+(une autre possibilité est que l'initialisation soit réalisée par le
+programme lui-même).</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf37892e" class="outline-3">
+<h3 id="orgf37892e"><span class="section-number-3">1.2</span> Manuel d'utilisation</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org33c350b" class="outline-4">
+<h4 id="org33c350b"><span class="section-number-4">1.2.1</span> Lancement du programme</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+Le manuel indique comment lancer le programme (cf. supra options de
+déploiement) et éventuellement comment paramétrer l'exécution (fichier
+<i>.properties</i>, variables d'environnement, arguments) par exemple pour
+l'adresse de la base et les login / mot de passe pour y accéder).
+</p>
+</div>
+</div>
+<div id="outline-container-org484dac5" class="outline-4">
+<h4 id="org484dac5"><span class="section-number-4">1.2.2</span> Exécution</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+Le manuel indique comment interagir avec le programmes (écrans…).
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgaf86fed" class="outline-3">
+<h3 id="orgaf86fed"><span class="section-number-3">1.3</span> Manuel de développement</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org7e713b7" class="outline-4">
+<h4 id="org7e713b7"><span class="section-number-4">1.3.1</span> Base de données</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+Suivant que la conception de la base de données a fait ou non partie
+du développement, le manuel indique les différents modèles (logique,
+conceptuel, physique, implémentation) selon leur pertinence (si le
+modèle est complexe, on aura besoin des modèles les plus abstraits
+pour ne pas être embrouillé par les détails des modèles plus
+concrets).
+</p>
+
+<p>
+Les types de données et les contraintes sont justifiées, ainsi que les
+conventions de nommage (référence à la norme suivie).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge06dd78" class="outline-4">
+<h4 id="orge06dd78"><span class="section-number-4">1.3.2</span> Code</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+Les éventuels packages et les classes sont présentées, notamment avec
+un ou plusieurs diagrammes de classe (UML).
+</p>
+
+<p>
+Si possible, une documentation est générée avec <a href="http://www.oracle.com/technetwork/articles/java/index-137868.html">Javadoc</a>.
+</p>
+
+
+<p>
+Si possible, les tests (et comment les lancer) sont expliqués.
+</p>
+
+<p>
+La façon de générer le programme (par exemple un <i>.jar</i>,
+cf. déploiement) est expliquée.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8b2fcd6" class="outline-2">
+<h2 id="org8b2fcd6"><span class="section-number-2">2</span> Code</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org6cb4430" class="outline-3">
+<h3 id="org6cb4430"><span class="section-number-3">2.1</span> Architecture</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Comment décomposer son code en classes ? L'objectif de la décomposition
+est principalement d'isoler en composants plus ou moins autonomes ce
+qui peut l'être, afin de limiter l'étendue de ce qui sera concerné par
+une éventuelle lors de la maintenance du code.  Bien sûr, l'exercice
+est tellement limité qu'il n'y a pas vraiment d'enjeu et il faut faire
+preuve d'imagination pour mettre en œuvre ce qui ne sera nécessaire
+que pour un 'vrai' projet.
+</p>
+
+<p>
+On peut par exemple isoler :
+</p>
+<ul class="org-ul">
+<li>chacune des <i>entités</i> (membre d'un club de sport, article
+vestimentaire, client, ce qui est vendu,…) qui sont représentées
+dans la base (tables et lignes de ces tables) et manipulées par le
+programme (classes et objets instances de ces classes, dont les
+attributs correspondent aux colonnes).</li>
+<li>Pour chacune de ces entités, ce qui permet d'interagir avec la table
+correspondante (<a href="http://www.oracle.com/technetwork/java/dataaccessobject-138824.html">Data Access Object</a>).</li>
+<li>le code qui manipule les entités pour réaliser les opérations
+voulues.</li>
+<li>le code qui permet à l'utilisateur d'interagir avec le programme
+(<i>User Interface</i>).</li>
+</ul>
+
+
+<p>
+Ainsi, toute modification de l'<i>implémentation</i> de l'une de ces
+classes n'aura pas d'impact sur le reste du code.
+</p>
+</div>
+
+<div id="outline-container-orgdba264d" class="outline-4">
+<h4 id="orgdba264d"><span class="section-number-4">2.1.1</span> Classes 'entités'</h4>
+<div class="outline-text-4" id="text-2-1-1">
+</div>
+<ol class="org-ol">
+<li><a id="orgd391900"></a>Attributs<br />
+<div class="outline-text-5" id="text-2-1-1-1">
+<p>
+Ces classes contiennent les attributs qui correspondent aux colonnes
+de la table correspondante. Il faut choisir les types correspondants,
+en se posant la question de la possibilité ou non de valeurs
+manquantes (<code>NULLABLE</code>). Si une valeur peut être manquante (<code>NULL</code>),
+on la représentera par un objet, ou plus exactement une référence qui
+pourra être nulle. On aura un attribut <code>id</code> correspondant à la clé
+primaire.
+</p>
+</div>
+</li>
+
+<li><a id="orga238939"></a>Constructeurs<br />
+<div class="outline-text-5" id="text-2-1-1-2">
+<p>
+On voudra faire un constructeur 'classique' qui prendra autant
+d'argument que la classe a d'attributs d'instance et les initialisera
+tous. Ce constructeur permettra de créer des objets lus dans la table.
+Mais pour créer de nouveaux objets, par exemple à partir de valeurs
+saisie par l'utilisateur/trice, on ne disposera pas de la valeur de
+l'identifiant. En effet, cette valeur (dans le cas qui nous intéresse
+d'une clé primaire de type <code>SERIAL</code>) est générée par la base de
+données lors de l'insertion. On aura donc un autre constructeur qui
+construira des objets au laissant l'identifiant en valeur manquante,
+avant l'insertion dans la base. Cette insertion devra mettre à jour la
+valeur de l'identifiant.
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org3f6c69c" class="outline-3">
+<h3 id="org3f6c69c"><span class="section-number-3">2.2</span> Durées de vie et portées</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-org2c7ed2d" class="outline-4">
+<h4 id="org2c7ed2d"><span class="section-number-4">2.2.1</span> Appels à .close</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+Tous les objets qui doivent être 'fermés' par un appel à une méthode
+<code>.close()</code> doivent être initialisés dans un <a href="https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html">try with resources</a> (ce qui
+impose une version de java supérieure ou égale à <code>1.7</code>, cf §
+déploiement) ou défaut avoir un appel à <code>.close()</code> dans un bloc
+<code>finally</code>.  Ce la concerne aussi bien les objets manipulés à travers
+l'interface <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a> que les <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html">java.sql.Statement</a> ou (mieux
+!) <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html">java.sql.PreparedStatement</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org14a87d0" class="outline-4">
+<h4 id="org14a87d0"><span class="section-number-4">2.2.2</span> Statement vs PreparedStatement</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+Pour éviter les <a href="https://xkcd.com/327/">risques</a> d'<a href="https://www.explainxkcd.com/wiki/index.php/Little_Bobby_Tables">injection SQL</a>, on ne construira <b>JAMAIS</b> de
+requêtes SQL à partir de chaînes de caractères saisies par
+l'utilisateur/trice ! On utilisera <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html">java.sql.PreparedStatement</a> récupéré
+par un appel à <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html#prepareStatement(java.lang.String)">prepareStatement</a>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgf258ae4" class="outline-4">
+<h4 id="orgf258ae4"><span class="section-number-4">2.2.3</span> Objet <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a></h4>
+<div class="outline-text-4" id="text-2-2-3">
+<p>
+Se pose le problème de la durée de vie de la connexion, et comment
+elle est partagée ou non et avec quelle portée.
+</p>
+
+<p>
+Au minimum, une seule connexion doit être utilisée pour toutes les
+opérations SQL au sein d'une même <i>transaction</i>.
+</p>
+
+<p>
+Au maximum, on sera tenté de réutiliser le même objet connexion dans
+tout le programme. Cependant, c'est sans doute une mauvaise idée dans
+le cas d'un programme qui peut tourner un temps indéterminé en
+attendant des entrées : le serveur de base de données prendra lui-même
+l'initiative de fermer la connexion au bout d'un certain temps si
+celle-ci est inactive (<i>idle</i>) !
+</p>
+
+<p>
+Il est plus sûr de recréer une connexion à chaque fois que le
+programme traite une demande.
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-12-04 Wed 01:28</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

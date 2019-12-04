@@ -1,0 +1,235 @@
+#+TITLE: Checklist pour auto-évaluation du mini projet JDBC
+#+DATE: 
+#+AUTHOR: 
+#+OPTIONS: ^:nil toc:2
+#+LANGUAGE: fr
+#+LATEX_HEADER: \usepackage[AUTO]{babel}
+
+#+latex_header: \usepackage{libertine}
+#+latex_header: \usepackage{unicode-math}
+#+LATEX_HEADER: \setmainfont{XITS}
+#+LATEX_HEADER: \setmathfont{XITS Math}
+#+LATEX_HEADER: \setmathfont[range={\mathcal,\mathbfcal},StylisticSet=1]{XITS Math}
+
+#+LaTeX_HEADER: \addtolength{\oddsidemargin}{-.875in}
+#+LaTeX_HEADER:	\addtolength{\evensidemargin}{-.875in}
+#+LaTeX_HEADER:	\addtolength{\textwidth}{1.75in}
+#+LaTeX_HEADER:
+#+LaTeX_HEADER:	\addtolength{\topmargin}{-1.875in}
+#+LaTeX_HEADER:	\addtolength{\textheight}{2.75in}
+#+LaTeX_HEADER: \usepackage{comment}
+
+#+BEGIN_SRC elisp :exports none :results silent
+(org-babel-do-load-languages 'org-babel-load-languages '((ditaa . t))) 
+  (add-to-list 'org-latex-packages-alist '("" "listings"))
+  (add-to-list 'org-latex-packages-alist '("" "color"))
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted)
+
+(setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
+(setq org-latex-pdf-process
+      '("lualatex -shell-escape -interaction nonstopmode %f"
+        "lualatex -shell-escape -interaction nonstopmode %f")) 
+  (setq org-latex-minted-options '(("frame" "lines")
+                                   ("fontsize" "\\scriptsize")
+                                   ("xleftmargin" "\\parindent")
+                                   ("linenos" "")))
+;; lualatex preview
+(setq org-latex-pdf-process
+  '("lualatex -shell-escape -interaction nonstopmode %f"
+    "lualatex -shell-escape -interaction nonstopmode %f")) 
+
+(setq luamagick '(luamagick :programs ("lualatex" "convert")
+       :description "pdf > png"
+       :message "you need to install lualatex and imagemagick."
+       :use-xcolor t
+       :image-input-type "pdf"
+       :image-output-type "png"
+       :image-size-adjust (1.0 . 1.0)
+       :latex-compiler ("lualatex -interaction nonstopmode -output-directory %o %f")
+       :image-converter ("convert -density %D -trim -antialias %f -quality 100 %O")))
+
+(add-to-list 'org-preview-latex-process-alist luamagick)
+
+(setq org-preview-latex-default-process 'luamagick)
+(require 'org-crypt)
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance (quote ("crypt")))
+;; GPG key to use for encryption
+;; Either the Key ID or set to nil to use symmetric encryption.
+(setq org-crypt-key nil)
+
+#+END_SRC
+
+
+* Manuels
+** Manuel de déploiement
+Il faut rendre accessible sur/à partir du poste :
+- le programme
+- la/une base de données
+
+*** Déploiement du programme
+Comment l'application sera-t'elle utilisée ?
+- À partir d'Eclipse :: Dans ce cas, le 'déploiement' sera la recopie
+     du répertoire contenant le projet, et son 'import' sous Eclipse ☹.
+- En utilisant les classes compilées et éventuel fichier .properties :: Dans ce cas, on doit recopier
+     les fichiers '.class' et la structure de répertoires /
+     sous-répertoires correspondant aux /packages/.
+- En utilisant un fichier .jar :: il suffit de recopier le fichier
+     .jar.
+
+Dans les deux derniers cas, comme les fichiers /.class/ et /.jar/ ne
+sont pas versionnés sous git, il faut les mettre à disposition. Par
+exemple dans le cadre d'une [[https://blog.github.com/2013-07-02-release-your-software/][release github]]. Le manuel de déploiement
+doit alors indiquer quelles sont les versions (minimum) requises.
+
+Il faut aussi penser aux dépendances, par exemple la bibliothèque de
+pilote JDBC pour Postgresql. Dans le cas d'une distribution de sources
+(utilisation d'Eclipse), =maven= prendra en charge le téléchargement
+automatiquement. Dans le cas de l'utilisation des fichiers .class
+compilés, il faudra que le fichier .jar du pilote soit dans le
+[[https://en.wikipedia.org/wiki/Classpath_(Java)][CLASSPATH]]. Dans le cas d'un fichier .jar, il faudra choisir si l'on
+laisse (oblige à) utiliser un driver dans le /CLASSPATH/ (comme
+précédemment), ou si l'on produit un /fat jar/ (ou /uber jar/) (par
+exemple [[https://dzone.com/articles/creating-executable-uber-jar%25E2%2580%2599s][avec maven]]).
+
+*** Déploiement de la base
+Deux cas de figure :
+- le programme utilise une base déjà existante et accessible (par
+  exemple [[http://elephantsql.com/][hébergée]]. Le manuel de déploiement doit alors indiquer ses
+  caractéristiques (URL, login, pass, ports utilisés).
+- le programme utilise une base spécifiquement crée. Le manuel de
+  déploiement indique quel SGBDR est nécessaire et fourni les script
+  SQL éventuellement nécessaire pour initialiser la base de données
+  (une autre possibilité est que l'initialisation soit réalisée par le
+  programme lui-même).
+
+** Manuel d'utilisation
+*** Lancement du programme
+Le manuel indique comment lancer le programme (cf. supra options de
+déploiement) et éventuellement comment paramétrer l'exécution (fichier
+/.properties/, variables d'environnement, arguments) par exemple pour
+l'adresse de la base et les login / mot de passe pour y accéder).
+*** Exécution
+Le manuel indique comment interagir avec le programmes (écrans…).
+
+
+** Manuel de développement
+
+*** Base de données
+Suivant que la conception de la base de données a fait ou non partie
+du développement, le manuel indique les différents modèles (logique,
+conceptuel, physique, implémentation) selon leur pertinence (si le
+modèle est complexe, on aura besoin des modèles les plus abstraits
+pour ne pas être embrouillé par les détails des modèles plus
+concrets).
+
+Les types de données et les contraintes sont justifiées, ainsi que les
+conventions de nommage (référence à la norme suivie).
+
+*** Code
+Les éventuels packages et les classes sont présentées, notamment avec
+un ou plusieurs diagrammes de classe (UML).
+
+Si possible, une documentation est générée avec [[http://www.oracle.com/technetwork/articles/java/index-137868.html][Javadoc]].
+
+
+Si possible, les tests (et comment les lancer) sont expliqués.
+
+La façon de générer le programme (par exemple un /.jar/,
+cf. déploiement) est expliquée.
+
+* Code
+
+** Architecture
+
+Comment décomposer son code en classes ? L'objectif de la décomposition
+est principalement d'isoler en composants plus ou moins autonomes ce
+qui peut l'être, afin de limiter l'étendue de ce qui sera concerné par
+une éventuelle lors de la maintenance du code.  Bien sûr, l'exercice
+est tellement limité qu'il n'y a pas vraiment d'enjeu et il faut faire
+preuve d'imagination pour mettre en œuvre ce qui ne sera nécessaire
+que pour un 'vrai' projet.
+
+On peut par exemple isoler :
+- chacune des /entités/ (membre d'un club de sport, article
+  vestimentaire, client, ce qui est vendu,…) qui sont représentées
+  dans la base (tables et lignes de ces tables) et manipulées par le
+  programme (classes et objets instances de ces classes, dont les
+  attributs correspondent aux colonnes).
+- Pour chacune de ces entités, ce qui permet d'interagir avec la table
+  correspondante ([[http://www.oracle.com/technetwork/java/dataaccessobject-138824.html][Data Access Object]]).
+- le code qui manipule les entités pour réaliser les opérations
+  voulues.
+- le code qui permet à l'utilisateur d'interagir avec le programme
+  (/User Interface/).
+
+
+Ainsi, toute modification de l'/implémentation/ de l'une de ces
+classes n'aura pas d'impact sur le reste du code.
+
+*** Classes 'entités'
+
+**** Attributs
+Ces classes contiennent les attributs qui correspondent aux colonnes
+de la table correspondante. Il faut choisir les types correspondants,
+en se posant la question de la possibilité ou non de valeurs
+manquantes (=NULLABLE=). Si une valeur peut être manquante (=NULL=),
+on la représentera par un objet, ou plus exactement une référence qui
+pourra être nulle. On aura un attribut =id= correspondant à la clé
+primaire.
+
+**** Constructeurs
+On voudra faire un constructeur 'classique' qui prendra autant
+d'argument que la classe a d'attributs d'instance et les initialisera
+tous. Ce constructeur permettra de créer des objets lus dans la table.
+Mais pour créer de nouveaux objets, par exemple à partir de valeurs
+saisie par l'utilisateur/trice, on ne disposera pas de la valeur de
+l'identifiant. En effet, cette valeur (dans le cas qui nous intéresse
+d'une clé primaire de type =SERIAL=) est générée par la base de
+données lors de l'insertion. On aura donc un autre constructeur qui
+construira des objets au laissant l'identifiant en valeur manquante,
+avant l'insertion dans la base. Cette insertion devra mettre à jour la
+valeur de l'identifiant.
+
+
+** Durées de vie et portées
+
+*** Appels à .close
+
+Tous les objets qui doivent être 'fermés' par un appel à une méthode
+=.close()= doivent être initialisés dans un [[https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html][try with resources]] (ce qui
+impose une version de java supérieure ou égale à =1.7=, cf §
+déploiement) ou défaut avoir un appel à =.close()= dans un bloc
+=finally=.  Ce la concerne aussi bien les objets manipulés à travers
+l'interface [[https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html][java.sql.Connection]] que les [[https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html][java.sql.Statement]] ou (mieux
+!) [[https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html][java.sql.PreparedStatement]].
+
+*** Statement vs PreparedStatement
+
+Pour éviter les [[https://xkcd.com/327/][risques]] d'[[https://www.explainxkcd.com/wiki/index.php/Little_Bobby_Tables][injection SQL]], on ne construira *JAMAIS* de
+requêtes SQL à partir de chaînes de caractères saisies par
+l'utilisateur/trice ! On utilisera [[https://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html][java.sql.PreparedStatement]] récupéré
+par un appel à [[https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html#prepareStatement(java.lang.String)][prepareStatement]].
+
+
+*** Objet [[https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html][java.sql.Connection]]
+
+Se pose le problème de la durée de vie de la connexion, et comment
+elle est partagée ou non et avec quelle portée.
+
+Au minimum, une seule connexion doit être utilisée pour toutes les
+opérations SQL au sein d'une même /transaction/.
+
+Au maximum, on sera tenté de réutiliser le même objet connexion dans
+tout le programme. Cependant, c'est sans doute une mauvaise idée dans
+le cas d'un programme qui peut tourner un temps indéterminé en
+attendant des entrées : le serveur de base de données prendra lui-même
+l'initiative de fermer la connexion au bout d'un certain temps si
+celle-ci est inactive (/idle/) !
+
+Il est plus sûr de recréer une connexion à chaque fois que le
+programme traite une demande.
+
+
+
