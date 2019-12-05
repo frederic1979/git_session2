@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-12-04 Wed 01:29 -->
+<!-- 2019-12-05 Thu 16:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gestion de dépendances avec Maven</title>
@@ -247,19 +247,19 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org009d503">1. Maven pour la gestion de dépendances</a></li>
-<li><a href="#org492a592">2. En pratique</a>
+<li><a href="#org51df095">1. Maven pour la gestion de dépendances</a></li>
+<li><a href="#org91258da">2. En pratique</a>
 <ul>
-<li><a href="#orgaf8242a">2.1. Création du projet Maven</a></li>
-<li><a href="#orga1e1958">2.2. Ajout d'une dépendance</a></li>
+<li><a href="#orgc16f76d">2.1. Création du projet Maven</a></li>
+<li><a href="#org28fb04b">2.2. Ajout d'une dépendance</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org009d503" class="outline-2">
-<h2 id="org009d503"><span class="section-number-2">1</span> Maven pour la gestion de dépendances</h2>
+<div id="outline-container-org51df095" class="outline-2">
+<h2 id="org51df095"><span class="section-number-2">1</span> Maven pour la gestion de dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://fr.wikipedia.org/wiki/Apache_Maven">Maven</a> est un outils de construction (<i>build</i>) de projets java. Il
@@ -311,12 +311,12 @@ l'organisme.</dd>
 </div>
 
 
-<div id="outline-container-org492a592" class="outline-2">
-<h2 id="org492a592"><span class="section-number-2">2</span> En pratique</h2>
+<div id="outline-container-org91258da" class="outline-2">
+<h2 id="org91258da"><span class="section-number-2">2</span> En pratique</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgaf8242a" class="outline-3">
-<h3 id="orgaf8242a"><span class="section-number-3">2.1</span> Création du projet Maven</h3>
+<div id="outline-container-orgc16f76d" class="outline-3">
+<h3 id="orgc16f76d"><span class="section-number-3">2.1</span> Création du projet Maven</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Sous l'environnement de développement (e.g. Eclipse ou IntelliJ), lors
@@ -339,8 +339,8 @@ dépendances. Par défaut, l'<code>ArtifactId</code> est le nom du projet.
 </div>
 
 
-<div id="outline-container-orga1e1958" class="outline-3">
-<h3 id="orga1e1958"><span class="section-number-3">2.2</span> Ajout d'une dépendance</h3>
+<div id="outline-container-org28fb04b" class="outline-3">
+<h3 id="org28fb04b"><span class="section-number-3">2.2</span> Ajout d'une dépendance</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Dans le fichier <code>pom.xml</code>, ajouter un bloc <code class="src src-nxml">&lt;<span style="color: #000088; background-color: #DEDEDE;">dependencies</span>&gt; &lt;/<span style="color: #000088; background-color: #DEDEDE;">dependencies</span>&gt;</code>.
@@ -368,35 +368,6 @@ On peut ensuite écrire le code suivant :
 </p>
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #0000FF;">import</span> <span style="color: #D0372D;">org</span>.<span style="color: #D0372D;">apache</span>.<span style="color: #D0372D;">commons</span>.<span style="color: #D0372D;">csv</span>.<span style="color: #6434A3;">CSVFormat</span>;
-<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">org</span>.<span style="color: #D0372D;">apache</span>.<span style="color: #D0372D;">commons</span>.<span style="color: #D0372D;">csv</span>.<span style="color: #6434A3;">CSVPrinter</span>;
-
-<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">FileWriter</span>;
-<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">IOException</span>;
-<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">HashMap</span>;
-<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">Map</span>;
-
-<span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Main</span> {
-    <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">HEADERS</span> = {<span style="color: #008000;">"nom_commune"</span>, <span style="color: #008000;">"latitude"</span>, <span style="color: #008000;">"longitude"</span>};
-    <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">Map</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">double</span>[]&gt; <span style="color: #BA36A5;">nameToCoords</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">HashMap</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">double</span>[]&gt;();
-
-    <span style="color: #0000FF;">static</span> {
-        nameToCoords.put(<span style="color: #008000;">"Attignat"</span>, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[]{46.283333, 5.166667});
-        nameToCoords.put(<span style="color: #008000;">"Beaupont"</span>, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[]{46.4, 5.266667});
-        nameToCoords.put(<span style="color: #008000;">"B&#233;ny"</span>, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[]{46.333333, 5.283333});
-    }
-
-    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>) <span style="color: #0000FF;">throws</span> <span style="color: #6434A3;">IOException</span> {
-        <span style="color: #6434A3;">FileWriter</span> <span style="color: #BA36A5;">out</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">FileWriter</span>(<span style="color: #008000;">"communes_new.csv"</span>);
-        <span style="color: #0000FF;">try</span> (<span style="color: #6434A3;">CSVPrinter</span> <span style="color: #BA36A5;">printer</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">CSVPrinter</span>(out, <span style="color: #D0372D;">CSVFormat</span>.DEFAULT
-                .withHeader(HEADERS))) {
-            <span style="color: #0000FF;">for</span> (<span style="color: #D0372D;">Map</span>.<span style="color: #6434A3;">Entry</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">double</span>[]&gt; <span style="color: #006699;">city</span> : nameToCoords.entrySet()) {
-                <span style="color: #6434A3;">double</span>[] <span style="color: #BA36A5;">coords</span> = city.getValue();
-                printer.printRecord(city.getKey(), coords[0], coords[1]);
-            }
-        }
-    }
-}
-<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">org</span>.<span style="color: #D0372D;">apache</span>.<span style="color: #D0372D;">commons</span>.<span style="color: #D0372D;">csv</span>.<span style="color: #6434A3;">CSVFormat</span>;
 <span style="color: #0000FF;">import</span> <span style="color: #D0372D;">org</span>.<span style="color: #D0372D;">apache</span>.<span style="color: #D0372D;">commons</span>.<span style="color: #D0372D;">csv</span>.<span style="color: #6434A3;">CSVPrinter</span>;
 
 <span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">FileWriter</span>;
@@ -448,7 +419,7 @@ Le programme peut être compilé et exécuté, Maven gérant automatiquement la 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: bernard</p>
-<p class="date">Created: 2019-12-04 Wed 01:29</p>
+<p class="date">Created: 2019-12-05 Thu 16:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

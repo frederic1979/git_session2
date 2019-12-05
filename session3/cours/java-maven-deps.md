@@ -1,11 +1,11 @@
-- [Maven pour la gestion de dépendances](#org3bd2614)
-- [En pratique](#orga2501ff)
-  - [Création du projet Maven](#orga699cd8)
-  - [Ajout d'une dépendance](#org46b4f85)
+- [Maven pour la gestion de dépendances](#org88b7739)
+- [En pratique](#org1a2a876)
+  - [Création du projet Maven](#orga3aa49f)
+  - [Ajout d'une dépendance](#orgc3f068b)
 
 
 
-<a id="org3bd2614"></a>
+<a id="org88b7739"></a>
 
 # Maven pour la gestion de dépendances
 
@@ -41,12 +41,12 @@ Les informations caractérisant la dépendance sont :
 -   **version:** indique la version de la bibliothèque à utiliser.
 
 
-<a id="orga2501ff"></a>
+<a id="org1a2a876"></a>
 
 # En pratique
 
 
-<a id="orga699cd8"></a>
+<a id="orga3aa49f"></a>
 
 ## Création du projet Maven
 
@@ -57,7 +57,7 @@ Dans un premier temps, on ne choisira pas d'archetype. Le projet maven a alors u
 -   **Exercice:** Créer un projet maven appelé `TestMavenCsv` (Choisir `Enable Auto-Import` lorsque cela est proposé).
 
 
-<a id="org46b4f85"></a>
+<a id="orgc3f068b"></a>
 
 ## Ajout d'une dépendance
 
@@ -77,35 +77,6 @@ Ensuite, on va chercher les informations pour indiquer une dépendance envers un
 On peut ensuite écrire le code suivant :
 
 ```java
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-public class Main {
-    static String[] HEADERS = {"nom_commune", "latitude", "longitude"};
-    static Map<String, double[]> nameToCoords = new HashMap<String, double[]>();
-
-    static {
-        nameToCoords.put("Attignat", new double[]{46.283333, 5.166667});
-        nameToCoords.put("Beaupont", new double[]{46.4, 5.266667});
-        nameToCoords.put("Bény", new double[]{46.333333, 5.283333});
-    }
-
-    public static void main(String[] args) throws IOException {
-        FileWriter out = new FileWriter("communes_new.csv");
-        try (CSVPrinter printer = new CSVPrinter(out, CSVFormat.DEFAULT
-                .withHeader(HEADERS))) {
-            for (Map.Entry<String, double[]> city : nameToCoords.entrySet()) {
-                double[] coords = city.getValue();
-                printer.printRecord(city.getKey(), coords[0], coords[1]);
-            }
-        }
-    }
-}
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 

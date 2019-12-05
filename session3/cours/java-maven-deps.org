@@ -94,35 +94,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         FileWriter out = new FileWriter("communes_new.csv");
         try (CSVPrinter printer = new CSVPrinter(out, CSVFormat.DEFAULT
-                .withHeader(HEADERS))) {
-            for (Map.Entry<String, double[]> city : nameToCoords.entrySet()) {
-                double[] coords = city.getValue();
-                printer.printRecord(city.getKey(), coords[0], coords[1]);
-            }
-        }
-    }
-}
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-public class Main {
-    static String[] HEADERS = {"nom_commune", "latitude", "longitude"};
-    static Map<String, double[]> nameToCoords = new HashMap<String, double[]>();
-
-    static {
-        nameToCoords.put("Attignat", new double[]{46.283333, 5.166667});
-        nameToCoords.put("Beaupont", new double[]{46.4, 5.266667});
-        nameToCoords.put("Bény", new double[]{46.333333, 5.283333});
-    }
-
-    public static void main(String[] args) throws IOException {
-        FileWriter out = new FileWriter("communes_new.csv");
-        try (CSVPrinter printer = new CSVPrinter(out, CSVFormat.DEFAULT
                 .withDelimiter(';').withHeader(HEADERS))) {
             for (Map.Entry<String, double[]> city : nameToCoords.entrySet()) {
                 double[] coords = city.getValue();
