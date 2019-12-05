@@ -1,0 +1,105 @@
+#+TITLE: Crudités Star-Wars
+
+
+#+BEGIN_SRC elisp :exports none :results none
+(org-babel-do-load-languages 'org-babel-load-languages '((dot . t)(ditaa . t)(emacs-lisp . t)(gnuplot . t)(java . t)(plantuml . t)(python . t)(R . t)(shell . t))) 
+(setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+#+END_SRC
+* Contexte
+
+La base d'un système informatique de gestion de données est de permettre à minima les opérations suivantes :
+
+- création :: on doit pouvoir ajouter de nouvelles entités
+- lecture :: on doit pouvoir :
+  - lister les différentes instance d'un même type
+  - liste toutes les informations d'une instance en particulier
+- éditer :: on doit pouvoir modifier les informations d'une entité
+- supprimer :: on doit pouvoir supprimer une entité
+
+
+En anglais, ces opérations (**Create**, **Read**, **Update**, **Delete**) on donné l'acronyme **CRUD**. À terme, on verra comment implémenter un CRUD web avec les aspects client-serveur, ce qui servira de base avant d'implémenter en sus les fonctionnalités métier spécifiques à chaque application. Dans un premier temps, on va se concentrer sur la partie "Gestion de la persistance" du schéma ci-dessous :
+
+#+BEGIN_SRC plantuml :file crud.png
+title Architecture client-serveur
+
+box "Côté client" #LightBlue
+	actor User
+	participant "Navigateur web"
+end box
+box "Serveur Web" #LightGreen
+	participant "Gestion des requêtes"
+	participant "Logique métier"
+        participant "Gestion de la persistance"
+end box
+
+database "Base de données"
+
+User -> "Navigateur web"
+
+"Navigateur web" -> "Gestion des requêtes" : requête HTTP sur le réseau
+"Gestion des requêtes" -> "Logique métier"
+"Logique métier" -> "Gestion de la persistance"
+"Gestion de la persistance" -> "Base de données"
+
+"Navigateur web" <- "Gestion des requêtes"
+"Gestion des requêtes" <- "Logique métier"
+"Logique métier" <- "Gestion de la persistance"
+"Gestion de la persistance" <- "Base de données"
+
+#+END_SRC
+
+#+RESULTS:
+[[file:crud.png]]
+
+
+* Un CRUD Star Wars
+
+En réutilisant les données du brief [[https://simplonline.co/briefs/detail/xL4XMmevPA2pZH8gT][May the Database be with you]], on va implémenter un CRUD en Java. Les entités sont donc :
+- Character
+- Planet
+- Specie
+- Starship
+- Vehicule
+
+
+Pour chaque entités, vous créerez deux classes Java correspondantes. Par exemple :
+- Character :: qui contient les informations associées à un personnage.
+- CharacterDAO :: DAO pour /Data Acces Object/ qui permettra de gérer la persistance des objets de la classe src_java[:exports code]{Character} :
+
+
+#+BEGIN_SRC plantuml :file CharacterDAO.png
+class CharacterDAO {
+c : Connection
+create(Character c) : Character
+findAll() : List<Character>
+findOne(int id) : Character
+update(Character c) : Character
+delete(Character c)
+
+}
+#+END_SRC
+
+#+RESULTS:
+[[file:CharacterDAO.png]]
+
+* Spécifications
+
+Écrire un programme qui :
+1. Propose de choisir parmi les différents types d'entités
+2. Pour le type d'entités choisi :
+   1. Affiche toutes les entités de ce type contenues dans la base de
+      données
+   2. Propose de :
+      1. revenir au menu précédent
+      2. modifier une entité
+      3. supprimer une entité
+   Dans les deux dernier cas, le programme propose ensuite de saisir l'identifiant (ou le numéro dans la liste affichée en 1.), et dans le cas 2. il demande ensuite de saisir toutes les informations caractérisant l'entité (sauf l'identifiant, évidemment).   
+
+
+* Niveaux d'implémentation
+
+1. Implémenter les fonctionnalités pour la gestion CRUD d'un seul type d'entités
+2. Implémenter les DAO pour toutes les entités
+3. Implémenter les fonctionnalités CRUD pour plus d'entités
+
+Pour éviter la duplication de code, on peut essayer d'utiliser l'héritage.
