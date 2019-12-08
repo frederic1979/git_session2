@@ -81,14 +81,60 @@ Pour faire une API RESTful (qui respecte toutes les règles du standard) il faut
 
 On dit qu'une API REST expose des ressources. Les ressources sont à la fois les données et la logique de gestion de ces données.
 
-On peut reprendre l'exemple de l'API météo.
+On peut reprendre l'exemple de l'API météo. Notre API météo proposait les url suivantes :
 
-**TODO continuer ici**.
+- `http://192.168.1.197/last-measure`
+- `http://192.168.1.197/top-measure/temperature`
+- `http://192.168.1.197/top-measure/pressure`
+- `http://192.168.1.197/top-measure/humidity`
+- `http://192.168.1.197/measure/date?startDate=${startDateString}&endDate=${endDateString}`
 
-### Définir des chemins d'accès aux ressources standard
+C'était pratique et adapté dans le cadre de notre mini projet, mais ce n'est pas du tout standard.
 
-TODO
+Plusieurs problèmes existent dans cette API. Dans le cas de la météo, `last-measure` et `top-measure` sont juste des filtres particuliers sur une ressource **measure**. De plus, la dernière url retourne plusieurs **measures**, donc on devrait nommer cette ressource `measures`. Une meilleure proposition ci-dessous.
 
-### Les méthodes HTTP comme opérations
+### Définir des chemins d'accès standard aux ressources
 
-TODO
+Pour notre API météo, nous aurions dû faire de la manière suivante :
+
+- `http://192.168.1.197/measures?tob-by=date`
+- `http://192.168.1.197/measures?top-by=temperature`
+- `http://192.168.1.197/measures?top-by=pressure`
+- `http://192.168.1.197/measures?top-by=humidity`
+- `http://192.168.1.197/measures?startDate=${startDateString}&endDate=${endDateString}`
+
+Imaginons maintenant une API où les ressources sont liées entre elles. On pourrait par exemple avoir une API gérant des villes et des monuments.
+
+Il faut dans ce cas construire les url de cette façon :
+
+- Pour récupérer toutes les villes : `http://ip-du-serveur/villes`
+- Pour faire des actions sur la ville avec l'ID 1 : `http://ip-du-serveur/villes/1`
+- Pour récupérer tous les monuments de la ville avec l'ID 1 : `http://ip-du-serveur/villes/1/monuments`
+- Pour faire des actions sur le monuments avec l'ID 3 de la ville avec l'ID 1 : `http://ip-du-serveur/villes/1/monuments/3`
+
+Et ainsi de suite si les monuments ont eux aussi des liens ...
+
+Certain•e•s préfèrent parfois utiliser cette architecture pour récupérer des ressources liées : `http://ip-du-serveur/monuments?ville-id=1` afin d'avoir une architecture **flat**. Cela dépendra des choix de votre team. Ce qu'il faut c'est surtout **rester consistant dans vos choix !**
+
+### Utiliser les méthodes HTTP comme opérations
+
+De la même manière, il convient d'utiliser les méthodes HTTP pour des actions bien précises sur des ressources. Dans le cas du projet météo, nous n'utilisions que le **GET** et c'est normal car nous ne faisions que de la lecture de données.
+
+Nous aurions pu imaginer mettre l'API sur un serveur partagé, et utiliser les petits Raspberry Pi comme des stations de mesure pour plusieurs salles et utiliser l'API avec **POST** pour enregistrer des mesures sur le serveur partagé.
+
+Nous aurions pu aussi imaginer utiliser **PUT** pour modifier et **DELETE** pour supprimer une mesure si nécessaire.
+
+Il faut retenir que chaque méthode a un rôle bien précis et qu'il convient de le respecter. Il est interdit de faire une requête du style `http://ip-du-serveur/villes/1/modify` pour modifier des données avec un **GET** ! C'est le rôle de **PUT**
+
+Ce qu'il faut retenir c'est que l'on doit associer au CRUD, les méthodes HTTP :
+
+- Create <=> POST
+- Read <=> GET
+- Update <=> PUT
+- Delete <=> DELETE
+
+### Utiliser les codes d'erreurs
+
+Ne renvoyez par un code 200 si vous avez catché une exception par exemple, mais retournez un code d'erreur approprié (par exemple un code 400 si c'est à cause de données d'entrée invalides).
+
+Et si vous ne respectez pas ces consignes, vous allez vous reconnaître dans [cette chanson](https://youtu.be/nSKp2StlS6s).
