@@ -1,0 +1,1194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2019-12-08 Sun 23:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mapping objet-relationnel en Java : JPA et Hibernate</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Bernard Hugueney" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Mapping objet-relationnel en Java : JPA et Hibernate</h1>
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org173fc4a">1. Principe</a></li>
+<li><a href="#org7cfa2f6">2. JPA et Hibernate</a></li>
+<li><a href="#orgce54dde">3. Mise en œuvre</a>
+<ul>
+<li><a href="#orga008cf2">3.1. Dépendances</a></li>
+<li><a href="#org0eef453">3.2. Configuration XML</a></li>
+<li><a href="#org8b37aee">3.3. Annotations</a></li>
+</ul>
+</li>
+<li><a href="#orga110085">4. Utilisation</a>
+<ul>
+<li><a href="#org57dc80e">4.1. Construction d'un EntityManager</a></li>
+<li><a href="#orge4861a9">4.2. Utilisation d'EntityManager</a>
+<ul>
+<li><a href="#orgad496a2">4.2.1. Création</a></li>
+</ul>
+</li>
+<li><a href="#org164b81a">4.3. Lecture</a></li>
+<li><a href="#org3e0444e">4.4. Mise à jour</a></li>
+<li><a href="#org52d1a39">4.5. Suppression</a></li>
+</ul>
+</li>
+<li><a href="#org2467631">5. Pratique</a></li>
+<li><a href="#org7188b23">6. Associations</a>
+<ul>
+<li><a href="#org5e387b0">6.1. 1-N, N-1</a></li>
+<li><a href="#orgfb77777">6.2. N-N</a></li>
+</ul>
+</li>
+<li><a href="#orgb74b037">7. Data Access Objects</a></li>
+<li><a href="#org32a2a7c">8. Java Persistence Query Language</a>
+<ul>
+<li><a href="#org6541a79">8.1. Paramétrage</a></li>
+<li><a href="#org231bfb0">8.2. Typage</a></li>
+<li><a href="#orge0f9068">8.3. Définition statique</a></li>
+</ul>
+</li>
+<li><a href="#orgc436bf8">9. Mise en œuvre</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org173fc4a" class="outline-2">
+<h2 id="org173fc4a"><span class="section-number-2">1</span> Principe</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Lorsque l'on implémente un CRUD à partir de JDBC, l'implémentation des
+DAO est extrêmement répétitive car toutes les entités doivent
+permettre les même fonctionnalités de base :
+</p>
+
+<ul class="org-ul">
+<li>création de nouvelle entités destinées à être enregistrée dans la
+table associée à la classe</li>
+<li>construction d'objets partir des lignes de la table associée à la
+classe</li>
+<li>mise à jour des lignes de la table pour prendre en compte les
+modifications des objets lorsque les attributs de ceux-ci ont été
+modifiés</li>
+<li>suppression des lignes correspondant à des objets que l'on veut
+supprimer.</li>
+</ul>
+
+
+<p>
+Les principales différences entre deux classes entités, sont :
+</p>
+<ul class="org-ul">
+<li>le nom de la table associée à la classe</li>
+<li>les noms et types des colonnes associées à chaque attributs</li>
+</ul>
+
+
+<p>
+Dans le cas un peu plus complexe de l'implémentation de relations
+entre entités, on doit aussi prendre en compte le type de relation
+(1-1, 1-plusieurs, plusieurs-1, plusieurs-plusieurs, et si elles sont
+unidirectionnelles ou bidirectionnelles) et identifier la table
+d'association éventuelle ainsi que décider si le chargement des
+entités associées doit être <a href="https://fr.wikipedia.org/wiki/%C3%89valuation_paresseuse">paresseux</a> (<a href="https://en.wikipedia.org/wiki/Lazy_evaluation">lazy</a>) ou non.
+</p>
+
+<p>
+Si l'on pouvait <i>déclarer</i> ces <i>paramètres</i> l'implémentation de la
+correspondance entre les classes entités et les tables pourrait être
+automatisée. Il sera ainsi possible de manipuler les données de la
+base en désignant les classes et attributs au lieu des tables et
+colonnes correspondantes grâce à un <i>Domain Specific Language</i>
+adapté : <a href="https://www.thoughts-on-java.org/jpql/">Java Persistence Query Language</a> (<i>JPQL</i>).
+</p>
+
+<p>
+Le fait d'utiliser JPQL plutôt que SQL nous permettra aussi, dans un
+deuxième temps, de factoriser une partie des implémentations de nos <i>DAO</i>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org7cfa2f6" class="outline-2">
+<h2 id="org7cfa2f6"><span class="section-number-2">2</span> JPA et Hibernate</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+La correspondance entre les tables des Systèmes de Bases de Données
+Relationnels et les classes de la Programmation Orientée Objet permet
+de définir un <i>Mapping Objet-Relationnel</i>. En Java, <a href="https://fr.wikipedia.org/wiki/Java_Persistence_API">JPA</a> (Java
+Persistence API) est la spécification standard et <a href="https://fr.wikipedia.org/wiki/Hibernate">Hibernate</a> en est
+l'implémentation la plus populaire (même si <a href="https://www.eclipse.org/eclipselink/">EclipseLink</a> est
+l'implémentation de référence). On a le même rapport entre
+spécification et implémentation qu'entre des <i>interfaces</i> et les
+classes implémentant ces interface (ces classes peuvent aussi
+implémenter plus que ce qui est spécifié par les interfaces).
+</p>
+
+<p>
+Afin de ne pas dépendre d'une implémentation spécifique, on pourra
+vouloir se restreindre à n'utiliser que ce qui est spécifié par <i>JPA</i>
+même si l'on utilise <i>Hibernate</i>.
+</p>
+
+
+<p>
+<i>JPA</i> constitue <b>encore</b> une couche d'abstraction. En tant que telle,
+elle ne sera pas vraiment utile pour de petits projets n'ayant pas
+besoin d'évoluer. Le couplage avec le typage statique de Java procède
+des mêmes avantages et inconvénients.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgce54dde" class="outline-2">
+<h2 id="orgce54dde"><span class="section-number-2">3</span> Mise en œuvre</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orga008cf2" class="outline-3">
+<h3 id="orga008cf2"><span class="section-number-3">3.1</span> Dépendances</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+On peut utiliser <i>JPA</i> et <i>Hibernate</i> dans le cadre de <i>frameworks</i>
+(e.g. <a href="https://spring.io/guides/gs/accessing-data-jpa/">Spring</a> boot, voire <a href="https://www.jhipster.tech/creating-an-entity/">JHipster</a>), mais dans un premier temps, on
+utilisera seulement/directement <i>JPA</i> et <i>Hibernate</i> dans un projet
+<i>Maven</i>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-nxml">&lt;<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;org.postgresql&lt;/<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;postgresql&lt;/<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;42.2.8&lt;/<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;
+&lt;/<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+
+&lt;<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;org.eclipse.persistence&lt;/<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;javax.persistence&lt;/<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;2.2.1&lt;/<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;
+&lt;/<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+&lt;<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;org.hibernate&lt;/<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;hibernate-core&lt;/<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;5.4.9.Final&lt;/<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;
+&lt;/<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0eef453" class="outline-3">
+<h3 id="org0eef453"><span class="section-number-3">3.2</span> Configuration XML</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Dans la structure standard d'un projet <i>Maven</i>, on ajoutera un
+répertoire <code>META-INF</code> dans le répertoire <code>src/main/java</code> et dans ce
+répertoire un fichier <code>persistence.xml</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-XML">&lt;persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+  version="2.1"&gt;
+&lt;persistence-unit name="demo-jpa-1" transaction-type="RESOURCE_LOCAL"&gt;
+    &lt;provider&gt;org.hibernate.jpa.HibernatePersistenceProvider&lt;/provider&gt;
+		&lt;class&gt;co.simplon.patrimoine.model.City&lt;/class&gt;
+		&lt;class&gt;co.simplon.patrimoine.model.Monument&lt;/class&gt;
+    &lt;properties&gt;
+        &lt;property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /&gt;
+ 
+        &lt;property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/postgres" /&gt; &lt;!-- !!! --&gt;
+        &lt;property name="javax.persistence.jdbc.user" value="****" /&gt; &lt;!-- !!! --&gt; 
+        &lt;property name="javax.persistence.jdbc.password" value="****" /&gt; &lt;!-- !!! --&gt;
+        
+        &lt;property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/&gt; &lt;!-- DB Dialect --&gt;
+        &lt;property name="hibernate.hbm2ddl.auto" value="update" /&gt; &lt;!-- create / create-drop / update --&gt;    
+        &lt;property name="hibernate.show_sql" value="true" /&gt; &lt;!-- Show SQL in console --&gt;
+        &lt;property name="hibernate.format_sql" value="true" /&gt; &lt;!-- Show SQL formatted --&gt;
+    &lt;/properties&gt;
+
+&lt;/persistence-unit&gt;
+&lt;/persistence&gt;
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Que penser des propriétés <code>javax.persistence.jdbc.url</code>
+et surtout <code>javax.persistence.jdbc.user</code> voire
+<code>javax.persistence.jdbc.password</code> ? Que proposez-vous ?</dd>
+</dl>
+
+<p>
+Les autres propriétés de configuration de JPA pourraient elles aussi
+être exprimée en XML, <a href="https://dzone.com/articles/persisting-entity-classes">dans un fichier orm.xml</a>. Mais comme elles sont
+liées aux classes entités, on préférera les exprimer sous la forme
+d'<i>annotations</i>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8b37aee" class="outline-3">
+<h3 id="org8b37aee"><span class="section-number-3">3.3</span> Annotations</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Dans les classes <code>co.simplon.patrimoine.model.City</code> et
+<code>co.simplon.patrimoine.model.Monument</code>, on utilisera les annotations
+suivantes :
+</p>
+
+<ul class="org-ul">
+<li>sur la classe :
+<ul class="org-ul">
+<li><a href="https://docs.oracle.com/javaee/6/api/javax/persistence/Entity.html">javax.persistence.Entity</a></li>
+<li><a href="https://docs.oracle.com/javaee/7/api/javax/persistence/Table.html">javax.persistence.Table</a></li>
+</ul></li>
+<li>sur les attributs :
+<ul class="org-ul">
+<li><a href="https://docs.oracle.com/javaee/7/api/javax/persistence/Id.html">javax.persistence.Id</a> pour l'attribut correspondant à la clé
+primaire</li>
+<li><a href="https://docs.oracle.com/javaee/7/api/index.html?javax/persistence/GeneratedValue.html">javax.persistence.GeneratedValue</a> toujours pour la clé
+primaire. Avec une valeur de <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/GeneratedValue.html#strategy--">strategy</a> à <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/GenerationType.html#SEQUENCE">GenerationType.SEQUENCE</a>,
+dans le cas d'une clé primaire de type <code>SERIAL</code> sous
+postgresql, <a href="https://www.thoughts-on-java.org/hibernate-postgresql-5-things-need-know/">notamment pour des raisons de performance</a>.</li>
+<li><a href="https://docs.oracle.com/javaee/7/api/javax/persistence/Column.html">javax.persistence.Column</a> pour chacun des attributs.</li>
+</ul></li>
+</ul>
+
+
+<p>
+Sur les classes suivantes :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">City</span> {
+      <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>;
+      <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">name</span>;
+      <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">Double</span> <span style="color: #BA36A5;">latitude</span>;
+      <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">Double</span> <span style="color: #BA36A5;">longitude</span>;
+
+      <span style="color: #0000FF;">public</span> <span style="color: #006699;">City</span>() {
+      }
+      <span style="color: #0000FF;">public</span> <span style="color: #006699;">City</span>(<span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">name</span>, <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">latitude</span>, <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">longitude</span>) {
+          <span style="color: #0000FF;">this</span>(<span style="color: #D0372D;">null</span>, name, latitude, longitude);
+      }
+      <span style="color: #0000FF;">public</span> <span style="color: #006699;">City</span>(<span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>, <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">name</span>, <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">latitude</span>, <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">longitude</span>) {
+          <span style="color: #0000FF;">this</span>.id= id;
+          <span style="color: #0000FF;">this</span>.name= name;
+          <span style="color: #0000FF;">this</span>.latitude= latitude;
+          <span style="color: #0000FF;">this</span>.longitude= longitude;
+      }
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">Long</span> <span style="color: #006699;">getId</span>() {
+          <span style="color: #0000FF;">return</span> id;
+      }
+
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">setId</span>(<span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>) {
+          <span style="color: #0000FF;">this</span>.id = id;
+      }
+
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">getName</span>() {
+          <span style="color: #0000FF;">return</span> name;
+      }
+
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">setName</span>(<span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">nom</span>) {
+          <span style="color: #0000FF;">this</span>.name = nom;
+      }
+
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">Double</span> <span style="color: #006699;">getLongitude</span>() {
+          <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">this</span>.longitude;
+      }
+
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">setLongitude</span>(<span style="color: #6434A3;">Double</span> <span style="color: #BA36A5;">longitude</span>) {
+          <span style="color: #0000FF;">this</span>.longitude = longitude;
+      }
+
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">Double</span> <span style="color: #006699;">getLatitude</span>() {
+          <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">this</span>.latitude;
+      }
+
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">setLatitude</span>(<span style="color: #6434A3;">Double</span> <span style="color: #BA36A5;">latitude</span>) {
+          <span style="color: #0000FF;">this</span>.latitude = latitude;
+      }
+
+      <span style="color: #D0372D;">@Override</span>
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">toString</span>() {
+          <span style="color: #0000FF;">return</span> <span style="color: #008000;">"City [id="</span> + id + <span style="color: #008000;">", name="</span> + name + <span style="color: #008000;">", latitude="</span> + latitude
+              + <span style="color: #008000;">", longitude="</span> + longitude + <span style="color: #008000;">"]"</span>;
+      }
+  }
+
+</pre>
+</div>
+<p>
+Cette classe doit être liée à une table nommée <code>CITIES</code> avec des
+colonnes : 
+</p>
+<dl class="org-dl">
+<dt>ID</dt><dd>clé primaire de type <code>SERIAL</code></dd>
+<dt>NAME</dt><dd></dd>
+
+<dt>LATITUDE</dt><dd></dd>
+
+<dt>LONGITUDE</dt><dd></dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Indiquer que la valeur d'une colonne ne doit pas
+être <code>NULL</code> et qu'une chaîne de caractères doit avoir une
+taille limitée à 255 caractères ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga110085" class="outline-2">
+<h2 id="orga110085"><span class="section-number-2">4</span> Utilisation</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org57dc80e" class="outline-3">
+<h3 id="org57dc80e"><span class="section-number-3">4.1</span> Construction d'un EntityManager</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Au lieu d'utiliser directement des objets de type <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a>,
+on interagit désormais avec la base de données à travers des objets de
+type <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html">javax.persistence.EntityManager</a>. Pour construire un tel objet en
+prenant en compte les propriétés définies dans le fichier
+<code>persistence.xml</code>, on utilise une
+<a href="https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManagerFactory.html">javax.persistence.EntityManagerFactory</a>. Lorsque l'on récupère cet
+objet <i>factory</i>, on indique le nom de la <code>persistence-unit</code> définie
+dans le fichier <code>persistence.xml</code> ainsi qu'une éventuelle table
+d'association qui permet de redéfinir certaines valeurs à l'exécution,
+par exemple les informations confidentielles :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">persistenceUnitName</span>= <span style="color: #008000;">"demo-jpa-1"</span>; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">defined in persistence.xml</span>
+<span style="color: #6434A3;">Map</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">String</span>&gt; <span style="color: #BA36A5;">env</span> = System.getenv();
+<span style="color: #6434A3;">Map</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Object</span>&gt; <span style="color: #BA36A5;">configOverrides</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">HashMap</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Object</span>&gt;();
+<span style="color: #0000FF;">for</span> (<span style="color: #6434A3;">String</span> <span style="color: #006699;">envName</span> : env.keySet()) {
+  <span style="color: #0000FF;">if</span> (envName.contains(<span style="color: #008000;">"DB_USER"</span>)) {
+    configOverrides.put(<span style="color: #008000;">"javax.persistence.jdbc.user"</span>, env.get(envName));
+  }
+  <span style="color: #0000FF;">if</span> (envName.contains(<span style="color: #008000;">"DB_PASS"</span>)) {
+    configOverrides.put(<span style="color: #008000;">"javax.persistence.jdbc.password"</span>, env.get(envName));
+  }
+  <span style="color: #0000FF;">if</span> (envName.contains(<span style="color: #008000;">"DB_URL"</span>)) {
+    configOverrides.put(<span style="color: #008000;">"javax.persistence.jdbc.url"</span>, env.get(envName));    
+  }
+}
+<span style="color: #6434A3;">EntityManagerFactory</span> <span style="color: #BA36A5;">entityManagerFactory</span> = Persistence.createEntityManagerFactory(persistenceUnitName
+                                            ,configOverrides);
+</pre>
+</div>
+
+<p>
+(Si besoin, <a href="https://stackoverflow.com/a/13854580">ajuster la configuration d'Eclipse pour qu'il reconnaisse
+le contenu du fichier persistence.xml</a>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge4861a9" class="outline-3">
+<h3 id="orge4861a9"><span class="section-number-3">4.2</span> Utilisation d'EntityManager</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+On peut utiliser l'objet de type <code>EntityManager</code> pour insérer un
+nouvel objet dans la table avec un appel à la méthode <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#persist-java.lang.Object-">persist</a>.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>vérifier la valeur de l'attribut <code>id</code> avant et après
+l'appel à <code>persist</code>.</dd>
+</dl>
+</div>
+<div id="outline-container-orgad496a2" class="outline-4">
+<h4 id="orgad496a2"><span class="section-number-4">4.2.1</span> Création</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">City</span> <span style="color: #006699;">createCity</span>() {
+      <span style="color: #6434A3;">EntityManager</span> <span style="color: #BA36A5;">em</span>= factory.createEntityManager();
+      <span style="color: #6434A3;">City</span> <span style="color: #BA36A5;">city</span>= <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">City</span>(<span style="color: #008000;">"Atlantis"</span>, 0, 0.5);
+      city= create(em, city);
+      em.close();
+      <span style="color: #0000FF;">return</span> city;
+  }
+  <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">City</span> <span style="color: #006699;">create</span>(<span style="color: #6434A3;">EntityManager</span> <span style="color: #BA36A5;">em</span>, <span style="color: #6434A3;">City</span> <span style="color: #BA36A5;">city</span>) {
+      em.getTransaction().begin();
+      em.persist(city);
+      em.getTransaction().commit();
+      <span style="color: #0000FF;">return</span> city;
+  }
+</pre>
+</div>
+<p>
+Une fois l'instance de la classe entité passée en argument à
+<code>persist</code>, celle-ci devient gérée (<i>managed</i>) par l'<code>EntityManager</code>.
+Ensuite, toutes modifications des attributs de l'objet effectuée avant
+l'appel à <code>commit</code> de l'<code>EntityManager</code> sera automatiquement répercutée :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">City</span> <span style="color: #006699;">createCityAndUpdate</span>() {
+          <span style="color: #6434A3;">EntityManager</span> <span style="color: #BA36A5;">em</span>= factory.createEntityManager();
+          <span style="color: #6434A3;">City</span> <span style="color: #BA36A5;">city</span>= <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">City</span>(<span style="color: #008000;">"Paris"</span>, 0, 0.5);
+          em.getTransaction().begin();
+          em.persist(city);
+          city.setLatitude(1000.);
+          em.getTransaction().commit();<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">MAGIC HAPPENS HERE !</span>
+          em.close();
+          <span style="color: #0000FF;">return</span> city;
+  }
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Observer le résultat de la gestion automatique dans la
+base de donnée.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org164b81a" class="outline-3">
+<h3 id="org164b81a"><span class="section-number-3">4.3</span> Lecture</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+On peut lire directement une entité à partir de l'<code>EntityManager</code> à
+partir de la valeur de la clé primaire :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">City</span> <span style="color: #006699;">readCity</span>() {
+      <span style="color: #6434A3;">EntityManager</span> <span style="color: #BA36A5;">em</span>= factory.createEntityManager();
+      <span style="color: #6434A3;">City</span> <span style="color: #BA36A5;">city</span>= readCity(em, 4L);
+      em.close();
+      <span style="color: #0000FF;">return</span> city;
+  }
+  <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">City</span> <span style="color: #006699;">readCity</span>(<span style="color: #6434A3;">EntityManager</span> <span style="color: #BA36A5;">em</span>, <span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>) {
+      <span style="color: #0000FF;">return</span> em.find(City.<span style="color: #0000FF;">class</span>, id);
+  }
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Que se passe-t-il si l'on change un attribut de l'objet
+lu ? Et si l'on effectue une transaction ensuite ?</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org3e0444e" class="outline-3">
+<h3 id="org3e0444e"><span class="section-number-3">4.4</span> Mise à jour</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+Lorsqu'on s'attend à ce qu'un objet soit déjà présent dans la base
+(l'attribut correspondant à la clé primaire doit donc avoir une
+valeur), et que l'on veut, le cas échéant récupérer une référence sur
+un objet géré par la base sans confier la gestion de l'objet passé en
+argument à l'<code>EntityManager</code>, on utilise <code>merge</code> plutôt que <code>persist</code>.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">City</span> <span style="color: #006699;">updateCity</span>() {
+      <span style="color: #0000FF;">return</span> update(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">City</span>(4L,<span style="color: #008000;">"PaRiS"</span>, -1., -2.));
+  }
+  <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">City</span> <span style="color: #006699;">update</span>(<span style="color: #6434A3;">City</span> <span style="color: #BA36A5;">city</span>) {
+      <span style="color: #6434A3;">EntityManager</span> <span style="color: #BA36A5;">em</span>= factory.createEntityManager();
+      em.getTransaction().begin();
+      city = em.merge(city);
+      em.getTransaction().commit();
+      <span style="color: #0000FF;">return</span> city;
+  }
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Constater si l'instance retournée par <code>merge</code> est gérée
+(<i>managed</i>).</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org52d1a39" class="outline-3">
+<h3 id="org52d1a39"><span class="section-number-3">4.5</span> Suppression</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+On peut vouloir supprimer un objet selon deux cas de figures :
+</p>
+<ul class="org-ul">
+<li>à partir de la valeur de la clé primaire</li>
+<li>à partir d'une instance de la classe entité</li>
+
+<li id="Exercice">Implémenter les deux cas de figure à l'aide de la
+méthode <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#remove-java.lang.Object-">remove</a> de l'<code>EntityManager</code>. Dans le deuxième
+cas de figure, prendre en compte que l'instance passé en
+argument doit être <i>gérée</i> par l'<code>EntityManager</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org2467631" class="outline-2">
+<h2 id="org2467631"><span class="section-number-2">5</span> Pratique</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Implémenter les mêmes fonctionnalités pour une classe <code>Monument</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">Monument</span> {
+      <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>;
+      <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">name</span>;
+
+      <span style="color: #8D8D84;">/* </span><span style="color: #8D8D84; font-style: italic;">TODO</span>
+<span style="color: #8D8D84; font-style: italic;">          private City city;</span>
+<span style="color: #8D8D84; font-style: italic;">      */</span>
+      <span style="color: #0000FF;">public</span> <span style="color: #006699;">Monument</span>(<span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">name</span>) {
+          <span style="color: #0000FF;">super</span>();
+          <span style="color: #0000FF;">this</span>.name = name;
+      }
+      <span style="color: #0000FF;">public</span> <span style="color: #006699;">Monument</span>() {
+      }
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">Long</span> <span style="color: #006699;">getId</span>() {
+          <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">this</span>.id;
+      }
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">setId</span>(<span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>) {
+          <span style="color: #0000FF;">this</span>.id = id;
+      }
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">getName</span>() {
+          <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">this</span>.name;
+      }
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">setName</span>(<span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">name</span>) {
+          <span style="color: #0000FF;">this</span>.name = name;
+      }
+      <span style="color: #8D8D84;">/*</span>
+<span style="color: #8D8D84; font-style: italic;">      public City getCity() {</span>
+<span style="color: #8D8D84; font-style: italic;">          return city;</span>
+<span style="color: #8D8D84; font-style: italic;">      }</span>
+<span style="color: #8D8D84; font-style: italic;">    </span>
+<span style="color: #8D8D84; font-style: italic;">      public void setCity(City city) {</span>
+<span style="color: #8D8D84; font-style: italic;">          this.city = city;</span>
+<span style="color: #8D8D84; font-style: italic;">      }</span>
+<span style="color: #8D8D84; font-style: italic;">      */</span>
+      <span style="color: #D0372D;">@Override</span>
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">toString</span>() {
+          <span style="color: #0000FF;">return</span> <span style="color: #008000;">"Monument [id="</span> + id + <span style="color: #008000;">", name="</span> + name
+              + <span style="color: #008000;">", city="</span> <span style="color: #8D8D84;">/*</span><span style="color: #8D8D84; font-style: italic;">+ city */</span>+ <span style="color: #008000;">"]"</span>;
+      }
+  }
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7188b23" class="outline-2">
+<h2 id="org7188b23"><span class="section-number-2">6</span> Associations</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org5e387b0" class="outline-3">
+<h3 id="org5e387b0"><span class="section-number-3">6.1</span> 1-N, N-1</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+On va vouloir modéliser une association entre :
+</p>
+<ul class="org-ul">
+<li>un monument et une ville</li>
+<li>une ville et des monuments</li>
+</ul>
+
+<p>
+Au niveau des entités, on peut ajouter des attributs (et accesseurs
+qui vont avec) :
+</p>
+<ul class="org-ul">
+<li><p>
+dans la classe <code>Monument</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">City</span> <span style="color: #BA36A5;">city</span>;
+</pre>
+</div></li>
+<li><p>
+dans la classe <code>City</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">List</span>&lt;<span style="color: #6434A3;">Monument</span>&gt; <span style="color: #BA36A5;">monuments</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">ArrayList</span>&lt;<span style="color: #6434A3;">Monument</span>&gt;();
+</pre>
+</div></li>
+</ul>
+
+<p>
+Remarque : On peut <a href="https://www.thoughts-on-java.org/association-mappings-bag-list-set/">utiliser d'autres types de Collection que List</a>.
+</p>
+
+<p>
+Au niveau de la base de données, il suffirait d'avoir une colonne
+<code>city</code> (ou <code>fk_city</code> suivant la convention de nommage) comme clé
+étrangère.
+</p>
+
+<p>
+On peut indiquer cela avec les annotations suivantes :
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #D0372D;">@ManyToOne</span>(fetch = <span style="color: #D0372D;">FetchType</span>.LAZY)
+<span style="color: #D0372D;">@JoinColumn</span>(name = <span style="color: #008000;">"city"</span>)
+<span style="color: #0000FF;">private</span> <span style="color: #6434A3;">City</span> <span style="color: #BA36A5;">city</span>;
+</pre>
+</div>
+
+<p>
+et
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #D0372D;">@OneToMany</span>(mappedBy = <span style="color: #008000;">"city"</span>)
+<span style="color: #0000FF;">private</span> <span style="color: #6434A3;">List</span>&lt;<span style="color: #6434A3;">Monument</span>&gt; <span style="color: #BA36A5;">monuments</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">ArrayList</span>&lt;<span style="color: #6434A3;">Monument</span>&gt;();
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercices</dt><dd><a href="https://www.thoughts-on-java.org/entity-mappings-introduction-jpa-fetchtypes/">Quel est l'effet</a> de <code>fetch = FetchType.Lazy</code> ?</dd>
+</dl>
+
+<p>
+Quel seraient les effets du codes suivant ?
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #D0372D;">@OneToMany</span>(mappedBy = <span style="color: #008000;">"city"</span>, cascade = <span style="color: #D0372D;">CascadeType</span>.ALL, orphanRemoval = <span style="color: #D0372D;">true</span>, fetch = <span style="color: #D0372D;">FetchType</span>.LAZY)
+<span style="color: #0000FF;">private</span> <span style="color: #6434A3;">Set</span>&lt;<span style="color: #6434A3;">Monument</span>&gt; <span style="color: #BA36A5;">monuments</span>;
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Modifier la méthode <code>createMonument</code> du programme principal pour créer un monument qui soit rattaché à une ville.</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-orgfb77777" class="outline-3">
+<h3 id="orgfb77777"><span class="section-number-3">6.2</span> N-N</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+On va ajouter une classe <code>User</code> qui permettra de modéliser des
+utilisateurs de notre application. Chaque utilisateur peut avoir
+visité plusieurs monuments et chaque monument peut avoir été visité
+par plusieurs utilisateurs.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java">
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">HashSet</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">Set</span>;
+
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">javax</span>.<span style="color: #D0372D;">persistence</span>.<span style="color: #6434A3;">Column</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">javax</span>.<span style="color: #D0372D;">persistence</span>.<span style="color: #6434A3;">Entity</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">javax</span>.<span style="color: #D0372D;">persistence</span>.<span style="color: #6434A3;">GeneratedValue</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">javax</span>.<span style="color: #D0372D;">persistence</span>.<span style="color: #6434A3;">GenerationType</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">javax</span>.<span style="color: #D0372D;">persistence</span>.<span style="color: #6434A3;">Id</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">javax</span>.<span style="color: #D0372D;">persistence</span>.<span style="color: #6434A3;">JoinTable</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">javax</span>.<span style="color: #D0372D;">persistence</span>.<span style="color: #6434A3;">JoinColumn</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">javax</span>.<span style="color: #D0372D;">persistence</span>.<span style="color: #6434A3;">ManyToMany</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">javax</span>.<span style="color: #D0372D;">persistence</span>.<span style="color: #6434A3;">Table</span>;
+
+<span style="color: #D0372D;">@Entity</span>
+<span style="color: #D0372D;">@Table</span>(name = <span style="color: #008000;">"USERS"</span>)
+<span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">User</span> {
+
+        <span style="color: #D0372D;">@Id</span>
+        <span style="color: #D0372D;">@GeneratedValue</span>(strategy = <span style="color: #D0372D;">GenerationType</span>.IDENTITY)
+        <span style="color: #D0372D;">@Column</span>(name = <span style="color: #008000;">"ID"</span>)
+        <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>;
+
+        <span style="color: #D0372D;">@Column</span>(name = <span style="color: #008000;">"NAME"</span>, nullable = <span style="color: #D0372D;">false</span>, length = 100)
+        <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">name</span>;
+        
+        <span style="color: #D0372D;">@ManyToMany</span>
+        <span style="color: #D0372D;">@JoinTable</span>(name= <span style="color: #008000;">"USER_MONUMENT"</span>,
+                   joinColumns = {<span style="color: #D0372D;">@JoinColumn</span>(name = <span style="color: #008000;">"FK_USER"</span>, referencedColumnName= <span style="color: #008000;">"ID"</span> ) },
+                   inverseJoinColumns = { <span style="color: #D0372D;">@JoinColumn</span>(name = <span style="color: #008000;">"FK_MONUMENT"</span>, referencedColumnName= <span style="color: #008000;">"ID"</span>) })
+        <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">Set</span>&lt;<span style="color: #6434A3;">Monument</span>&gt; <span style="color: #BA36A5;">monuments</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">HashSet</span>&lt;<span style="color: #6434A3;">Monument</span>&gt;();
+        
+        <span style="color: #0000FF;">public</span> <span style="color: #006699;">User</span>() {
+        }
+        <span style="color: #0000FF;">public</span> <span style="color: #006699;">User</span>(<span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">name</span>) {
+                <span style="color: #0000FF;">this</span>.name= name;
+        }
+        <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">getName</span>() {
+                <span style="color: #0000FF;">return</span> name;
+        }
+        <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">setName</span>(<span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">name</span>) {
+                <span style="color: #0000FF;">this</span>.name= name;
+        }
+        <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">addMonument</span>(<span style="color: #6434A3;">Monument</span> <span style="color: #BA36A5;">m</span>){
+                monuments.add(m);
+                m.getUsers().add(<span style="color: #0000FF;">this</span>);
+        }
+        <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">Set</span>&lt;<span style="color: #6434A3;">Monument</span>&gt; <span style="color: #006699;">getMonuments</span>(){
+                <span style="color: #0000FF;">return</span> monuments;
+        }
+        <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">setMonuments</span>(<span style="color: #6434A3;">Set</span>&lt;<span style="color: #6434A3;">Monument</span>&gt; <span style="color: #BA36A5;">monuments</span>) {
+                <span style="color: #0000FF;">this</span>.monuments= monuments;
+        }
+        <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">toString</span>() {
+                <span style="color: #0000FF;">return</span> <span style="color: #008000;">"User :{ id= "</span>+id+<span style="color: #008000;">"\n name= "</span>+name+<span style="color: #008000;">"\n nb momunents"</span>+ monuments.size()+<span style="color: #008000;">"\n}"</span>;
+        }
+        
+}
+</pre>
+</div>
+
+<p>
+Et en ajoutant dans la classe <code>Monument</code> l'attribut annoté suivant (et ses accesseurs) :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #D0372D;">@ManyToMany</span>(mappedBy=<span style="color: #008000;">"monuments"</span>)
+  <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">Set</span>&lt;<span style="color: #6434A3;">User</span>&gt; <span style="color: #BA36A5;">users</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">HashSet</span>&lt;<span style="color: #6434A3;">User</span>&gt;();
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Implémenter un méthode <code>createUser</code> .</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb74b037" class="outline-2">
+<h2 id="orgb74b037"><span class="section-number-2">7</span> Data Access Objects</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Implémenter les DAOs selon les interfaces suivantes :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">MonumentDao</span> {
+      <span style="color: #6434A3;">Monument</span> <span style="color: #006699;">createMonument</span>(<span style="color: #6434A3;">Monument</span> <span style="color: #BA36A5;">monument</span>);
+      <span style="color: #6434A3;">Monument</span> <span style="color: #006699;">getMonumentById</span>(<span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>);
+      <span style="color: #6434A3;">Monument</span> <span style="color: #006699;">updateMonument</span>(<span style="color: #6434A3;">Monument</span> <span style="color: #BA36A5;">monument</span>);
+      <span style="color: #6434A3;">void</span> <span style="color: #006699;">deleteMonumentById</span>(<span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>);
+  }
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">CityDao</span> {
+      <span style="color: #6434A3;">City</span> <span style="color: #006699;">createCity</span>(<span style="color: #6434A3;">City</span> <span style="color: #BA36A5;">city</span>);
+      <span style="color: #6434A3;">City</span> <span style="color: #006699;">getCityById</span>(<span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>);
+      <span style="color: #6434A3;">City</span> <span style="color: #006699;">updateCity</span>(<span style="color: #6434A3;">City</span> <span style="color: #BA36A5;">city</span>);
+      <span style="color: #6434A3;">void</span> <span style="color: #006699;">deleteCityById</span>(<span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>);
+  }
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">UserDao</span> {
+      <span style="color: #6434A3;">User</span> <span style="color: #006699;">createUser</span>(<span style="color: #6434A3;">User</span> <span style="color: #BA36A5;">user</span>);
+      <span style="color: #6434A3;">User</span> <span style="color: #006699;">getUserById</span>(<span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>);
+      <span style="color: #6434A3;">User</span> <span style="color: #006699;">updateUser</span>(<span style="color: #6434A3;">User</span> <span style="color: #BA36A5;">user</span>);
+      <span style="color: #6434A3;">void</span> <span style="color: #006699;">deleteUserById</span>(<span style="color: #6434A3;">Long</span> <span style="color: #BA36A5;">id</span>);
+  }
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercices</dt><dd><ul class="org-ul">
+<li>Factoriser les interfaces avec une interface <i>générique</i>.</li>
+<li>Factoriser les implémentations avec une classe de base
+<i>générique</i>.</li>
+</ul></dd>
+</dl>
+
+
+<p>
+Bien sûr, les méthodes <code>find</code>, <code>persist</code>, <code>merge</code> et <code>remove</code> ne
+suffisent pas à interagir avec la base de données. <a href="https://www.thoughts-on-java.org/jpa-native-queries/">Il est possible
+d'utiliser l'EntityManager pour effectuer des requêtes SQL</a> avec la
+méthode <a href="http://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#createNativeQuery-java.lang.String-">createNativeQuery</a>. Cependant, on pourra tirer un parti plus
+avantageux des correspondances classes / tables, attributs / colonnes,
+objets / lignes en écrivant des requêtes manipulant des classes,
+attributs et objets plutôt que des tables, colonnes et tuples avec un
+nouveau <i>DSL</i> (<i>Domain Specific Language</i>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org32a2a7c" class="outline-2">
+<h2 id="org32a2a7c"><span class="section-number-2">8</span> Java Persistence Query Language</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+<a href="https://www.thoughts-on-java.org/jpql/">JPQL reprend exactement les principes de SQL</a> et l'on peut passer une
+<code>String</code> de code <code>JPQL</code> en argument à la méthode <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#createQuery-java.lang.String-">createQuery</a> de
+l'objet <code>EntityManager</code> de ma même façon qu'on utilisait par exemple
+la méthode <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html#execute(java.lang.String)">execute</a> d'un objet <code>java.sql.Statement</code>. Ainsi, pour lister
+tous les monuments en les triant dans l'ordre alphabétique, le code
+JPQL sera :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #008000;">" SELECT m FROM Monument m ORDER BY m.nom "</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org6541a79" class="outline-3">
+<h3 id="org6541a79"><span class="section-number-3">8.1</span> Paramétrage</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Il est bien sûr aussi possible de paramétrer les requêtes <i>JQPL</i>. On
+peut utiliser deux types de paramètres :
+</p>
+
+<dl class="org-dl">
+<dt>positionnels</dt><dd><p>
+Ils sont indiqué dans la requête <i>JPQL</i> sous la
+forme <code>?1</code>, <code>?2</code> …
+</p>
+<div class="org-src-container">
+<pre class="src src-java">                  <span style="color: #008000;">"SELECT c FROM City AS c WHERE c.name=?1"</span>
+</pre>
+</div></dd>
+<dt>nommés</dt><dd><p>
+Ils sont indiqués dans la requête <i>JPQL</i> sous la forme <code>:nom</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">            <span style="color: #008000;">"SELECT c FROM City AS c WHERE c.name=:nameParam"</span>
+</pre>
+</div></dd>
+</dl>
+
+<p>
+Un appel à la méthode <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/Query.html#setParameter-int-java.lang.Object-">setParameter</a> prenant un <code>int</code> en premier
+argument ou à <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/Query.html#setParameter-java.lang.String-java.lang.Object-">setParameter</a> prenant une chaîne de caractères (le nom
+<b>sans</b> le préfixe ':') en premier argument permet d'assigner une
+valeur à un paramètre avant d'exécuter la requête.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Utiliser des requêtes JPQL, notamment en explorant les
+<a href="https://www.objectdb.com/java/jpa/query/jpql/string#LIKE___String_Pattern_Matching_with_Wildcards_">opérateurs sur les chaînes de caractères</a> plutôt qu'une
+simple égalité.</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org231bfb0" class="outline-3">
+<h3 id="org231bfb0"><span class="section-number-3">8.2</span> Typage</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+Plutôt que de récupérer des références de type <code>Object</code>, on préférera
+récupérer directement selon leur vrai type les instances de nos
+entités. On peut utiliser pour cela des objets de type <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/TypedQuery.html">TypedQuery</a> :
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #6434A3;">TypedQuery</span>&lt;<span style="color: #6434A3;">City</span>&gt; <span style="color: #BA36A5;">query</span> = em.createQuery(<span style="color: #008000;">"SELECT c FROM City AS c WHERE c.name=:nameParam"</span>
+                                        , City.<span style="color: #0000FF;">class</span>);
+query.setParameter(<span style="color: #008000;">"nameParam"</span>, <span style="color: #008000;">"Paris"</span>);
+<span style="color: #0000FF;">for</span> (<span style="color: #6434A3;">City</span> <span style="color: #006699;">c</span> : query.getResultList()) {
+    System.out.println(c);
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge0f9068" class="outline-3">
+<h3 id="orge0f9068"><span class="section-number-3">8.3</span> Définition statique</h3>
+<div class="outline-text-3" id="text-8-3">
+<p>
+Grâce au paramétrage de requêtes, la plupart des requêtes peuvent être
+fixées à la compilation. Cela permet d'utiliser des <i>requêtes nommées</i>
+(<i>NamedQueries</i>) définies par des annotations. Par exemple :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #D0372D;">@NamedQueries</span>({
+                <span style="color: #D0372D;">@NamedQuery</span>(name = <span style="color: #008000;">"City.findAll"</span>, query = <span style="color: #008000;">" SELECT c FROM City c ORDER BY c.name "</span>),
+                <span style="color: #D0372D;">@NamedQuery</span>(name = <span style="color: #008000;">"City.deleteById"</span>, query = <span style="color: #008000;">" DELETE FROM City c WHERE c.id = :id"</span>) })
+</pre>
+</div>
+
+<p>
+Il est d'usage de situer ces annotations au niveau de la classe Entité
+qu'elles concernent (par exemple après les annotations <code>@Entity</code> et
+<code>@Table</code>). De même qu'il est d'usage d'utiliser le nom de la classe
+comme préfixe dans les noms des <i>requêtes nommées</i>.
+</p>
+
+<p>
+On peut ensuite utiliser ces requêtes nommées de la façon suivante :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">List</span>&lt;<span style="color: #6434A3;">City</span>&gt; <span style="color: #006699;">findAll</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">first</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">size</span>) {
+      <span style="color: #0000FF;">return</span> entityManager.createNamedQuery(<span style="color: #008000;">"City.findAll"</span>, City.<span style="color: #0000FF;">class</span>)
+          .setFirstResult(first).setMaxResults(size).getResultList();
+  }
+
+
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercices</dt><dd><ul class="org-ul">
+<li>Implémenter des méthodes <code>findAll</code> avec des <i>requêtes nommées</i>
+pour les classes <code>Monument</code> et <code>User</code>.</li>
+<li>Implémenter des méthodes <code>deleteById</code> avec des <i>requêtes nommées</i>
+pour les classes <code>City</code>, <code>Monument</code> et <code>User</code>.</li>
+</ul></dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc436bf8" class="outline-2">
+<h2 id="orgc436bf8"><span class="section-number-2">9</span> Mise en œuvre</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Implémenter un CRUD en utilisant <i>JPA</i> !  Remarquer qu'on a les mêmes
+problèmes de durées de vie/partage pour les objets de type
+<code>EntityManager</code> que pour les objets de type <code>Connection</code>.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: Bernard Hugueney</p>
+<p class="date">Created: 2019-12-08 Sun 23:45</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

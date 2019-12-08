@@ -1,0 +1,694 @@
+#+TITLE: Mapping objet-relationnel en Java : JPA et Hibernate
+#+AUTHOR: Bernard Hugueney
+#+DATE:
+
+#+LANGUAGE: fr
+#+LATEX_HEADER: \usepackage[AUTO]{babel}
+
+#+LaTeX_HEADER: \addtolength{\oddsidemargin}{-.475in}
+#+LaTeX_HEADER:	\addtolength{\evensidemargin}{-.475in}
+#+LaTeX_HEADER:	\addtolength{\textwidth}{1.75in}
+#+LaTeX_HEADER:
+#+LaTeX_HEADER:	\addtolength{\topmargin}{-1.75in}
+#+LaTeX_HEADER:	\addtolength{\textheight}{2.75in}
+#+LaTeX_HEADER: \usepackage{comment}
+
+#+BEGIN_SRC elisp :exports none :results silent
+(setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+(org-babel-do-load-languages 'org-babel-load-languages '((ditaa . t)(plantuml . t))) 
+  (add-to-list 'org-latex-packages-alist '("" "listings"))
+  (add-to-list 'org-latex-packages-alist '("" "color"))
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted)
+
+  (setq org-latex-pdf-process '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+                                "bibtex %b"
+                                "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+                                "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+  (setq org-latex-minted-options '(("frame" "lines")
+                                   ("fontsize" "\\scriptsize")
+                                   ("xleftmargin" "\\parindent")
+                                   ("linenos" "")))
+(require 'org-crypt)
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance (quote ("crypt")))
+;; GPG key to use for encryption
+;; Either the Key ID or set to nil to use symmetric encryption.
+(setq org-crypt-key nil)
+#+END_SRC
+
+
+* Principe
+
+Lorsque l'on implémente un CRUD à partir de JDBC, l'implémentation des
+DAO est extrêmement répétitive car toutes les entités doivent
+permettre les même fonctionnalités de base :
+
+- création de nouvelle entités destinées à être enregistrée dans la
+  table associée à la classe
+- construction d'objets partir des lignes de la table associée à la
+  classe
+- mise à jour des lignes de la table pour prendre en compte les
+  modifications des objets lorsque les attributs de ceux-ci ont été
+  modifiés
+- suppression des lignes correspondant à des objets que l'on veut
+  supprimer.
+
+
+Les principales différences entre deux classes entités, sont :
+- le nom de la table associée à la classe
+- les noms et types des colonnes associées à chaque attributs
+
+
+Dans le cas un peu plus complexe de l'implémentation de relations
+entre entités, on doit aussi prendre en compte le type de relation
+(1-1, 1-plusieurs, plusieurs-1, plusieurs-plusieurs, et si elles sont
+unidirectionnelles ou bidirectionnelles) et identifier la table
+d'association éventuelle ainsi que décider si le chargement des
+entités associées doit être [[https://fr.wikipedia.org/wiki/%25C3%2589valuation_paresseuse][paresseux]] ([[https://en.wikipedia.org/wiki/Lazy_evaluation][lazy]]) ou non.
+
+Si l'on pouvait /déclarer/ ces /paramètres/ l'implémentation de la
+correspondance entre les classes entités et les tables pourrait être
+automatisée. Il sera ainsi possible de manipuler les données de la
+base en désignant les classes et attributs au lieu des tables et
+colonnes correspondantes grâce à un /Domain Specific Language/
+adapté : [[https://www.thoughts-on-java.org/jpql/][Java Persistence Query Language]] (/JPQL/).
+
+Le fait d'utiliser JPQL plutôt que SQL nous permettra aussi, dans un
+deuxième temps, de factoriser une partie des implémentations de nos /DAO/.
+
+
+* JPA et Hibernate
+La correspondance entre les tables des Systèmes de Bases de Données
+Relationnels et les classes de la Programmation Orientée Objet permet
+de définir un /Mapping Objet-Relationnel/. En Java, [[https://fr.wikipedia.org/wiki/Java_Persistence_API][JPA]] (Java
+Persistence API) est la spécification standard et [[https://fr.wikipedia.org/wiki/Hibernate][Hibernate]] en est
+l'implémentation la plus populaire (même si [[https://www.eclipse.org/eclipselink/][EclipseLink]] est
+l'implémentation de référence). On a le même rapport entre
+spécification et implémentation qu'entre des /interfaces/ et les
+classes implémentant ces interface (ces classes peuvent aussi
+implémenter plus que ce qui est spécifié par les interfaces).
+
+Afin de ne pas dépendre d'une implémentation spécifique, on pourra
+vouloir se restreindre à n'utiliser que ce qui est spécifié par /JPA/
+même si l'on utilise /Hibernate/.
+
+
+/JPA/ constitue *encore* une couche d'abstraction. En tant que telle,
+elle ne sera pas vraiment utile pour de petits projets n'ayant pas
+besoin d'évoluer. Le couplage avec le typage statique de Java procède
+des mêmes avantages et inconvénients.
+
+* Mise en œuvre
+
+** Dépendances
+On peut utiliser /JPA/ et /Hibernate/ dans le cadre de /frameworks/
+(e.g. [[https://spring.io/guides/gs/accessing-data-jpa/][Spring]] boot, voire [[https://www.jhipster.tech/creating-an-entity/][JHipster]]), mais dans un premier temps, on
+utilisera seulement/directement /JPA/ et /Hibernate/ dans un projet
+/Maven/.
+
+#+BEGIN_SRC nxml
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.2.8</version>
+</dependency>
+
+<dependency>
+    <groupId>org.eclipse.persistence</groupId>
+    <artifactId>javax.persistence</artifactId>
+    <version>2.2.1</version>
+</dependency>
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.4.9.Final</version>
+</dependency>
+
+#+END_SRC
+** Configuration XML
+
+Dans la structure standard d'un projet /Maven/, on ajoutera un
+répertoire =META-INF= dans le répertoire =src/main/java= et dans ce
+répertoire un fichier =persistence.xml= :
+#+BEGIN_SRC XML
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+  version="2.1">
+<persistence-unit name="demo-jpa-1" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>co.simplon.patrimoine.model.City</class>
+		<class>co.simplon.patrimoine.model.Monument</class>
+    <properties>
+        <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+ 
+        <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/postgres" /> <!-- !!! -->
+        <property name="javax.persistence.jdbc.user" value="****" /> <!-- !!! --> 
+        <property name="javax.persistence.jdbc.password" value="****" /> <!-- !!! -->
+        
+        <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/> <!-- DB Dialect -->
+        <property name="hibernate.hbm2ddl.auto" value="update" /> <!-- create / create-drop / update -->    
+        <property name="hibernate.show_sql" value="true" /> <!-- Show SQL in console -->
+        <property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
+    </properties>
+
+</persistence-unit>
+</persistence>
+#+END_SRC
+
+- Exercice :: Que penser des propriétés =javax.persistence.jdbc.url=
+              et surtout =javax.persistence.jdbc.user= voire
+              =javax.persistence.jdbc.password= ? Que proposez-vous ?
+
+Les autres propriétés de configuration de JPA pourraient elles aussi
+être exprimée en XML, [[https://dzone.com/articles/persisting-entity-classes][dans un fichier orm.xml]]. Mais comme elles sont
+liées aux classes entités, on préférera les exprimer sous la forme
+d'/annotations/.
+
+** Annotations
+Dans les classes =co.simplon.patrimoine.model.City= et
+=co.simplon.patrimoine.model.Monument=, on utilisera les annotations
+suivantes :
+
+- sur la classe :
+  - [[https://docs.oracle.com/javaee/6/api/javax/persistence/Entity.html][javax.persistence.Entity]]
+  - [[https://docs.oracle.com/javaee/7/api/javax/persistence/Table.html][javax.persistence.Table]]
+- sur les attributs :
+  - [[https://docs.oracle.com/javaee/7/api/javax/persistence/Id.html][javax.persistence.Id]] pour l'attribut correspondant à la clé
+    primaire
+  - [[https://docs.oracle.com/javaee/7/api/index.html?javax/persistence/GeneratedValue.html][javax.persistence.GeneratedValue]] toujours pour la clé
+    primaire. Avec une valeur de [[https://docs.oracle.com/javaee/7/api/javax/persistence/GeneratedValue.html#strategy--][strategy]] à [[https://docs.oracle.com/javaee/7/api/javax/persistence/GenerationType.html#SEQUENCE][GenerationType.SEQUENCE]],
+    dans le cas d'une clé primaire de type =SERIAL= sous
+    postgresql, [[https://www.thoughts-on-java.org/hibernate-postgresql-5-things-need-know/][notamment pour des raisons de performance]].
+  - [[https://docs.oracle.com/javaee/7/api/javax/persistence/Column.html][javax.persistence.Column]] pour chacun des attributs.
+
+
+Sur les classes suivantes :
+#+BEGIN_SRC java
+  public class City {
+      private Long id;
+      private String name;
+      private Double latitude;
+      private Double longitude;
+
+      public City() {
+      }
+      public City(String name, double latitude, double longitude) {
+	  this(null, name, latitude, longitude);
+      }
+      public City(Long id, String name, double latitude, double longitude) {
+	  this.id= id;
+	  this.name= name;
+	  this.latitude= latitude;
+	  this.longitude= longitude;
+      }
+      public Long getId() {
+	  return id;
+      }
+
+      public void setId(Long id) {
+	  this.id = id;
+      }
+
+      public String getName() {
+	  return name;
+      }
+
+      public void setName(String nom) {
+	  this.name = nom;
+      }
+
+      public Double getLongitude() {
+	  return this.longitude;
+      }
+
+      public void setLongitude(Double longitude) {
+	  this.longitude = longitude;
+      }
+
+      public Double getLatitude() {
+	  return this.latitude;
+      }
+
+      public void setLatitude(Double latitude) {
+	  this.latitude = latitude;
+      }
+
+      @Override
+      public String toString() {
+	  return "City [id=" + id + ", name=" + name + ", latitude=" + latitude
+	      + ", longitude=" + longitude + "]";
+      }
+  }
+
+#+END_SRC
+Cette classe doit être liée à une table nommée =CITIES= avec des
+colonnes : 
+- ID :: clé primaire de type =SERIAL=
+- NAME :: 
+- LATITUDE ::
+- LONGITUDE :: 
+
+
+- Exercice :: Indiquer que la valeur d'une colonne ne doit pas
+              être =NULL= et qu'une chaîne de caractères doit avoir une
+              taille limitée à 255 caractères ?
+
+* Utilisation
+
+** Construction d'un EntityManager
+
+Au lieu d'utiliser directement des objets de type [[https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html][java.sql.Connection]],
+on interagit désormais avec la base de données à travers des objets de
+type [[https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html][javax.persistence.EntityManager]]. Pour construire un tel objet en
+prenant en compte les propriétés définies dans le fichier
+=persistence.xml=, on utilise une
+[[https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManagerFactory.html][javax.persistence.EntityManagerFactory]]. Lorsque l'on récupère cet
+objet /factory/, on indique le nom de la =persistence-unit= définie
+dans le fichier =persistence.xml= ainsi qu'une éventuelle table
+d'association qui permet de redéfinir certaines valeurs à l'exécution,
+par exemple les informations confidentielles :
+
+#+BEGIN_SRC java
+String persistenceUnitName= "demo-jpa-1"; // defined in persistence.xml
+Map<String, String> env = System.getenv();
+Map<String, Object> configOverrides = new HashMap<String, Object>();
+for (String envName : env.keySet()) {
+  if (envName.contains("DB_USER")) {
+    configOverrides.put("javax.persistence.jdbc.user", env.get(envName));
+  }
+  if (envName.contains("DB_PASS")) {
+    configOverrides.put("javax.persistence.jdbc.password", env.get(envName));
+  }
+  if (envName.contains("DB_URL")) {
+    configOverrides.put("javax.persistence.jdbc.url", env.get(envName));    
+  }
+}
+EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(persistenceUnitName
+                                            ,configOverrides);
+#+END_SRC
+
+(Si besoin, [[https://stackoverflow.com/a/13854580][ajuster la configuration d'Eclipse pour qu'il reconnaisse
+le contenu du fichier persistence.xml]]).
+
+** Utilisation d'EntityManager
+On peut utiliser l'objet de type =EntityManager= pour insérer un
+nouvel objet dans la table avec un appel à la méthode [[https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#persist-java.lang.Object-][persist]].
+
+- Exercice :: vérifier la valeur de l'attribut =id= avant et après
+              l'appel à =persist=.
+*** Création
+#+BEGIN_SRC java
+  public City createCity() {
+      EntityManager em= factory.createEntityManager();
+      City city= new City("Atlantis", 0, 0.5);
+      city= create(em, city);
+      em.close();
+      return city;
+  }
+  public City create(EntityManager em, City city) {
+      em.getTransaction().begin();
+      em.persist(city);
+      em.getTransaction().commit();
+      return city;
+  }
+#+END_SRC
+Une fois l'instance de la classe entité passée en argument à
+=persist=, celle-ci devient gérée (/managed/) par l'=EntityManager=.
+Ensuite, toutes modifications des attributs de l'objet effectuée avant
+l'appel à =commit= de l'=EntityManager= sera automatiquement répercutée :
+#+BEGIN_SRC java
+  public City createCityAndUpdate() {
+	  EntityManager em= factory.createEntityManager();
+	  City city= new City("Paris", 0, 0.5);
+	  em.getTransaction().begin();
+	  em.persist(city);
+	  city.setLatitude(1000.);
+	  em.getTransaction().commit();// MAGIC HAPPENS HERE !
+	  em.close();
+	  return city;
+  }
+#+END_SRC
+
+- Exercice :: Observer le résultat de la gestion automatique dans la
+              base de donnée.
+
+** Lecture
+On peut lire directement une entité à partir de l'=EntityManager= à
+partir de la valeur de la clé primaire :
+#+BEGIN_SRC java
+  public City readCity() {
+      EntityManager em= factory.createEntityManager();
+      City city= readCity(em, 4L);
+      em.close();
+      return city;
+  }
+  public City readCity(EntityManager em, Long id) {
+      return em.find(City.class, id);
+  }
+#+END_SRC
+
+- Exercice :: Que se passe-t-il si l'on change un attribut de l'objet
+              lu ? Et si l'on effectue une transaction ensuite ?
+
+** Mise à jour
+Lorsqu'on s'attend à ce qu'un objet soit déjà présent dans la base
+(l'attribut correspondant à la clé primaire doit donc avoir une
+valeur), et que l'on veut, le cas échéant récupérer une référence sur
+un objet géré par la base sans confier la gestion de l'objet passé en
+argument à l'=EntityManager=, on utilise =merge= plutôt que =persist=.
+
+
+#+BEGIN_SRC java
+  public City updateCity() {
+      return update(new City(4L,"PaRiS", -1., -2.));
+  }
+  public City update(City city) {
+      EntityManager em= factory.createEntityManager();
+      em.getTransaction().begin();
+      city = em.merge(city);
+      em.getTransaction().commit();
+      return city;
+  }
+#+END_SRC
+
+- Exercice :: Constater si l'instance retournée par =merge= est gérée
+              (/managed/).
+
+** Suppression
+On peut vouloir supprimer un objet selon deux cas de figures :
+- à partir de la valeur de la clé primaire
+- à partir d'une instance de la classe entité
+
+- Exercice :: Implémenter les deux cas de figure à l'aide de la
+              méthode [[https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#remove-java.lang.Object-][remove]] de l'=EntityManager=. Dans le deuxième
+              cas de figure, prendre en compte que l'instance passé en
+              argument doit être /gérée/ par l'=EntityManager=.
+
+
+* Pratique
+
+Implémenter les mêmes fonctionnalités pour une classe =Monument= :
+#+BEGIN_SRC java
+  public class Monument {
+      private Long id;
+      private String name;
+
+      /* TODO
+	  private City city;
+      ,*/
+      public Monument(String name) {
+	  super();
+	  this.name = name;
+      }
+      public Monument() {
+      }
+      public Long getId() {
+	  return this.id;
+      }
+      public void setId(Long id) {
+	  this.id = id;
+      }
+      public String getName() {
+	  return this.name;
+      }
+      public void setName(String name) {
+	  this.name = name;
+      }
+      /*
+      public City getCity() {
+	  return city;
+      }
+    
+      public void setCity(City city) {
+	  this.city = city;
+      }
+      ,*/
+      @Override
+      public String toString() {
+	  return "Monument [id=" + id + ", name=" + name
+	      + ", city=" /*+ city */+ "]";
+      }
+  }
+#+END_SRC
+* Associations
+
+** 1-N, N-1
+On va vouloir modéliser une association entre :
+- un monument et une ville
+- une ville et des monuments
+
+Au niveau des entités, on peut ajouter des attributs (et accesseurs
+qui vont avec) :
+- dans la classe =Monument= :
+  #+BEGIN_SRC java
+  private City city;
+  #+END_SRC
+- dans la classe =City= :
+  #+BEGIN_SRC java
+  private List<Monument> monuments = new ArrayList<Monument>();
+  #+END_SRC
+
+Remarque : On peut [[https://www.thoughts-on-java.org/association-mappings-bag-list-set/][utiliser d'autres types de Collection que List]].
+
+Au niveau de la base de données, il suffirait d'avoir une colonne
+=city= (ou =fk_city= suivant la convention de nommage) comme clé
+étrangère.
+
+On peut indiquer cela avec les annotations suivantes :
+#+BEGIN_SRC java
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "city")
+private City city;
+#+END_SRC
+
+et
+#+BEGIN_SRC java
+@OneToMany(mappedBy = "city")
+private List<Monument> monuments = new ArrayList<Monument>();
+#+END_SRC
+
+- Exercices :: [[https://www.thoughts-on-java.org/entity-mappings-introduction-jpa-fetchtypes/][Quel est l'effet]] de =fetch = FetchType.Lazy= ?
+
+Quel seraient les effets du codes suivant ?
+#+BEGIN_SRC java
+@OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+private Set<Monument> monuments;
+#+END_SRC
+
+- Exercice :: Modifier la méthode =createMonument= du programme principal pour créer un monument qui soit rattaché à une ville.
+
+** N-N
+
+On va ajouter une classe =User= qui permettra de modéliser des
+utilisateurs de notre application. Chaque utilisateur peut avoir
+visité plusieurs monuments et chaque monument peut avoir été visité
+par plusieurs utilisateurs.
+
+#+BEGIN_SRC java
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "USERS")
+public class User {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private Long id;
+
+	@Column(name = "NAME", nullable = false, length = 100)
+	private String name;
+	
+	@ManyToMany
+        @JoinTable(name= "USER_MONUMENT",
+                   joinColumns = {@JoinColumn(name = "FK_USER", referencedColumnName= "ID" ) },
+                   inverseJoinColumns = { @JoinColumn(name = "FK_MONUMENT", referencedColumnName= "ID") })
+        private Set<Monument> monuments = new HashSet<Monument>();
+	
+	public User() {
+	}
+	public User(String name) {
+		this.name= name;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name= name;
+	}
+	public void addMonument(Monument m){
+		monuments.add(m);
+		m.getUsers().add(this);
+	}
+	public Set<Monument> getMonuments(){
+		return monuments;
+	}
+	public void setMonuments(Set<Monument> monuments) {
+		this.monuments= monuments;
+	}
+	public String toString() {
+		return "User :{ id= "+id+"\n name= "+name+"\n nb momunents"+ monuments.size()+"\n}";
+	}
+	
+}
+#+END_SRC
+
+Et en ajoutant dans la classe =Monument= l'attribut annoté suivant (et ses accesseurs) :
+#+BEGIN_SRC java
+  @ManyToMany(mappedBy="monuments")
+  private Set<User> users = new HashSet<User>();
+#+END_SRC
+
+- Exercice :: Implémenter un méthode =createUser= .
+
+
+* Data Access Objects
+
+Implémenter les DAOs selon les interfaces suivantes :
+#+BEGIN_SRC java
+  public interface MonumentDao {
+      Monument createMonument(Monument monument);
+      Monument getMonumentById(Long id);
+      Monument updateMonument(Monument monument);
+      void deleteMonumentById(Long id);
+  }
+#+END_SRC
+#+BEGIN_SRC java
+  public interface CityDao {
+      City createCity(City city);
+      City getCityById(Long id);
+      City updateCity(City city);
+      void deleteCityById(Long id);
+  }
+#+END_SRC
+#+BEGIN_SRC java
+  public interface UserDao {
+      User createUser(User user);
+      User getUserById(Long id);
+      User updateUser(User user);
+      void deleteUserById(Long id);
+  }
+#+END_SRC
+
+- Exercices :: 
+  - Factoriser les interfaces avec une interface /générique/.
+  - Factoriser les implémentations avec une classe de base
+    /générique/.
+
+
+Bien sûr, les méthodes =find=, =persist=, =merge= et =remove= ne
+suffisent pas à interagir avec la base de données. [[https://www.thoughts-on-java.org/jpa-native-queries/][Il est possible
+d'utiliser l'EntityManager pour effectuer des requêtes SQL]] avec la
+méthode [[http://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#createNativeQuery-java.lang.String-][createNativeQuery]]. Cependant, on pourra tirer un parti plus
+avantageux des correspondances classes / tables, attributs / colonnes,
+objets / lignes en écrivant des requêtes manipulant des classes,
+attributs et objets plutôt que des tables, colonnes et tuples avec un
+nouveau /DSL/ (/Domain Specific Language/).
+
+* Java Persistence Query Language
+
+[[https://www.thoughts-on-java.org/jpql/][JPQL reprend exactement les principes de SQL]] et l'on peut passer une
+=String= de code =JPQL= en argument à la méthode [[https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#createQuery-java.lang.String-][createQuery]] de
+l'objet =EntityManager= de ma même façon qu'on utilisait par exemple
+la méthode [[https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html#execute(java.lang.String)][execute]] d'un objet =java.sql.Statement=. Ainsi, pour lister
+tous les monuments en les triant dans l'ordre alphabétique, le code
+JPQL sera :
+
+#+BEGIN_SRC java
+" SELECT m FROM Monument m ORDER BY m.nom "
+#+END_SRC
+
+** Paramétrage
+
+Il est bien sûr aussi possible de paramétrer les requêtes /JQPL/. On
+peut utiliser deux types de paramètres :
+
+- positionnels :: Ils sont indiqué dans la requête /JPQL/ sous la
+                  forme =?1=, =?2= …
+		  #+BEGIN_SRC java
+		  "SELECT c FROM City AS c WHERE c.name=?1"
+		  #+END_SRC
+- nommés :: Ils sont indiqués dans la requête /JPQL/ sous la forme =:nom= :
+	    #+BEGIN_SRC java
+	    "SELECT c FROM City AS c WHERE c.name=:nameParam"
+	    #+END_SRC
+
+Un appel à la méthode [[https://docs.oracle.com/javaee/7/api/javax/persistence/Query.html#setParameter-int-java.lang.Object-][setParameter]] prenant un =int= en premier
+argument ou à [[https://docs.oracle.com/javaee/7/api/javax/persistence/Query.html#setParameter-java.lang.String-java.lang.Object-][setParameter]] prenant une chaîne de caractères (le nom
+*sans* le préfixe ':') en premier argument permet d'assigner une
+valeur à un paramètre avant d'exécuter la requête.
+
+- Exercice :: Utiliser des requêtes JPQL, notamment en explorant les
+              [[https://www.objectdb.com/java/jpa/query/jpql/string#LIKE___String_Pattern_Matching_with_Wildcards_][opérateurs sur les chaînes de caractères]] plutôt qu'une
+              simple égalité.
+
+** Typage
+Plutôt que de récupérer des références de type =Object=, on préférera
+récupérer directement selon leur vrai type les instances de nos
+entités. On peut utiliser pour cela des objets de type [[https://docs.oracle.com/javaee/7/api/javax/persistence/TypedQuery.html][TypedQuery]] :
+
+
+#+BEGIN_SRC java
+TypedQuery<City> query = em.createQuery("SELECT c FROM City AS c WHERE c.name=:nameParam"
+                                        , City.class);
+query.setParameter("nameParam", "Paris");
+for (City c : query.getResultList()) {
+    System.out.println(c);
+}
+#+END_SRC
+
+** Définition statique
+
+Grâce au paramétrage de requêtes, la plupart des requêtes peuvent être
+fixées à la compilation. Cela permet d'utiliser des /requêtes nommées/
+(/NamedQueries/) définies par des annotations. Par exemple :
+
+#+BEGIN_SRC java
+@NamedQueries({
+		@NamedQuery(name = "City.findAll", query = " SELECT c FROM City c ORDER BY c.name "),
+		@NamedQuery(name = "City.deleteById", query = " DELETE FROM City c WHERE c.id = :id") })
+#+END_SRC
+
+Il est d'usage de situer ces annotations au niveau de la classe Entité
+qu'elles concernent (par exemple après les annotations =@Entity= et
+=@Table=). De même qu'il est d'usage d'utiliser le nom de la classe
+comme préfixe dans les noms des /requêtes nommées/.
+
+On peut ensuite utiliser ces requêtes nommées de la façon suivante :
+#+BEGIN_SRC java
+  public List<City> findAll(int first, int size) {
+      return entityManager.createNamedQuery("City.findAll", City.class)
+	  .setFirstResult(first).setMaxResults(size).getResultList();
+  }
+
+
+#+END_SRC
+
+- Exercices ::
+  - Implémenter des méthodes =findAll= avec des /requêtes nommées/
+    pour les classes =Monument= et =User=.
+  - Implémenter des méthodes =deleteById= avec des /requêtes nommées/
+    pour les classes =City=, =Monument= et =User=.
+
+
+* Mise en œuvre
+
+Implémenter un CRUD en utilisant /JPA/ !  Remarquer qu'on a les mêmes
+problèmes de durées de vie/partage pour les objets de type
+=EntityManager= que pour les objets de type =Connection=.
+
