@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-12-09 Mon 13:48 -->
+<!-- 2019-12-09 Mon 14:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mapping objet-relationnel en Java : JPA et Hibernate</title>
@@ -247,50 +247,50 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org7938402">1. Principe</a></li>
-<li><a href="#orgebb6b16">2. JPA et Hibernate</a></li>
-<li><a href="#orga3af5cb">3. Mise en œuvre</a>
+<li><a href="#orgaac4af9">1. Principe</a></li>
+<li><a href="#org433455a">2. JPA et Hibernate</a></li>
+<li><a href="#org3d99191">3. Mise en œuvre</a>
 <ul>
-<li><a href="#org61ff623">3.1. Dépendances</a></li>
-<li><a href="#org4becd20">3.2. Configuration XML</a></li>
-<li><a href="#orgc38fb7e">3.3. Annotations</a></li>
+<li><a href="#org6ebda39">3.1. Dépendances</a></li>
+<li><a href="#orge0a3989">3.2. Configuration XML</a></li>
+<li><a href="#orgffc958d">3.3. Annotations</a></li>
 </ul>
 </li>
-<li><a href="#orge55d48b">4. Utilisation</a>
+<li><a href="#org09e1d99">4. Utilisation</a>
 <ul>
-<li><a href="#org9ecd23e">4.1. Construction d'un EntityManager</a></li>
-<li><a href="#org9256861">4.2. Utilisation d'EntityManager</a>
+<li><a href="#orgaf56601">4.1. Construction d'un EntityManager</a></li>
+<li><a href="#orge707f1d">4.2. Utilisation d'EntityManager</a>
 <ul>
-<li><a href="#orgb9a5ef2">4.2.1. Création</a></li>
+<li><a href="#org9693b7f">4.2.1. Création</a></li>
 </ul>
 </li>
-<li><a href="#orgcb9f89f">4.3. Lecture</a></li>
-<li><a href="#orgefe6dfa">4.4. Mise à jour</a></li>
-<li><a href="#org1dba4b6">4.5. Suppression</a></li>
+<li><a href="#org9f42367">4.3. Lecture</a></li>
+<li><a href="#org487879c">4.4. Mise à jour</a></li>
+<li><a href="#org56c20f3">4.5. Suppression</a></li>
 </ul>
 </li>
-<li><a href="#org6b71149">5. Pratique</a></li>
-<li><a href="#org45594d5">6. Associations</a>
+<li><a href="#org08c37f4">5. Pratique</a></li>
+<li><a href="#org4e28633">6. Associations</a>
 <ul>
-<li><a href="#org601c05f">6.1. 1-N, N-1</a></li>
-<li><a href="#org441089a">6.2. N-N</a></li>
+<li><a href="#org7a46fbd">6.1. 1-N, N-1</a></li>
+<li><a href="#org5541dc0">6.2. N-N</a></li>
 </ul>
 </li>
-<li><a href="#org8182b56">7. Data Access Objects</a></li>
-<li><a href="#org0365eff">8. Java Persistence Query Language</a>
+<li><a href="#orgb5c1c16">7. Data Access Objects</a></li>
+<li><a href="#org8b8b271">8. Java Persistence Query Language</a>
 <ul>
-<li><a href="#org9e5bf28">8.1. Paramétrage</a></li>
-<li><a href="#orgc8cf28e">8.2. Typage</a></li>
-<li><a href="#org8aa4a8a">8.3. Définition statique</a></li>
+<li><a href="#org0710856">8.1. Paramétrage</a></li>
+<li><a href="#orgf3081fe">8.2. Typage</a></li>
+<li><a href="#orgc799985">8.3. Définition statique</a></li>
 </ul>
 </li>
-<li><a href="#org588191b">9. Mise en œuvre</a></li>
+<li><a href="#org50c5d2a">9. Mise en œuvre</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org7938402" class="outline-2">
-<h2 id="org7938402"><span class="section-number-2">1</span> Principe</h2>
+<div id="outline-container-orgaac4af9" class="outline-2">
+<h2 id="orgaac4af9"><span class="section-number-2">1</span> Principe</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Lorsque l'on implémente un CRUD à partir de JDBC, l'implémentation des
@@ -346,8 +346,8 @@ deuxième temps, de factoriser une partie des implémentations de nos <i>DAO</i>
 </div>
 
 
-<div id="outline-container-orgebb6b16" class="outline-2">
-<h2 id="orgebb6b16"><span class="section-number-2">2</span> JPA et Hibernate</h2>
+<div id="outline-container-org433455a" class="outline-2">
+<h2 id="org433455a"><span class="section-number-2">2</span> JPA et Hibernate</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 La correspondance entre les tables des Systèmes de Bases de Données
@@ -377,12 +377,12 @@ des mêmes avantages et inconvénients.
 </div>
 </div>
 
-<div id="outline-container-orga3af5cb" class="outline-2">
-<h2 id="orga3af5cb"><span class="section-number-2">3</span> Mise en œuvre</h2>
+<div id="outline-container-org3d99191" class="outline-2">
+<h2 id="org3d99191"><span class="section-number-2">3</span> Mise en œuvre</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org61ff623" class="outline-3">
-<h3 id="org61ff623"><span class="section-number-3">3.1</span> Dépendances</h3>
+<div id="outline-container-org6ebda39" class="outline-3">
+<h3 id="org6ebda39"><span class="section-number-3">3.1</span> Dépendances</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 On peut utiliser <i>JPA</i> et <i>Hibernate</i> dans le cadre de <i>frameworks</i>
@@ -413,8 +413,8 @@ utilisera seulement/directement <i>JPA</i> et <i>Hibernate</i> dans un projet
 </div>
 </div>
 </div>
-<div id="outline-container-org4becd20" class="outline-3">
-<h3 id="org4becd20"><span class="section-number-3">3.2</span> Configuration XML</h3>
+<div id="outline-container-orge0a3989" class="outline-3">
+<h3 id="orge0a3989"><span class="section-number-3">3.2</span> Configuration XML</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Dans la structure standard d'un projet <i>Maven</i>, on ajoutera un
@@ -464,8 +464,8 @@ d'<i>annotations</i>.
 </div>
 </div>
 
-<div id="outline-container-orgc38fb7e" class="outline-3">
-<h3 id="orgc38fb7e"><span class="section-number-3">3.3</span> Annotations</h3>
+<div id="outline-container-orgffc958d" class="outline-3">
+<h3 id="orgffc958d"><span class="section-number-3">3.3</span> Annotations</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Dans les classes <code>co.simplon.patrimoine.model.City</code> et
@@ -578,12 +578,12 @@ taille limitée à 255 caractères ?</dd>
 </div>
 </div>
 
-<div id="outline-container-orge55d48b" class="outline-2">
-<h2 id="orge55d48b"><span class="section-number-2">4</span> Utilisation</h2>
+<div id="outline-container-org09e1d99" class="outline-2">
+<h2 id="org09e1d99"><span class="section-number-2">4</span> Utilisation</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org9ecd23e" class="outline-3">
-<h3 id="org9ecd23e"><span class="section-number-3">4.1</span> Construction d'un EntityManager</h3>
+<div id="outline-container-orgaf56601" class="outline-3">
+<h3 id="orgaf56601"><span class="section-number-3">4.1</span> Construction d'un EntityManager</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Au lieu d'utiliser directement des objets de type <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a>,
@@ -622,11 +622,18 @@ l'exécution, par exemple les informations confidentielles :
 (Si besoin, <a href="https://stackoverflow.com/a/13854580">ajuster la configuration d'Eclipse pour qu'il reconnaisse
 le contenu du fichier persistence.xml</a>).
 </p>
+
+<p>
+<b>Attention !</b> Comme l' <code class="src src-java">EntityManagerFactory</code>
+gère la connection, il doit être fermé par un appel à
+<code class="src src-java">close()</code>. Heureusement, cette classe implément
+l'interface <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html">AutoCloseable</a>.
+</p>
 </div>
 </div>
 
-<div id="outline-container-org9256861" class="outline-3">
-<h3 id="org9256861"><span class="section-number-3">4.2</span> Utilisation d'EntityManager</h3>
+<div id="outline-container-orge707f1d" class="outline-3">
+<h3 id="orge707f1d"><span class="section-number-3">4.2</span> Utilisation d'EntityManager</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 On peut utiliser l'objet de type <code>EntityManager</code> pour insérer un
@@ -638,8 +645,8 @@ nouvel objet dans la table avec un appel à la méthode <a href="https://docs.or
 l'appel à <code>persist</code>.</dd>
 </dl>
 </div>
-<div id="outline-container-orgb9a5ef2" class="outline-4">
-<h4 id="orgb9a5ef2"><span class="section-number-4">4.2.1</span> Création</h4>
+<div id="outline-container-org9693b7f" class="outline-4">
+<h4 id="org9693b7f"><span class="section-number-4">4.2.1</span> Création</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <p>
 On peut créer une class <code class="src src-java">Main</code> avec l'
@@ -691,8 +698,8 @@ base de donnée.</dd>
 </div>
 </div>
 
-<div id="outline-container-orgcb9f89f" class="outline-3">
-<h3 id="orgcb9f89f"><span class="section-number-3">4.3</span> Lecture</h3>
+<div id="outline-container-org9f42367" class="outline-3">
+<h3 id="org9f42367"><span class="section-number-3">4.3</span> Lecture</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 On peut lire directement une entité à partir de l'<code>EntityManager</code> à
@@ -718,8 +725,8 @@ lu ? Et si l'on effectue une transaction ensuite ?</dd>
 </div>
 </div>
 
-<div id="outline-container-orgefe6dfa" class="outline-3">
-<h3 id="orgefe6dfa"><span class="section-number-3">4.4</span> Mise à jour</h3>
+<div id="outline-container-org487879c" class="outline-3">
+<h3 id="org487879c"><span class="section-number-3">4.4</span> Mise à jour</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 Lorsqu'on s'attend à ce qu'un objet soit déjà présent dans la base
@@ -751,8 +758,8 @@ argument à l'<code>EntityManager</code>, on utilise <code>merge</code> plutôt 
 </div>
 </div>
 
-<div id="outline-container-org1dba4b6" class="outline-3">
-<h3 id="org1dba4b6"><span class="section-number-3">4.5</span> Suppression</h3>
+<div id="outline-container-org56c20f3" class="outline-3">
+<h3 id="org56c20f3"><span class="section-number-3">4.5</span> Suppression</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
 On peut vouloir supprimer un objet selon deux cas de figures :
@@ -771,8 +778,8 @@ argument doit être <i>gérée</i> par l'<code>EntityManager</code>.</li>
 </div>
 
 
-<div id="outline-container-org6b71149" class="outline-2">
-<h2 id="org6b71149"><span class="section-number-2">5</span> Pratique</h2>
+<div id="outline-container-org08c37f4" class="outline-2">
+<h2 id="org08c37f4"><span class="section-number-2">5</span> Pratique</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Implémenter les mêmes fonctionnalités pour une classe <code>Monument</code> :
@@ -822,16 +829,16 @@ Implémenter les mêmes fonctionnalités pour une classe <code>Monument</code> :
 </div>
 </div>
 </div>
-<div id="outline-container-org45594d5" class="outline-2">
-<h2 id="org45594d5"><span class="section-number-2">6</span> Associations</h2>
+<div id="outline-container-org4e28633" class="outline-2">
+<h2 id="org4e28633"><span class="section-number-2">6</span> Associations</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 On peut <a href="https://thoughts-on-java.org/ultimate-guide-association-mappings-jpa-hibernate/">utiliser JPA pour modéliser tous types d'associations</a>.
 </p>
 </div>
 
-<div id="outline-container-org601c05f" class="outline-3">
-<h3 id="org601c05f"><span class="section-number-3">6.1</span> 1-N, N-1</h3>
+<div id="outline-container-org7a46fbd" class="outline-3">
+<h3 id="org7a46fbd"><span class="section-number-3">6.1</span> 1-N, N-1</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 On va vouloir modéliser une association entre :
@@ -910,8 +917,8 @@ Quel seraient les effets du codes suivant ?
 </div>
 </div>
 
-<div id="outline-container-org441089a" class="outline-3">
-<h3 id="org441089a"><span class="section-number-3">6.2</span> N-N</h3>
+<div id="outline-container-org5541dc0" class="outline-3">
+<h3 id="org5541dc0"><span class="section-number-3">6.2</span> N-N</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 On va ajouter une classe <code>User</code> qui permettra de modéliser des
@@ -999,8 +1006,8 @@ Et en ajoutant dans la classe <code>Monument</code> l'attribut annoté suivant (
 </div>
 
 
-<div id="outline-container-org8182b56" class="outline-2">
-<h2 id="org8182b56"><span class="section-number-2">7</span> Data Access Objects</h2>
+<div id="outline-container-orgb5c1c16" class="outline-2">
+<h2 id="orgb5c1c16"><span class="section-number-2">7</span> Data Access Objects</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Implémenter les DAOs selon les interfaces suivantes :
@@ -1055,8 +1062,8 @@ nouveau <i>DSL</i> (<i>Domain Specific Language</i>).
 </div>
 </div>
 
-<div id="outline-container-org0365eff" class="outline-2">
-<h2 id="org0365eff"><span class="section-number-2">8</span> Java Persistence Query Language</h2>
+<div id="outline-container-org8b8b271" class="outline-2">
+<h2 id="org8b8b271"><span class="section-number-2">8</span> Java Persistence Query Language</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 <a href="https://www.thoughts-on-java.org/jpql/">JPQL reprend exactement les principes de SQL</a> et l'on peut passer une
@@ -1073,8 +1080,8 @@ JPQL sera :
 </div>
 </div>
 
-<div id="outline-container-org9e5bf28" class="outline-3">
-<h3 id="org9e5bf28"><span class="section-number-3">8.1</span> Paramétrage</h3>
+<div id="outline-container-org0710856" class="outline-3">
+<h3 id="org0710856"><span class="section-number-3">8.1</span> Paramétrage</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 Il est bien sûr aussi possible de paramétrer les requêtes <i>JQPL</i>. On
@@ -1114,8 +1121,8 @@ simple égalité.</dd>
 </div>
 </div>
 
-<div id="outline-container-orgc8cf28e" class="outline-3">
-<h3 id="orgc8cf28e"><span class="section-number-3">8.2</span> Typage</h3>
+<div id="outline-container-orgf3081fe" class="outline-3">
+<h3 id="orgf3081fe"><span class="section-number-3">8.2</span> Typage</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 Plutôt que de récupérer des références de type <code>Object</code>, on préférera
@@ -1136,8 +1143,8 @@ query.setParameter(<span style="color: #008000;">"nameParam"</span>, <span style
 </div>
 </div>
 
-<div id="outline-container-org8aa4a8a" class="outline-3">
-<h3 id="org8aa4a8a"><span class="section-number-3">8.3</span> Définition statique</h3>
+<div id="outline-container-orgc799985" class="outline-3">
+<h3 id="orgc799985"><span class="section-number-3">8.3</span> Définition statique</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 Grâce au paramétrage de requêtes, la plupart des requêtes peuvent être
@@ -1185,8 +1192,8 @@ pour les classes <code>City</code>, <code>Monument</code> et <code>User</code>.<
 </div>
 
 
-<div id="outline-container-org588191b" class="outline-2">
-<h2 id="org588191b"><span class="section-number-2">9</span> Mise en œuvre</h2>
+<div id="outline-container-org50c5d2a" class="outline-2">
+<h2 id="org50c5d2a"><span class="section-number-2">9</span> Mise en œuvre</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Implémenter un CRUD en utilisant <i>JPA</i> !  Remarquer qu'on a les mêmes
@@ -1201,15 +1208,17 @@ problèmes de durées de vie/partage pour les objets de type
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">Ici, on a utilisé un attribut
 d'instance et des méthodes d'instance et <code class="src src-java">Main.main(<span style="color: #6434A3;">String</span>[] <span style="color: #BA36A5;">args</span>)</code> devrait donc instancier la classe
-<code class="src src-java">Main</code>. On pourrait aussi utiliser un attribut
-<code class="src src-java"><span style="color: #0000FF;">static</span></code> et des méthodes <code class="src src-java"><span style="color: #0000FF;">static</span></code>.</p></div></div>
+<code class="src src-java">Main</code>. L'intérêt par rapport à un attribut
+<code class="src src-java"><span style="color: #0000FF;">static</span></code> est que l'on peut ainsi gérer la
+fermeture de la factory en faisant cette instanciation dans un <i>try
+with resources</i>.</p></div></div>
 
 
 </div>
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Auteur: Bernard Hugueney</p>
-<p class="date">Created: 2019-12-09 Mon 13:48</p>
+<p class="date">Created: 2019-12-09 Mon 14:10</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

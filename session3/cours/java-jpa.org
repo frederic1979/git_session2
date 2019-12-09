@@ -294,6 +294,11 @@ EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFacto
 (Si besoin, [[https://stackoverflow.com/a/13854580][ajuster la configuration d'Eclipse pour qu'il reconnaisse
 le contenu du fichier persistence.xml]]).
 
+*Attention !* Comme l' src_java[:exports code]{EntityManagerFactory}
+gère la connection, il doit être fermé par un appel à
+src_java[:exports code]{close()}. Heureusement, cette classe implément
+l'interface [[https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html][AutoCloseable]].
+
 ** Utilisation d'EntityManager
 On peut utiliser l'objet de type =EntityManager= pour insérer un
 nouvel objet dans la table avec un appel à la méthode [[https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#persist-java.lang.Object-][persist]].
@@ -307,9 +312,10 @@ src_java[:exports code]{EntityManagerFactory} en attribut (ici
 src_java[:exports code]{factory}) [fn:: Ici, on a utilisé un attribut
 d'instance et des méthodes d'instance et src_java[:exports
 code]{Main.main(String[] args)} devrait donc instancier la classe
-src_java[:exports code]{Main}. On pourrait aussi utiliser un attribut
-src_java[:exports code]{static} et des méthodes src_java[:exports
-code]{static}.] :
+src_java[:exports code]{Main}. L'intérêt par rapport à un attribut
+src_java[:exports code]{static} est que l'on peut ainsi gérer la
+fermeture de la factory en faisant cette instanciation dans un /try
+with resources/.] :
 
 #+BEGIN_SRC java
   public City createCity() {

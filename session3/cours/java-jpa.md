@@ -1,30 +1,30 @@
-- [Principe](#org98ae7ed)
-- [JPA et Hibernate](#orgcfab6a4)
-- [Mise en œuvre](#orgbd1c0a7)
-  - [Dépendances](#orgf093d4a)
-  - [Configuration XML](#orgfd42830)
-  - [Annotations](#org506745f)
-- [Utilisation](#org2060c03)
-  - [Construction d'un EntityManager](#org9028e7a)
-  - [Utilisation d'EntityManager](#org4407dee)
-    - [Création](#orge3c04c5)
-  - [Lecture](#org0b05d2c)
-  - [Mise à jour](#org79e0082)
-  - [Suppression](#org10bf939)
-- [Pratique](#orgdab9509)
-- [Associations](#org99995e0)
-  - [1-N, N-1](#orgaf370f8)
-  - [N-N](#org7c0b6e2)
-- [Data Access Objects](#org80e90a7)
-- [Java Persistence Query Language](#orgc417af6)
-  - [Paramétrage](#orgf8a1cb1)
-  - [Typage](#orgdc506d4)
-  - [Définition statique](#orgcb35a16)
-- [Mise en œuvre](#orgf9fb056)
+- [Principe](#org0af3f71)
+- [JPA et Hibernate](#orgea3180c)
+- [Mise en œuvre](#org95054cb)
+  - [Dépendances](#org39b5d1a)
+  - [Configuration XML](#orgc79688a)
+  - [Annotations](#org85ed308)
+- [Utilisation](#org33f0fd1)
+  - [Construction d'un EntityManager](#org5aef88d)
+  - [Utilisation d'EntityManager](#org374a970)
+    - [Création](#org2ca1563)
+  - [Lecture](#org81dd4fb)
+  - [Mise à jour](#org25c2319)
+  - [Suppression](#orgb09bc17)
+- [Pratique](#orged7cbca)
+- [Associations](#orgbcca5dc)
+  - [1-N, N-1](#orgda0bc05)
+  - [N-N](#org29ad975)
+- [Data Access Objects](#orgca40791)
+- [Java Persistence Query Language](#org05f53e2)
+  - [Paramétrage](#org5455380)
+  - [Typage](#orga7519c4)
+  - [Définition statique](#org14e50fb)
+- [Mise en œuvre](#orgef1e6a3)
 
 
 
-<a id="org98ae7ed"></a>
+<a id="org0af3f71"></a>
 
 # Principe
 
@@ -47,7 +47,7 @@ Si l'on pouvait *déclarer* ces *paramètres* l'implémentation de la correspond
 Le fait d'utiliser JPQL plutôt que SQL nous permettra aussi, dans un deuxième temps, de factoriser une partie des implémentations de nos *DAO*.
 
 
-<a id="orgcfab6a4"></a>
+<a id="orgea3180c"></a>
 
 # JPA et Hibernate
 
@@ -58,12 +58,12 @@ Afin de ne pas dépendre d'une implémentation spécifique, on pourra vouloir se
 *JPA* constitue **encore** une couche d'abstraction. En tant que telle, elle ne sera pas vraiment utile pour de petits projets n'ayant pas besoin d'évoluer. Le couplage avec le typage statique de Java procède des mêmes avantages et inconvénients.
 
 
-<a id="orgbd1c0a7"></a>
+<a id="org95054cb"></a>
 
 # Mise en œuvre
 
 
-<a id="orgf093d4a"></a>
+<a id="org39b5d1a"></a>
 
 ## Dépendances
 
@@ -90,7 +90,7 @@ On peut utiliser *JPA* et *Hibernate* dans le cadre de *frameworks* (e.g. [Sprin
 ```
 
 
-<a id="orgfd42830"></a>
+<a id="orgc79688a"></a>
 
 ## Configuration XML
 
@@ -128,7 +128,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 Les autres propriétés de configuration de JPA pourraient elles aussi être exprimée en XML, [dans un fichier orm.xml](https://dzone.com/articles/persisting-entity-classes). Mais comme elles sont liées aux classes entités, on préférera les exprimer sous la forme d'*annotations*.
 
 
-<a id="org506745f"></a>
+<a id="org85ed308"></a>
 
 ## Annotations
 
@@ -216,12 +216,12 @@ Cette classe doit être liée à une table nommée `CITIES` avec des colonnes :
 -   **Exercice:** Indiquer que la valeur d'une colonne ne doit pas être `NULL` et qu'une chaîne de caractères doit avoir une taille limitée à 255 caractères ?
 
 
-<a id="org2060c03"></a>
+<a id="org33f0fd1"></a>
 
 # Utilisation
 
 
-<a id="org9028e7a"></a>
+<a id="org5aef88d"></a>
 
 ## Construction d'un EntityManager
 
@@ -248,8 +248,10 @@ EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFacto
 
 (Si besoin, [ajuster la configuration d'Eclipse pour qu'il reconnaisse le contenu du fichier persistence.xml](https://stackoverflow.com/a/13854580)).
 
+**Attention !** Comme l' `EntityManagerFactory` gère la connection, il doit être fermé par un appel à `close()`. Heureusement, cette classe implément l'interface [AutoCloseable](https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html).
 
-<a id="org4407dee"></a>
+
+<a id="org374a970"></a>
 
 ## Utilisation d'EntityManager
 
@@ -258,7 +260,7 @@ On peut utiliser l'objet de type `EntityManager` pour insérer un nouvel objet d
 -   **Exercice:** vérifier la valeur de l'attribut `id` avant et après l'appel à `persist`.
 
 
-<a id="orge3c04c5"></a>
+<a id="org2ca1563"></a>
 
 ### Création
 
@@ -298,7 +300,7 @@ Une fois l'instance de la classe entité passée en argument à `persist`, celle
 -   **Exercice:** Observer le résultat de la gestion automatique dans la base de donnée.
 
 
-<a id="org0b05d2c"></a>
+<a id="org81dd4fb"></a>
 
 ## Lecture
 
@@ -319,7 +321,7 @@ On peut lire directement une entité à partir de l'`EntityManager` à partir de
 -   **Exercice:** Que se passe-t-il si l'on change un attribut de l'objet lu ? Et si l'on effectue une transaction ensuite ?
 
 
-<a id="org79e0082"></a>
+<a id="org25c2319"></a>
 
 ## Mise à jour
 
@@ -341,7 +343,7 @@ Lorsqu'on s'attend à ce qu'un objet soit déjà présent dans la base (l'attrib
 -   **Exercice:** Constater si l'instance retournée par `merge` est gérée (*managed*).
 
 
-<a id="org10bf939"></a>
+<a id="orgb09bc17"></a>
 
 ## Suppression
 
@@ -353,7 +355,7 @@ On peut vouloir supprimer un objet selon deux cas de figures :
 -   **Exercice:** Implémenter les deux cas de figure à l'aide de la méthode [remove](https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#remove-java.lang.Object-) de l'`EntityManager`. Dans le deuxième cas de figure, prendre en compte que l'instance passé en argument doit être *gérée* par l'`EntityManager`.
 
 
-<a id="orgdab9509"></a>
+<a id="orged7cbca"></a>
 
 # Pratique
 
@@ -403,14 +405,14 @@ Implémenter les mêmes fonctionnalités pour une classe `Monument` :
 ```
 
 
-<a id="org99995e0"></a>
+<a id="orgbcca5dc"></a>
 
 # Associations
 
 On peut [utiliser JPA pour modéliser tous types d'associations](https://thoughts-on-java.org/ultimate-guide-association-mappings-jpa-hibernate/).
 
 
-<a id="orgaf370f8"></a>
+<a id="orgda0bc05"></a>
 
 ## 1-N, N-1
 
@@ -463,7 +465,7 @@ private Set<Monument> monuments;
 -   **Exercice:** Modifier la méthode `createMonument` du programme principal pour créer un monument qui soit rattaché à une ville.
 
 
-<a id="org7c0b6e2"></a>
+<a id="org29ad975"></a>
 
 ## N-N
 
@@ -540,7 +542,7 @@ Et en ajoutant dans la classe `Monument` l'attribut annoté suivant (et ses acce
 -   **Exercice:** Implémenter un méthode `createUser` .
 
 
-<a id="org80e90a7"></a>
+<a id="orgca40791"></a>
 
 # Data Access Objects
 
@@ -579,7 +581,7 @@ Implémenter les DAOs selon les interfaces suivantes :
 Bien sûr, les méthodes `find`, `persist`, `merge` et `remove` ne suffisent pas à interagir avec la base de données. [Il est possible d'utiliser l'EntityManager pour effectuer des requêtes SQL](https://www.thoughts-on-java.org/jpa-native-queries/) avec la méthode [createNativeQuery](http://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#createNativeQuery-java.lang.String-). Cependant, on pourra tirer un parti plus avantageux des correspondances classes / tables, attributs / colonnes, objets / lignes en écrivant des requêtes manipulant des classes, attributs et objets plutôt que des tables, colonnes et tuples avec un nouveau *DSL* (*Domain Specific Language*).
 
 
-<a id="orgc417af6"></a>
+<a id="org05f53e2"></a>
 
 # Java Persistence Query Language
 
@@ -590,7 +592,7 @@ Bien sûr, les méthodes `find`, `persist`, `merge` et `remove` ne suffisent pas
 ```
 
 
-<a id="orgf8a1cb1"></a>
+<a id="org5455380"></a>
 
 ## Paramétrage
 
@@ -612,7 +614,7 @@ Un appel à la méthode [setParameter](https://docs.oracle.com/javaee/7/api/java
 -   **Exercice:** Utiliser des requêtes JPQL, notamment en explorant les [opérateurs sur les chaînes de caractères](https://www.objectdb.com/java/jpa/query/jpql/string#LIKE___String_Pattern_Matching_with_Wildcards_) plutôt qu'une simple égalité.
 
 
-<a id="orgdc506d4"></a>
+<a id="orga7519c4"></a>
 
 ## Typage
 
@@ -628,7 +630,7 @@ for (City c : query.getResultList()) {
 ```
 
 
-<a id="orgcb35a16"></a>
+<a id="org14e50fb"></a>
 
 ## Définition statique
 
@@ -657,7 +659,7 @@ On peut ensuite utiliser ces requêtes nommées de la façon suivante :
     -   Implémenter des méthodes `deleteById` avec des *requêtes nommées* pour les classes `City`, `Monument` et `User`.
 
 
-<a id="orgf9fb056"></a>
+<a id="orgef1e6a3"></a>
 
 # Mise en œuvre
 
@@ -667,5 +669,7 @@ Implémenter un CRUD en utilisant *JPA* ! Remarquer qu'on a les mêmes problème
 
 <sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> Ici, on a utilisé un attribut
 d'instance et des méthodes d'instance et `Main.main(String[] args)` devrait donc instancier la classe
-`Main`. On pourrait aussi utiliser un attribut
-`static` et des méthodes `static`.
+`Main`. L'intérêt par rapport à un attribut
+`static` est que l'on peut ainsi gérer la
+fermeture de la factory en faisant cette instanciation dans un *try
+with resources*.
