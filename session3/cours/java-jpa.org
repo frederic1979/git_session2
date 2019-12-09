@@ -241,6 +241,7 @@ Sur les classes suivantes :
 	  return "City [id=" + id + ", name=" + name + ", latitude=" + latitude
 	      + ", longitude=" + longitude + "]";
       }
+      // TODO hashCode() & equals()
   }
 
 #+END_SRC
@@ -268,8 +269,8 @@ prenant en compte les propriétés définies dans le fichier
 [[https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManagerFactory.html][javax.persistence.EntityManagerFactory]]. Lorsque l'on récupère cet
 objet /factory/, on indique le nom de la =persistence-unit= définie
 dans le fichier =persistence.xml= ainsi qu'une éventuelle table
-d'association qui permet de redéfinir certaines valeurs à l'exécution,
-par exemple les informations confidentielles :
+d'association ([[https://docs.oracle.com/javase/9/docs/api/java/util/Map.html][Map]])qui permet de redéfinir certaines valeurs à
+l'exécution, par exemple les informations confidentielles :
 
 #+BEGIN_SRC java
 String persistenceUnitName= "demo-jpa-1"; // defined in persistence.xml
@@ -300,6 +301,16 @@ nouvel objet dans la table avec un appel à la méthode [[https://docs.oracle.co
 - Exercice :: vérifier la valeur de l'attribut =id= avant et après
               l'appel à =persist=.
 *** Création
+
+On peut créer une class src_java[:exports code]{Main} avec l'
+src_java[:exports code]{EntityManagerFactory} en attribut (ici
+src_java[:exports code]{factory}) [fn:: Ici, on a utilisé un attribut
+d'instance et des méthodes d'instance et src_java[:exports
+code]{Main.main(String[] args)} devrait donc instancier la classe
+src_java[:exports code]{Main}. On pourrait aussi utiliser un attribut
+src_java[:exports code]{static} et des méthodes src_java[:exports
+code]{static}.] :
+
 #+BEGIN_SRC java
   public City createCity() {
       EntityManager em= factory.createEntityManager();
