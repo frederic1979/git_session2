@@ -158,6 +158,10 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 </persistence>
 #+END_SRC
 
+La propriété =hibernate.hbm2ddl.auto= permet de définir comment
+[[https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#configurations-hbmddl][Hibernate va gérer les tables correspondant aux entités]] (création,
+modification, destruction en fin d'exécution,…).
+
 - Exercice :: Que penser des propriétés =javax.persistence.jdbc.url=
               et surtout =javax.persistence.jdbc.user= voire
               =javax.persistence.jdbc.password= ? Que proposez-vous ?
