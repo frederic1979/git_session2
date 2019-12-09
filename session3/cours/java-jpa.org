@@ -446,6 +446,8 @@ Implémenter les mêmes fonctionnalités pour une classe =Monument= :
 #+END_SRC
 * Associations
 
+On peut [[https://thoughts-on-java.org/ultimate-guide-association-mappings-jpa-hibernate/][utiliser JPA pour modéliser tous types d'associations]].
+
 ** 1-N, N-1
 On va vouloir modéliser une association entre :
 - un monument et une ville
