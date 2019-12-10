@@ -60,7 +60,7 @@ Un exemple standardisé : le **Content-Type**. Cet entête indique le type de co
 
 La requête comme la réponse peuvent contenir un corps. Celui-ci contiendra les ressources à envoyer vers le serveur s'il s'agit d'une requête ou les ressources à envoyer au client s'il s'agit d'une réponse.
 
-Dans le cas d'une requête, il peut s'agit de données à sauvegarder (dans le cas d'un POST par exemple).
+Dans le cas d'une requête, il peut s'agir de données à sauvegarder (dans le cas d'un POST par exemple).
 
 Dans le cas d'une réponse, il peut s'agir de ressources demandées par la requête (données, page HTML, ...).
 
@@ -133,8 +133,8 @@ Ce qu'il faut retenir c'est que l'on doit associer au CRUD, les méthodes HTTP :
 - Update <=> PUT
 - Delete <=> DELETE
 
-### Utiliser les codes d'erreurs
+### Utiliser les bons codes d'erreurs
 
-Ne renvoyez par un code 200 si vous avez catché une exception par exemple, mais retournez un code d'erreur approprié (par exemple un code 400 si c'est à cause de données d'entrée invalides).
+Ne renvoyez pas un code 200 si vous avez catché une exception par exemple, mais retournez un code d'erreur approprié (par exemple un code 400 si c'est à cause de données d'entrée invalides).
 
 Et si vous ne respectez pas ces consignes, vous allez vous reconnaître dans [cette chanson](https://youtu.be/nSKp2StlS6s).

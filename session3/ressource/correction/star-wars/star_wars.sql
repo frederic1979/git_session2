@@ -169,7 +169,7 @@ create table vehicles
     crew                   int,
     passengers             int,
     cargo_capacity         bigint,
-    consumables_in_days    int,
+    consumables            varchar(127),
 
     vehicle_class          int
         constraint vehicle_class_fk
@@ -196,6 +196,7 @@ create table starships
             references vehicles
             on delete cascade,
     hyperdrive_rating numeric(2, 1),
+    mglt              smallint,
     primary key (vehicle_idx)
 );
 
@@ -221,7 +222,7 @@ create table characters
     full_name     varchar(255),
     height        numeric(4, 1),
     mass          numeric(5, 1),
-    birthday      timestamp,
+    birthday      varchar(255),
     gender_idx    int
         constraint gender_fk
             references genders,

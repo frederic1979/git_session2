@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>API REST</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../remark/remark-prez.css">
+    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Abel&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <textarea id="source">
+
+class: center, middle
+
+# API REST
+
+![Logo Simplon](../../reveal/images/logo_simplon.png)
+
+---
+
+## Les bases du back
+
+### Pourquoi un serveur
+
+#### Mais d'abord, c'est quoi un serveur
+
+--
+
+**Serveur physique** : Machine tout le temps (ou presque) **allumée et connectée** au réseau (intranet ou internet).
+
+--
+
+Caractéristiques dépendantes des besoins des applications.
+
+|              | Rasp       | Serveur Pro |
+|--------------|------------|-------------|
+| Mémoire vive | 1Go        | 256 Go      |
+| Stockage     | 32Go       | 16 To       |
+| CPU          | 4C 1.2GHz  | 16C 2.9GHz  |
+
+
+--
+
+**Serveur logiciel** : Logiciel permettant de répondre à des requêtes réseau sur une machine.
+
+---
+
+## Les bases du back
+
+### Pourquoi un serveur
+
+#### Pourquoi utiliser un serveur
+
+--
+
+- Donner un accès **simultané** à des informations
+- Répondre à un nombre **indéterminé** d’utilisateurs
+- Pouvoir répondre **à tout moment**
+
+--
+
+Mise en place d'un serveur logiciel sur un serveur physique
+
+---
+
+## Les bases du back
+
+### Pourquoi un serveur
+
+#### Pourquoi utiliser un serveur Web
+
+--
+
+A partir d'ici : _serveur_ => **logiciel**.
+
+--
+
+Serveur web = Serveur internet ou intranet => utilisant **TCP/IP** et **HTTP**.
+
+Intérêt : tirer partie de toute l’infrastructure réseau existante.
+
+---
+
+## Les bases du back
+
+### Pourquoi un serveur
+
+#### Pourquoi utiliser un serveur Web Dynamique
+
+--
+
+Informations d'un S.I. souvent **modifiées** par les utilisateurs
+
+=> **généreration dynamique** (en cours d’utilisation) des informations à envoyer.
+
+---
+
+## Les bases du back
+
+### Pourquoi un serveur
+
+#### Pourquoi utiliser un serveur Web Dynamique en Java
+
+--
+
+- Connections de plusieurs utilisateurs en parallèle
+- Performance de la JVM
+- Portabilité grâce à la JVM
+- Fiabilité du typage statique
+- Rapidité de développement grâce aux frameworks
+
+---
+
+## Les bases du back
+
+### Changement de paradigme : inversion de contrôle & multithread
+
+#### Inversion de contrôle
+
+--
+
+Architecture du code différente :
+
+- Le programme **attend** des requêtes/évènements pour y répondre
+- Le code qui implémente la réponse est **enregistré** pour se déclencher au bon moment
+
+---
+
+## Les bases du back
+
+### Changement de paradigme : inversion de contrôle & multithread
+
+#### Multithread & accès concurrents
+
+--
+
+Masqué par l'utilisation du framework
+
+Le code va gérer les multiples appels **simultanés** grâce à plusieurs `Thread`
+
+Peut poser un problème particulier si l’implémentation modifie un état partagé !
+
+---
+
+## Une API REST
+
+### L'évolution vers les API REST
+
+--
+
+Un peu d'histoire :
+
+- Pages HTML **statiques**
+- Génération de pages HTML en fonction du client ou des données
+- Progression de JavaScript : appels au back sans rechargement complet de page
+
+Aujourd'hui : 
+
+- Plus besoin de générer les pages HTML côté serveur !
+- Il suffit de répondre aux requêtes **HTTP** pour créer/lire/modifier/supprimer des données
+
+---
+
+## Une API REST
+
+### Définitions
+
+--
+
+API = **A**pplication **P**rogramming **I**nterface.
+
+[REST](https://fr.wikipedia.org/wiki/Representational_state_transfer) = Standard pour la définition de service web.
+
+---
+
+## Une API REST
+
+### Notions de base sur HTTP
+
+--
+
+HTTP = **H**yper**T**ext **T**ransfer **P**rotocol.
+
+Utilisé par les navigateurs pour communiquer avec les serveurs
+
+Les navigateurs envoient des **requêtes** et les serveurs répondent ... des **réponses**.
+
+---
+
+## Une API REST
+
+### Notions de base sur HTTP
+
+#### La méthode HTTP
+
+--
+
+- **GET** : Récupération de données
+- **POST** : Soumission de données
+- **PUT** : Modifiction de données
+- **DELETE** : Suppression de données
+
+---
+
+## Une API REST
+
+### Notions de base sur HTTP
+
+#### L'URL
+
+--
+
+Localisation des ressources auxquelles on souhaite accéder (page HTML, données, ...)
+
+`http://192.168.1.197/last-measure`
+
+---
+
+## Une API REST
+
+### Notions de base sur HTTP
+
+#### Les entêtes
+
+--
+
+Entêtes **standard** ou pas
+
+Exemple standardisé : le **Content-Type**
+
+`Content-Type: text/html; charset=utf-8`
+
+---
+
+## Une API REST
+
+### Notions de base sur HTTP
+
+#### Le corps
+
+--
+
+**Requête** : données à sauvegarder (avec un POST).
+
+**Réponse** : ressources demandées par la requête (données, page HTML, ...).
+
+---
+
+## Une API REST
+
+### Notions de base sur HTTP
+
+#### Le statut
+
+--
+
+Code de statut avec la réponse => informer sur la résultat de l'exécution de la requête.
+
+- **2xx** => requête **traitée avec succès**.
+- **3xx** => requête **redirigée**.
+- **4xx** => **erreur venant du client**.
+- **5xx** => **erreur venant du serveur**.
+
+---
+
+## Une API REST
+
+### Les règles de base de REST
+
+#### Définir des chemins d'accès standard
+
+--
+
+Pour l'API météo :
+
+- `http://192.168.1.197/measures?tob-by=date`
+- `http://192.168.1.197/measures?top-by=temperature`
+- `http://192.168.1.197/measures?top-by=pressure`
+- `http://192.168.1.197/measures?top-by=humidity`
+- `http://192.168.1.197/measures?startDate=${startDateString}&endDate=${endDateString}`
+
+---
+
+## Une API REST
+
+### Les règles de base de REST
+
+#### Utiliser les méthodes HTTP comme opérations
+
+--
+
+- Create => POST
+- Read => GET
+- Update => PUT
+- Delete => DELETE
+
+--
+
+**Das ist verboten:** `http://ip-du-serveur/villes/1/modify`
+
+---
+
+## Une API REST
+
+### Les règles de base de REST
+
+#### Utiliser les bons codes d'erreurs
+
+--
+
+On ne renvoit pas un code 200 si on a une erreur, on utilise un **code d'erreur** approprié !
+
+Exemple : un code 400 si données d'entrée invalides
+
+--
+
+Et si vous ne respectez pas ces consignes, vous allez vous reconnaître dans [cette
+chanson](https://youtu.be/nSKp2StlS6s).
+
+---
+
+## Avec Spring boot
+
+### Pourquoi utiliser un framework
+
+--
+
+- 80% des développeur•euses => **mêmes besoins**
+- Développement d'API REST en Java => très répandu
+
+--
+
+=> Apparition de frameworks :
+
+- **Cadre imposé** (réponses aux problématiques d'architecture du code)
+- **Librairies standard** (besoins récurrents)
+
+--
+
+On se concentre sur la **valeur aujoutée**
+
+---
+
+## Avec Spring boot
+
+### Les bénéfices de Spring boot
+
+#### L'inversion de contrôle et l'injection de dépendances
+
+--
+
+```java
+public class CsvReader {
+    private ZipCodeDAO zDao;
+    private CityDAO cDao;
+
+    public CsvReader() {
+        this.zDao = new ZipCodeDAO();
+        this.cDao = new CityDAO();
+    }
+}
+```
+
+---
+
+## Avec Spring boot
+
+### Les bénéfices de Spring boot
+
+#### L'inversion de contrôle et l'injection de dépendances
+
+--
+
+```java
+public class CsvReader {
+    private ZipCodeDAO zDao;
+    private CityDAO cDao;
+
+    public CsvReader(ZipCodeDAO zDao, CityDAO cDao) {
+*       this.zDao = zDao;
+*       this.cDao = cDao;
+    }
+}
+```
+
+---
+
+## Avec Spring boot
+
+### Les bénéfices de Spring boot
+
+#### L'inversion de contrôle et l'injection de dépendances
+
+--
+
+Avantages :
+
+- Changement plus facile entre différentes implémentations
+- Simplification des tests
+
+--
+
+On aurait pu le faire nous même avec le pattern **???**
+
+---
+
+## Avec Spring boot
+
+### Les bénéfices de Spring boot
+
+#### Web
+
+##### Servlet et conteneur de Servlet
+
+--
+
+On a pas attendu Spring pour répondre à des appels HTTP :-)
+
+--
+
+C'était déjà possible grâce aux **Servlets**
+
+> Servlet : classe Java définissant le comportement à avoir en fonction d'un certain appel réseau (et notamment HTTP).
+
+---
+
+## Avec Spring boot
+
+### Les bénéfices de Spring boot
+
+#### Web
+
+##### Servlet et conteneur de Servlet
+
+```java
+public class HelloWorldServlet extends HttpServlet {
+
+    private String message = "Salut la promo !";;
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+        // On indique que l'on renvoie du JSON
+        response.setContentType("application/json");
+
+        // Et on le renvoie pour de vrai !
+        PrintWriter out = response.getWriter();
+        out.println("{ \"message\": \"" + message + "\"}");
+    }
+}
+```
+
+---
+
+## Avec Spring boot
+
+### Les bénéfices de Spring boot
+
+#### Web
+
+##### Servlet et conteneur de Servlet
+
+--
+
+Notre **Servlet** doit tourner dans un **conteneur de Servlet** qui sait gérer les appels HTTP
+
+Serveur web Java permettant la gestion des **Servlets** comme [Tomcat](https://tomcat.apache.org/)
+
+---
+
+## Avec Spring boot
+
+### En pratique
+
+--
+
+- **Etape 1 :** Création d'un projet **Maven** (ou Gradle) avec [Spring Initializr](https://start.spring.io/) pour la
+configuration du projet
+- **Etape 2 :** Configuration du fichier `application.properties` (accès base par exemple)
+- **Etape 3 :** Premier `Controller`
+
+---
+
+## Avec Spring boot
+
+### En pratique
+
+--
+
+```java
+@RestController
+@RequestMapping("/api/hello-world")
+public class HelloWorldController {
+
+    @GetMapping
+    public ResponseEntity<Message> sayHello() {
+        return ResponseEntity.ok(new Message("Salut la promo !"));
+    }
+
+}
+```
+
+---
+
+class: center, middle
+
+# Un petit live coding pour s'échauffer ?
+
+    </textarea>
+    <script src="../../remark/2019-10-remark.min.js">
+    </script>
+    <script>
+        var slideshow = remark.create({
+            // Set the slideshow display ratio
+            // Default: '4:3'
+            // Alternatives: '16:9', ...
+            ratio: '16:9',
+
+            // Navigation options
+            navigation: {
+                // Enable or disable navigating using scroll
+                // Default: true
+                // Alternatives: false
+                scroll: true,
+
+                // Enable or disable navigation using touch
+                // Default: true
+                // Alternatives: false
+                touch: true,
+
+                // Enable or disable navigation using click
+                // Default: false
+                // Alternatives: true
+                click: false,
+            },
+
+            // Enable or disable counting of incremental slides in the slide counting
+            countIncrementalSlides: false,
+
+            // Code highlight style
+            highlightStyle: 'monokai',
+
+            // Highlight lines preceded with '*'
+            highlightLines: true,
+        });
+    </script>
+    <script src="../../remark/2019-10-last-heading.js"></script>
+</body>
+
+</html>
