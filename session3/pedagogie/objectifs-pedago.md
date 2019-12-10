@@ -48,5 +48,5 @@
   * Connaître les grand principes d'une API REST
   * Savoir utiliser Spring boot pour définir une API REST minimaliste
 * **Compétence•s visées•s :** 7
-* **Modalité•s pédagogique•s :** Todo
+* **Modalité•s pédagogique•s :** [API REST Star Wars](../exercice/rest-api.md)
 * **Temporalité :** 21h
