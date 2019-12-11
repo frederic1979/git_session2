@@ -35,7 +35,7 @@ spring.datasource.username=<votre username>
 spring.datasource.password=<le mdp de votre username>
 ```
 
-Cela permettra à Spring de se connecter à la base de données que nous avons créée pour Star Wars. Si vous souhaitez importer les données des planètes : [le schéma à utiliser](../ressource/correction/star-wars/star_wars.sql) et [les données](session3/ressource/correction/star-wars/insert.sql).
+Cela permettra à Spring de se connecter à la base de données que nous avons créée pour Star Wars. Si vous souhaitez importer les données des planètes : [le schéma à utiliser](../ressource/correction/star-wars/star_wars.sql) et [les données](../ressource/correction/star-wars/insert.sql).
 
 ## Etape 3 : Création de l'API
 
