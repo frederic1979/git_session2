@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Angular</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../remark/remark-prez.css">
+    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Abel&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <textarea id="source">
+
+class: center, middle
+
+# Développer une SPA avec Angular
+
+![Logo Simplon](../../reveal/images/logo_simplon.png)
+
+---
+
+## Mais d'abord c'est quoi une SPA
+
+--
+
+📖 **S**ingle **P**age **A**pplication
+
+> Une seule page web où les données et les vues sont rechargées par le code JavaScript.
+
+--
+
+On a les mécanismes suivants :
+
+- Chargement des données via une API
+- Modification du DOM côté client
+
+---
+
+## Mais d'abord c'est quoi une SPA
+
+--
+
+.center[![Image SPA](../ressource/spa.png)]
+
+---
+
+## Mais d'abord c'est quoi une SPA
+
+--
+
+**Les avantages d'une SPA**
+
+- Serveur moins sollicité
+- Impression d'utiliser une application (client lourd)
+- Tout le contenu est chargé en une seule fois
+- Bonne fluidité une fois le contenu chargé
+
+--
+
+**Les inconvénients d'une SPA**
+
+- Temps de chargement potentiellement plus long au démarrage
+- Beaucoup de code exposé au client
+
+---
+
+## Angular
+
+--
+
+> Angular est un framework permettant de développer des SPA (qu'elles soient prévues pour le web, pour mobile ou pour
+client lourd).
+
+--
+
+**Pourquoi un framework ?**
+
+- **HTML** only à partir de 1989
+- Puis **CSS** pour un peu plus de _charme_
+- Puis **JavaScript** en 1995 pour ajouter du _dynamisme_
+- A partir des années 2000 apparition des premières **librairies** Javascript (jQuery, ...)
+- Aujourd'hui : beaucoup de **frameworks** pour construire des applications modulaires **rapidement** et **proprement**
+
+---
+
+## L'environnement de développement
+
+--
+
+- **Node.js** : Récupération des différents packages & outils de développement
+- **npm** : Gestion des packages (= Maven pour Java)
+- **Angular CLI** : Utilitaire permettant de :
+  - créer des composants, des services, ...
+  - compiler l'application
+  - maintenir l'application
+- **Webpack** : Utilitaire magique pour l'agrégation des fichiers HTML, CSS et TS.
+
+---
+
+## De quoi se compose une application Angular
+
+### Les modules
+
+--
+
+> Les modules définissent les **blocs fonctionnels** d'une application
+
+Les modules sont eux mêmes découpés en **vues** et **services**.
+
+--
+
+⚠️ Les modules (au sens Angular) ne doivent **pas être confondus** avec les modules JavaScript
+
+---
+
+## De quoi se compose une application Angular
+
+### Les modules
+
+--
+
+Ce qu'il faut retenir :
+
+- Une app => toujours un **module racine**
+- Fichier `AppModule.ts`.
+- Le module racine **amorce** l'application
+- D'autres modules peuvent être importés par ce module
+
+---
+
+## De quoi se compose une application Angular
+
+### Les vues
+
+--
+
+> Les vues sont les blocs de base composant notre application. C'est dans les vues que l'on va écrire du **HTML**, du **CSS**
+et du **TypeScript**.
+
+--
+
+Elles sont souvent composées de **3 fichiers** (parfois un 4ème pour les tests) :
+
+- Un fichier HTML => **template** de notre vue
+- Un fichier CSS (ou SCSS, ou LESS) => **style** de notre vue
+- Un fichier TS => **logique** de notre vue
+
+---
+
+## De quoi se compose une application Angular
+
+### Les vues
+
+--
+
+💡 Notre application aura une **vue racine** :
+
+- Elle sera **déclarée** dans notre **module racine**
+- Cette vue pourra **inclure** d'autres vues
+
+---
+
+## De quoi se compose une application Angular
+
+### Les services
+
+> Les services mettent à disposition des fonctions qui peuvent être **partagées** par différents composants
+
+💡 C'est dans les **services** que l'on fera les appels à nos **API REST**.
+
+---
+
+## De quoi se compose une application Angular
+
+### Un exemple
+
+.center[![Exemple de l'application Glycémique](../ressource/app-glyc-structure.png)]
+
+---
+
+## De quoi se compose une application Angular
+
+### Un exemple
+
+.center[![Exemple de l'application Glycémique](../ressource/app-glyc-list.png)]
+
+---
+
+## De quoi se compose une application Angular
+
+### Un exemple
+
+.center[![Exemple de l'application Glycémique](../ressource/app-glyc-calc.png)]
+
+---
+
+## TypeScript
+
+--
+
+> TypeScript est un sur-ensemble de JavaScript
+
+💡 Cela veut dire :
+
+- On peut écrire du code JavaScript dans un fichier TypeScript
+- TypeScript ajoute des fonctionnalités supplémentaires
+- Un fichier TypeScript doit être **transpilé** en JavaScript pour être exécutable par un navigateur Web
+
+---
+
+## TypeScript
+
+### Les avantages
+
+#### Le typage statique
+
+--
+
+Grâce à TypeScript, on _peut_ choisir le type d'une **variable** !
+
+```typescript
+let isAngularGreat: boolean = true;
+
+// Ce qui veut dire que je ne peux pas faire
+isAngularGreat = "C'est pas faux"; // ==> Erreur à la compilation
+```
+
+--
+
+Alors qu'en **JavaScript** on peut écrire :
+
+```javascript
+let isAngularGreat = true;
+isAngularGreat = "C'est pas faux";
+```
+
+---
+
+## TypeScript
+
+### Les avantages
+
+#### Le typage statique
+
+--
+
+On _peut_ aussi typer ses **fonctions** :
+
+```typescript
+function isAngularGreat(): boolean {
+  return true;
+}
+```
+
+---
+
+## TypeScript
+
+### Les avantages
+
+#### Le typage statique
+
+--
+
+On retrouve les mêmes **types primitifs** qu'en JS :
+
+```typescript
+// boolean
+let isAngularGreat: boolean = true;
+
+// number
+let angularMajorVersion: number = 7;
+
+// string
+let angularFullVersion: string = '7.1.4';
+
+// array
+let angularMajorVersion: number[] = [2, 4, 5, 6, 7];
+let angularVersions: Array<string> = ['6.0.0', '6.1.2', '7.0.0', '7.0.1', '7.1.4'];
+```
+
+---
+
+## TypeScript
+
+### Les avantages
+
+#### Les classes
+
+--
+
+En **TypeScript** on se rapproche du Java :
+
+```typescript
+class Framework {
+  // attributs
+  private name: string;
+  private language: string;
+  private version: string;
+
+  // méthodes
+  ...
+}
+```
+
+---
+
+## TypeScript
+
+### Les avantages
+
+#### Les classes
+
+--
+
+En **TypeScript** on peut d'ailleurs déclarer des **getters/setters** comme en C# :
+
+```typescript
+class Framework {
+  // attribut
+  private _version: string;
+
+  // getter
+  get version(): string {
+    return 'V_' + _version;
+  }
+
+  // setter
+  set version() {
+    this.version = version;
+  }
+}
+```
+
+---
+
+class: center, middle
+
+# Au boulot !
+
+    </textarea>
+    <script src="../../remark/2019-10-remark.min.js">
+    </script>
+    <script>
+        var slideshow = remark.create({
+            // Set the slideshow display ratio
+            // Default: '4:3'
+            // Alternatives: '16:9', ...
+            ratio: '16:9',
+
+            // Navigation options
+            navigation: {
+                // Enable or disable navigating using scroll
+                // Default: true
+                // Alternatives: false
+                scroll: true,
+
+                // Enable or disable navigation using touch
+                // Default: true
+                // Alternatives: false
+                touch: true,
+
+                // Enable or disable navigation using click
+                // Default: false
+                // Alternatives: true
+                click: false,
+            },
+
+            // Enable or disable counting of incremental slides in the slide counting
+            countIncrementalSlides: false,
+
+            // Code highlight style
+            highlightStyle: 'monokai',
+        });
+    </script>
+    <script src="../../remark/2019-10-last-heading.js"></script>
+</body>
+
+</html>
