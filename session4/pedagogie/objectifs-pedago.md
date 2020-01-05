@@ -9,9 +9,10 @@
 * **Notions :** [Découverte d'Angular](../cours/angular.md)
 * **Objectif•s :**
   * Comprendre les bases d'Angular (Components & Templates)
-    * Interpolation {{ }}
-    * Property binding [ ]
-    * Event binding ( )
+    * Interpolation `{{ }}`
+    * Property binding `[ ]`
+    * Event binding `( )`
+    * Structural directives (`*ngFor` & `*ngIf`)
     * Input
     * Output
   * Savoir utiliser le Routing pour naviguer dans son applicaiton
