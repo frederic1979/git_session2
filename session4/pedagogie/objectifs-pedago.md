@@ -15,7 +15,7 @@
     * Structural directives (`*ngFor` & `*ngIf`)
     * Input
     * Output
-  * Savoir utiliser le Routing pour naviguer dans son applicaiton
+  * Savoir utiliser le Routing pour naviguer dans son application
   * Savoir créer des services pour la gestion de données
   * Savoir créer des formulaires
 * **Compétence•s visées•s :** 2 et 3
