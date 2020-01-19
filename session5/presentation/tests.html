@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tester son code</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../../reveal/css/reveal.css">
+  <link rel="stylesheet" href="../../reveal/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="../../reveal/css/presentation.css">
+  <link rel="stylesheet" href="../../reveal/lib/css/atom-one-dark.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../../reveal/css/print/pdf.css' : '../../reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+
+<body>
+  <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+  <div class="reveal">
+    <!-- Wrap all slides in a single "slides" class -->
+    <div class="slides">
+
+      <!-- ALL SLIDES GO HERE -->
+      <!-- Each section element contains an individual slide -->
+      <section>
+        <h1>Tester son code</h1>
+        <img class="no-border" src="../../reveal/images/logo_simplon.png" alt="Logo Simplon">
+      </section>
+
+      <section>
+        <section>
+          <h3>C'est quoi un test ?</h3>
+        </section>
+
+        <section>
+          <p>D'après le dictionnaire Larousse</p>
+          <blockquote cite="https://www.larousse.fr/dictionnaires/francais/test/77497?q=test#76585">Essai d'un produit, d'un appareil pour vérifier son action, son fonctionnement.</blockquote>
+          <blockquote cite="https://www.larousse.fr/dictionnaires/francais/test/77497?q=test#76585">Toute circonstance qui permet d'éprouver, de mesurer quelque chose.</blockquote>
+        </section>
+
+        <section>
+          <p>Est-ce que vous testez votre code ?</p>
+          <p class="fragment">La réponse est <strong>oui</strong> ! Vous faites des tests "à la main"</p>
+        </section>
+
+        <section>
+          <p>Mais pourquoi testez-vous votre code ?</p>
+          <p class="fragment">Réponse espérée :</p>
+          <blockquote class="fragment">Pour vérifier que mon code fonctionne comme attendu</blockquote>
+        </section>
+
+        <section>
+          <p>Est-ce que les tests "à la main" sont efficaces ?</p>
+          <p class="fragment">Réponse espérée :</p>
+          <blockquote class="fragment">Bof Bof</blockquote>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Les différents types de test</h3>
+        </section>
+
+        <section>
+          <p>Les tests <strong>unitaires</strong></p>
+          <p>On teste une unité de code &lt;=&gt; souvent une fonction</p>
+          <p>Manuellement &lt;=&gt; <span class="code-font">System.out.println();</span> ou debugger</p>
+        </section>
+
+        <section>
+          <p>Les tests <strong>d'intégration</strong></p>
+          <p>On teste la collaboration de plusieurs unités de code</p>
+          <p>Exemple : Repository Spring avec connexion BDD</p>
+          <p>Manuellement &lt;=&gt; test du controller via SOAP UI ou Postman</p>
+        </section>
+
+        <section>
+            <p>Les tests <strong>fonctionnels</strong></p>
+            <p>On vérifie que la fonctionnalité développée se comporte comme attendu</p>
+            <p>Manuellement &lt;=&gt; test d'une fonctionnalité dans le navigateur</p>
+        </section>
+
+        <section>
+          <p>Les tests <strong>de performance</strong></p>
+          <p>On teste les performances de notre code</p>
+          <p>Exemple : utilisation de <a href="https://gatling.io/">Gatling</a></p>
+        </section>
+
+        <section>
+          <p>Les tests <strong>de sécurité</strong></p>
+          <p>On teste la sécurité de notre code</p>
+          <p>Exemple : on tente des failles connues de sécurité (injection SQL, ...)</p>
+        </section>
+
+        <section>
+          <p>Et il y en a d'autres</p>
+          <p>Tests <strong>d'acceptance</strong>, <strong>d'utilisabilité</strong>, ...</p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Les tests à automatiser et maitriser</h3>
+          <ul>
+            <li><strong>Unitaires</strong></li>
+            <li>D'intégration</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Les tests <strong>unitaires</strong></h3>
+          <ul>
+            <li>Rapides à exécuter</li>
+            <li>Facile à mettre en place</li>
+          </ul>
+          <p>Ils représentent souvent environ 75% des tests de l'application</p>
+        </section>
+        <section>
+          <h3>Les tests <strong>d'intégration</strong></h3>
+          <p>Ils représentent souvent environ 20% des tests de l'application</p>
+        </section>
+        <section>
+          <h3>Les tests <strong>fonctionnels</strong></h3>
+          <p>Ils représentent souvent environ 5% des tests de l'application</p>
+          <p>Leur automatisation peut s'avérer complexe et chronophage</p>
+        </section>
+        <section>
+          <h3>La pyramide de répartition des tests</h3>
+          <img src="../ressource/tests/tests-pyramid.png" alt="Test pyramid split">  
+        </section>
+      </section>
+      
+      <section>
+        <section>
+          <h3>La couverture de code</h3>
+        </section>
+
+        <section>
+          <h3>Définition</h3>
+          <p>Mesure determinant la <strong>proportion</strong> de code <strong>couverte</strong> pas les tests</p>
+          <a href="http://www.junit.fr/2012/04/03/definition-de-la-couverture-de-code-illustree-avec-junit/">Comprendre la couverture de code</a>
+        </section>
+        <section>
+          <h3>Quelle couverture de code ?</h3>
+          <p>Entre 70% et 80%</p>
+        </section>
+
+        <section>
+          <h3>Comment couvrir 80% du code "à la main" ?</h3>
+          <p class="fragment">Réponse espérée :</p>
+          <blockquote class="fragment">C'est pas possible !</blockquote>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Comment automatiser les tests ?</h3>
+        </section>
+
+        <section>
+          <h3>Plusieurs niveaux d'automatisation</h3>
+          <ul>
+            <li>Le test en lui même</li>
+            <li>Son exécution</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Automatiser le test</h3>
+          <p>Utilisation de frameworks</p>
+          <ul>
+            <li>JUnit</li>
+            <li>AssertJ</li>
+            <li>Mockito</li>
+            <li>...</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Exemple de fonction à tester</h3>
+          <pre><code class="hljs java" data-trim>
+            public class SmileFaces {
+              public static int countSmileys(List &lt;String&gt; arr) {
+                // Counter
+                int smilingFaces = 0;
+                // List analysis
+                for (String face : arr) {
+                  // If smiley is smiling then counter++
+                  if (matchesSmiley(face))
+                    smilingFaces++; 
+                }
+                return smilingFaces;
+              }
+              
+              private static boolean matchesSmiley(String input) {
+                return input.matches("[:;][-~]?[\\)D]");
+              }
+            }
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Exemple de tests JUnit</h3>
+          <pre><code class="hljs java" data-trim>
+            class SmileFacesTest {
+              @Test
+              void shoulReturn0IfINoSmiley() {
+                List&lt;String&gt; a = new ArrayList&lt;String&gt;();
+                assertEquals(0, SmileFaces.countSmileys(a));
+              }
+
+              @Test
+              void shouldReturn1IfISmileOnce() {
+                List&lt;String&gt; a = new ArrayList&lt;String&gt;();
+                a.add(":)");
+                assertEquals(1, SmileFaces.countSmileys(a));
+              }
+            }
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Automatiser la réalisation</h3>
+          <p>Utilisation de l'intégration continue</p>
+          <ul>
+            <li>Jenkins</li>
+            <li>Travis</li>
+            <li>Circle CI</li>
+            <li>Gitlab</li>
+            <li><strong>Github</strong></li>
+            <li>...</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Capture d'écran build Circle CI</h3>
+          <img src="../ressource/tests/github-ci.png" alt="Capture d'écran Github CI">
+        </section>
+      </section>
+      
+      <section>
+        <section>
+          <h3>Le Test Driven Development &lt;=&gt; TDD</h3>
+        </section>
+
+        <section>
+          <h3>Qu'est-ce que c'est ?</h3>
+          <p class="fragment">Une méthode de développement ...</p>
+          <p class="fragment">... dirigée par les tests</p>
+        </section>
+
+        <section>
+          <img src="../ressource/tests/tdd-flow.jpeg" alt="Cycle simplifié du TDD">
+        </section>
+
+        <section>
+          <img width="1080" src="../ressource/tests/cycle-global-tdd.png" alt="Cycle global du TDD">
+        </section>
+        
+      </section>
+      <section>
+        <section>
+          <h3>Les Behavior Driven Development</h3>
+          <a href="http://blog.soat.fr/2011/06/introduction-au-behavior-driven-development/">Le BDD</a>
+        </section>
+      </section>    
+      
+      <section>
+        <h3>A vous de jouer ;-)</h3>
+        <a href="../exercice/tests.md">Exercices TU en TDD</a>
+      </section>
+    </div>
+  </div>
+  <script src="../../reveal/lib/js/head.min.js"></script>
+  <script src="../../reveal/js/reveal.js"></script>
+
+  <script>
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../../reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: '../../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: '../../reveal/plugin/search/search.js', async: true },
+      { src: '../../reveal/plugin/zoom-js/zoom.js', async: true },
+      { src: '../../reveal/plugin/notes/notes.js', async: true }
+    ]
+  });
+  </script>
+</body>
+
+</html>

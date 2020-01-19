@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tester avec Spring</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../../reveal/css/reveal.css">
+  <link rel="stylesheet" href="../../reveal/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="../../reveal/css/presentation.css">
+  <link rel="stylesheet" href="../../reveal/lib/css/atom-one-dark.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../../reveal/css/print/pdf.css' : '../../reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+
+<body>
+  <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+  <div class="reveal">
+    <!-- Wrap all slides in a single "slides" class -->
+    <div class="slides">
+
+      <!-- ALL SLIDES GO HERE -->
+      <!-- Each section element contains an individual slide -->
+      <section>
+        <h1>Tester avec Spring</h1>
+        <img class="no-border" src="../../reveal/images/logo_simplon.png" alt="Logo Simplon">
+      </section>
+
+      <section>
+        <section>
+          <h3>Comment faire pour tester ...</h3>
+          <ul>
+            <li>Les <span class="code-font">controllers</span></li>
+            <li>Les <span class="code-font">services</span></li>
+            <li>Les <span class="code-font">repositories</span></li>
+            <li>Et toute la chaîne ?</li>
+          </ul>
+        </section>
+      </section>
+      
+      <section>
+        <section>
+          <h3>Ce que Spring nous propose d'utiliser</h3>
+          <pre><code class="hljs xml" data-trim>
+            &lt;dependency&gt;
+              &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+              &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+              &lt;scope&gt;test&lt;/scope&gt;
+            &lt;/dependency&gt;
+          </code></pre>
+        </section>
+        <section>
+          <ul>
+            <li><strong>JUnit</strong> : La librairie incontournable pour les tests unitaires</li>
+            <li><strong>Spring Test / Spring Boot Test</strong> : Des utilitaires notamment pour les tests d'intégration</li>
+            <li><strong>Mockito</strong> : Un framework permettant de gérer les mocks</li>
+            <li><strong>JsonPath</strong> : le XPath pour JSON</li>
+            <li>...</li>
+          </ul>
+        </section>
+        <section data-background="https://media.giphy.com/media/2AsEweF761Dji/giphy.gif">
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Comment y aller pas à pas</h3>
+        </section>
+        <section>
+          <h3>En utilisant l'approche TDD</h3>
+          <ul class="fragment">
+            <li><strong>Top-Down</strong> : Intégration =&gt; Unitaire</li>
+            <li>Bottom-Up : Unitaire =&gt; Intégration</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Un exemple en Top-Down</h3>
+          <p>Avec l'exemple des Villes et Monuments</p>
+          <a href="https://github.com/simplonco/java-workshop-spring-test/tree/master">L'exemple sur GitHub</a>
+        </section>
+        <section>
+          <h3>Fonctionnalités Rest</h3>
+          <ul>
+            <li>Récupérer la liste des villes</li>
+            <li>Récupérer une ville avec son nom</li>
+            <li>Récupérer les monuments d'une ville</li>
+            <li>Récupérer le monument d'une ville avec son nom</li>
+            <li>Ajouter une ville</li>
+            <li>Ajouter un monument à une ville</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Cela implique :</h3>
+          <ul>
+            <li>Un CityController</li>
+            <li>Un CityService</li>
+            <li>Un CityRepository et un MonumentRepository</li>
+            <li>Les entités City et Monument</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Si on teste en Top-Down</h3>
+          <p>Par quoi commencer ?</p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Les tests d'intégration de haut niveau</h3>
+          <p>Tester au plus haut niveau &lt;=&gt; faire des appels au <strong>controller</strong></p>
+          <a href="https://github.com/simplonco/java-workshop-spring-test/tree/01-top-level-int-test">Branche git <span class="code-font">01-top-level-int-test</span></a>
+        </section>
+        <section>
+          <h3>Comment faire des appels controller ?</h3>
+          <ul>
+            <li>En chargeant tout le contexte Spring</li>
+            <li>En utilisant <span class="code-font">TestRestTemplate</span></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Extrait de code</h3>
+          <pre><code class="hljs java" data-trim>
+            @ExtendWith(SpringExtension.class)
+            @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+            public class JavaCitySpringTestApplicationTests {
+            
+              @Autowired
+              private TestRestTemplate restTemplate;
+            
+              @Test
+              public void getCities() {
+                // When retrieving cities from /api/city
+                List&lt;?&gt; cities = this.restTemplate.getForObject("/api/city", List.class);
+                
+                // Then a non null list should be returned
+                assertThat(cities).isNotNull();
+              }
+            }
+          </code></pre>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Les tests du controller</h3>
+          <p>Tester le controller &lt;=&gt; vérifier les réponses et codes de retour</p>
+          <a href="https://github.com/simplonco/java-workshop-spring-test/tree/02-controller-test">Branche git <span class="code-font">02-controller-test</span></a>
+        </section>
+        <section>
+          <h3>Comment tester son controller sans le contexte ?</h3>
+          <ul>
+            <li>En utilisant <span class="code-font">@WebMvcTest</span> et <span class="code-font">@MockMvc</span></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Extrait de code</h3>
+          <pre><code class="hljs java" data-trim>
+            @ExtendWith(SpringExtension.class)
+            @WebMvcTest
+            public class CityControllerTests {
+            
+              @Autowired
+              MockMvc mockMvc;
+              @MockBean
+              CityService cityService;
+            
+              @Test
+              public void getCities() throws Exception {
+                when(this.cityService.getAllCities()).thenReturn(new ArrayList&lt;&gt;());
+            
+                this.mockMvc.perform(get("/api/city"))
+                  .andExpect(status().isOk());
+              }
+            }
+          </code></pre>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h3>Les tests du service</h3>
+          <p>Tester le service &lt;=&gt; Vrais tests unitaires</p>
+          <a href="https://github.com/simplonco/java-workshop-spring-test/tree/03-service-test">Branche git <span class="code-font">03-service-test</span></a>
+        </section>
+        <section>
+          <h3>Comment tester son service ?</h3>
+          <ul>
+            <li>En utilisant les <span class="code-font">@Mock</span></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Extrait de code</h3>
+          <pre><code class="hljs java" data-trim>
+            @ExtendWith(MockitoExtension.class)
+            public class CityServiceTests {
+
+              @Mock
+              CityRepository cityRepo;
+              private CityService cityService;
+
+              @Before
+              public void setUp() throws Exception {
+                cityService = new CityServiceImpl(cityRepo);
+              }
+
+              @Test
+              public void getAllCities() {
+                given(cityRepo.findAll()).willReturn(new ArrayList&lt;&gt;());
+                List&lt;City&gt; cities = cityService.getAllCities();
+                assertThat(cities).isNotNull();
+              }
+            }
+          </code></pre>
+        </section>
+      </section>
+      
+      <section>
+        <section>
+          <h3>Les tests du repository</h3>
+          <p>Tester le repository &lt;=&gt; Tester les méthodes gratuites JpaRepository</p>
+          <a href="https://github.com/simplonco/java-workshop-spring-test/tree/04-repository-test">Branche git <span class="code-font">04-repository-test</span></a>
+        </section>
+        <section>
+          <h3>Comment tester son repository sans le contexte ?</h3>
+          <ul>
+            <li>En utilisant <span class="code-font">@DataJpaTest</span></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Extrait de code</h3>
+          <pre><code class="hljs java" data-trim>
+            @ExtendWith(SpringExtension.class)
+            @DataJpaTest
+            public class CityRepositoryTests {
+
+              @Autowired
+              private CityRepository cityRepo;
+
+              @Autowired
+              private TestEntityManager testEntityManager;
+
+              @Test
+              public void findCityByName() throws Exception {
+                  City savedCity = testEntityManager
+                    .persistFlushFind(new City("Toulouse", 31));
+                  City toulouse = this.cityRepo
+                    .findByNameIgnoreCase("Toulouse");
+                  assertThat(toulouse.getName()).isEqualTo(savedCity.getName());
+                  assertThat(toulouse.getDptCode()).isEqualTo(savedCity.getDptCode());
+              }
+            }
+          </code></pre>
+        </section>
+      </section>
+
+      <section>
+        <h3>A vous de jouer ;-)</h3>
+        <p>Mettez en place les tests sur votre API Star Wars !</p>
+      </section>
+    </div>
+  </div>
+  <script src="../../reveal/lib/js/head.min.js"></script>
+  <script src="../../reveal/js/reveal.js"></script>
+
+  <script>
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../../reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: '../../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: '../../reveal/plugin/search/search.js', async: true },
+      { src: '../../reveal/plugin/zoom-js/zoom.js', async: true },
+      { src: '../../reveal/plugin/notes/notes.js', async: true }
+    ]
+  });
+  </script>
+</body>
+
+</html>
