@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTTPS</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../remark/remark-prez.css">
+    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Abel&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <textarea id="source">
+
+class: center, middle
+
+# Quelques mots sur HTTPS
+
+![Logo Simplon](../../reveal/images/logo_simplon.png)
+
+---
+
+## Pourquoi HTTPS ?
+
+--
+
+📖 **H**yper**T**ext **T**ransfer **P**rotocol **S**ecure
+
+--
+
+Pour garantir :
+
+- **l'identité** du site que l'on visite.
+- **la confidentialité** des données échangées.
+- **l'intégrité** des données échangées.
+
+---
+
+## Pourquoi HTTPS ?
+
+### Focus identité
+
+--
+
+Vérification d'identité grâce aux **certificats**
+
+Certificat = **carte d'identité** d'un site
+
+--
+
+Généré :
+
+- par les développeur•euse•s (pour les tests)
+- par une autorité de certification (pour la prod)
+
+---
+
+## Pourquoi HTTPS ?
+
+### Focus identité
+
+--
+
+Autorités de certification = **mairies** ou **préfectures**
+
+--
+
+Plusieurs types de certificats :
+
+- Le **DV** pour _domain validation_.
+- Le **OV** pour _organization validation_.
+- Le **EV** pour _extended validation_.
+
+---
+
+## Pourquoi HTTPS ?
+
+### Focus identité
+
+--
+
+- Le certificat contient les **informations** du site en **clair**.
+- Ces informations sont **hashées** puis **signées** avec la **clé privée** du certificat.
+- Cette **signature** est ajoutée dans le certificat
+- Elle est vérifiée grâce à la **clé publique** associée à la clé privée du certificat.
+
+---
+
+class: middle, center
+
+<video width="780" height="560" controls>
+    <source src="../ressource/https/https.mp4" type="video/mp4">
+</video>
+
+---
+
+## Pourquoi HTTPS ?
+
+### Focus confidentialité
+
+--
+
+Si identité vérifiée, on peut échanger des données avec le serveur.
+
+On souhaite que cet échange soit **chiffré** pour garantir la **confidentialité**.
+
+--
+
+Pour ce faire :
+
+- le navigateur va choisir une **clé de chiffrement symétrique**.
+- le navigateur va **chiffrer** cette clé symétrique avec la **clé plublique RSA**.
+- le navigateur **envoie** la clé au serveur.
+- le serveur déchiffre avec la **clé privée associée**.
+
+La communication peut commencer !
+
+---
+
+## Pourquoi HTTPS ?
+
+### Focus intégrité
+
+--
+
+Intégrité **assurée** par un **simple hash** des données.
+
+Hash **ajouté** au message ==> le destinataire **recalcule** ce hash pour vérifier.
+
+---
+
+## Pourquoi HTTPS ?
+
+### La mise en pratique en développement pour une API Spring Boot
+
+[Voir l'exercice HTTPS](../exercice/https.md)
+
+---
+
+class: center, middle
+
+# Au boulot !
+
+    </textarea>
+    <script src="../../remark/2019-10-remark.min.js">
+    </script>
+    <script>
+        var slideshow = remark.create({
+            // Set the slideshow display ratio
+            // Default: '4:3'
+            // Alternatives: '16:9', ...
+            ratio: '16:9',
+
+            // Navigation options
+            navigation: {
+                // Enable or disable navigating using scroll
+                // Default: true
+                // Alternatives: false
+                scroll: true,
+
+                // Enable or disable navigation using touch
+                // Default: true
+                // Alternatives: false
+                touch: true,
+
+                // Enable or disable navigation using click
+                // Default: false
+                // Alternatives: true
+                click: false,
+            },
+
+            // Enable or disable counting of incremental slides in the slide counting
+            countIncrementalSlides: false,
+
+            // Code highlight style
+            highlightStyle: 'monokai',
+        });
+    </script>
+    <script src="../../remark/2019-10-last-heading.js"></script>
+</body>
+
+</html>

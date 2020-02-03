@@ -21,3 +21,7 @@ La semaine 49 sera dédiée à la découverte des bases de données et la commun
 ## Session 4 : Angular
 
 Les semaines 2 et 3 seront dédiées à Angular. Rendez-vous sur [Objectifs pédagogiques Session 4](./session4/pedagogie/objectifs-pedago.md) pour en savoir un peu plus.
+
+## Session 5 : Angular
+
+La semaine 6 sera dédié à la sécurité des API, et aux devops. La semaine 7 sera l'occasion de démarrer le projet fil rouge et de découvrir un CMS statique. Rendez-vous sur [Objectifs pédagogiques Session 5](./session5/pedagogie/objectifs-pedago.md) pour en savoir un peu plus.

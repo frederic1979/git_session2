@@ -17,7 +17,16 @@
 * **Modalité•s pédagogique•s :** Exercices : [Debugguer du code qui n'est pas le sien](../exercice/debug.md), [Mettre en place le TDD](../exercice/tests.md)
 * **Temporalité :** 7h
 
-#### **Mar 4 Fev :** Introduction au devops
+#### **Mar 4 Fev et Mer 5 Fev :** Sécurisation de son API
+
+* **Notions :** Todo @bhugueney
+* **Objectif•s :**
+  * Todo @bhugueney
+* **Compétence•s visées•s :** 6 et 7
+* **Modalité•s pédagogique•s :** Todo @bhugueney
+* **Temporalité :** 14h
+
+#### **Jeu 6 Fev :** Introduction au devops
 
 * **Objectif•s :**
   * Comprendre la philosophie du CI/CD
@@ -27,15 +36,6 @@
 * **Compétence•s visées•s :** 2, 3, 6 et 7
 * **Modalité•s pédagogique•s :** Exercices : [Tester son API et mettre en place CI/CD](../exercice/ci-cd-api.md). En bonus : [Mettre en place le CI/CD pour le front](../exercice/ci-cd-front.md)
 * **Temporalité :** 7h
-
-#### **Mer 5 et Jeu 6 Fev :** Sécurisation de son API
-
-* **Notions :** Todo @bhugueney
-* **Objectif•s :**
-  * Todo @bhugueney
-* **Compétence•s visées•s :** 6 et 7
-* **Modalité•s pédagogique•s :** Todo @bhugueney
-* **Temporalité :** 14h
 
 #### **Ven 7 Fev :** Soutien
 
@@ -50,18 +50,18 @@
 
 #### **Lun 10, Mar 11 et Mer 12 Fev :** Conception fil rouge
 
-* **Notions :** Todo @jlsgrand
 * **Objectif•s :**
-  * 
-* **Compétence•s visées•s :** 
-* **Modalité•s pédagogique•s :** Projet
+  * Réaliser la conception d'une application Web
+* **Compétence•s visées•s :** 1, 2, 3, 5, 6 et 7
+* **Modalité•s pédagogique•s :** [Projet fil rouge](./fil-rouge.md)
 * **Temporalité :** 21h
 
 #### **Jeu 13 et Ven 14 Fev :** Jamstack
 
 * **Notions :** Todo @laurentpoi
 * **Objectif•s :**
-  * 
-* **Compétence•s visées•s :** 
+  * Utiliser un Headless CMS
+  * Customiser un Headless CMS
+* **Compétence•s visées•s :** 4 et 8
 * **Modalité•s pédagogique•s :** Projet
 * **Temporalité :** 14h
