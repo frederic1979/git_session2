@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2020-02-04 Tue 08:13 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Notions de sécurité avec Spring Security, mise en œuvre de OAuth2</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Bernard Hugueney" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Notions de sécurité avec Spring Security, mise en œuvre de OAuth2</h1>
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org9b43be6">1. Notions de sécurité</a>
+<ul>
+<li><a href="#org7c6ac7c">1.1. Modélisation de la menace (Threat Model)</a></li>
+<li><a href="#org9e78b34">1.2. Difficultés de la sécurisation</a></li>
+<li><a href="#orgf8cc5bb">1.3. Sécurisation d'une application : Authentification  et Autorisation</a></li>
+<li><a href="#orge45480a">1.4. Spécificité des technologies web</a></li>
+</ul>
+</li>
+<li><a href="#org2e57e6a">2. Authentification</a>
+<ul>
+<li><a href="#org6da7540">2.1. Authentification locale</a></li>
+<li><a href="#org2a07b81">2.2. Authentification externalisée</a></li>
+<li><a href="#org8772b84">2.3. Page d'accueil et contrôleur</a></li>
+<li><a href="#org8c7ecb2">2.4. Protection basée sur les URL</a></li>
+<li><a href="#org4867121">2.5. OAuth2</a></li>
+<li><a href="#org7ce8066">2.6. Ajout de javascript côté client</a></li>
+<li><a href="#orgabd58d9">2.7. Extraction d'informations sur l'utilisateur connecté</a></li>
+<li><a href="#orgb7ca113">2.8. Logout</a></li>
+<li><a href="#org2bc9833">2.9. CSRF</a></li>
+<li><a href="#orgdb83a81">2.10. Sécurisation au niveau des méthodes</a></li>
+<li><a href="#org1c90c54">2.11. Affectation de rôles en fonction d'information depuis le serveur OAuth 2.0</a></li>
+</ul>
+</li>
+<li><a href="#org7108f5d">3. Mise en œuvre</a>
+<ul>
+<li><a href="#org3e0b1d1">3.1. Protections plus complexes au niveau des méthodes</a></li>
+<li><a href="#org9b68658">3.2. CRUD</a></li>
+<li><a href="#org1b1b35e">3.3. Client Angular 6</a></li>
+</ul>
+</li>
+<li><a href="#org06b48a2">4. Pour aller plus loin</a>
+<ul>
+<li><a href="#org9a09d50">4.1. Content Security Policy</a></li>
+<li><a href="#org7fe7b5b">4.2. SSL</a></li>
+<li><a href="#orga7cc6b9">4.3. OWASP</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9b43be6" class="outline-2">
+<h2 id="org9b43be6"><span class="section-number-2">1</span> Notions de sécurité</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org7c6ac7c" class="outline-3">
+<h3 id="org7c6ac7c"><span class="section-number-3">1.1</span> Modélisation de la menace (Threat Model)</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+La première étape d'une démarche de sécurisation est la <a href="https://en.wikipedia.org/wiki/Threat_model">modélisation
+de la menace</a>. En effet, selon que vous soyez chargé de protéger les
+secrets nucléaires Français contre la NSA, le GRU et le MSS, ou que
+vous ayez à protéger les résultats sportifs de votre association
+locale de tennis de table, les enjeux ne seront pas les mêmes.  Il
+faut donc identifier ce que vous avez à protéger, qui serait intéressé
+à chercher un accès non autorisé et quel point.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9e78b34" class="outline-3">
+<h3 id="org9e78b34"><span class="section-number-3">1.2</span> Difficultés de la sécurisation</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+On pourrait penser que la sécurisation n'est qu'une partie des
+spécifications comme les autres et qu'il suffit que son implémentation
+ne soit pas buggée pour que l'application soit sécurisée.
+</p>
+
+<p>
+La différence fondamentale réside dans la classe des bugs à
+éradiquer. Alors que dans le cadre d'une utilisation normale,
+l'utilisateur ne rencontrera des bugs qu'accidentellement, un
+utilisateur hostile recherchera activement des bugs à exploiter.
+</p>
+
+<p>
+Pour cette raison, il est essentiel d'être particulièrement vigilant
+quand à la qualité du code. Non seulement il faut éviter de
+"réinventer la roue" soi-même, mais il ne faut pas se fier à n'importe
+quel conseil <a href="https://blog.acolyer.org/2018/06/27/secure-coding-practices-in-java-challenges-and-vulnerabilities/">trouvé sur internet</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf8cc5bb" class="outline-3">
+<h3 id="orgf8cc5bb"><span class="section-number-3">1.3</span> Sécurisation d'une application : Authentification  et Autorisation</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+On distingue généralement l'<a href="https://en.wikipedia.org/wiki/Electronic_authentication">authentification</a> et
+l'<a href="https://en.wikipedia.org/wiki/Authorization">autorisation</a>. L'authentification consiste à l'assurer de l'identité
+de l'utilisateur, et l'autorisation consiste à déterminer les droits
+d'accès associés à l'utilisateur en fonction de son identité et plus
+précisément en fonction des rôles (cf. cas d'utilisation) associés
+cette identité.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge45480a" class="outline-3">
+<h3 id="orge45480a"><span class="section-number-3">1.4</span> Spécificité des technologies web</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Dans le cadre d'un système client-serveur où le client est un
+navigateur web, il est essentiel de réaliser que l'on a aucun contrôle
+sur le code exécuté par le client et donc sur les requêtes que
+celui-ci envoie au serveur. <b>Par défaut</b>, on peut supposer que
+l'utilisateur se contentera d'envoyer les requêtes prévues lors de la
+conception du client. Cependant, l'utilisateur garde la possibilité
+d'exécuter le code de son choix, notamment par la console
+javascript. Pour cette raison, toutes les validations et restrictions
+seront au moins implémentées côté serveur. On peut en implémenter côté
+client pour permettre un retour plus rapide (sans attendre
+d'aller-retour sur le réseau), mais on ne se contentera <b>jamais</b> d'une
+vérification côté client.
+</p>
+
+<p>
+Aussi, toute implémentation réelle devra <b>évidemment</b> utiliser SSL
+pour <b>toutes</b> les communications, voire avec en plus du <i>certificate
+pinning</i> (ou <a href="https://fr.wikipedia.org/wiki/HTTP_Public_Key_Pinning">HTTP Public Key Pinning</a>), même s'il <a href="https://news.ycombinator.com/item?id=15572143">y a des soucis qui
+ont amené Chrome à ne plus le supporter</a> et que d'<a href="https://en.wikipedia.org/wiki/Certificate_Transparency">autres solutions sont
+explorées</a>.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org2e57e6a" class="outline-2">
+<h2 id="org2e57e6a"><span class="section-number-2">2</span> Authentification</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Pour l'authentification, on a principalement deux possibilités : une
+gestion locale ou une gestion externalisée.
+</p>
+</div>
+
+<div id="outline-container-org6da7540" class="outline-3">
+<h3 id="org6da7540"><span class="section-number-3">2.1</span> Authentification locale</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+L'authentification est généralement basée sur des association de
+login et mot de passe. Lors d'une requête de connections, le mot de
+passe envoyé est validé ou non en fonction du mot de passe déclaré à
+l'inscription (ou modifié ultérieurement).
+</p>
+
+
+<p>
+Le mot de passe lui-même est considéré comme une information
+confidentielle, notamment parce qu'il est souvent réutilisé pour des
+authentifications dans différents systèmes. Pour cette raison, il ne
+doit <b>jamais</b> être stocké en clair dans une base de données. On
+<a href="https://o7planning.org/en/11705/create-a-login-application-with-spring-boot-spring-security-jpa#a13944416">utilisera un hachage</a>, par exemple avec <a href="https://docs.spring.io/spring-security/site/docs/4.2.4.RELEASE/apidocs/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html">BCryptPasswordEncoder</a>. La
+fonction de hachage est telle qu'il suffit de comparer les résultats
+de hachage au lieu de comparer les mots de passe :
+</p>
+
+
+<p>
+\(
+bcrypt(receivedPassword) = bcrypt(storedPassword) \\
+\iff receivedPassword = storedPassword \)
+</p>
+
+
+<p>
+ mais il serait impossible (ou prohibitivement coûteux) de retrouver
+le mot de passe stocké \(storedPassword\) à partir de la valeur stockée
+en base \(bcrypt(storedPassword)\).
+</p>
+
+<p>
+La <a href="https://medium.com/@gustavo.ponce.ch/spring-boot-spring-mvc-spring-security-mysql-a5d8545d837d">simple implémentation d'une authentification locale</a> requiert
+d'avoir des tables/repositories/services pour les entités représentant
+les utilisateurs et pour leurs rôles. De plus, dans on contexte de
+Système d'Informations interne, on ne voudra généralement pas avoir un
+profil utilisateur par application. Pour ces raisons, on pourra
+préférer externaliser l'authentification, notamment par un mécanisme
+d'<a href="https://fr.wikipedia.org/wiki/Authentification_unique">Authentification unique</a> (SSO pour <i>Single Sign On</i>).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org2a07b81" class="outline-3">
+<h3 id="org2a07b81"><span class="section-number-3">2.2</span> Authentification externalisée</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+<a href="https://en.wikipedia.org/wiki/OAuth#OAuth_2.0">OAuth 2.0</a> est un protocole largement utilisé pour déléguer
+l'authentification. On va utiliser son implémentation dans la version
+la plus récente de spring boot. OAuth 2.0 permet non seulement
+l'authentification, mais aussi l'autorisation concernant les services
+directement offerts par le prestataire OAuth 2.0 (par exemple
+d'accès/modification aux posts pour Facebook, aux dépôts git pour
+github, etc.). On va utiliser Github comme prestataire OAuth 2.0 pour
+les exercices suivants.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Créer un nouveau projet Spring boot avec les
+caractéristiques suivantes :
+<dl class="org-dl">
+<dt>package</dt><dd>co.simplon.oauth2</dd>
+<dt>version de spring boot</dt><dd>2.2.4</dd>
+<dt>dépendences</dt><dd><ul class="org-ul">
+<li>Security</li>
+<li>Web</li>
+</ul></dd>
+</dl></dd>
+
+<dt>Exercice</dt><dd><p>
+Ajouter les dépendances suivantes au projet :
+</p>
+<div class="org-src-container">
+<pre class="src src-xml">    &lt;<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+        &lt;<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;org.springframework.security.oauth&lt;/<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;
+        &lt;<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;spring-security-oauth2&lt;/<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;
+    &lt;/<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+
+    &lt;<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;org.springframework.security.oauth.boot&lt;/<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;spring-security-oauth2-autoconfigure&lt;/<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;
+    &lt;/<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+</pre>
+</div></dd>
+
+<dt>Exercice</dt><dd>Configurer le port du serveur pour qu'il se lance
+en écoutant sur le port 8090 (ce sera utile pour la
+suite).</dd>
+</dl>
+
+<p>
+Afin de pouvoir observer des traces des mécanismes de sécurité,
+définir aussi les propriétés suivantes:
+</p>
+<div class="org-src-container">
+<pre class="src src-properties">logging.level.org.springframework.security=DEBUG
+logging.level.org.springframework.security.web.FilterChainProxy: DEBUG
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org8772b84" class="outline-3">
+<h3 id="org8772b84"><span class="section-number-3">2.3</span> Page d'accueil et contrôleur</h3>
+<div class="outline-text-3" id="text-2-3">
+<dl class="org-dl">
+<dt>Exercice</dt><dd><ul class="org-ul">
+<li><p>
+Créer une page index.html dans le répertoire <code>src/main/resources/static</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-html">      <span style="color: #008000;">&lt;!doctype html&gt;</span>
+      &lt;<span style="color: #006699;">html</span> <span style="color: #BA36A5;">lang</span>=<span style="color: #008000;">"en"</span>&gt;
+        &lt;<span style="color: #006699;">head</span>&gt;
+          &lt;<span style="color: #006699;">meta</span> <span style="color: #BA36A5;">charset</span>=<span style="color: #008000;">"utf-8"</span> /&gt;
+          &lt;<span style="color: #006699;">title</span>&gt;<span style="color: #000000; font-weight: bold; text-decoration: underline;">Demo spring security OAuth2</span>&lt;/<span style="color: #006699;">title</span>&gt;
+        &lt;/<span style="color: #006699;">head</span>&gt;
+        &lt;<span style="color: #006699;">body</span>&gt;
+          Welcome !
+        &lt;/<span style="color: #006699;">body</span>&gt;
+      &lt;/<span style="color: #006699;">html</span>&gt;
+</pre>
+</div></li>
+<li>Créer une classe annotée <code>@Controller</code> (voire <code>RestController</code>)
+avec un <code>RequestMapping</code> sur <code>/np/private</code> qui retourne la chaîne
+de caractères <code>"private"</code>.</li>
+<li>Lancer le programme en regardant les logs.</li>
+<li>Aller à l'adresse <a href="http://localhost:8090/">http://localhost:8090/</a> en regardant quelles
+requêtes sont envoyées par le navigateur et quels cookies sont
+déposés.</li>
+<li>À la page de login, se connecter avec login <code>user</code> et le mot de
+passe généré indiqué dans les logs.</li>
+<li>Aller à <a href="http://localhost:8090/np/private/">http://localhost:8090/np/private/</a></li>
+<li>Supprimer les cookies associés à ce site et recharger la page.</li>
+</ul></dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org8c7ecb2" class="outline-3">
+<h3 id="org8c7ecb2"><span class="section-number-3">2.4</span> Protection basée sur les URL</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Créer la classe suivante :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">  <span style="color: #0000FF;">package</span> co.simplon.<span style="color: #D0372D;">oauth2</span>;
+
+  <span style="color: #0000FF;">import</span> <span style="color: #D0372D;">org</span>.<span style="color: #D0372D;">springframework</span>.<span style="color: #D0372D;">context</span>.<span style="color: #D0372D;">annotation</span>.<span style="color: #6434A3;">Configuration</span>;
+  <span style="color: #0000FF;">import</span> <span style="color: #D0372D;">org</span>.<span style="color: #D0372D;">springframework</span>.<span style="color: #D0372D;">security</span>.<span style="color: #D0372D;">config</span>.<span style="color: #D0372D;">annotation</span>.<span style="color: #D0372D;">web</span>.<span style="color: #D0372D;">builders</span>.<span style="color: #6434A3;">HttpSecurity</span>;
+  <span style="color: #0000FF;">import</span> <span style="color: #D0372D;">org</span>.<span style="color: #D0372D;">springframework</span>.<span style="color: #D0372D;">security</span>.<span style="color: #D0372D;">config</span>.<span style="color: #D0372D;">annotation</span>.<span style="color: #D0372D;">web</span>.<span style="color: #D0372D;">configuration</span>.<span style="color: #6434A3;">WebSecurityConfigurerAdapter</span>;
+
+  <span style="color: #D0372D;">@Configuration</span>
+  <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">SecurityConfiguration</span> <span style="color: #0000FF;">extends</span> <span style="color: #6434A3;">WebSecurityConfigurerAdapter</span>{
+
+      <span style="color: #D0372D;">@Override</span>
+
+      <span style="color: #0000FF;">protected</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">configure</span>(<span style="color: #6434A3;">HttpSecurity</span> <span style="color: #BA36A5;">http</span>) <span style="color: #0000FF;">throws</span> <span style="color: #6434A3;">Exception</span> {
+          http.antMatcher(<span style="color: #008000;">"/**"</span>).authorizeRequests()
+              .antMatchers(<span style="color: #008000;">"/"</span>,<span style="color: #008000;">"/login**"</span>, <span style="color: #008000;">"/error**"</span>).permitAll()
+              .anyRequest().authenticated();
+      }
+  }
+</pre>
+</div>
+
+<p>
+Cette classe, qui doit porter l'annotation <code>@Configuration</code> pour être
+prise en compte dans la configuration de notre application, créer un
+<i>filtre</i> d'autorisation pour toutes les requêtes à partir de la racine
+(<code>antMatcher("/**")</code>) tel que :
+</p>
+<ol class="org-ol">
+<li>les urls de la racine, celles situées sous <code>/login</code> et sous <code>/error</code> sont autorisées</li>
+
+<li>toutes les autres exigent d'êtres authentifié.</li>
+</ol>
+
+
+<p>
+L'ordre des règles est important ! Dès qu'une requête active une règle
+(dans l'ordre de leurs déclarations), c'est celle-ci qui est activée.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>tester l'accès à la racine, puis  <code>/np/private</code>.</dd>
+<dt>Exercice</dt><dd>Même chose en intervertissant les deux règles.</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt>Important !</dt><dd>La formulation (<i>whitelisting</i>) qui consiste à
+indiquer explicitement les page autorisées et
+interdit par défaut tout le reste est
+<b>essentielle</b>. En effet, en cas d'oubli (ou plus
+exactement lors d'un oubli), les utilisateurs feront
+un rapport de bug pour se plaindre de ne pas avoir
+accès à une page alors que des adversaires ne se
+plaindront pas d'avoir accès à une page qui devrait
+être protégée !</dd>
+</dl>
+
+
+
+<p>
+Plusieurs classes peuvent ainsi être définies pour décomposer la
+configuration de sécurisation des URL, mais seule la première règle
+activée aura un effet. On peut indiquer l'ordre (en utilisant
+l'annotation <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/annotation/Order.html">@Order</a> sur la classe) dans lequel les différentes classes
+de configuration doivent être considérées. En pratique, on restreindra
+souvent les différentes classes de configuration à des chemins
+différents par l'appel initial à <code>antMatcher</code>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org4867121" class="outline-3">
+<h3 id="org4867121"><span class="section-number-3">2.5</span> OAuth2</h3>
+<div class="outline-text-3" id="text-2-5">
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Configurer les <a href="https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-security-oauth2">propriétés OAuth2</a> propriétés suivantes :</dd>
+</dl>
+
+<div class="org-src-container">
+<pre class="src src-properties">security.oauth2.client.client-id= 7045a59b0f0c7a9dac46
+security.oauth2.client.client-secret= 583daf81b2a22782bc9172d7a5a392e2d70a6f62
+security.oauth2.client.access-token-uri= https://github.com/login/oauth/access_token
+security.oauth2.client.user-authorization-uri= https://github.com/login/oauth/authorize
+security.oauth2.client.client-authentication-scheme= form
+security.oauth2.resource.user-info-uri= https://api.github.com/user
+</pre>
+</div>
+
+
+<p>
+Le couple <code>client-id</code> / <code>client-secret</code> est celui qui identifie notre
+application auprès du prestataire de service <code>OAuth2</code> (ici
+Github). Une application <a href="https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/">a été enregistrée</a> pour l'adresse
+<code>localhost:8090</code> et le couple d'identifiant/secret a été attribué à
+cette application. Comme le service gratuit est bridé, on pourra avoir
+intérêt à en enregistrer une autre (avec l'url de la racine comme
+callback).
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd><ul class="org-ul">
+<li>Ajouter l'annotation <code>@EnableOAuth2Sso</code> à la classe
+<code>SecurityConfiguration</code>.</li>
+<li>Se déconnecter de github par exemple en allant sur
+<a href="https://github.com/logout">https://github.com/logout</a>.</li>
+<li>Aller sur la pages d'acceuil et sur <code>/np/private</code>.</li>
+</ul></dd>
+</dl>
+
+
+<p>
+Pour plus de convivialité, ajouter un lien dans la page d'accueil :
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #006699;">div</span> <span style="color: #BA36A5;">class</span>=<span style="color: #008000;">"container unauthenticated"</span>&gt;
+       &lt;<span style="color: #006699;">div</span>&gt;
+            Login with Github: &lt;<span style="color: #006699;">a</span> <span style="color: #BA36A5;">href</span>=<span style="color: #008000;">"/login"</span>&gt;click here&lt;/<span style="color: #006699;">a</span>&gt;
+        &lt;/<span style="color: #006699;">div</span>&gt;
+    &lt;/<span style="color: #006699;">div</span>&gt;
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Observer les redirections lorsqu'on clique sur le lien
+ajouté, notamment lorsqu'on efface les cookies associés
+à <a href="http://localhost:8090">http://localhost:8090</a> et/ou à <a href="https://github.com">https://github.com</a>.</dd>
+</dl>
+</div>
+</div>
+
+
+
+<div id="outline-container-org7ce8066" class="outline-3">
+<h3 id="org7ce8066"><span class="section-number-3">2.6</span> Ajout de javascript côté client</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+Pour utiliser javascript côté client, on pourrait charger les
+bibliothèques depuis un CDN, mais on peut aussi les héberger
+directement sur notre serveur. Pour les plus répandues, il y a déjà
+des dépendances maven.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Ajouter les dépendances suivantes :</dd>
+</dl>
+<div class="org-src-container">
+<pre class="src src-xml">  &lt;<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;org.webjars&lt;/<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;js-cookie&lt;/<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;2.1.0&lt;/<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;
+  &lt;/<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+  &lt;<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;org.webjars&lt;/<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;jquery&lt;/<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;2.1.1&lt;/<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;
+  &lt;/<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+  &lt;<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;org.webjars&lt;/<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;bootstrap&lt;/<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;3.2.0&lt;/<span style="color: #000088; background-color: #DEDEDE;">version</span>&gt;
+  &lt;/<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+  &lt;<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;org.webjars&lt;/<span style="color: #000088; background-color: #DEDEDE;">groupId</span>&gt;
+      &lt;<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;webjars-locator-core&lt;/<span style="color: #000088; background-color: #DEDEDE;">artifactId</span>&gt;
+  &lt;/<span style="color: #000088; background-color: #DEDEDE;">dependency</span>&gt;
+</pre>
+</div>
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Modifier la page d'accueil pour inclure les
+bibliothèques suivantes :</dd>
+</dl>
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #006699;">base</span> <span style="color: #BA36A5;">href</span>=<span style="color: #008000;">"/"</span> /&gt;
+&lt;<span style="color: #006699;">link</span> <span style="color: #BA36A5;">rel</span>=<span style="color: #008000;">"stylesheet"</span> <span style="color: #BA36A5;">type</span>=<span style="color: #008000;">"text/css"</span>
+    <span style="color: #BA36A5;">href</span>=<span style="color: #008000;">"/webjars/bootstrap/css/bootstrap.min.css"</span> /&gt;
+&lt;<span style="color: #006699;">script</span> <span style="color: #BA36A5;">type</span>=<span style="color: #008000;">"text/javascript"</span> <span style="color: #BA36A5;">src</span>=<span style="color: #008000;">"/webjars/jquery/jquery.min.js"</span>&gt;&lt;/<span style="color: #006699;">script</span>&gt;
+&lt;<span style="color: #006699;">script</span> <span style="color: #BA36A5;">type</span>=<span style="color: #008000;">"text/javascript"</span>
+    <span style="color: #BA36A5;">src</span>=<span style="color: #008000;">"/webjars/bootstrap/js/bootstrap.min.js"</span>&gt;&lt;/<span style="color: #006699;">script</span>&gt;
+
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Modifier la configuration d sécurité pour permettre
+l'accès aux fichiers javascripts et css.</dd>
+
+<dt>Exercice</dt><dd>Modifier la page d'accueil pour indiquer le nom de la
+personne connectée :</dd>
+</dl>
+<div class="org-src-container">
+<pre class="src src-html">  &lt;<span style="color: #006699;">div</span> <span style="color: #BA36A5;">class</span>=<span style="color: #008000;">"container unauthenticated"</span>&gt;
+    &lt;<span style="color: #006699;">div</span>&gt;
+      Login with Github: &lt;<span style="color: #006699;">a</span> <span style="color: #BA36A5;">href</span>=<span style="color: #008000;">"/login"</span>&gt;click here&lt;/<span style="color: #006699;">a</span>&gt;
+    &lt;/<span style="color: #006699;">div</span>&gt;
+  &lt;/<span style="color: #006699;">div</span>&gt;
+  &lt;<span style="color: #006699;">div</span> <span style="color: #BA36A5;">class</span>=<span style="color: #008000;">"container authenticated"</span> <span style="color: #BA36A5;">style</span>=<span style="color: #008000;">"display: none"</span>&gt;
+    Logged in as: &lt;<span style="color: #006699;">span</span> <span style="color: #BA36A5;">id</span>=<span style="color: #008000;">"user"</span>&gt;&lt;/<span style="color: #006699;">span</span>&gt;
+  
+  &lt;/<span style="color: #006699;">div</span>&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgabd58d9" class="outline-3">
+<h3 id="orgabd58d9"><span class="section-number-3">2.7</span> Extraction d'informations sur l'utilisateur connecté</h3>
+<div class="outline-text-3" id="text-2-7">
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Ajouter le code suivant à la page d'accueil :</dd>
+</dl>
+<div class="org-src-container">
+<pre class="src src-html">  &lt;<span style="color: #006699;">script</span> <span style="color: #BA36A5;">type</span>=<span style="color: #008000;">"text/javascript"</span>&gt;
+    $.get("/user", function(data) {
+    $("#user").html(data.name);
+    $(".unauthenticated").hide();
+    $(".authenticated").show();
+    });
+  &lt;/<span style="color: #006699;">script</span>&gt;
+</pre>
+</div>
+
+
+<p>
+Pour implémenter la réponse à l'url <code>/user</code>, on va utiliser
+l'interface <a href="https://docs.oracle.com/javase/7/docs/api/java/security/Principal.html">java.security.Principal</a>. Il suffit pour cela d'ajouter un
+argument de type <a href="https://docs.oracle.com/javase/7/docs/api/java/security/Principal.html">java.security.Principal</a> à la méthode associée à l'url
+<code>/user</code>. Dans le code javascript, on accède à un attribut nommé <code>name</code>
+de la donnée reçu en réponse à la requête. Ce peut aussi bien être la
+valeur associée à une clé <code>"name"</code> dans un dictionnaire.  Implémenter
+dans le contrôler une méthode qui retourne (au format JSON) une
+<code>Map&lt;String, String&gt;</code> associant la clé <code>"name"</code> au nom contenu dans
+l'instance de <code>Principal</code> reçue en argument.
+</p>
+
+<p>
+Si l'on avait voulou d'autres informations que celles fournies par
+l'interface <a href="https://docs.oracle.com/javase/7/docs/api/java/security/Principal.html">java.security.Principal</a>, on aurait pu de la même façon
+récupérer un argument de type <a href="https://docs.spring.io/spring-security/site/docs/4.2.x/apidocs/index.html?org/springframework/security/core/Authentication.html">Authentication</a> à la place.
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgb7ca113" class="outline-3">
+<h3 id="orgb7ca113"><span class="section-number-3">2.8</span> Logout</h3>
+<div class="outline-text-3" id="text-2-8">
+<p>
+Côté client, on va ajouter à la page d'accueil un bouton de
+déconnection.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Ajouter à la page d'acceuil un bouton qui exécute le
+code javascript suivant :</dd>
+</dl>
+<div class="org-src-container">
+<pre class="src src-javascript">  <span style="color: #0000FF;">var</span> <span style="color: #BA36A5;">logout</span> = <span style="color: #0000FF;">function</span>() {
+      $.post(<span style="color: #008000;">"/logout"</span>, <span style="color: #0000FF;">function</span>() {
+          $(<span style="color: #008000;">"#user"</span>).html(<span style="color: #008000;">''</span>);
+          $(<span style="color: #008000;">".unauthenticated"</span>).show();
+          $(<span style="color: #008000;">".authenticated"</span>).hide();
+      })
+      <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">true</span>;
+  }
+</pre>
+</div>
+
+<p>
+Côté serveur, modifier la classe <code>SecurityConfiguration</code> pour ajouter
+aux appels sur l'argument <code>HttpSecurity</code> de la méthode <code>configure</code> les appels suivants :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">.and().logout().logoutSuccessUrl(<span style="color: #008000;">"/"</span>).permitAll();
+</pre>
+</div>
+
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd>Essayer de se connecter et de se déconnecter. Quel
+problème y a-t-il à la déconnection ?</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org2bc9833" class="outline-3">
+<h3 id="org2bc9833"><span class="section-number-3">2.9</span> CSRF</h3>
+<div class="outline-text-3" id="text-2-9">
+<p>
+Les site <b>doivent</b> être protégés contre le <a href="https://fr.wikipedia.org/wiki/Cross-site_request_forgery">CSRF</a>, et c'est la raison
+pour laquelle la requête de déconnection est refusée avec la
+configuration de sécurité par défaut.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd><p>
+Désactiver la protection contre csrf sur tout le site
+avec les appels de méthodes suivants:
+</p>
+<div class="org-src-container">
+<pre class="src src-java">              .csrf().disable()
+</pre>
+</div></dd>
+</dl>
+
+<p>
+Évidemment, on voudra plutôt modifier notre client pour qu'il prenne
+en compte la protection contre CSRF. C'est d'ailleurs pour cela qu'on
+avait ajouté la dépendance à la bibliothèque javascript d'accès aux
+cookies à notre projet.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd><p>
+Ajouter la dépendance à la bibliothèque d'accès aux
+cookies sur la page d'acceuil :
+</p>
+<div class="org-src-container">
+<pre class="src src-html">                    &lt;<span style="color: #006699;">script</span> <span style="color: #BA36A5;">type</span>=<span style="color: #008000;">"text/javascript"</span> <span style="color: #BA36A5;">src</span>=<span style="color: #008000;">"/webjars/js-cookie/js.cookie.js"</span>&gt;&lt;/<span style="color: #006699;">script</span>&gt;
+</pre>
+</div>
+<p>
+et ajouter l'exécution du code suivant :
+</p>
+<div class="org-src-container">
+<pre class="src src-javascript">                 $.ajaxSetup({
+                     <span style="color: #006699;">beforeSend</span> : <span style="color: #0000FF;">function</span>(<span style="color: #BA36A5;">xhr</span>, <span style="color: #BA36A5;">settings</span>) {
+                         <span style="color: #0000FF;">if</span> (settings.type == <span style="color: #008000;">'POST'</span> || settings.type == <span style="color: #008000;">'PUT'</span>
+                             || settings.type == <span style="color: #008000;">'DELETE'</span> || settings.type == <span style="color: #008000;">'GET'</span> ) {
+                             <span style="color: #0000FF;">if</span> (!(<span style="color: #008000;">/^http:.*/</span>.test(settings.url) || <span style="color: #008000;">/^https:.*/</span>
+                                   .test(settings.url))) {
+                                 <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">Only send the token to relative URLs i.e. locally.</span>
+                                 xhr.setRequestHeader(<span style="color: #008000;">"X-XSRF-TOKEN"</span>, Cookies
+                                                      .get(<span style="color: #008000;">'XSRF-TOKEN'</span>));
+                                }
+                         }
+                     }
+                 });
+</pre>
+</div>
+<p>
+Refaire un cycle de connection / déconnection en ayant
+enlevé <code>.csrf().disable()</code> et en mettant
+<code>.and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())</code>
+la place côté serveur et observer les requêtes,
+notamment au niveau des entêtes.
+</p></dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-orgdb83a81" class="outline-3">
+<h3 id="orgdb83a81"><span class="section-number-3">2.10</span> Sécurisation au niveau des méthodes</h3>
+<div class="outline-text-3" id="text-2-10">
+<p>
+On peut aussi définir des restrictions d'accès au niveau de méthodes,
+par exemple au niveau des services. Pour cela il faut d'abord activer
+cette possibilité avec l'annotation <a href="https://docs.spring.io/spring-security/site/docs/4.2.6.RELEASE/apidocs/org/springframework/security/config/annotation/method/configuration/EnableGlobalMethodSecurity.html">@EnableGlobalMethodSecurity</a>.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd><ul class="org-ul">
+<li>Mettre l'annotation
+<code>@EnableGlobalMethodSecurity(securedEnabled = true)</code>
+sur la classe <code>SecurityConfiguration</code>.</li>
+<li>Rendre accessible sans restriction toutes les url sous <code>/np</code> dans
+la méthode <code>configure(HttpSecurity)</code> de cette classe.</li>
+<li><p>
+Dans un contrôleur, définir les méthodes suivantes :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">        <span style="color: #D0372D;">@RequestMapping</span>(<span style="color: #008000;">"/np/private"</span>)
+        <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">privateInfo</span>() {
+                <span style="color: #0000FF;">return</span> myService.privateInfo();
+        }
+        
+        <span style="color: #D0372D;">@RequestMapping</span>(<span style="color: #008000;">"/np/admin"</span>)
+        <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">adminInfo</span>() {
+                <span style="color: #0000FF;">return</span> myService.adminInfo();
+        }
+        <span style="color: #D0372D;">@RequestMapping</span>(<span style="color: #008000;">"/np"</span>)
+        <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">np</span>() {
+                <span style="color: #0000FF;">return</span> myService.publicInfo();
+        }
+</pre>
+</div>
+<p>
+avec un attribut <code>MyService myService;</code> injecté.
+</p></li>
+<li><p>
+Dans une classe <code>MyService</code> injectable, définir les méthodes
+suivantes :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">publicInfo</span>() {
+          <span style="color: #0000FF;">return</span> <span style="color: #008000;">"for anybody"</span>;
+      }
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">adminInfo</span>() {
+          <span style="color: #0000FF;">return</span> <span style="color: #008000;">"for admin only"</span>;
+      }
+      <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">privateInfo</span>() {
+          <span style="color: #0000FF;">return</span> <span style="color: #008000;">"for user"</span>;
+      }
+</pre>
+</div>
+<p>
+et restreindre l'accès aux deux dernières aux rôles administrateur
+(<code>ROLE_ADMIN</code>) et utilisateur (<code>ROLE_USER</code>) grâce l'annotation
+<a href="https://docs.spring.io/spring-security/site/docs/4.2.4.RELEASE/apidocs/org/springframework/security/access/annotation/Secured.html">@Secured</a>.
+</p></li>
+<li>Tester l'accès à ces URL.</li>
+</ul></dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org1c90c54" class="outline-3">
+<h3 id="org1c90c54"><span class="section-number-3">2.11</span> Affectation de rôles en fonction d'information depuis le serveur OAuth 2.0</h3>
+<div class="outline-text-3" id="text-2-11">
+<p>
+On va donner à l'utilisateur le rôle d'administrateur s'il est membre,
+<b>de façon publique</b>, de l'organisation <code>simplonco</code>.
+</p>
+
+<dl class="org-dl">
+<dt>Exercice</dt><dd><p>
+Ajouter les méthodes suivantes à la classe
+<code>SecurityConfiguration</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">                <span style="color: #D0372D;">@Bean</span>
+                <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">OAuth2RestTemplate</span> <span style="color: #006699;">oauth2RestTemplate</span>(<span style="color: #6434A3;">OAuth2ProtectedResourceDetails</span> <span style="color: #BA36A5;">resource</span>
+                                                             , <span style="color: #6434A3;">OAuth2ClientContext</span> <span style="color: #BA36A5;">context</span>) {
+                    <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">OAuth2RestTemplate</span>(resource, context);
+                }
+
+                <span style="color: #D0372D;">@Bean</span>
+                <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">AuthoritiesExtractor</span> <span style="color: #006699;">authoritiesExtractor</span>(<span style="color: #6434A3;">OAuth2RestOperations</span> <span style="color: #BA36A5;">template</span>) {
+                    <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">GithubOrgsAuthoritiesExtractor</span>(template);
+                }
+</pre>
+</div>
+<p>
+L'annotation <a href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch02s02.html">@Bean</a> permet d'utiliser les objets
+retournés par ces méthodes pour de l'injection de
+dépendances. Il faut bien sûr aussi définir la classe
+<code>GithubOrgsAuthoritiesExtractor</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-java">                <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">GithubOrgsAuthoritiesExtractor</span> <span style="color: #0000FF;">implements</span> <span style="color: #6434A3;">AuthoritiesExtractor</span>{
+        
+                    <span style="color: #0000FF;">private</span> <span style="color: #6434A3;">OAuth2RestOperations</span> <span style="color: #BA36A5;">template</span>;
+        
+                    <span style="color: #006699;">GithubOrgsAuthoritiesExtractor</span>(<span style="color: #6434A3;">OAuth2RestOperations</span> <span style="color: #BA36A5;">template</span>){
+                        <span style="color: #0000FF;">this</span>.template= template;
+                    }
+
+                    <span style="color: #D0372D;">@Override</span>
+                    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">List</span>&lt;<span style="color: #6434A3;">GrantedAuthority</span>&gt; <span style="color: #006699;">extractAuthorities</span>(<span style="color: #6434A3;">Map</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Object</span>&gt; <span style="color: #BA36A5;">map</span>) {
+                        <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">url</span> = (<span style="color: #6434A3;">String</span>) map.get(<span style="color: #008000;">"organizations_url"</span>);
+                        System.err.println(<span style="color: #008000;">"url:"</span>+url);
+                        <span style="color: #D0372D;">@SuppressWarnings</span>(<span style="color: #008000;">"unchecked"</span>)
+                            <span style="color: #6434A3;">List</span>&lt;<span style="color: #6434A3;">Map</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Object</span>&gt;&gt; <span style="color: #BA36A5;">orgs</span> = template.getForObject(url, List.<span style="color: #0000FF;">class</span>);
+                        System.err.println(<span style="color: #008000;">"orgs:"</span>+orgs);
+                        <span style="color: #0000FF;">for</span>(<span style="color: #6434A3;">Map</span>&lt;<span style="color: #6434A3;">String</span>, <span style="color: #6434A3;">Object</span>&gt; <span style="color: #BA36A5;">org</span> : orgs) {
+                            <span style="color: #0000FF;">if</span>(<span style="color: #008000;">"simplonco"</span>.equals(org.get(<span style="color: #008000;">"login"</span>))) {
+                                <span style="color: #0000FF;">return</span> AuthorityUtils.commaSeparatedStringToAuthorityList(<span style="color: #008000;">"ROLE_USER, ROLE_ADMIN"</span>);
+                            }
+                        }
+                        <span style="color: #0000FF;">return</span> AuthorityUtils.commaSeparatedStringToAuthorityList(<span style="color: #008000;">"ROLE_USER"</span>);
+                        <span style="color: #8D8D84;">//      </span><span style="color: #8D8D84; font-style: italic;">throw new BadCredentialsException("Not in required organization");</span>
+
+                    }
+                }
+</pre>
+</div>
+<p>
+Tester l'accès à la ressource restreinte au rôle
+d'administrateur. Éventuellement, créer une autre
+organisation github, s'y inscrire et rendre publique
+son appartenance à celle-ci. Modifier le code pour
+qu'il utilise cette nouvelle organisation et tester
+nouveau.
+</p></dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7108f5d" class="outline-2">
+<h2 id="org7108f5d"><span class="section-number-2">3</span> Mise en œuvre</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org3e0b1d1" class="outline-3">
+<h3 id="org3e0b1d1"><span class="section-number-3">3.1</span> Protections plus complexes au niveau des méthodes</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Tester les annotations <a href="http://www.baeldung.com/spring-security-method-security">@PreAuthorize et @PostAutorize</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-org9b68658" class="outline-3">
+<h3 id="org9b68658"><span class="section-number-3">3.2</span> CRUD</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Implémenter la sécurisation d'un CRUD
+</p>
+</div>
+</div>
+<div id="outline-container-org1b1b35e" class="outline-3">
+<h3 id="org1b1b35e"><span class="section-number-3">3.3</span> Client Angular 6</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Implémenter la <a href="http://www.baeldung.com/spring-security-oauth-authorization-code-flow">sécurisation avec un client Angular 6</a>.
+</p>
+
+<p>
+Pour la protection contre le <a href="https://fr.wikipedia.org/wiki/Cross-site_request_forgery">CSRF</a> à l'aide d'un token dans les
+entêtes HTTP qui doit être ajouté par javascript, et qui empêche les
+simples liens <a href="https://mysitesecuredwithcookies.com/send/myMoney">Vous avez gagné !!!!!</a> de marcher, on aurait pas gagné
+grand chose s'il était possible à un adversaire (par exemple
+<a href="https://evil.com">https://evil.com</a> ) d'envoyer du code javascript qui ferait lui aussi
+l'ajout du token dans l'entête de la requête vers le site sécurisé.
+C'est pour empêcher cela que les navigateurs implémentent le <a href="https://en.wikipedia.org/wiki/Same-origin_policy">Same
+Origin Policy (SOP)</a> qui interdit à du code javascript chargé depuis un
+serveur (e.g.<a href="https://evil.com">https://evil.com</a>) d'envoyer des requêtes vers un serveur
+différent (e.g. <a href="https://my-secured-site.com">https://my-secured-site.com</a>).
+</p>
+
+<p>
+Évidemment, cela poserait des problèmes non seulement pour
+l'utilisation de web services, mais aussi pour le développement
+d'applications Angular qui sont (en cours de développement) servies
+par un serveur dédié (par exemple en <a href="http://localhost:4200">http://localhost:4200</a>) différent
+du serveur backend (par exemple en <a href="http://localhost:8090">http://localhost:8090</a>).
+</p>
+
+<p>
+La solution à ce problème est offerte par le mécanisme de <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">Cross Origin
+Resource Sharing (CORS)</a> qui permet à un serveur (par exemple le
+backend en <a href="http://localhost:8090">http://localhost:8090</a>) d'indiquer aux navigateurs webs
+quels autres serveurs (par exemple le serveur de développement angular
+en <a href="http://localhost:4200">http://localhost:4200</a>)sont autorisés à envoyer du code javascript
+qui pourra faire des requêtes qui lui sont destinées.
+</p>
+
+<p>
+Avec Spring, il est <a href="https://spring.io/blog/2015/06/08/cors-support-in-spring-framework">facile d'activer le CORS</a> à différents niveaux de
+granularité, comme pour les autres mécanismes d'autorisation.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org06b48a2" class="outline-2">
+<h2 id="org06b48a2"><span class="section-number-2">4</span> Pour aller plus loin</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org9a09d50" class="outline-3">
+<h3 id="org9a09d50"><span class="section-number-3">4.1</span> Content Security Policy</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+La protection en fonction de l'origine du code Javascript exécuté
+offerte par Same Origin Policy peut aussi être étendue, notamment aux
+bibliothèques Javascript utilisée. La standardisation des entêtes
+définissant la <a href="https://en.wikipedia.org/wiki/Content_Security_Policy">Content Security Policy</a> permet de répondre à ces
+besoins. Bien sûr, <a href="https://docs.spring.io/spring-security/site/docs/current/reference/html/headers.html">Spring Security permet de mettre en œuvre ces
+protections</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7fe7b5b" class="outline-3">
+<h3 id="org7fe7b5b"><span class="section-number-3">4.2</span> SSL</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Aucune des autres protection ne pourra être efficace si l'attaquant
+peut intercepter les communications (<a href="https://fr.wikipedia.org/wiki/Attaque_de_l%27homme_du_milieu">Man In the Middle</a>). Pour éviter
+cela, il <b>faut</b> utiliser HTTPS (et donc un certificat SSL). Dans un
+environnement <i>corporate</i>, cela sera pris en charge au niveau de
+l'entreprise. Pour un projet personnel, on peut utiliser un certificat
+délivré par <a href="https://letsencrypt.org/">Let's Encrypt</a>. Le processus <a href="https://github.com/creactiviti/spring-boot-starter-acme">peut être automatisé pour une
+application Spring Boot</a>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orga7cc6b9" class="outline-3">
+<h3 id="orga7cc6b9"><span class="section-number-3">4.3</span> OWASP</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Dans le domaine de la sécurité encore plus que tout autre, il est
+indispensable de faire de la veille pour se tenir à jour des dernières
+vulnérabilité / bonnes pratiques. La lecture régulières des documents
+publiés par <a href="https://www.owasp.org/index.php/Main_Page">OWASP</a> (cf. <a href="https://www.owasp.org/index.php/REST_Security_Cheat_Sheet">sécurisation de REST</a>) est indispensable.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: Bernard Hugueney</p>
+<p class="date">Created: 2020-02-04 Tue 08:13</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
